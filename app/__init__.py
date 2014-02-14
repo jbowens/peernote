@@ -22,6 +22,14 @@ db = SQLAlchemy(app)
 # Import the models
 from app.models.user import User
 
+# Setup all the blueprints
+from users import users
+from essays import essays
+app.register_blueprint(users)
+app.register_blueprint(essays, url_prefix='/essays')
+
+# Sometime before the first request we need to create all of the
+# database tables.
 @app.before_first_request
 def initialize_database():
     if app.debug:
