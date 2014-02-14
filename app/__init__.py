@@ -4,13 +4,12 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 # Set up the flask application.
 app = Flask(__name__)
-<<<<<<< HEAD
 app.debug = True
 assets = Environment(app)
 
 common_css = Bundle(
-    "less/*.less",
-    filters="less,cssmin",
+    "scss/*.scss", "scss/bootstrap/*.scss",
+    filters="scss,cssmin",
     output="gen/dist.css",
 )
 

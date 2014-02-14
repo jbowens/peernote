@@ -1,7 +1,54 @@
 {% extends 'base/application.html' %}
 {% block content %}
-<div id="welcome">
-    <h1>Welcome to Peernote</h1>
-    <p>Peernote is a peer review service for essays, articles, and more. We believe in a collaborative approach to writing. Help others, get helped back.</p>
+
+<div class="page-container top-margin bottom-margin">
+    <div id="welcome">
+        <h1> Welcome to peernote </h1>
+        <p>
+        Peernote is a peer review service for essays, articles, and more.
+        We believe in a collaborative approach to writing. Help others, get helped back.
+        </p>
+    </div>
+    <div id="signup">
+        <a class="btn btn-primary alt" href="#"> Sign up </a>
+    </div>
 </div>
+
+<div id="background">
+    <div class="page-container">
+        <div id="steps-container">
+            <h1>Using Peernote is Simple</h1>
+            <ul class="steps">
+                <li>
+                    <div class="circle">
+                        <i class="fa fa-cloud-upload"></i>
+                    </div>
+                    Upload your writing
+                </li>
+                <li>
+                    <div class="circle">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    Peer review another user's work
+                </li>
+                <li>
+                    <div class="circle">
+                        <i class="fa fa-check"></i>
+                    </div>
+                    Get feedback on your writing
+                </li>
+            </ul>
+        </div>
+        <div id="learn-more">
+            <h1>What Goes Around Comes Around</h1>
+            <p>
+            Our system keeps track of and rewards the effort you put into generating high quality feedback by matching you with other users who put in a similar amount of effort. It's automated karma.
+            </p>
+            <a class="btn btn-primary alt" href="/faq">
+            Learn More
+            </a>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
