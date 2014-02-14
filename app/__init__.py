@@ -1,8 +1,7 @@
-from flask import Flask, g, request
+from flask import Flask, g, request, render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'This is peernote on a nonshitty framework.'
-
+    return render_template('index.html')
