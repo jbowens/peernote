@@ -7,4 +7,6 @@ Peernote in Python using Flask.
 
 ```bash
 pip install flask-sqlalchemy
+
+brew install less
 ```
