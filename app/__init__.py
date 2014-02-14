@@ -23,9 +23,9 @@ db = SQLAlchemy(app)
 from app.models.user import User
 
 # Setup all the blueprints
-from front import front
-from users import users
-from essays import essays
+from blueprints.front import front
+from blueprints.users import users
+from blueprints.essays import essays
 app.register_blueprint(front)
 app.register_blueprint(users)
 app.register_blueprint(essays, url_prefix='/essays')

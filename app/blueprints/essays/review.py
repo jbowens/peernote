@@ -1,4 +1,4 @@
-from app.essays import essays
+from app.blueprints.essays import essays
 
 @essays.route('/review/<int:essay_id>')
 def review_essay(essay_id):

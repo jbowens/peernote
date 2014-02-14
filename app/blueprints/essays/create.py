@@ -1,4 +1,4 @@
-from app.essays import essays
+from app.blueprints.essays import essays
 
 @essays.route('/write', methods=['GET','POST'])
 def create_essay():

@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from app.models.user import User
-from app.users import users
+from app.blueprints.users import users
 from app import db
 
 @users.route('/log-in', methods=['GET','POST'])
