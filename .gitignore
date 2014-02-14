@@ -40,3 +40,5 @@ nosetests.xml
 app/static/.webassets-cache/*
 !app/static/.webassets-cache/.gitignore
 
+# database migrations
+migrations

@@ -17,12 +17,14 @@ assets.register('common_css', common_css)
 
 # Gimmie some databi
 db = SQLAlchemy(app)
+db.create_all()
+
+# Import the models
+from app.models.user import User
 
 @app.before_first_request
 def initialize_database():
     db.create_all()
-
-from app.models import *
 
 @app.route('/')
 def index():
