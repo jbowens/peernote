@@ -23,8 +23,10 @@ db = SQLAlchemy(app)
 from app.models.user import User
 
 # Setup all the blueprints
+from front import front
 from users import users
 from essays import essays
+app.register_blueprint(front)
 app.register_blueprint(users)
 app.register_blueprint(essays, url_prefix='/essays')
 
@@ -35,10 +37,6 @@ def initialize_database():
     if app.debug:
         db.drop_all()
     db.create_all()
-
-@app.route('/')
-def index():
-    return render_template('index.html')
 
 if __name__ == '__main__':
     db.drop_all()
