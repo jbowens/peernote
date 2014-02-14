@@ -9,4 +9,8 @@ Peernote in Python using Flask.
 pip install flask-sqlalchemy
 
 brew install less
+
+easy_install Flask-Assets
+easy_install mincss
+
 ```
