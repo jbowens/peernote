@@ -1,0 +1,29 @@
+{% extends 'base/application.html' %}
+{% block content %}
+
+<div class="page-container top-margin bottom-margin">
+    <h1>Sign up</h1>
+    <form method="post">
+        <div class="field">
+            <label for="signup_username">Username</label>
+            <input type="text" id="signup_username" name="username" />
+        </div>
+        <div class="field">
+            <label for="signup_email">Email</label>
+            <input type="text" id="signup_email" name="email" />
+        </div>
+        <div class="field">
+            <label for="signup_password">Password</label>
+            <input type="password" id="signup_password" name="password" />
+        </div>
+        <div class="field">
+            <label for="signup_password_confirm">Password again</label>
+            <input type="password" id="signup_password_confirm" name="password" />
+        </div>
+        <div class="button-field">
+            <input type="submit" value="Sign up" />
+        </div>
+    </form>
+</div>
+
+{% endblock %}
