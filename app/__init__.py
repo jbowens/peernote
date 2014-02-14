@@ -4,7 +4,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 # Set up the flask application.
 app = Flask(__name__)
-app.debug = True
+app.config.from_pyfile('../config/default.cfg')
 assets = Environment(app)
 
 common_css = Bundle(
@@ -14,7 +14,6 @@ common_css = Bundle(
 )
 
 assets.register('common_css', common_css)
-app.config.from_pyfile('../config/default.cfg')
 
 # Gimmie some databi
 db = SQLAlchemy(app)
