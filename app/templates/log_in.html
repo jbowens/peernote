@@ -1,0 +1,21 @@
+{% extends 'base/application.html' %}
+{% block content %}
+
+<div class="page-container top-margin bottom-margin">
+    <h1>Log in</h1>
+    <form method="post" id="log-in">
+        <div class="field">
+            <label for="login_username">Username</label>
+            <input type="text" id="login_username" name="username" />
+        </div>
+        <div class="field">
+            <label for="login_password">Password</label>
+            <input type="password" id="login_password" name="password" />
+        </div>
+        <div class="button-field">
+            <input type="submit" value="Log in" />
+        </div>
+    </form>
+</div>
+
+{% endblock %}
