@@ -1,6 +1,14 @@
 from flask import Flask, g, request, render_template
+from flask.ext.sqlalchemy import SQLAlchemy
 
+# Set up the flask application.
 app = Flask(__name__)
+app.config.from_pyfile('../config/default.cfg')
+
+# Gimmie some databi
+db = SQLAlchemy(app)
+
+from app.models import *
 
 @app.route('/')
 def index():
