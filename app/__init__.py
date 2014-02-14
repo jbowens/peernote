@@ -18,15 +18,19 @@ assets.register('common_css', common_css)
 
 # Gimmie some databi
 db = SQLAlchemy(app)
-db.create_all()
 
 # Import the models
 from app.models.user import User
 
 @app.before_first_request
 def initialize_database():
+    if app.debug:
+        db.drop_all()
     db.create_all()
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+if __name__ == '__main__':
+    db.drop_all()
