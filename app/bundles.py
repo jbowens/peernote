@@ -7,7 +7,7 @@ assets.register('base_css',
     Bundle(
         "scss/bootstrap.scss",
         "scss/reset.scss",
-        "scss/top_nav.scss",
+        "scss/shared/*.scss",
         filters="scss,cssmin",
         output="gen/base.css",
     )
