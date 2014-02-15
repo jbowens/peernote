@@ -1,12 +1,13 @@
 {% extends 'base/application.html' %}
 
-{% block head_content %}
+{% block styles %}
+    {{ super() }}
     {% assets "home_css" %}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
     {% endassets %}
 {% endblock %}
-{% block content %}
 
+{% block content %}
 <div class="page-container top-margin bottom-margin">
     <div id="welcome">
         <h1> Welcome to Peernote </h1>

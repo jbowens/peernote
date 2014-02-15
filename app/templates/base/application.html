@@ -7,10 +7,16 @@
         <!-- Actually download font-awesome later -->
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
-        {% assets "base_css" %}
-            <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
-        {% endassets %}
-        {% block head_content %}{% endblock %}
+        {% block styles %}
+            {% assets "base_css" %}
+                <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+            {% endassets %}
+        {% endblock %}
+
+        {% block scripts %}
+            <script src="/static/js/include/jquery-2.1.0.min.js"></script>
+            <script src="/static/js/navbar.js"></script>
+        {% endblock %}
 
     </head>
     <body>
