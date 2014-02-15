@@ -12,6 +12,7 @@ import bundles
 
 # add our jinja extensions
 from jinja_extensions import *
+from decorators import *
 
 # Gimmie some databi
 db = SQLAlchemy(app)

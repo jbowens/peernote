@@ -9,3 +9,4 @@ users = Blueprint('users', __name__)
 from signup import *
 from login import *
 from logout import *
+from settings import *
