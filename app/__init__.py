@@ -6,15 +6,9 @@ from flask.ext.sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.debug = True
 app.config.from_pyfile('../config/default.cfg')
-assets = Environment(app)
 
-common_css = Bundle(
-    "scss/*.scss", "scss/bootstrap/*.scss",
-    filters="scss,cssmin",
-    output="gen/dist.css",
-)
-
-assets.register('common_css', common_css)
+# bundles for css
+import bundles
 
 # Gimmie some databi
 db = SQLAlchemy(app)

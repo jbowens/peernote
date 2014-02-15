@@ -9,11 +9,14 @@
 
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
-        {% assets "common_css" %}
+        {% assets "base_css" %}
             <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
         {% endassets %}
+        {% block head_content %}{% endblock %}
+
     </head>
     <body>
+        {% include "shared/signed_in_nav.html" %}
         {% block content %}{% endblock %}
     </body>
 </html>

@@ -1,4 +1,10 @@
 {% extends 'base/application.html' %}
+
+{% block head_content %}
+    {% assets "home_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+{% endblock %}
 {% block content %}
 
 <div class="page-container top-margin bottom-margin">
