@@ -3,6 +3,14 @@
 
 <div class="page-container top-margin bottom-margin">
     <h1>Log in</h1>
+    {% if g.user %}
+    <div class="error">
+        You're already logged in!
+        <div class="log-out">
+            <a href="/log-out">log out</a>
+        </div>
+    </div>
+    {% else %}
     <form method="post" id="log-in">
         <div class="field">
             <label for="login_username">Username</label>
@@ -16,6 +24,7 @@
             <input type="submit" value="Log in" />
         </div>
     </form>
+    {% endif %}
 </div>
 
 {% endblock %}
