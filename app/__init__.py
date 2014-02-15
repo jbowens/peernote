@@ -15,6 +15,7 @@ db = SQLAlchemy(app)
 
 # Import the models
 from app.models.user import User
+from app.models.essay import Essay
 
 # Setup all the blueprints
 from blueprints.front import front
