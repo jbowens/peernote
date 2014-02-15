@@ -5,9 +5,9 @@ assets = Environment(app)
 
 assets.register('base_css',
     Bundle(
-        "scss/bootstrap.scss",
         "scss/reset.scss",
-        "scss/shared/*.scss",
+        "scss/bootstrap.scss",
+        "scss/top_nav.scss",
         filters="scss,cssmin",
         output="gen/base.css",
     )
