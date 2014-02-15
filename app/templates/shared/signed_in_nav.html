@@ -1,8 +1,28 @@
 <nav>
     <div class="header-container">
         <ul class="nav-right">
-            <a href="/log-in">Sign In</a>
-        </ul>
+            {% if g.user %}
+                <li>
+                    <a href="/essays">
+                        <i class="fa fa-file-text fa-lg"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-comments fa-lg"></i>
+                    </a>
+                </li>
+                <li>
+                    <a class="light username show-dropdown">
+                        {{ g.user.username }}
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </li>
+            {% else %}
+                <a href="/log-in">Sign In</a>
+            {% endif %}
+        </ul> <!-- nav-right -->
+
         <div class="nav-left">
             <a href="/">
                 <span id="logo">
@@ -13,6 +33,20 @@
                 </span>
                 <span id="logo-name"> PEERNOTE </span>
             </a>
-        </div>
-    </div>
+        </div> <!-- nav-left -->
+
+        {% if g.user %}
+            <div class="hidden dropdown" style="display:none;">
+                <ul>
+                    <li>
+                        <a href="#">Settings</a>
+                    </li>
+                    <li>
+                        <a href="#">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+
+    </div> <!-- header-container -->
 </nav>
