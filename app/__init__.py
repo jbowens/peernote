@@ -10,6 +10,9 @@ app.config.from_pyfile('../config/default.cfg')
 # bundles for css
 import bundles
 
+# add our jinja extensions
+from jinja_extensions import *
+
 # Gimmie some databi
 db = SQLAlchemy(app)
 

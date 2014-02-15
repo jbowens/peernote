@@ -1,7 +1,7 @@
 <nav>
     <div class="header-container">
         <ul class="nav-right">
-            {% if g.user %}
+            {% if is_logged_in %}
                 <li>
                     <a href="/essays">
                         <i class="fa fa-file-text fa-lg"></i>
@@ -35,7 +35,7 @@
             </a>
         </div> <!-- nav-left -->
 
-        {% if g.user %}
+        {% if is_logged_in %}
             <div class="hidden dropdown">
                 <ul>
                     <li>
