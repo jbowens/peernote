@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, session, current_app
 from app.models.user import User
 from app.blueprints.users import users
 from app import db
@@ -16,6 +16,10 @@ def signup():
         newuser.set_password(request.form['password'])
         db.session.add(newuser)
         db.session.commit()
+
+        # Log this user in.
+        session['uid'] = newuser.uid
+        current_app.logger.debug('Logging in as uid = %d', session['uid'])
 
         # TODO: Lots of shit
 

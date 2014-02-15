@@ -1,4 +1,4 @@
-from flask import Flask, g, request, render_template
+from flask import Flask, g, request, render_template, session
 from flask.ext.assets import Environment, Bundle
 from flask.ext.sqlalchemy import SQLAlchemy
 
@@ -32,6 +32,20 @@ def initialize_database():
     if app.debug:
         db.drop_all()
     db.create_all()
+
+@app.before_request
+def process_session():
+    g.user = None
+    if session.get('uid', None): 
+        # This user is logged in. Grab the user object.
+        cur_user = User.query.filter_by(uid=session['uid']).first()
+        if not cur_user:
+            # This user was deleted during his/her session. Kill the session.
+            session.pop('uid', None)
+        else:
+            # Save the user object in the global object
+            g.user = cur_user
+            app.logger.debug('Request authenticated as (%d, %s)', g.user.uid, g.user.email)
 
 if __name__ == '__main__':
     db.drop_all()
