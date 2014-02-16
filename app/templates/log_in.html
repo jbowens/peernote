@@ -1,7 +1,7 @@
 {% extends 'base/application.html' %}
 {% block content %}
 
-<div class="page-container top-margin bottom-margin">
+<div class="page-container top-margin bottom-margin log-in">
     <h1>Log in</h1>
     {% if is_logged_in %}
     <div class="error">
@@ -11,11 +11,7 @@
         </div>
     </div>
     {% else %}
-    {% if login_failed %}
-    <div class="error">
-        Sorry, no account was found with that username and password combination.
-    </div>
-    {% endif %}
+    {% include "shared/flashes.html" %}
     <form method="post" id="log-in">
         <div class="field">
             <label for="login_username">Username</label>
