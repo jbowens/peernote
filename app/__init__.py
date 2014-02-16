@@ -7,6 +7,8 @@ from os import environ
 app = Flask(__name__)
 app.debug = True
 app.config.from_pyfile('../config/default.cfg')
+if environ.get('REMOTE_DB'):
+    app.config.from_pyfile('../config/remote_db.cfg')
 
 # bundles for css
 import bundles
