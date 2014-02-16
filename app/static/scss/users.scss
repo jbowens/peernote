@@ -1,0 +1,97 @@
+@import "bootstrap.scss";
+
+.dashboard {
+    width: 100%;
+    padding: 35px 0;
+    z-index: -1;
+    background-color: $base;
+    border-bottom: 1px solid $border;
+    margin-bottom: 20px;
+
+    #user-profile {
+        img {
+            height: 150px;
+            display: inline-block;
+        }
+    
+        #user-info {
+            height: 150px;
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 20px;
+        }
+    }
+    
+    #ratings {
+        float: right;
+    
+        .knob {
+            display: inline-block;
+            text-align: center;
+            margin-left: 20px;
+    
+            canvas {
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+
+.review-process {
+    background-color: $base;
+    border: 1px solid $border;
+    padding: 20px;
+
+    .progress-bar {
+        border: 1px solid $border;
+        height: 14px;
+        margin: 10px 0;
+    
+        .stage {
+            display: inline-block;
+            @include calc(width, "(#{$contentwidth} - 20px) / 3.0");
+            height: 100%;
+            background-color: lightgreen;
+        }
+    }
+}
+
+.settings {
+    margin: 0 auto;
+    margin-top: 50px;
+
+    .input-field {
+        padding: 0 $inputpadding;
+        height: $inputheight;
+        width: 200px;
+    }
+
+    select {
+        width: 220px;
+    }
+
+    td {
+        width: 200px;
+        height: 40px;
+    }
+
+}
+
+#delete {
+    text-align: center;
+
+    .btn {
+        width: 382px;
+    }
+}
+
+.review-process {
+    margin-bottom: 20px;
+
+    .date {
+        font-size: 12px;
+        font-weight: 100;
+    }
+}
+
