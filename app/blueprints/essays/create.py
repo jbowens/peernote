@@ -6,6 +6,6 @@ from app.decorators import login_required
 @login_required
 def create_essay():
     if request.method == 'GET':
-        return render_template('essays/write.html')
+        return render_template('essays/create.html')
     else:
         return "FUCK POSTS"

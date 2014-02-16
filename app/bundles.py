@@ -24,7 +24,15 @@ assets.register('home_css',
 assets.register('essays_css',
     Bundle(
         "scss/essays.scss",
-        filters="scss, cssmin",
+        filters="scss,cssmin",
         output="gen/essays.css"
+    )
+)
+
+assets.register('users_css',
+    Bundle(
+        "scss/users.scss",
+        filters="scss,cssmin",
+        output="gen/users.css"
     )
 )

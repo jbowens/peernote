@@ -1,0 +1,29 @@
+{% extends 'base/application.html' %}
+
+{% block styles %}
+    {{ super() }}
+    {% assets "users_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="page-container">
+        <div id="user-profile">
+            <img src="/static/images/default_avatar.png" />
+            <div id="user-info">
+                <h1>{{ viewed_user }}</h1>
+                <div>Member!</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if user and viewed_user == user.username %}
+    <div class="page-container bottom-margin">
+        <a class="btn btn-primary" href="{{ url_for('essays.create_essay') }}"> Write Paper </a>
+    </div>
+{% endif %}
+
+{% endblock %}
