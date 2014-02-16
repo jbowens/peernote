@@ -2,6 +2,14 @@
 {% block content %}
 
 <div class="page-container top-margin bottom-margin">
+    {% if is_logged_in %}
+        <div class="error full-error">
+        <h1>Already registered</h1>
+
+        <p>You are already registered. Go <a href="{{ url_for('front.index') }}">home</a>.</p>
+    </div>
+    {% else %}
+
     <h1>Sign up</h1>
     <form method="post">
         <div class="field">
@@ -24,6 +32,7 @@
             <input type="submit" value="Sign up" />
         </div>
     </form>
+    {% endif %}
 </div>
 
 {% endblock %}

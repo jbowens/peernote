@@ -1,11 +1,11 @@
-from flask import render_template, request, redirect, url_for, session, current_app
+from flask import render_template, request, redirect, url_for, session, current_app, g
 from app.models.user import User
 from app.blueprints.users import users
 from app import db
 
 @users.route('/sign-up', methods=['GET','POST'])
 def signup():
-    if request.method == 'POST':
+    if not g.user and request.method == 'POST':
         # They submitted the form and we should process it.
         
         # TODO: form validation lololololol
