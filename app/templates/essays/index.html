@@ -5,8 +5,8 @@
     <h1>My essays</h1>
     {% if essays %}
     <ul class="essays">
-        {% for essay in essays %}
-        <li>{{ essay.title }}</li>
+        {% for essay in essays|sort(attribute='eid') %}
+        <li><a href='/essays/edit/{{ essay.eid }}'> {{ essay.title }} </a></li>
         {% endfor %}
     </ul>
     {% endif %}

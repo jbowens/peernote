@@ -1,23 +1,27 @@
-$(document).ready(function() {
+/*
+ * Client side JS for essay editor
+ */
+var peernoteNS = peernoteNS || {};
+peernoteNS.essays = peernoteNS.essays || {eid: null};
 
-    var essay_id = null; // TODO: handle case with pre-existing essay id
+peernoteNS.essays.initEditor = function() {
     var $title = $('#essay-title');
     var $text = $('#essay-text');
 
-    $('#submit-paper').click(function() {
+    $('#save-paper').click(function() {
         var title = $title.text();
         var text = $text.text();
 
         var params = { title: title, text: text};
-        if (essay_id != null) {
-            params.eid =  essay_id;
+        if (peernoteNS.essays.eid != null) {
+            params.eid = peernoteNS.essays.eid;
         }
 
         if (title.length > 0 && title.length <= 80) {
             $.post('/api/save_essay', params, function(data) {
                 if (data.success) {
                     console.log(data);
-                    essay_id = data.eid;
+                    peernoteNS.essays.eid = data.eid;
                     alert('YAY');
                 }
             });
@@ -25,5 +29,8 @@ $(document).ready(function() {
             alert('UH OH!');
         }
     });
-});
+}
 
+$(document).ready(function(e) {
+    peernoteNS.essays.initEditor();
+});

@@ -1,8 +1,8 @@
-from flask import request, render_template, current_app, jsonify, g
+from flask import render_template
 from app.blueprints.essays import essays
 from app.decorators import login_required
 
-@essays.route('/write', methods=['GET'])
+@essays.route('/create', methods=['GET'])
 @login_required
 def create_essay():
-    return render_template('essays/create.html')
+    return render_template('essays/editor.html')
