@@ -10,7 +10,7 @@ def save_essay():
     if g.user and 'title' in request.form and 'text' in request.form:
         if 'eid' in request.form: # preexisting essay
             essay = Essay.query.filter_by(eid=request.form.get('eid', None)).first()
-            if not essay:
+            if not essay or essay.uid != g.user.uid:
                 return jsonify(success=False), 400
         else: # new essay
             essay = Essay()
