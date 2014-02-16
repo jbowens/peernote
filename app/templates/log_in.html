@@ -13,6 +13,9 @@
     {% else %}
     {% include "shared/flashes.html" %}
     <form method="post" id="log-in">
+        {% if next_location %}
+        <input type="hidden" name="next_location" value="{{ next_location }}" />
+        {% endif %}
         <div class="field">
             <label for="login_username">Username</label>
             <input type="text" id="login_username" name="username" />
