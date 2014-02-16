@@ -15,4 +15,4 @@ def log_in():
             return redirect(next_location if next_location else url_for('front.index'))
         flash('No user with the given username and password combination was found.')
 
-    return render_template('log_in.html', next_location=request.args.get('next'))
+    return render_template('users/log_in.html', next_location=request.args.get('next'))
