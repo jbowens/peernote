@@ -1,4 +1,4 @@
-from flask import render_template, redirect
+from flask import render_template, redirect, current_app
 from app.models.user import User
 from app.blueprints.users import users
 from app.decorators import login_required
@@ -7,6 +7,6 @@ from app.decorators import login_required
 def show_user_profile(name):
     user = User.query.filter_by(username=name).first()
     if user:
-        return render_template('users/profile.html', viewed_user=name)
+        return render_template('users/profile.html', viewed_user=user)
     else:
         return "USER DONT EXIST"

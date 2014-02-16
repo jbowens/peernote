@@ -11,16 +11,16 @@
 <div class="dashboard">
     <div class="page-container">
         <div id="user-profile">
-            <img src="/static/images/default_avatar.png" />
+            <img src="{{ viewed_user.email | gravatar }}" />
             <div id="user-info">
-                <h1>{{ viewed_user }}</h1>
+                <h1>{{ viewed_user.username }}</h1>
                 <div>Member!</div>
             </div>
         </div>
     </div>
 </div>
 
-{% if user and viewed_user == user.username %}
+{% if user and viewed_user.uid == user.uid %}
     <div class="page-container bottom-margin">
         <a class="btn btn-primary" href="{{ url_for('essays.create_essay') }}"> Write Paper </a>
     </div>

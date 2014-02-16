@@ -1,5 +1,6 @@
 from flask import render_template, g
 from app.blueprints.front import front
+from app.blueprints.users.profile import show_user_profile
 
 @front.route('/', methods=['GET'])
 def index():
@@ -8,4 +9,4 @@ def index():
     if g.user == None:
         return render_template('index.html')
     else:
-        return render_template('users/profile.html', viewed_user=g.user.username)
+        return show_user_profile(g.user.username)
