@@ -10,8 +10,12 @@
     </div>
     {% else %}
 
+    {% include "shared/form_errors.html" %}
+
     <h1>Sign up</h1>
     <form method="post">
+        {{ form.csrf_token }}
+
         <div class="field">
             <label for="signup_username">Username</label>
             <input type="text" id="signup_username" name="username" />
@@ -22,11 +26,11 @@
         </div>
         <div class="field">
             <label for="signup_password">Password</label>
-            <input type="password" id="signup_password" name="password" />
+            <input type="password" id="signup_password" name="pw" />
         </div>
         <div class="field">
             <label for="signup_password_confirm">Password again</label>
-            <input type="password" id="signup_password_confirm" name="password" />
+            <input type="password" id="signup_password_confirm" name="pw_again" />
         </div>
         <div class="button-field">
             <input type="submit" value="Sign up" />

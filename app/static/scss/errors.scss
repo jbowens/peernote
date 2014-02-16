@@ -1,0 +1,15 @@
+ul.form-errors {
+    margin: 1em 0;
+}
+
+ul.form-errors li .message {
+    background: #783E3E;
+    color: #FFF;
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    display: inline-block;
+    margin: 0.25em 0;
+    font-size: 0.9em;
+}

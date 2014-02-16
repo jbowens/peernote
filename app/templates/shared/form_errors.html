@@ -1,0 +1,9 @@
+{% with error_tups = form.errors.iteritems() %}
+    {% if error_tups %}
+        <ul class="form-errors">
+        {% for field, error in error_tups %}
+        <li class=".error-{{field}}"><span class="message">{{field}}: {{ error[0] }}</span></li> 
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}

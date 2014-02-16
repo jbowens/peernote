@@ -10,4 +10,4 @@ from signup import *
 from login import *
 from logout import *
 from settings import *
-from user_profile import *
+from profile import *

@@ -8,6 +8,7 @@ assets.register('base_css',
         "scss/reset.scss",
         "scss/bootstrap.scss",
         "scss/top_nav.scss",
+        "scss/errors.scss",
         filters="scss,cssmin",
         output="gen/base.css",
     )
