@@ -1,0 +1,28 @@
+{% extends 'base/application.html' %}
+
+{% block styles %}
+    {{ super() }}
+    {% assets "essays_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+{% endblock %}
+
+{% block content %}
+<div class="page-container top-margin bottom-margin">
+    <h1>Upload a paper</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        <div class="field">
+            <label for="upload_title">Title</label>
+            <input type="text" name="title" id="upload_title" value="Untitled" />
+        </div>
+        <div class="field">
+            <label for="upload_file">File</label>
+            <input type="file" name="paper" id="upload_file" />
+        </div>
+        <div class="button-field">
+            <input type="submit" value="Upload" />
+        </div>
+    </form>
+</div>
+{% endblock %}

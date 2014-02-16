@@ -23,6 +23,7 @@
 {% if user and viewed_user.uid == user.uid %}
     <div class="page-container bottom-margin">
         <a class="btn btn-primary" href="{{ url_for('essays.create_essay') }}"> Write Paper </a>
+        <a class="btn btn-primary" href="{{ url_for('essays.upload_essay') }}"> Upload Paper </a>
     </div>
 {% endif %}
 
