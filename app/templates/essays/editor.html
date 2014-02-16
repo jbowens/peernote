@@ -1,0 +1,39 @@
+{% extends 'base/application.html' %}
+
+{% block styles %}
+    {{ super() }}
+    {% assets "essays_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+
+    {% if current_essay %}
+        <script>
+            var peernoteNS = peernoteNS || {};
+            peernoteNS.essays = peernoteNS.essays || {};
+            peernoteNS.essays.eid = {{ current_essay.eid }};
+        </script>
+    {% endif %}
+
+    <script src="/static/js/essays/write.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="editor-background">
+    <div class="center-container">
+        <a id="save-paper" class="btn btn-primary">Save Paper</a>
+        <div class="page-container">
+            <div class="content" contenteditable="true", spellcheck="false">
+                <h1 id="essay-title" class=essay-title>{% if current_essay %}{{ current_essay.title|escape }}{% else %}Title here{% endif %}</h1>
+                <p id="essay-text">{% if current_essay %}{{ current_essay.text|escape }}{% else %}Title here{% endif %}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
