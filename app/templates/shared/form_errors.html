@@ -2,7 +2,7 @@
     {% if error_tups %}
         <ul class="form-errors">
         {% for field, error in error_tups %}
-        <li class=".error-{{field}}">{{field}}: {{ error[0] }}</li> 
+        <li class=".error-{{field}}"><span class="message">{{field}}: {{ error[0] }}</span></li> 
         {% endfor %}
         </ul>
     {% endif %}
