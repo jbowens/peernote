@@ -1,11 +1,8 @@
-from flask import request, render_template
+from flask import request, render_template, current_app, jsonify, g
 from app.blueprints.essays import essays
 from app.decorators import login_required
 
-@essays.route('/write', methods=['GET','POST'])
+@essays.route('/write', methods=['GET'])
 @login_required
 def create_essay():
-    if request.method == 'GET':
-        return render_template('essays/create.html')
-    else:
-        return "FUCK POSTS"
+    return render_template('essays/create.html')
