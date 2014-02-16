@@ -1,6 +1,7 @@
 from flask import Flask, g, request, render_template, session
 from flask.ext.assets import Environment, Bundle
 from flask.ext.sqlalchemy import SQLAlchemy
+from os import environ
 
 # Set up the flask application.
 app = Flask(__name__)
@@ -33,7 +34,8 @@ app.register_blueprint(essays, url_prefix='/essays')
 # database tables.
 @app.before_first_request
 def initialize_database():
-    if app.debug:
+    if environ.get('RESET_DB'):
+        app.logger.debug('RECREATING ALL DATABASE TABLES')
         db.drop_all()
     db.create_all()
 
