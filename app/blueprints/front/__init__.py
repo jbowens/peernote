@@ -9,3 +9,4 @@ front = Blueprint('front', __name__)
 # Import the endpoints.
 from index import *
 from faq import *
+from splash import *
