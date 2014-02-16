@@ -11,6 +11,11 @@
         </div>
     </div>
     {% else %}
+    {% if login_failed %}
+    <div class="error">
+        Sorry, no account was found with that username and password combination.
+    </div>
+    {% endif %}
     <form method="post" id="log-in">
         <div class="field">
             <label for="login_username">Username</label>
