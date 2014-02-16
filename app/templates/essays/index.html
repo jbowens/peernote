@@ -1,0 +1,14 @@
+{% extends 'base/application.html' %}
+
+{% block content %}
+<div class="page-container top-margin bottom-margin">
+    <h1>My essays</h1>
+    {% if essays %}
+    <ul class="essays">
+        {% for essay in essays %}
+        <li>{{ essay.title }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}
