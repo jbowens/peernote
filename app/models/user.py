@@ -1,4 +1,4 @@
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 
 class User(db.Model):
@@ -13,3 +13,10 @@ class User(db.Model):
         """
         self.password = generate_password_hash(password)
         return self.password
+
+    def check_password(self, password):
+        """
+        Takes a plaintext password and verifies that it matches 
+        the stored hash.
+        """
+        return check_password_hash(self.password, password)
