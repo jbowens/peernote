@@ -1,0 +1,21 @@
+{% extends 'base/application.html' %}
+
+{% block styles %}
+    {{ super() }}
+    {% assets "essays_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+{% endblock %}
+
+{% block content %}
+<div class="editor-background">
+    <div class="center-container">
+        <div class="page-container">
+            <div class="content" contenteditable="true", spellcheck="false">
+                <h1 class=essay-title> TITLE </h1>
+                <p> TEXT </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

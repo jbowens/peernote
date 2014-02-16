@@ -20,3 +20,11 @@ assets.register('home_css',
         output="gen/home.css",
     )
 )
+
+assets.register('essays_css',
+    Bundle(
+        "scss/essays.scss",
+        filters="scss, cssmin",
+        output="gen/essays.css"
+    )
+)
