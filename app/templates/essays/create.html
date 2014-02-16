@@ -7,15 +7,24 @@
     {% endassets %}
 {% endblock %}
 
+{% block scripts %}
+    {{ super() }}
+    <script src="/static/js/essays/write.js"></script>
+{% endblock %}
+
 {% block content %}
 <div class="editor-background">
     <div class="center-container">
+        <a id="submit-paper" class="btn btn-primary"> Save Paper</a>
         <div class="page-container">
             <div class="content" contenteditable="true", spellcheck="false">
-                <h1 class=essay-title> TITLE </h1>
-                <p> TEXT </p>
+                <h1 id="essay-title" class=essay-title> TITLE </h1>
+                <p id="essay-text"> TEXT </p>
             </div>
         </div>
     </div>
+
 </div>
+
+
 {% endblock %}
