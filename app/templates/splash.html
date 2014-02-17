@@ -1,0 +1,81 @@
+{% extends 'base/application.html' %}
+
+{% block content %}
+    <div class='page-container top-morgin bottom-margin'>
+        <h1>Welcome to Peernote</h1>
+        <p>
+        Peernote is a platform that enables writers and instructors to connect and
+        collaboratively review and edit written material.
+        </p>
+        <form accept-charset="UTF-8" action="/recipients" class="new_recipient" id="new_recipient" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="/VpkIF5umzuCs1Gr3pa1WX2Y3ura0YXJLx8zr9TCmkU=" /></div>  
+            <br>
+            <table>
+                <tr>
+                    <td>
+                        <h2>Sign Up for Our Beta Site</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                        We'll keep you up to date with our progress and provide you with early
+                        access to the beta site.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="recipient_email">Email</label>
+                    </td>
+                    <td>
+                        <input class="input-field" id="recipient_email" name="recipient[email]" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="btn btn-primary alt" name="commit" type="submit" value="Sign Up" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <h2>A Tool for Writers</h2>
+        <p>It's 2014. Why would you review papers by hand?</p>
+        <br>
+        <h3>Write Wherever</h3>
+        <p>Peernote provides a full-fledged word processor accessible entirely from the browser. Already started a paper? Upload it! Peernote supports a wide variety of document formats.</p>
+        <br>
+        <br>
+        <h3>Never Write Between the Lines Again</h3>
+        <p>With Peernote's comprehensive in-browser editor, you can comment and mark-up essays with ease. In addition, you can utilize a suite of grammar, spelling, and plagiarism-checking tools to keep your writing clean.</p>
+        <br>
+        <br>
+        <h3>What Goes Around Comes Around</h3>
+        <p>Provide a review, get one back! Our platform connects you with other writers who can provide feedback on your work in exchange for your feedback on theirs. If you have a particular friend you'd like to review your essay, send an email link to your paper. They don't even need to sign up to provide a review.</p>
+        <br>
+        <h2>A Tool for Instructors</h2>
+        <p>Bringing the power of technology to the classroom</p>
+        <br>
+        <h3>Streamline Instruction</h3>
+        <p>With Peernote, the entire writing process is contained within the application, including assigning work, writing papers, peer reviewing essays, and grading. You can spend more time instructing and less time rummaging through student papers, entering grades, and printing assignments.</p>
+        <br>
+        <br>
+        <h3>Classroom Analytics</h3>
+        <p>Peernote helps focus instruction by providing a detailed analytical breakdown of classroom and individual writing proficiency. You can identify strengths and weaknesses in grammar or writing fluency or pinpoint plagiarism violations.</p>
+        <br>
+        <br>
+        <h3>Standardized Reviews</h3>
+        <p>Instructors and students both have access to Peernote's document markup editor. Never again will there be issues of legibility, or confusion over the various editing symbols and idiosyncrasies.</p>
+    </div>
+    <footer>
+    <!-- Adds a Google Analytics Beacon to each page -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-46451983-1', 'peernote.me');
+        ga('send', 'pageview');
+    </script>
+    </footer>
+{% endblock %}
