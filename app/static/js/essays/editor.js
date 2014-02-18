@@ -12,7 +12,7 @@ peernoteNS.autosave_timer = null;
 
 peernoteNS.essays.save = function() {
   var $title = $('#essay-title');
-  var $text = $('.essay-text');
+  var $text = $('.editor-background .content p, .editor-background .content div, .essay-text');
   var title = $title.text();
 
   var lines = [];
@@ -20,8 +20,6 @@ peernoteNS.essays.save = function() {
     lines.push($(this).text());
   });
   var text = lines.join('\n');
-
-  console.log(text);
 
   var params = { title: title, text: text};
   if (peernoteNS.essays.eid != null) {
