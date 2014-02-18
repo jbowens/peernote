@@ -11,18 +11,14 @@ class DocxParser(DocumentParser):
         self.file_extensions.append('docx')
 
     def parse_file(self, f):
-        essay = Essay()
-
         doc = opendocx(f)
         raw_paragraphs = getdocumenttext(doc)
         paragraphs = []
         for p in raw_paragraphs:
             paragraphs.append(p.encode('utf-8'))
-        essay.text = '\n'.join(paragraphs)
 
-        # TODO: Handle title
-
-        return essay
+        parsed_contents = {'text': '\n'.join(paragraphs)}
+        return parsed_contents
 
     def create_file(self, essay):
         # TODO: Implement

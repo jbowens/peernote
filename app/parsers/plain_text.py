@@ -8,11 +8,8 @@ class PlainTextParser(DocumentParser):
         self.file_extensions.append('txt')
 
     def parse_file(self, file_contents):
-        essay = Essay()
-        # TODO: Figure out the title
-        essay.title = 'Untitled'
-        essay.text = file_contents
-        return essay
+        print file_contents
+        return {'text': file_contents}
 
     def create_file(self, essay):
         return essay.text

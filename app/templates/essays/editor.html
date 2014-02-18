@@ -10,13 +10,12 @@
 {% block scripts %}
     {{ super() }}
 
-    {% if current_essay %}
-        <script>
-            var peernoteNS = peernoteNS || {};
-            peernoteNS.essays = peernoteNS.essays || {};
-            peernoteNS.essays.eid = {{ current_essay.eid }};
-        </script>
-    {% endif %}
+    <script>
+        var peernoteNS = peernoteNS || {};
+        peernoteNS.essays = peernoteNS.essays || {};
+        peernoteNS.essays.uid = {{ current_essay.uid }};
+        peernoteNS.essays.did = {{ current_essay.get_current_draft().did }};
+    </script>
 
     <script src="/static/js/essays/editor.js"></script>
 {% endblock %}
@@ -27,20 +26,16 @@
         <div class="status-line"></div>
         <div class="page-container">
             <div class="content" contenteditable="true", spellcheck="false">
-                <h1 id="essay-title" class=essay-title>{% if current_essay %}{{ current_essay.title|escape }}{% else %}Title here{% endif %}</h1>
-                {% if current_essay %}
-                    {% with paras = current_essay.get_paragraphs() %}
-                      {% if paras %}
-                        {% for p in paras %}
-                        <p class="essay-text">{{ p }}</p>
-                        {% endfor %}
-                      {% else %}
-                        <p class="essay-text"></p>
-                      {% endif %}
-                    {% endwith %}
-                {% else %}
-                  <p class="essay-text">Once upon a time...</p>
-                {% endif %}
+                <h1 id="essay-title" class=essay-title>{{ current_essay.get_current_draft().title|escape }}</h1>
+                {% with paras = current_essay.get_paragraphs() %}
+                  {% if paras %}
+                    {% for p in paras %}
+                    <p class="essay-text">{{ p }}</p>
+                    {% endfor %}
+                  {% else %}
+                    <p class="essay-text"></p>
+                  {% endif %}
+                {% endwith %}
             </div>
         </div>
     </div>
