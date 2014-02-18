@@ -3,7 +3,7 @@ class DocumentParser(object):
     file_extensions = []
 
     def __init__(self):
-        self.file_extensions.append('docx')
+        self.file_extensions = []
 
     def get_file_extensions(self):
         return self.file_extensions

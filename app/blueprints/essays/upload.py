@@ -28,10 +28,11 @@ def upload_essay():
 
         # Read the entire file into memory.
         contents = f.read()
+        f.seek(0)
 
         # Parse the document with the appropriate parser 
-        doc_parser = parsers[0]
-        new_essay = doc_parser.parse_file(contents)
+        doc_parser = applicable_parsers[0]
+        new_essay = doc_parser.parse_file(f.stream)
 
         # Create an entry in the upload table for the upload
         new_upload = Upload()

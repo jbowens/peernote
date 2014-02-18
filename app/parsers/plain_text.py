@@ -4,6 +4,7 @@ from app.parsers.document_parser import DocumentParser
 class PlainTextParser(DocumentParser):
 
     def __init__(self):
+        super(PlainTextParser, self).__init__()
         self.file_extensions.append('txt')
 
     def parse_file(self, file_contents):

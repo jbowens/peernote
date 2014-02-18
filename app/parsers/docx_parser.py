@@ -1,16 +1,23 @@
+from flask import current_app
 from app.models.essay import Essay
 from app.parsers.document_parser import DocumentParser
-from docx import *
 from cStringIO import StringIO
+from docx import opendocx,  getdocumenttext
 
 class DocxParser(DocumentParser):
 
-    def parse_file(self, file_contents):
+    def __init__(self):
+        super(DocxParser, self).__init__()
+        self.file_extensions.append('docx')
+
+    def parse_file(self, f):
         essay = Essay()
 
-        f = StringIO(file_contents)
         doc = opendocx(f)
-        paragraphs = getdocumenttext(doc)
+        raw_paragraphs = getdocumenttext(doc)
+        paragraphs = []
+        for p in raw_paragraphs:
+            paragraphs.append(p.encode('utf-8'))
         essay.text = '\n'.join(paragraphs)
 
         # TODO: Handle title
