@@ -40,9 +40,9 @@ app.register_blueprint(api, url_prefix='/api')
 # database tables.
 @app.before_first_request
 def initialize_database():
-    if environ.get('RESET_DB'):
-        app.logger.debug('RECREATING ALL DATABASE TABLES')
-        db.drop_all()
+    #if environ.get('RESET_DB'):
+    app.logger.debug('RECREATING ALL DATABASE TABLES')
+    db.drop_all()
     db.create_all()
 
 @app.before_request

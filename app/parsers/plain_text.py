@@ -9,7 +9,7 @@ class PlainTextParser(DocumentParser):
 
     def parse_file(self, file_contents):
         print file_contents
-        return {'text': file_contents}
+        return {'text': file_contents.getvalue()}
 
     def create_file(self, essay):
         return essay.text

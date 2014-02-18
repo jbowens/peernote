@@ -56,7 +56,7 @@ def upload_essay():
         new_essay.uid = g.user.uid
         new_essay.upload_id = new_upload.upload_id
         db.session.add(new_essay)
-        db.session.flush
+        db.session.flush()
 
         # Create draft associated with essay
         draft = Draft()
