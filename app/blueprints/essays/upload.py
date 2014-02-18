@@ -58,7 +58,6 @@ def upload_essay():
         db.session.add(new_essay)
         db.session.commit()
 
-        # TODO: Change redirect location.
-        return redirect(url_for('front.index'))
+        return redirect(url_for('essays.edit_essay', essayid=new_essay.eid))
 
     return render_template('essays/upload.html')
