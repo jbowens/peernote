@@ -29,18 +29,17 @@
             <div class="content" contenteditable="true", spellcheck="false">
                 <h1 id="essay-title" class=essay-title>{% if current_essay %}{{ current_essay.title|escape }}{% else %}Title here{% endif %}</h1>
                 {% if current_essay %}
-                {% with paras = current_essay.get_paragraphs() %}
-                  {% if paras %}
-                    {% for p in paras %}
-                    <p class="essay-text">{{ p }}</p>
-                    {% endfor %}
-                  {% else %}
-                    <p class="essay-text"></p>
-                  {% endif %}
-                {% endwith %}
+                    {% with paras = current_essay.get_paragraphs() %}
+                      {% if paras %}
+                        {% for p in paras %}
+                        <p class="essay-text">{{ p }}</p>
+                        {% endfor %}
+                      {% else %}
+                        <p class="essay-text"></p>
+                      {% endif %}
+                    {% endwith %}
                 {% else %}
                   <p class="essay-text">Once upon a time...</p>
-                <p class="essay-text">{% if current_essay %}{{ current_essay.text|escape }}{% else %}Once upon a time...{% endif %}</p>
                 {% endif %}
             </div>
         </div>
