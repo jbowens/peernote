@@ -37,3 +37,11 @@ assets.register('users_css',
         output="gen/users.css"
     )
 )
+
+assets.register('splash_css',
+    Bundle(
+        "scss/splash.scss",
+        filters="scss,cssmin",
+        output="gen/splash.css"
+    )
+)
