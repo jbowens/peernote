@@ -1,0 +1,523 @@
+$radius: 2px;
+$theme-color: #a6538d;
+$large-font: 30pt;
+$large-font-2: 20pt;
+$large-explanation: 15pt;  
+$small-explanation: 13pt;
+$white-color: #e5e5e5;
+
+* {
+    padding: 0;
+    margin:0;
+    font-family: 'open-sans';
+}
+
+html,body {
+    height:100%;
+    background: #f5f5f5;
+}
+
+@mixin border-radius {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    -o-border-radius: $radius;
+    border-radius: $radius;
+}
+
+#everything-wrapper {
+    height:100%;
+}
+
+.content-container {
+    width:1000px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+.splash-container {
+    width: 100%;    
+    background:#ccc;
+}
+
+#splash-main-image {
+    height:100%;
+    background: url('../images/julian.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.slanty-thing {
+    width: 150%;
+    height:100px;
+    background-color:white;
+    z-index:1;
+    position:absolute;
+    display: none;
+}
+
+#slanty-thing-1 {
+    top:516px;
+    -webkit-transform: rotate(-2deg);
+}
+
+#slanty-thing-2 {
+    top: -85px;
+    -webkit-transform: rotate(-2deg);
+}
+
+#navbar-inner {
+    width: 1000px;
+    margin:auto;
+}
+
+#navbar {
+    $button-height: 30px;
+    //padding:0px 0px 0 20px;
+    //border-bottom: $white-color 1px solid;
+    min-width:918px;
+    background: rgba(0,0,0,.5);
+    width:100%;
+    overflow:auto;
+
+    * {
+        color: $white-color;
+    }
+
+    .about-button {
+        width:100px;
+    }
+
+    .services-button {
+        width: 100px;
+    }
+
+    .team-button {
+        width: 90px;
+    }
+
+    .faq-button {
+        width: 80px;
+    }
+
+    .contact-button {
+        width: 100px;
+    }
+
+    li {
+        float: left;
+        height:66px;
+
+        a {
+            display:block;
+            padding:25px 0px;
+            width:100%;
+
+            text-align:center;
+            font-size:12pt;
+        }
+
+        a:hover {
+            background:rgba(206,206,206,.2);
+        }
+    } 
+
+    #login-button {
+        margin-top: 15px;
+        margin-right: 15px;
+        height: $button-height - 7px;
+        width: 100px;
+        font-size: 11px;
+        padding-top: 7px;
+        background: gray;
+    }
+
+    form {
+        padding-top:15px;
+        * { float: right; }
+
+        .textfield, .submit-button {
+            @include border-radius;
+            height: $button-height;
+            width: 200px;
+            border: 0px;
+        }
+
+        .submit-button {
+            background-color: $theme-color;
+            width:100px;
+            margin-left:10px;
+        }
+
+        .textfield {
+            color: black;
+            padding-left: 10px;
+            width:170px;
+        }
+    }
+
+    #login-button {
+        float: right;
+        @include border-radius;
+        text-align: center;
+        margin-left: 10px;
+    }
+}
+
+#splash-main-content {
+
+    * { color: $white-color }
+
+    #intro-spiel {
+        margin-top: 150px;
+        height: 250px;
+        width: 500px;
+        //background-color: rgba(0,0,0,.4);
+        padding:35px;
+        border-radius: 2px;
+
+        h1 {
+            font-size: $large-font;
+        }
+
+        p {
+            font-size: $large-explanation;
+            line-height: 30px;
+            margin-top: 25px;
+        }
+
+        #beta-signup {
+            @include border-radius;
+            background-color: $theme-color;
+            height: 40px;
+            width: 250px;
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 50px;
+        }
+    }
+}
+
+#learn-more {
+    color:white;
+    position:relative;
+    top:-62px;
+    width:150px;
+    margin:auto;
+    background: rgba(0,0,0,.6);
+    padding:20px;
+    text-align:center;
+
+    i {
+        margin-right:5px;
+    }
+}
+
+
+
+#explanation-content, #splash-2 {
+    position: relative;
+    z-index: 10;
+    height: 700px;
+    background: white;
+    
+    $column-padding: 20px;
+
+    * {
+        font-size: $small-explanation;
+        line-height: 16pt;
+    }
+
+    .section-title {
+        * {
+            float:left;
+        }
+
+        h2 {
+            font-size: $large-font;
+            text-align: center;
+            color: $theme-color;
+            margin-bottom: 15px;
+            width:380px;
+        }
+        .title-line {
+            bottom-border: black 1px solid;
+            width:310px;
+            height:1px;
+            background-color:rgba(0,0,0,.3);
+            margin-top:10px;
+        }
+    }
+
+    .left-column {
+        padding: 30px $column-padding 0 $column-padding;
+        width: 800px;
+        float: right;
+    }
+
+    .tagline {
+        clear:both;
+        text-align:center;
+        font-size: $small-explanation;
+        margin-bottom: 50px;
+    }
+
+
+    h3 {
+        font-size: $large-explanation;
+        font-weight: bold;
+        margin-bottom:8px;
+    }
+
+    .pitch-point {
+        $icon-size: 100px;
+        margin-top: 30px;
+        overflow:auto;
+        margin-left:165px;
+
+        i {
+            height:100%;
+            color: $theme-color;
+            font-size: 85px;
+            line-height: 40px;
+        }
+
+        .pitch-point-icon {
+            height: $icon-size;
+            width: $icon-size;
+            float: left;
+            margin-top: 40px;
+            margin-right: 50px;
+        }
+
+        .pitch-point-text {
+            width: 600px;
+            float:left;
+        }
+    }
+}
+
+#splash-2 {
+    position: relative;
+    z-index: 10;
+    height: 700px;
+    background: white;
+    
+    $column-padding: 20px;
+
+    * {
+        font-size: $small-explanation;
+        line-height: 16pt;
+        color:$white-color;
+    }
+
+    .section-title {
+        * {
+            float:left;
+        }
+
+        h2 {
+            font-size: $large-font;
+            text-align: center;
+            color: $white-color;
+            margin-bottom: 15px;
+            width:460px;
+        }
+
+        .title-line {
+            width:270px;
+            height:1px;
+            background-color:$white-color;
+            margin-top:10px;
+        }
+    }
+
+    .left-column {
+        padding: 30px $column-padding 0 $column-padding;
+        width: 800px;
+        float: right;
+    }
+
+    .tagline {
+        clear:both;
+        text-align:center;
+        font-size: $small-explanation;
+        margin-bottom: 50px;
+    }
+
+
+    h3 {
+        font-size: $large-explanation;
+        font-weight: bold;
+        margin-bottom:8px;
+    }
+
+    .pitch-point {
+        $icon-size: 100px;
+        margin-top: 30px;
+        overflow:auto;
+        margin-left:165px;
+
+        i {
+            height:100%;
+            color: $white-color;
+            font-size: 85px;
+            line-height: 40px;
+        }
+
+        .pitch-point-icon {
+            height: $icon-size;
+            width: $icon-size;
+            float: left;
+            margin-top: 40px;
+            margin-right: 50px;
+        }
+
+        .pitch-point-text {
+            width: 600px;
+            float:left;
+        }
+    }
+}
+
+#splash-2 {
+    height: 750px;
+    padding-top:100px;
+    width: 100%;
+    position:relative;
+    background-image: url('../images/stocky-stock-dark.jpg');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    //background-attachment: fixed;
+
+    .content-container {
+        background: rgba(0,0,0,.6);
+        padding: 30px 50px;
+        @include border-radius;
+    }
+}
+
+
+#testimonials-splash {
+    background: url('../images/talk.jpg') no-repeat center center;
+    background-position:0 -100px;
+    height:700px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    .dark-cover {
+        width:100%;
+        height:100%;
+        background: rgba(0,0,0,.6);
+        padding-top:80px;
+
+        h1 {
+            text-align: center;
+            font-size: $large-font;
+            color: $white-color;
+        }
+
+        .testimonial-container {
+            width:1100px;
+            margin: auto;
+            height: 500px;
+
+            * {
+                font-size:$small-explanation;
+                line-height:18pt;
+                text-align: center;
+            }
+
+            .top-testimonial {
+                margin-bottom:90px;
+                margin-top:70px;
+            }
+            
+            .testimonial-column {
+                height: 100%;
+                width: 33%;
+                float:left;
+
+                i {
+                    width:10px;
+                    margin:auto;
+                    display:block;
+                    color: $white-color;
+                    margin-bottom:5px;
+                }
+
+                .testimonial-text {
+                    color: $white-color;
+                    font-style:italic;
+                    width: 340px;
+                    margin:auto;
+                }
+
+                .testimonial-author {
+                    color:grey;
+                }
+            }
+
+        }
+    }
+}
+
+#faq {
+    background: url('../images/symbol-bg.jpg') no-repeat center center;
+    background-size: 100% auto;
+    width:100%;
+    height:800px;
+
+    * {
+        color: #888;
+        line-height: 16pt;
+    }
+
+    h2 {
+        font-size: $large-font;
+        text-align:center;
+        padding-top:50px;
+    }
+
+    .questions-container {
+        width:1100px;
+        margin:auto;
+        //border: red 1px dashed;
+        height:600px;
+        padding-top:50px;
+
+        .questions-column {
+            width: 49%;
+            float:left;
+          //  border: green 1px dashed;
+        }
+
+        li * {
+            float:left;
+            font-size: $large-explanation;
+        }
+
+        li {
+            clear: both;
+            margin-bottom:50px;
+            float: left;
+        }
+
+        i {
+            margin-right:15px;
+            font-size: 10pt;
+        }
+
+        p {
+            display: block;
+            width: 480px;
+        }
+    }
+
+}
+

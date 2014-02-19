@@ -6,7 +6,7 @@
     {% if essays %}
     <ul class="essays">
         {% for essay in essays|sort(attribute='eid') %}
-        <li><a href='/essays/edit/{{ essay.eid }}'> {{ essay.title }} </a></li>
+        <li><a href='/essays/edit/{{ essay.eid }}'> {{ essay.get_current_draft().title }} </a></li>
         {% endfor %}
     </ul>
     {% endif %}

@@ -69,6 +69,14 @@ ul.essay-container {
             padding-top: 90px;
         }
 
+        .status-line {
+            @include calc(width, "#{$contentwidth}");
+            height: 2em;
+            margin: 0 auto;
+            font-size: 0.9em;
+            color: #666;
+        }
+
         .page-container {
             @include calc(width, "#{$contentwidth} - 100px");
             @include calc(min-height, "#{$contentwidth} * (11 / 8.5)");
