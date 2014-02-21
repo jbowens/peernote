@@ -7,17 +7,25 @@
     {% endassets %}
 {% endblock %}
 
+{% block scripts %}
+    {{ super() }}
+    <script src="/static/js/include/jquery.scrollTo.min.js"></script>
+    <script src="/static/js/include/jquery.stellar.min.js"></script>
+    <script src="/static/js/include/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="/static/js/splashScroll.js"></script>
+{% endblock %}
+
 {% block main %}
 <div id="everything-wrapper">
 
-    <div id="splash-main-image" class="splash-container">
+    <div id="splash-main-image" class="splash-container" data-stellar-background-ratio=".8" data-stellar-vertical-offset="100">
         <div id="navbar">
             <div id="navbar-inner">
                 <ul>
-                    <li class="about-button"><a>ABOUT</a> </li>
+                    <li class="about-button"><a id="about-id">ABOUT</a> </li>
                     <li class="services-button"><a>SERVICES</a></li>
                     <li class="team-button"><a>TEAM</a></li>
-                    <li class="faq-button"><a>FAQ</a></li>
+                    <li class="faq-button"><a id="faq-id">FAQ</a></li>
                     <li class="contact-button"><a>CONTACT</a></li>
                 </ul>
                 <div id="login-button"> LOG IN</div>
@@ -33,100 +41,92 @@
                 <p>
                     Peernote is a platform that enables writers and instructors to connect and collaboratively review and edit written material.
                 </p>
-                <div id="beta-signup">SIGN UP FOR OUR BETA SITE </div>
+                <div id="beta-signup">BETA SIGN UP </div>
             </div>
         </div>
-
     </div>
-    <div id="explanation-content" class="content-container">
+    <div id="explanation-content" class="content-container splash-class">
+        <div class="cube-image" id="cube-image-1" /> </div>
+        <div class="cube-image" id="cube-image-2"/> </div>
+        <div class="cube-image" id="cube-image-3" /> </div>
         <div id="learn-more">
-            <i class="fa fa-arrow-circle-down"></i>
-            Learn More
+            <div>
+                <i class="fa fa-arrow-circle-down"></i>
+                Learn More
+            </div>
         </div>
         <div class="section-title">
             <div class="title-line"></div>
             <h2>A Tool for Writers</h2>
             <div class="title-line"></div>
         </div>
-        <p class="tagline">iiii want. to but the iris lalalal hahahaha spa</p>
-        <div class="pitch-point">
-            <div id="pitch-point-write-wherever" class="pitch-point-icon">
-                <i class="fa fa-edit"></i>
-            </div>
-            <div class="pitch-point-text">
-                <h3>Write Wherever, Whenever</h3>
-                <p>
-                Peernote provides a full-fledged word processor accessible entirely from the browser. Already started a paper? Upload it! Peernote supports a wide variety of document formats.
-                </p>
-            </div>
+        <p class="tagline">Upgrade the Way You Write.</p>
+        <h3>
+            <i class="fa fa-edit"></i>
+            Write Wherever, Whenever
+        </h3>
+        <div class="pitch-point-parag">
+            Peernote provides a full-fledged word processor accessible entirely from the browser. Already started a paper? Upload it! Peernote supports a wide variety of document formats.
         </div>
-        <div class="pitch-point"> 
-            <div id="pitch-point-write-between" class="pitch-point-icon">
-                <i class="fa fa-align-justify"></i>
-            </div>
-            <div class="pitch-point-text">
-                <h3>Never Write Between the Lines Again</h3>
-                <p>
-                With Peernote's comprehensive in-browser editor, you can comment and mark-up essays with ease. In addition, you can utilize a suite of grammar, spelling, and plagiarism-checking tools to keep your writing clean.
-                </p>
-            </div>
+        <h3>
+            <i class="fa fa-align-justify"></i>
+            Never Write Between the Lines Again
+        </h3>
+        <div class="pitch-point-parag">
+            With Peernote's comprehensive in-browser editor, you can edit essays with ease. You can utilize our suite of grammar, spelling, and plagiarism-checking tools to keep your writing clean.
         </div>
-        <div class="pitch-point">
-            <div class="pitch-point-icon">
-                <i class="fa fa-refresh"></i>
-            </div>
-            <div class="pitch-point-text">
-                <h3>What Goes Around Comes Around</h3>
-                <p>
-                Provide a review, get one back! Our platform connects you with other writers who can provide feedback on your work in exchange for your feedback on theirs. If you have a particular friend you'd like to review your essay, send an email link to your paper. They don't even need to sign up to provide a review.
-                </p>
-            </div>
+        <h3>
+            <i class="fa fa-refresh"></i>
+            What Goes Around Comes Around
+        </h3>
+        <div class="pitch-point-parag">
+            Provide a review, get one back! Our platform connects you with other writers who can provide feedback on your work in exchange for your feedback on theirs.
         </div>
     </div>
-    <div id="splash-2">
-        <div class="content-container">
-            <div class="section-title">
-                <div class="title-line"></div>
-                <h2>A Tool for Instructors</h2>
-                <div class="title-line"></div>
-            </div>
-            <p class="tagline">Bringing technology to the classroom</p>
-            <div class="pitch-point">
-                <div id="pitch-point-write-wherever" class="pitch-point-icon">
-                    <i class="fa fa-rocket"></i>
+    <div id="splash-2" class="splash-class" data-stellar-background-ratio=".8" data-stellar-vertical-offset="50">
+        <div class="splash-2-shadow">
+            <div class="content-container">
+                <div class="cube-image" id="cube-image-4" /> </div>
+                <div class="cube-image" id="cube-image-5"/> </div>
+                <div class="section-title">
+                    <div class="title-line"></div>
+                    <h2>A Tool for Instructors</h2>
+                    <div class="title-line"></div>
                 </div>
-                <div class="pitch-point-text">
-                    <h3>Streamline Instruction</h3>
-                    <p>With Peernote, the entire writing process is contained within the application, including assigning work, writing papers, peer reviewing essays, and grading. You can spend more time instructing and less time rummaging through student papers, entering grades, and printing assignments.</p>
+                <p class="tagline">Bringing technology to the classroom</p>
+                <div class="pitch-panel">
+                    <h3>
+                        <i class="fa fa-rocket"></i>
+                        Streamline Instruction
+                    </h3>
+                    <div class="pitch-point-parag">
+                        With Peernote, the entire writing process is contained within the application, including assigning work, writing papers, peer reviewing essays, and grading. You can spend more time instructing and less time rummaging through student papers, entering grades, and printing assignments.
+                    </div>
                 </div>
-            </div>
-            <div class="pitch-point"> 
-                <div id="pitch-point-write-between" class="pitch-point-icon">
-                    <i class="fa fa-flask"></i>
+                <div class="pitch-panel">
+                    <h3>
+                        <i class="fa fa-flask"></i>
+                        Classroom Analytics
+                    </h3>
+                    <div class="pitch-point-parag">
+                        Peernote helps focus instruction by providing a detailed analytical breakdown of classroom and individual writing proficiency. You can identify strengths and weaknesses in grammar or writing fluency or pinpoint plagiarism violations.
+                    </div>
                 </div>
-                <div class="pitch-point-text">
-                    <h3>Classroom Analytics</h3>
-                    <p>Peernote helps focus instruction by providing a detailed analytical breakdown of classroom and individual writing proficiency. You can identify strengths and weaknesses in grammar or writing fluency or pinpoint plagiarism violations.</p>
+                <div class="pitch-panel">
+                    <h3>
+                        <i class="fa fa-font"></i>
+                        Standardized Reviews</h3>
+                    <div class="pitch-point-parag">
+                        Instructors and students both have access to Peernote's document markup editor. Never again will there be issues of legibility, or confusion over the various editing symbols and idiosyncrasies.
+                    </div>
                 </div>
-            </div>
-            <div class="pitch-point">
-                <div class="pitch-point-icon">
-                    <i class="fa fa-font"></i>
-                </div>
-                <div class="pitch-point-text">
-                    <h3>Standardized Reviews</h3>
-                    <p>
-                    Instructors and students both have access to Peernote's document markup editor. Never again will there be issues of legibility, or confusion over the various editing symbols and idiosyncrasies.
-                    </p>
-                </div>
-            </div>
-        </div>    
-    <div class="slanty-thing" id="slanty-thing-1"></div> 
-    <div class="slanty-thing" id="slanty-thing-2"></div> 
+            </div>    
+            <div class="slanty-thing" id="slanty-thing-1"></div> 
+            <div class="slanty-thing" id="slanty-thing-2"></div> 
+        </div>
     </div>
 
-    <div id="explanation-content" class="content-container">
-    </div>
+    <div id="explanation-content-2" class="content-container"></div>
     <div id="testimonials-splash" class="splash-container">
         <div class="dark-cover">
             <h1> Testimonials</h1>
@@ -190,47 +190,47 @@
             <div class="questions-column">
                 <ul>
                     <li>
-                        <i class="fa fa-circle" ></i>
-                        <p>Lorem ipsum dolor sit amet, consecteteur?</p>
+                    <i class="fa fa-circle" ></i>
+                    <p>Lorem ipsum dolor sit amet, consecteteur?</p>
                     </li>
                     <li>
-                        <i class="fa fa-circle"></i>    
-                        <p>Adipiscing elit, seddo eiusmod tempor, quis nostrud?</p>
+                    <i class="fa fa-circle"></i>    
+                    <p>Adipiscing elit, seddo eiusmod tempor, quis nostrud?</p>
                     </li>
                     <li>
-                        <i class="fa fa-circle"></i>    
-                        <p>Incidunt ut labore et dolore magna?</p>
+                    <i class="fa fa-circle"></i>    
+                    <p>Incidunt ut labore et dolore magna?</p>
                     </li>
                     <li>
-                        <i class="fa fa-circle"></i>    
-                        <p>Ut enim ad minim veniam, quis nostrad, uis aute irure dolor in reprehenderit?</p>
+                    <i class="fa fa-circle"></i>    
+                    <p>Ut enim ad minim veniam, quis nostrad, uis aute irure dolor in reprehenderit?</p>
                     </li>
                 </ul> 
             </div>
             <div class="questions-column">
                 <ul> 
                     <li>
-                        <i class="fa fa-circle"></i>
-                        <p>Adipiscing elit, sed do eiusmod tempor, quis nostrad?</p>
+                    <i class="fa fa-circle"></i>
+                    <p>Adipiscing elit, sed do eiusmod tempor, quis nostrad?</p>
                     </li>
                     <li>
-                        <i class="fa fa-circle"></i>    
-                        <p>Lorem ipsum dolor sit amet, consecteteur?</p>
+                    <i class="fa fa-circle"></i>    
+                    <p>Lorem ipsum dolor sit amet, consecteteur?</p>
                     </li>
                     <li>
-                        <i class="fa fa-circle"></i>    
-                        <p>Est id urbanitas forensibus sentitae. Te epicure accomodare qui?</p>
+                    <i class="fa fa-circle"></i>    
+                    <p>Est id urbanitas forensibus sentitae. Te epicure accomodare qui?</p>
                     </li>
                     <li>
-                        <i class="fa fa-circle"></i>    
-                        <p>Incidunt ut labore dolore magna?</p>
+                    <i class="fa fa-circle"></i>    
+                    <p>Incidunt ut labore dolore magna?</p>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 
-    
+
     <div class='page-container top-morgin bottom-margin'>
         <form accept-charset="UTF-8" action="/recipients" class="new_recipient" id="new_recipient" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="/VpkIF5umzuCs1Gr3pa1WX2Y3ura0YXJLx8zr9TCmkU=" /></div>  
         </form>
@@ -242,13 +242,13 @@
 <!-- Adds a Google Analytics Beacon to each page -->
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-46451983-1', 'peernote.me');
     ga('send', 'pageview');
 </script>
 </footer>
-    
+
 {% endblock %}

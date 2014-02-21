@@ -1,10 +1,22 @@
+
+/***********************************************/
+/*                GLOBAL VARIABLES             */
+/***********************************************/
+
 $radius: 2px;
 $theme-color: #a6538d;
 $large-font: 30pt;
 $large-font-2: 20pt;
 $large-explanation: 15pt;  
 $small-explanation: 13pt;
+$button-font-size: 10pt;
 $white-color: #e5e5e5;
+
+
+
+/***********************************************/
+/*                PAGE-WIDE STYLING            */
+/***********************************************/
 
 * {
     padding: 0;
@@ -12,9 +24,16 @@ $white-color: #e5e5e5;
     font-family: 'open-sans';
 }
 
-html,body {
+html, body {
     height:100%;
-    background: #f5f5f5;
+}
+
+@mixin unselectable {
+    -webkit-user-select: none;        
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    -o-user-select: none;
+    user-select: none;
 }
 
 @mixin border-radius {
@@ -40,9 +59,23 @@ html,body {
     background:#ccc;
 }
 
+.cube-image {
+    z-index: 1000;
+    position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+    border: 3px solid $white-color;
+}
+
+
+/********************************************************************/
+/*                      PANEL 1 (TOP SPLASH)                        */
+/********************************************************************/
+
 #splash-main-image {
     height:100%;
-    background: url('../images/julian.jpg') no-repeat center center;
+    background: url('../images/julian.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -84,6 +117,7 @@ html,body {
 
     * {
         color: $white-color;
+        @include unselectable;
     }
 
     .about-button {
@@ -132,11 +166,15 @@ html,body {
         font-size: 11px;
         padding-top: 7px;
         background: gray;
+        @include unselectable;
     }
 
     form {
         padding-top:15px;
-        * { float: right; }
+        * { 
+            float: right; 
+            font-size: $button-font-size;    
+        }
 
         .textfield, .submit-button {
             @include border-radius;
@@ -149,6 +187,11 @@ html,body {
             background-color: $theme-color;
             width:100px;
             margin-left:10px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #B45B99;
         }
 
         .textfield {
@@ -163,12 +206,17 @@ html,body {
         @include border-radius;
         text-align: center;
         margin-left: 10px;
+        font-size: $button-font-size;
+        cursor: pointer;
     }
 }
 
 #splash-main-content {
 
-    * { color: $white-color }
+    * { 
+        color: $white-color; 
+        cursor: default;
+    }
 
     #intro-spiel {
         margin-top: 150px;
@@ -190,41 +238,85 @@ html,body {
 
         #beta-signup {
             @include border-radius;
+            @include unselectable;
             background-color: $theme-color;
             height: 40px;
             width: 250px;
             text-align: center;
             padding-top: 20px;
             margin-top: 50px;
+            font-size: $large-explanation;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #beta-signup:hover {
+            background: #B45B99;
         }
     }
 }
 
 #learn-more {
+    @include unselectable;
+    @include border-radius;
     color:white;
-    position:relative;
+    position:absolute;
+    left:0;
+    right:0;
     top:-62px;
     width:150px;
     margin:auto;
     background: rgba(0,0,0,.6);
     padding:20px;
     text-align:center;
+    cursor: pointer;
 
     i {
         margin-right:5px;
     }
 }
 
+#learn-more:hover {
+    background: rgba(30,30,30,.6);
+}
 
+
+
+/*******************************************************/
+/*            PANEL 2 (TOOL FOR WRITERS)               */
+/*******************************************************/
+
+#cube-image-1 {
+    background-image: url('../images/typing.jpg');
+    height: 285px;
+    width: 285px;
+    top: 190px;
+    right:50px;
+    border: 3px white solid;
+}
+
+#cube-image-2 {
+    background-image: url('../images/jackjack.png');
+    height:200px;
+    width:200px;
+    top:430px;
+    left:670px;
+    border: 3px white solid;
+}
+
+.pitch-point-parag {
+    line-height:22px;
+    width: 500px;
+    display: block;
+    padding-top:10px;
+    padding-bottom:60px; 
+}
 
 #explanation-content, #splash-2 {
     position: relative;
     z-index: 10;
-    height: 700px;
-    background: white;
+    background-position:0 0;
     
-    $column-padding: 20px;
-
     * {
         font-size: $small-explanation;
         line-height: 16pt;
@@ -251,12 +343,6 @@ html,body {
         }
     }
 
-    .left-column {
-        padding: 30px $column-padding 0 $column-padding;
-        width: 800px;
-        float: right;
-    }
-
     .tagline {
         clear:both;
         text-align:center;
@@ -264,58 +350,77 @@ html,body {
         margin-bottom: 50px;
     }
 
-
     h3 {
         font-size: $large-explanation;
-        font-weight: bold;
-        margin-bottom:8px;
-    }
-
-    .pitch-point {
-        $icon-size: 100px;
-        margin-top: 30px;
-        overflow:auto;
-        margin-left:165px;
-
-        i {
-            height:100%;
-            color: $theme-color;
-            font-size: 85px;
-            line-height: 40px;
-        }
-
-        .pitch-point-icon {
-            height: $icon-size;
-            width: $icon-size;
-            float: left;
-            margin-top: 40px;
-            margin-right: 50px;
-        }
-
-        .pitch-point-text {
-            width: 600px;
-            float:left;
-        }
     }
 }
 
+#explanation-content {
+    height: 750px;
+
+    .section-title {
+        padding-top:70px;
+    }
+
+    h3 {
+        padding: 10px;
+        color: $theme-color;
+        i {
+            margin-right:10px;
+        }
+        border-radius: 2px;
+    }
+
+
+}
+
+#cube-image-4 {
+    background-image: url('../images/help.png');
+    height: 285px;
+    width: 285px;
+    top: 190px;
+    left:50px;
+    background-position: -36px;
+}
+
+#cube-image-5 {
+    background-image: url('../images/open-book.png');
+    height:200px;
+    width:200px;
+    top:430px;
+    right:670px;
+}
+
 #splash-2 {
-    position: relative;
-    z-index: 10;
-    height: 700px;
-    background: white;
-    
-    $column-padding: 20px;
+    height: 850px;
+    padding-top:70px;
+    width: 100%;
+    background-image: url('../images/stocky-stock-dark.jpg');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+
+    .content-container {
+        padding: 30px 50px;
+        overflow:auto;
+        position:relative;
+    }
+
+    .splash-2-shadow {
+        background: rgba(0,0,0,.6);
+        width:100%;
+    }
 
     * {
         font-size: $small-explanation;
         line-height: 16pt;
-        color:$white-color;
+        color: $white-color;
     }
 
     .section-title {
         * {
-            float:left;
+            float: left;
         }
 
         h2 {
@@ -323,88 +428,62 @@ html,body {
             text-align: center;
             color: $white-color;
             margin-bottom: 15px;
-            width:460px;
+            width: 460px;
         }
 
         .title-line {
-            width:270px;
-            height:1px;
-            background-color:$white-color;
-            margin-top:10px;
+            width: 270px;
+            height: 1px;
+            background-color: $white-color;
+            margin-top: 10px;
         }
-    }
-
-    .left-column {
-        padding: 30px $column-padding 0 $column-padding;
-        width: 800px;
-        float: right;
     }
 
     .tagline {
         clear:both;
-        text-align:center;
+        text-align: center;
         font-size: $small-explanation;
         margin-bottom: 50px;
     }
 
+    .pitch-panel {
+        float: right; 
+        clear: both;
 
-    h3 {
-        font-size: $large-explanation;
-        font-weight: bold;
-        margin-bottom:8px;
-    }
-
-    .pitch-point {
-        $icon-size: 100px;
-        margin-top: 30px;
-        overflow:auto;
-        margin-left:165px;
-
-        i {
-            height:100%;
-            color: $white-color;
-            font-size: 85px;
-            line-height: 40px;
+        .pitch-point-parag {
+            float:right;
         }
 
-        .pitch-point-icon {
-            height: $icon-size;
-            width: $icon-size;
-            float: left;
-            margin-top: 40px;
-            margin-right: 50px;
-        }
+        h3 {
+            font-weight: bold;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            width: 500px;
 
-        .pitch-point-text {
-            width: 600px;
-            float:left;
-        }
+            i {
+                margin-right: 10px;
+             }
+
+            .pitch-point-text {
+                width: 500px;
+            }
+        }   
     }
 }
 
-#splash-2 {
-    height: 750px;
-    padding-top:100px;
-    width: 100%;
-    position:relative;
-    background-image: url('../images/stocky-stock-dark.jpg');
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    background-position: center center;
-    //background-attachment: fixed;
 
-    .content-container {
-        background: rgba(0,0,0,.6);
-        padding: 30px 50px;
-        @include border-radius;
-    }
+#explanation-content-2 {
+    height:300px;
 }
 
+/*******************************************************/
+/*                 TESTIMONIALS PANEL                  */
+/*******************************************************/
 
 #testimonials-splash {
     background: url('../images/talk.jpg') no-repeat center center;
-    background-position:0 -100px;
-    height:700px;
+    background-position: 0 -100px;
+    height: 700px;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -423,49 +502,54 @@ html,body {
         }
 
         .testimonial-container {
-            width:1100px;
+            width: 1100px;
             margin: auto;
             height: 500px;
 
             * {
-                font-size:$small-explanation;
-                line-height:18pt;
+                font-size: $small-explanation;
+                line-height: 18pt;
                 text-align: center;
             }
 
             .top-testimonial {
-                margin-bottom:90px;
-                margin-top:70px;
+                margin-bottom: 90px;
+                margin-top: 70px;
             }
             
             .testimonial-column {
                 height: 100%;
                 width: 33%;
-                float:left;
+                float: left;
 
                 i {
-                    width:10px;
-                    margin:auto;
-                    display:block;
+                    width: 10px;
+                    margin: auto;
+                    display: block;
                     color: $white-color;
-                    margin-bottom:5px;
+                    margin-bottom: 5px;
                 }
 
                 .testimonial-text {
                     color: $white-color;
                     font-style:italic;
                     width: 340px;
-                    margin:auto;
+                    margin: auto;
                 }
 
                 .testimonial-author {
-                    color:grey;
+                    color: grey;
                 }
             }
-
         }
     }
 }
+
+
+
+/*******************************************************/
+/*                     FAQ PANEL                       */
+/*******************************************************/
 
 #faq {
     background: url('../images/symbol-bg.jpg') no-repeat center center;
@@ -487,14 +571,12 @@ html,body {
     .questions-container {
         width:1100px;
         margin:auto;
-        //border: red 1px dashed;
         height:600px;
         padding-top:50px;
 
         .questions-column {
             width: 49%;
             float:left;
-          //  border: green 1px dashed;
         }
 
         li * {
@@ -518,6 +600,4 @@ html,body {
             width: 480px;
         }
     }
-
 }
-
