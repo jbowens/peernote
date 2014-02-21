@@ -8,5 +8,5 @@ Peernote in Python using Flask.
 ```bash
 npm install -g less
 
-pip install Flask Flask-Assets cssmin flask-sqlalchemy Flask-WTF Flask-Gravatar boto psycopg2 docx lxml PIL
+pip install Flask Flask-Assets cssmin flask-sqlalchemy Flask-WTF Flask-Gravatar boto psycopg2 docx lxml PIL mailchimp mandrill
 ```
