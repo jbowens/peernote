@@ -54,7 +54,6 @@ peernoteNS.essays.save = function() {
     $.post('/api/save_draft', params, function(data) {
       if (data.success) {
         $status_line.text('Saved');
-        $status_line.animate({opacity: 0}, 1000);
       }
     });
   }
@@ -73,6 +72,9 @@ peernoteNS.essays.keystroke = function(e) {
     clearTimeout(peernoteNS.autosave_timer);
     peernoteNS.autosave_timer = null;
   }
+ 
+  // Remove the saved text, the state has probs changed.
+  $('.status-line').text('');
 
   peernoteNS.autosave_timer = setTimeout(function() {
     peernoteNS.essays.save();
