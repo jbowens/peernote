@@ -14,7 +14,7 @@
         var peernoteNS = peernoteNS || {};
         peernoteNS.essays = peernoteNS.essays || {};
         peernoteNS.essays.uid = {{ current_essay.uid }};
-        peernoteNS.essays.did = {{ current_essay.get_current_draft().did }};
+        peernoteNS.essays.did = {{ current_draft.did }};
     </script>
 
     <script src="/static/js/essays/editor.js"></script>
@@ -24,12 +24,9 @@
 <div class="editor-background">
     <div class="center-container">
         <div class="status-line"></div>
-        <div class="page-container">
-            <div class="content" contenteditable="true", spellcheck="false"><h1 id="essay-title" class=essay-title>{{ current_essay.get_current_draft().title|escape }}</h1>{{ current_essay.get_current_draft().text }}</div>
-        </div>
+        <a id="review" class="btn btn-primary alt">Reviewify</a>
+        {% include "shared/essays/essay_content.html" %}
     </div>
-
 </div>
-
 
 {% endblock %}

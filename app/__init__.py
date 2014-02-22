@@ -30,10 +30,13 @@ from app.models.draft import Draft
 from blueprints.front import front
 from blueprints.users import users
 from blueprints.essays import essays
+from blueprints.reviews import reviews
 from blueprints.api import api
+
 app.register_blueprint(front)
 app.register_blueprint(users)
 app.register_blueprint(essays, url_prefix='/essays')
+app.register_blueprint(reviews, url_prefix='/reviews')
 app.register_blueprint(api, url_prefix='/api')
 
 # Sometime before the first request we need to create all of the
