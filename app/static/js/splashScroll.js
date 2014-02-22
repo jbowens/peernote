@@ -5,20 +5,28 @@ $(document).ready(function() {
         $.scrollTo('#faq', 800, {});
     });
 
+
     $("#learn-more").click(function() {
-        $.scrollTo('#explanation-content',600, {offset:-60});
+        $.scrollTo('#explanation-content', 600); //, {offset: -60});
     });
 
     $("#about-id").click(function() {
-        $.scrollTo('#explanation-content',600, {});
+        $.scrollTo('#explanation-content', 600); //, {offset: -60});
+    });
+
+    $("#instructors-id").click(function() {
+        $.scrollTo('#splash-2', 600); //, {offset: -40});
+    });
+
+    $(".contact-button a").click(function() {
+        $.scrollTo('#footer', 600);
     });
 
     /* Turn on parallax scrolling for the window */
-    $(window).stellar({horizontalScrolling: false});
+    //$(window).stellar({horizontalScrolling: false});
 
     /* Hide the learn more button when scrolling from top */
     $(window).scroll(function() {
-        console.log($(window).scrollTop()); 
         var scrollTop = $(window).scrollTop();
         if (scrollTop <= 0) {
             $('#learn-more').fadeIn();

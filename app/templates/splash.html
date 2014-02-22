@@ -9,10 +9,13 @@
 
 {% block scripts %}
     {{ super() }}
-    <script src="/static/js/include/jquery.scrollTo.min.js"></script>
-    <script src="/static/js/include/jquery.stellar.min.js"></script>
-    <script src="/static/js/include/jquery-ui-1.10.4.custom.min.js"></script>
-    <script src="/static/js/splashScroll.js"></script>
+    <script type="text/javascript" src="/static/js/include/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="/static/js/include/jquery.stellar.min.js"></script>
+    <script type="text/javascript" src="/static/js/include/jquery-ui-1.10.4.custom.min.js"></script>
+    <script type="text/javascript" src="/static/js/include/jquery.viewport.mini.js"></script>
+    <script type="text/javascript" src="/static/js/splashScroll.js"></script>
+
+    <script src="/static/js/splashFaq.js"></script>
 {% endblock %}
 
 {% block main %}
@@ -22,8 +25,8 @@
         <div id="navbar">
             <div id="navbar-inner">
                 <ul>
-                    <li class="about-button"><a id="about-id">ABOUT</a> </li>
-                    <li class="services-button"><a>SERVICES</a></li>
+                    <li class="about-button"><a id="about-id">WRITERS</a> </li>
+                    <li class="services-button"><a id="instructors-id">INSTRUCTORS</a></li>
                     <li class="team-button"><a>TEAM</a></li>
                     <li class="faq-button"><a id="faq-id">FAQ</a></li>
                     <li class="contact-button"><a>CONTACT</a></li>
@@ -83,7 +86,8 @@
             Provide a review, get one back! Our platform connects you with other writers who can provide feedback on your work in exchange for your feedback on theirs.
         </div>
     </div>
-    <div id="splash-2" class="splash-class" data-stellar-background-ratio=".8" data-stellar-vertical-offset="50">
+    <!--<div id="splash-2" class="splash-class" data-stellar-background-ratio=".8" data-stellar-vertical-offset="50">-->
+        <div id="splash-2" class="splash-class">
         <div class="splash-2-shadow">
             <div class="content-container">
                 <div class="cube-image" id="cube-image-4" /> </div>
@@ -100,7 +104,7 @@
                         Streamline Instruction
                     </h3>
                     <div class="pitch-point-parag">
-                        With Peernote, the entire writing process is contained within the application, including assigning work, writing papers, peer reviewing essays, and grading. You can spend more time instructing and less time rummaging through student papers, entering grades, and printing assignments.
+                        With Peernote, the entire writing process is contained within the application, including assigning work, writing papers, peer reviewing essays, and grading. You can spend more time instructing and less time doing busywork.
                     </div>
                 </div>
                 <div class="pitch-panel">
@@ -117,7 +121,7 @@
                         <i class="fa fa-font"></i>
                         Standardized Reviews</h3>
                     <div class="pitch-point-parag">
-                        Instructors and students both have access to Peernote's document markup editor. Never again will there be issues of legibility, or confusion over the various editing symbols and idiosyncrasies.
+                        Instructors and students both have access to Peernote's document markup editor. Avoid issues of legibility, or confusion over the various editing symbols and idiosyncrasies.
                     </div>
                 </div>
             </div>    
@@ -126,7 +130,7 @@
         </div>
     </div>
 
-    <div id="explanation-content-2" class="content-container"></div>
+    <!--<div id="explanation-content-2" class="content-container"></div>
     <div id="testimonials-splash" class="splash-container">
         <div class="dark-cover">
             <h1> Testimonials</h1>
@@ -182,51 +186,104 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
 
     <div id="faq">
-        <h2>Frequently Asked Questions</h2>
+        <div class="content-container">
+        <div class="section-title">
+            <div class="title-line"></div>
+            <h2>Frequently Asked Questions</h2>
+            <div class="title-line"></div>
+        </div>
         <div class="questions-container">
             <div class="questions-column">
-                <ul>
-                    <li>
-                    <i class="fa fa-circle" ></i>
-                    <p>Lorem ipsum dolor sit amet, consecteteur?</p>
-                    </li>
-                    <li>
-                    <i class="fa fa-circle"></i>    
-                    <p>Adipiscing elit, seddo eiusmod tempor, quis nostrud?</p>
-                    </li>
-                    <li>
-                    <i class="fa fa-circle"></i>    
-                    <p>Incidunt ut labore et dolore magna?</p>
-                    </li>
-                    <li>
-                    <i class="fa fa-circle"></i>    
-                    <p>Ut enim ad minim veniam, quis nostrad, uis aute irure dolor in reprehenderit?</p>
-                    </li>
-                </ul> 
+                <div id="faq-1" class="faq-question">
+                    <h3>
+                        <i class="fa fa-caret-right" ></i>
+                        When will the Peernote beta open?
+                    </h3>
+                    <p id="faq-a-1" class="faq-a">We will be launching our private beta for users in March. Our instructor beta will open in May. Sign up <a href="#">here</a> to receive a notification when the beta opens. </p>
+                </div>
+
+                <div id="faq-2" class="faq-question">
+                    <h3>
+                        <i class="fa fa-caret-right"></i>    
+                        Which features can I expect in the initial beta?
+                    </h3>
+                    <p id="faq-a-2" class="faq-a"> You will initially be able to write, open and save documents in our editor, upload word documents, and send your essay for review to friends via email. Reviewers will be able to use our document markup editor. </p>
+                </div>
+                <div id="faq-3" class="faq-question">
+                    <h3>
+                        <i class="fa fa-caret-right"></i>    
+                        Which features will roll out after beta launch?
+                    </h3>
+                    <p id="faq-a-3" class="faq-a">
+                        After the beta opens, we will be rapidly adding features. These include improved review tools for grammar analysis and plagiarism checking, richer document text, and automatic peer matching for essay reviews. 
+                    </p>
+                </div>
+                <div id="faq-4" class="faq-question">
+                    <h3>
+                        <i class="fa fa-caret-right"></i>    
+                        How much will Peernote cost me?
+                    </h3>
+                    <p id="faq-a-4" class="faq-a">If you are a student or writer, Peernote is free now and forever. If you are a school administrator, please contact us for quotes. </p>
+                </div>
             </div>
             <div class="questions-column">
-                <ul> 
-                    <li>
-                    <i class="fa fa-circle"></i>
-                    <p>Adipiscing elit, sed do eiusmod tempor, quis nostrad?</p>
-                    </li>
-                    <li>
-                    <i class="fa fa-circle"></i>    
-                    <p>Lorem ipsum dolor sit amet, consecteteur?</p>
-                    </li>
-                    <li>
-                    <i class="fa fa-circle"></i>    
-                    <p>Est id urbanitas forensibus sentitae. Te epicure accomodare qui?</p>
-                    </li>
-                    <li>
-                    <i class="fa fa-circle"></i>    
-                    <p>Incidunt ut labore dolore magna?</p>
-                    </li>
-                </ul>
+                <div id="faq-5" class="faq-question">
+                    <h3>
+                        <i class="fa fa-caret-right"></i>
+                        Why are we building Peernote?
+                    </h3>
+                    <p id="faq-a-5" class="faq-a">
+                    The literature on effective writing education centers on providing numerous rich writing experiences like editing, revising, and learning from mistakes. Peernote allows students to write and edit collaboratively, providing easy and efficient access to these crucial writing experiences.
+                    </p> 
+                </div>
+                <div id="faq-6" class="faq-question">
+                    <h3>
+                        <i class="fa fa-caret-right"></i>    
+                        Who makes Peernote?
+                    </h3>
+                    <p id="faq-a-6" class="faq-a">We're a dedicated team who met and founded Peernote at Brown University. Learn more about us <a href="#">here</a></p>
+                </div>
+                <div id="faq-7" class="faq-question">
+                    <h3>
+                        <i class="fa fa-caret-right"></i>    
+                        Est id urbanitas forensibus sentitae. Te epicure?
+                    </h3>
+                    <p id="faq-a-7" class="faq-a">hhnoaenhhtn hhnaohsu ahnh hn auohohnhn h hsaou hs h hshsao hsao ehshs hs aohhs ahshsao hs hs. </p>
+                </div>
+                <div id="faq-8" class="faq-question">
+                    <h3>
+                        <i class="fa fa-caret-right"></i>    
+                        Incidunt ut labore dolore magna?
+                    </h3>
+                    <p id="faq-a-8" class="faq-a">hhnoaenhhtn hhnaohsu ahnh hn auohohnhn h hsaou hs h hshsao hsao ehshs hs aohhs ahshsao hs hs. </p>
+                </div>
             </div>
+        </div>
+    </div>
+</div>
+    <div id="footer">
+        <div class="content-container">
+            <h3>Contact Us</h3>
+            <form>
+                <div id="contact-fields">
+                    <input class="contact-form-text" type="text" name="name" placeholder="Name" />
+                    <input class="contact-form-text" type="text" name="email" placeholder="Email" /> 
+                    <input class="contact-form-text" type="text" name="subject" placeholder="Subject" />
+                    <textarea id="contact-message" type="textarea" name="message" placeholder="Message"  cols="70" rows="7"></textarea>
+                </div>
+                <div id="contact-info-container">
+                    <div class="contact-info">Peernote <br>
+                        69 Brown St. Box 3718 <br>
+                        Providence, RI. 02912, USA
+                    </div>
+                    <div class="drop-a-line">Feel free to drop us a line, or just say hello!</div>
+                    <input id="contact-submit" type="submit" value="Submit" />
+                </div>
+            </form>
+            <div id="copyright"> Copyright &copy 2014 Peernote. All Rights Reserved </div>
         </div>
     </div>
 
