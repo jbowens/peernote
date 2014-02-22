@@ -25,18 +25,7 @@
     <div class="center-container">
         <div class="status-line"></div>
         <div class="page-container">
-            <div class="content" contenteditable="true", spellcheck="false">
-                <h1 id="essay-title" class=essay-title>{{ current_essay.get_current_draft().title|escape }}</h1>
-                {% with paras = current_essay.get_paragraphs() %}
-                  {% if paras %}
-                    {% for p in paras %}
-                    <p class="essay-text">{{ p }}</p>
-                    {% endfor %}
-                  {% else %}
-                    <p class="essay-text"></p>
-                  {% endif %}
-                {% endwith %}
-            </div>
+            <div class="content" contenteditable="true", spellcheck="false"><h1 id="essay-title" class=essay-title>{{ current_essay.get_current_draft().title|escape }}</h1>{{ current_essay.get_current_draft().text }}</div>
         </div>
     </div>
 
