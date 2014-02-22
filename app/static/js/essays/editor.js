@@ -81,7 +81,7 @@ peernoteNS.essays.keystroke = function(e) {
 };
 
 peernoteNS.essays.initEditor = function() {
-  $('.page-container').keypress(peernoteNS.essays.keystroke);
+  $('.page-container').keyup(peernoteNS.essays.keystroke);
   $('.page-container .content').keydown(peernoteNS.essays.keydown);
 };
 
