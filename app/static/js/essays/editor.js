@@ -3,7 +3,7 @@
  */
 var peernoteNS = peernoteNS || {};
 peernoteNS.essays = peernoteNS.essays || {uid: null, did: null};
-peernoteNS.essays.AUTOSAVE_PAUSE_MILLIS = 2500;
+peernoteNS.essays.AUTOSAVE_PAUSE_MILLIS = 1000;
 
 /* setTimeout() timer handle used for implementing
  * autosaving after a pause in writing.
