@@ -75,12 +75,14 @@ html, body {
 
 #splash-main-image {
     height:100%;
-    background: url('../images/julian.jpg') no-repeat center center fixed;
+    background: url('../images/julian.jpg') no-repeat center center;
+    //background-attachment: fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
+
 
 .slanty-thing {
     width: 150%;
@@ -125,7 +127,7 @@ html, body {
     }
 
     .services-button {
-        width: 100px;
+        width: 130px;
     }
 
     .team-button {
@@ -211,6 +213,12 @@ html, body {
     }
 }
 
+.navbar-fixed {
+    position: fixed;
+    top:0;
+    background: rgba(0,0,0,.8);
+}
+
 #splash-main-content {
 
     * { 
@@ -259,16 +267,16 @@ html, body {
 #learn-more {
     @include unselectable;
     @include border-radius;
-    color:white;
-    position:absolute;
-    left:0;
-    right:0;
-    top:-62px;
-    width:150px;
-    margin:auto;
+    color: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -62px;
+    width: 150px;
+    margin: auto;
     background: rgba(0,0,0,.6);
-    padding:20px;
-    text-align:center;
+    padding: 20px;
+    text-align: center;
     cursor: pointer;
 
     i {
@@ -370,8 +378,6 @@ html, body {
         }
         border-radius: 2px;
     }
-
-
 }
 
 #cube-image-4 {
@@ -392,14 +398,14 @@ html, body {
 }
 
 #splash-2 {
-    height: 850px;
+    height: 810px;
     padding-top:70px;
     width: 100%;
     background-image: url('../images/stocky-stock-dark.jpg');
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center center;
-    background-attachment: fixed;
+    //background-attachment: fixed;
 
     .content-container {
         padding: 30px 50px;
@@ -552,52 +558,201 @@ html, body {
 /*******************************************************/
 
 #faq {
-    background: url('../images/symbol-bg.jpg') no-repeat center center;
+    //background: url('../images/symbol-bg.jpg') no-repeat center center;
     background-size: 100% auto;
     width:100%;
     height:800px;
+    $gray-color: #888;
 
     * {
-        color: #888;
+        color: $gray-color;
         line-height: 16pt;
     }
 
-    h2 {
-        font-size: $large-font;
-        text-align:center;
-        padding-top:50px;
-    }
+    .section-title {
+        padding-top:80px;
 
-    .questions-container {
-        width:1100px;
-        margin:auto;
-        height:600px;
-        padding-top:50px;
 
-        .questions-column {
-            width: 49%;
-            float:left;
-        }
-
-        li * {
-            float:left;
-            font-size: $large-explanation;
-        }
-
-        li {
-            clear: both;
-            margin-bottom:50px;
+        * {
             float: left;
         }
 
-        i {
-            margin-right:15px;
-            font-size: 10pt;
+        h2 {
+            font-size: $large-font;
+            text-align: center;
+            //color: $gray-color;
+            color: $theme-color;
+            margin-bottom: 15px;
+            width: 600px;
         }
 
-        p {
-            display: block;
-            width: 480px;
+        .title-line {
+            width: 200px;
+            height: 1px;
+            background-color: $gray-color;
+            margin-top: 10px;
         }
+    }
+
+    .questions-container {
+        clear:both;
+        //border: purple 1px dashed;
+        width: 1100px;
+        margin: auto;
+        height: 600px;
+        padding-top: 80px;
+
+
+        .questions-column {
+            //border: blue 1px dashed;
+            width: 49%;
+            float:left;
+
+            .faq-question {
+                position: relative;
+                overflow: auto;
+                border: 1px red dashed;
+                float: left;
+                min-height: 50px;
+
+                p {
+                    display: none;
+                    position: absolute;
+                    top: 40px;
+                    font-size: $small-explanation;
+
+                }
+
+                h3 {
+                    //float: left;
+                    font-weight:bold;
+                    //margin-bottom:120px;
+                    font-size: $large-explanation;
+                }
+
+                i {
+                    margin-right: 20px;
+                    font-size: 20pt;
+                    position: relative;
+                    top:2px;
+                }
+
+
+                .faq-a {
+                    margin-left: 42px;
+                    width: 450px;
+                }
+            }
+        }
+
+        h3:hover {
+            color: $theme-color;
+            cursor: pointer;
+        }
+    }
+}
+
+
+#footer {
+    height: 500px;
+    background: url('../images/symbol-bg.jpg') no-repeat center center;
+    background-size: 100% auto;
+    width: 100%;
+    border-top: 1px solid #888;
+    position: relative;
+
+    h3 {
+        font-size: $large-font;
+        margin-top: 60px;
+        margin-bottom: 40px;
+    }
+
+    .contact-container {
+        height: 100%;
+    }
+
+
+    form {
+        width: 500px;
+        $field-width: 200px;
+        overflow: auto;
+        position: relative;
+        
+        #contact-fields {
+            overflow: auto;
+           // border: red 1px dashed;
+            float:left;
+        }
+
+
+        input, textarea {
+            float: left;
+            clear: both;
+            @include border-radius;
+            border: 1px #ccc solid;
+            margin-bottom:15px;
+        }
+
+        .contact-form-text, textarea {
+            width: $field-width;
+            padding: 5px;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        #contact-submit:hover {
+            background-color: #B45B99;
+        }
+
+        #contact-message {
+            width: $field-width;
+        }
+
+        #contact-info-container {
+            //border: blue 1px dashed;
+            float: left;
+            height: 260px;
+            width: 200px;
+            position: relative;
+
+            * {
+                float: left;
+            }
+
+            .contact-info {
+                width: 145px;
+                margin-left: 18px;
+                float: left;
+            }
+
+            .drop-a-line {
+                margin-left: 18px;
+                margin-top:62px;
+                width: 100px;
+            }
+
+            #contact-submit {
+                clear: none;
+                background-color: $theme-color;
+                color: $white-color;
+                @include border-radius;
+                width:100px;
+                height:33px;
+                margin-left: 18px;
+                position: absolute;
+                bottom: 2px;
+                left: 0px;
+            }
+        }
+
+    }
+
+    #copyright {
+        position: absolute;
+        bottom: 15px;
+        width: 300px;
+        margin: auto;
     }
 }

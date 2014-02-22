@@ -10,3 +10,4 @@ front = Blueprint('front', __name__)
 from index import *
 from faq import *
 from splash import *
+from email_signup import *
