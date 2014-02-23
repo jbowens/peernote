@@ -49,7 +49,7 @@ def create_review():
         unique_hash = False
         gen_hash = ''
         while not unique_hash:
-            gen_hash = uuid.uuid4().hex[:8]
+            gen_hash = uuid.uuid4().hex
             queried_review = Review.query.filter_by(urlhash=gen_hash).first()
             if not queried_review:
                 unique_hash = True
