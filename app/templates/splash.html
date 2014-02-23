@@ -10,18 +10,28 @@
 {% block scripts %}
     {{ super() }}
     <script type="text/javascript" src="/static/js/include/jquery.scrollTo.min.js"></script>
-    <script type="text/javascript" src="/static/js/include/jquery.stellar.min.js"></script>
-    <script type="text/javascript" src="/static/js/include/jquery-ui-1.10.4.custom.min.js"></script>
-    <script type="text/javascript" src="/static/js/splashScroll.js"></script>
 
     {# TODO: Convert all these javascript files into a bundle. #}
-    <script type="text/javascript" src="/static/js/splash/scroll.js"></script>
-    <script type="text/javascript" src="/static/js/splash/faq.js"></script>
     <script type="text/javascript" src="/static/js/splash/email-signup.js"></script>
+    <script type="text/javascript" src="/static/js/splash/splash.js"></script>
 {% endblock %}
 
 {% block main %}
 <div id="everything-wrapper">
+    <div id="sign-up-shadow">
+        <div class="sign-up-center-align">
+            <div class="sign-up-pane"> 
+                <i class="fa fa-times"></i>
+                <h3>Peernote Signup</h3>
+                <div>Sign up for beta access. We'll notify you when we're up and running. </div>
+                <form>
+                    <input type="text" name="email" placeholder="Email Address" class="sign-up-pane-email">
+                    <input type="submit" value="SIGN UP" class="sign-up-pane-submit">
+                    <span class="email-confirmation-popup">Thank you! We'll notify you when the beta begins</span>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <div id="splash-main-image" class="splash-container" data-stellar-background-ratio=".8" data-stellar-vertical-offset="100">
         <div id="navbar">
@@ -35,22 +45,22 @@
                 </ul>
                 <div id="login-button"> LOG IN</div>
                 <form class="email-signup">
-                  {% if has_signed_up %}
-                  <span class="email-confirmation">
-                    Thank you! We'll notify you when the beta begins.
-                  </span>
-                  {% else %}
+                    {% if has_signed_up %}
+                    <span class="email-confirmation">
+                        Thank you! We'll notify you when the beta begins.
+                    </span>
+                    {% else %}
                     <input class="submit-button" type="submit" value="SIGN UP" />
                     <input class="textfield" type="text" name="email" placeholder="Email Address" />
-                  {% endif %}
-                  </form>
+                    {% endif %}
+                </form>
             </div>
         </div>
         <div id="splash-main-content" class="content-container">
             <div id="intro-spiel">
                 <h1>Welcome to Peernote</h1>
                 <p>
-                    Peernote is a platform that enables writers and instructors to connect and collaboratively review and edit written material.
+                Peernote is a platform that enables writers and instructors to connect and collaboratively review and edit written material.
                 </p>
                 <div id="beta-signup">BETA SIGN UP </div>
             </div>
@@ -71,7 +81,7 @@
             <h2>A Tool for Writers</h2>
             <div class="title-line"></div>
         </div>
-        <p class="tagline">Upgrade the Way You Write.</p>
+        <p class="tagline">Upgrade the Way You Write</p>
         <h3>
             <i class="fa fa-edit"></i>
             Write Wherever, Whenever
@@ -95,7 +105,7 @@
         </div>
     </div>
     <!--<div id="splash-2" class="splash-class" data-stellar-background-ratio=".8" data-stellar-vertical-offset="50">-->
-        <div id="splash-2" class="splash-class">
+    <div id="splash-2" class="splash-class">
         <div class="splash-2-shadow">
             <div class="content-container">
                 <div class="cube-image" id="cube-image-4" /> </div>
@@ -198,82 +208,82 @@
 
     <div id="faq">
         <div class="content-container">
-        <div class="section-title">
-            <div class="title-line"></div>
-            <h2>Frequently Asked Questions</h2>
-            <div class="title-line"></div>
-        </div>
-        <div class="questions-container">
-            <div class="questions-column">
-                <div id="faq-1" class="faq-question">
-                    <h3>
-                        <i></i>
-                        When will the Peernote beta open?
-                    </h3>
-                    <p id="faq-a-1" class="faq-a">We will be launching our private beta for users in March. Our instructor beta will open in May. Sign up <a href="#">here</a> to receive a notification when the beta opens. </p>
-                </div>
-
-                <div id="faq-2" class="faq-question">
-                    <h3>
-                        <i></i>    
-                        Which features can I expect in the initial beta?
-                    </h3>
-                    <p id="faq-a-2" class="faq-a"> You will initially be able to write, open and save documents in our editor, upload word documents, and send your essay for review to friends via email. Reviewers will be able to use our document markup editor. </p>
-                </div>
-                <div id="faq-3" class="faq-question">
-                    <h3>
-                        <i></i>    
-                        Which features will roll out after beta launch?
-                    </h3>
-                    <p id="faq-a-3" class="faq-a">
-                        After the beta opens, we will be rapidly adding features. These include improved review tools for grammar analysis and plagiarism checking, richer document text, and automatic peer matching for essay reviews. 
-                    </p>
-                </div>
-                <div id="faq-4" class="faq-question">
-                    <h3>
-                        <i></i>    
-                        How much will Peernote cost me?
-                    </h3>
-                    <p id="faq-a-4" class="faq-a">If you are a student or writer, Peernote is free now and forever. If you are a school administrator, please contact us for quotes. </p>
-                </div>
+            <div class="section-title">
+                <div class="title-line"></div>
+                <h2>Frequently Asked Questions</h2>
+                <div class="title-line"></div>
             </div>
-            <div class="questions-column">
-                <div id="faq-5" class="faq-question">
-                    <h3>
-                        <i></i>
-                        Why are we building Peernote?
-                    </h3>
-                    <p id="faq-a-5" class="faq-a">
-                    The literature on effective writing education centers on providing numerous rich writing experiences like editing, revising, and learning from mistakes. Peernote allows students to write and edit collaboratively, providing easy and efficient access to these crucial writing experiences.
-                    </p> 
+            <div class="questions-container">
+                <div class="questions-column">
+                    <div id="faq-1" class="faq-question">
+                        <h3>
+                            <i></i>
+                            When will the Peernote beta open?
+                        </h3>
+                        <p id="faq-a-1" class="faq-a">We will be launching our private beta for users in March. Our instructor beta will open in May. Sign up <a>here</a> to receive a notification when the beta opens. </p>
+                    </div>
+
+                    <div id="faq-2" class="faq-question">
+                        <h3>
+                            <i></i>    
+                            Which features can I expect in the initial beta?
+                        </h3>
+                        <p id="faq-a-2" class="faq-a"> You will initially be able to write, open and save documents in our editor, upload word documents, and send your essay for review to friends via email. Reviewers will be able to use our document markup editor. </p>
+                    </div>
+                    <div id="faq-3" class="faq-question">
+                        <h3>
+                            <i></i>    
+                            Which features will roll out after beta launch?
+                        </h3>
+                        <p id="faq-a-3" class="faq-a">
+                        After the beta opens, we will be rapidly adding features. These include improved review tools for grammar analysis and plagiarism checking, richer document text, and automatic peer matching for essay reviews. 
+                        </p>
+                    </div>
+                    <div id="faq-4" class="faq-question">
+                        <h3>
+                            <i></i>    
+                            How much will Peernote cost me?
+                        </h3>
+                        <p id="faq-a-4" class="faq-a">If you are a student or writer, Peernote is free now and forever. If you are a school administrator, please contact us for quotes. </p>
+                    </div>
                 </div>
-                <div id="faq-7" class="faq-question">
-                    <h3>
-                        <i></i>    
-                        I have Google Docs. Why Peernote? 
-                    </h3>
-                    <p id="faq-a-7" class="faq-a">
-                     Peernote streamlines the processes that take place in class everyday - distributing assignments, writing, editing, and grading all in the same place. Additionally, instructors gain powerful insights into how their students write and how they can improve.
-                    </p>
-                </div>
-                <div id="faq-6" class="faq-question">
-                    <h3>
-                        <i></i>    
-                        Who makes Peernote?
-                    </h3>
-                    <p id="faq-a-6" class="faq-a">We're a dedicated team who met and founded Peernote at Brown University. Bryce is founder and front-end developer, Jackson and Alec are back-end engineers, Linh is our lovely designer, and Jeff takes care of business. Learn more about us <a href="#">here</a>.</p>
-                </div>
-                <div id="faq-8" class="faq-question">
-                    <h3>
-                        <i></i>    
-                        I have another question. Who can I ask? 
-                    </h3>
-                    <p id="faq-a-8" class="faq-a">Our founders are happy to answer your questions. Feel free to send us a message <a>here</a>. We don't bite! (Except for Jackson maybe).</p>
+                <div class="questions-column">
+                    <div id="faq-5" class="faq-question">
+                        <h3>
+                            <i></i>
+                            Why are we building Peernote?
+                        </h3>
+                        <p id="faq-a-5" class="faq-a">
+                        The literature on effective writing education centers on providing numerous rich writing experiences like editing, revising, and learning from mistakes. Peernote allows students to write and edit collaboratively, providing easy and efficient access to these crucial writing experiences.
+                        </p> 
+                    </div>
+                    <div id="faq-7" class="faq-question">
+                        <h3>
+                            <i></i>    
+                            I have Google Docs. Why Peernote? 
+                        </h3>
+                        <p id="faq-a-7" class="faq-a">
+                        Peernote streamlines the processes that take place in class everyday - distributing assignments, writing, editing, and grading all in the same place. Additionally, instructors gain powerful insights into how their students write and how they can improve.
+                        </p>
+                    </div>
+                    <div id="faq-6" class="faq-question">
+                        <h3>
+                            <i></i>    
+                            Who makes Peernote?
+                        </h3>
+                        <p id="faq-a-6" class="faq-a">We're a dedicated team who met and founded Peernote at Brown University. Bryce is founder and front-end developer, Jackson and Alec are back-end engineers, Linh is our lovely designer, and Jeff takes care of business. <!--Learn more about us <a href="#">here</a>.--></p>
+                    </div>
+                    <div id="faq-8" class="faq-question">
+                        <h3>
+                            <i></i>    
+                            I have another question. Who can I ask? 
+                        </h3>
+                        <p id="faq-a-8" class="faq-a">Our founders are happy to answer your questions. Feel free to send us a message <a>here</a>. We don't bite! (Except for Jackson maybe).</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
     <div id="footer">
         <div class="content-container">
             <h3>Contact Us</h3>

@@ -42,3 +42,6 @@ app/static/.webassets-cache/*
 
 # database migrations
 migrations
+
+# etc
+.swp

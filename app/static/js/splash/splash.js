@@ -1,17 +1,36 @@
 $(document).ready(function() {
 
+    /*******************************/
+    /* Signup Overlay Display Code */
+    /*******************************/
+
+    $("#beta-signup, #faq-a-1 a").click(function() {
+        $("#sign-up-shadow").css("display","table");
+    });
+
+    $("#sign-up-shadow").click(function(event) {
+        var targetClass = $(event.target).attr('class');
+        if (targetClass === "sign-up-center-align" || targetClass === "fa fa-times") {
+            $("#sign-up-shadow").fadeOut(100, "linear"); 
+        }
+    });
+
+
+    /*******************************/
+    /*   AUTOMATED SCROLL CODE     */
+    /*******************************/
+
     /* Automatically scroll to certain locations on the page */
     $("#faq-id").click(function() {
         $.scrollTo('#faq', 800, {});
     });
 
-
     $("#learn-more").click(function() {
-        $.scrollTo('#explanation-content', 600); //, {offset: -60});
+        $.scrollTo('#explanation-content', 400); //, {offset: -60});
     });
 
     $("#about-id").click(function() {
-        $.scrollTo('#explanation-content', 600); //, {offset: -60});
+        $.scrollTo('#explanation-content', 400); //, {offset: -60});
     });
 
     $("#instructors-id").click(function() {
@@ -34,5 +53,5 @@ $(document).ready(function() {
             $('#learn-more').fadeOut();
         }
     });
+    
 });
-

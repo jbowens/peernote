@@ -14,7 +14,6 @@ $button-font-size: 10pt;
 $white-color: #e5e5e5;
 
 
-
 /***********************************************/
 /*                PAGE-WIDE STYLING            */
 /***********************************************/
@@ -27,6 +26,10 @@ $white-color: #e5e5e5;
 
 html, body {
     height: 100%;
+}
+
+input:focus {
+    outline: none;
 }
 
 @mixin unselectable {
@@ -67,6 +70,97 @@ html, body {
     background-repeat: no-repeat;
     border-radius: 20px;
     border: 3px solid $white-color;
+}
+
+
+/***********************************/
+/*         SIGNUP OVERLAY          */
+/***********************************/
+
+#sign-up-shadow {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,.85);;
+    z-index: 100;
+    display: none;
+
+    .sign-up-center-align {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    
+    .sign-up-pane {
+        @include border-radius;
+        width: 400px;
+        height: 230px;
+        margin: auto;
+        background: white;
+        padding: 50px 60px;
+
+        * {
+            font-size: $small-explanation;
+            line-height: 24px;
+        }
+
+        i {
+            float: right;
+            position: relative;
+            bottom: 40px;
+            left: 40px;
+        }
+
+        i:hover {
+            color: #888;
+            cursor: pointer;
+        }
+
+        h3 {
+            font-size: $large-font-2;
+            margin-bottom: 20px;
+        }
+
+        .sign-up-pane-submit {
+            @include border-radius;
+            background-color: $theme-color;
+            width: 100px;
+            height: 30px;
+            cursor: pointer;
+            border: 0px;
+            color: $white-color;
+            font-size: $button-font-size;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        .sign-up-pane-submit:hover {
+            background-color: $theme-color-hover;
+        }
+
+        .sign-up-pane-email {
+            @include border-radius;
+            height: 30px;
+            border: 1px #ddd solid;
+            padding-left: 5px;
+            width: 250px;
+            font-size: $button-font-size;
+        }
+
+        form {
+            overflow: auto;
+            width: 400px;
+            margin-top:50px;
+            height: 100px;
+        }
+
+        .email-confirmation-popup {
+            color: green;
+            position:relative;
+            top:10px;
+            margin-top: 30px;
+            display: none;
+        }
+    }
 }
 
 
@@ -192,7 +286,7 @@ html, body {
         }
 
         .submit-button:hover {
-            background-color: #B45B99;
+            background-color: $theme-color-hover;
         }
 
         .textfield {
@@ -200,6 +294,10 @@ html, body {
             padding-left: 10px;
             width: 170px;
         }
+    }
+
+    .email-confirmation {
+        margin-top: 10px;
     }
 
     #login-button {
@@ -284,7 +382,6 @@ html, body {
 #learn-more:hover {
     background: rgba(30,30,30,.6);
 }
-
 
 
 /*******************************************************/
@@ -476,10 +573,10 @@ html, body {
     }
 }
 
-
 #explanation-content-2 {
     height:300px;
 }
+
 
 /*******************************************************/
 /*                 TESTIMONIALS PANEL                  */
@@ -617,7 +714,7 @@ html, body {
                 }
 
                 h3 {
-                    font-weight:bold;
+                    //font-weight:bold;
                     font-size: $large-explanation;
                     color: $theme-color;
                     float:right;
@@ -711,6 +808,7 @@ html, body {
 
             * {
                 float: left;
+                color: #888;
             }
 
             .contact-info {
