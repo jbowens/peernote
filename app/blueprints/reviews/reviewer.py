@@ -10,6 +10,6 @@ def review_draft(reviewhash):
     if review:
         current_draft = Draft.query.filter_by(did=review.did).first()
         if current_draft:
-            return render_template('essays/review.html', current_draft=current_draft)
+            return render_template('reviews/reviewer.html', current_draft=current_draft)
 
     return redirect(url_for('essays.essays_index')) # TODO: something else
