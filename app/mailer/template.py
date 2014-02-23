@@ -1,4 +1,5 @@
 from flask import render_template
+from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from html2text import html2text
 
@@ -9,8 +10,13 @@ class MailTemplate:
   def __init__(self):
     pass
 
-  def render(self, bindings = dict()):
-    raise NotImplementedError()
+  def render(self, to_email, from_email, bindings = dict()):
+    msg = MIMEMultipart()
+    msg['To'] = to_email
+    msg['From'] = from_email
+    msg['Subject'] = bindings['subject']
+    self.render_body(msg, bindings)
+    return msg   
 
   def render_body_template(self, bindings = dict(), template=None):
     if template == None:
