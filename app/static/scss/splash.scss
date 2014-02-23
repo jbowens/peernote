@@ -5,6 +5,7 @@
 
 $radius: 2px;
 $theme-color: #a6538d;
+$theme-color-hover: #B45B99;
 $large-font: 30pt;
 $large-font-2: 20pt;
 $large-explanation: 15pt;  
@@ -20,12 +21,12 @@ $white-color: #e5e5e5;
 
 * {
     padding: 0;
-    margin:0;
+    margin: 0;
     font-family: 'open-sans';
 }
 
 html, body {
-    height:100%;
+    height: 100%;
 }
 
 @mixin unselectable {
@@ -45,11 +46,11 @@ html, body {
 }
 
 #everything-wrapper {
-    height:100%;
+    height: 100%;
 }
 
 .content-container {
-    width:1000px;
+    width: 1000px;
     margin: 0 auto;
     padding: 0 50px;
 }
@@ -76,20 +77,19 @@ html, body {
 #splash-main-image {
     height:100%;
     background: url('../images/julian.jpg') no-repeat center center;
-    //background-attachment: fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 
-
+/* // USE THESE ROTATED BLOCKS IF YOU WANT TO MAKE SLANTED SECTION EDGES
 .slanty-thing {
     width: 150%;
-    height:100px;
-    background-color:white;
-    z-index:1;
-    position:absolute;
+    height: 100px;
+    background-color: white;
+    z-index: 1;
+    position: absolute;
     display: none;
 }
 
@@ -102,28 +102,27 @@ html, body {
     top: -85px;
     -webkit-transform: rotate(-2deg);
 }
+*/
 
 #navbar-inner {
     width: 1000px;
-    margin:auto;
+    margin: auto;
 }
 
 #navbar {
     $button-height: 30px;
-    //padding:0px 0px 0 20px;
-    //border-bottom: $white-color 1px solid;
     min-width:918px;
     background: rgba(0,0,0,.5);
-    width:100%;
-    overflow:auto;
+    width: 100%;
+    overflow: auto;
 
     * {
-        color: $white-color;
         @include unselectable;
+        color: $white-color;
     }
 
     .about-button {
-        width:100px;
+        width: 100px;
     }
 
     .services-button {
@@ -144,35 +143,35 @@ html, body {
 
     li {
         float: left;
-        height:66px;
+        height: 66px;
 
         a {
             display:block;
             padding:25px 0px;
             width:100%;
-
-            text-align:center;
-            font-size:12pt;
+            text-align: center;
+            font-size: 12pt;
         }
 
         a:hover {
-            background:rgba(206,206,206,.2);
+            background: rgba(206,206,206,.2);
         }
     } 
 
     #login-button {
-        margin-top: 15px;
-        margin-right: 15px;
+        @include unselectable;
+        margin: 15px 15px 0px 0px;
         height: $button-height - 7px;
         width: 100px;
         font-size: 11px;
         padding-top: 7px;
         background: gray;
-        @include unselectable;
+        display: none;
     }
 
     form {
         padding-top:15px;
+
         * { 
             float: right; 
             font-size: $button-font-size;    
@@ -187,8 +186,8 @@ html, body {
 
         .submit-button {
             background-color: $theme-color;
-            width:100px;
-            margin-left:10px;
+            width: 100px;
+            margin-left: 10px;
             cursor: pointer;
         }
 
@@ -199,13 +198,13 @@ html, body {
         .textfield {
             color: black;
             padding-left: 10px;
-            width:170px;
+            width: 170px;
         }
     }
 
     #login-button {
-        float: right;
         @include border-radius;
+        float: right;
         text-align: center;
         margin-left: 10px;
         font-size: $button-font-size;
@@ -215,7 +214,7 @@ html, body {
 
 .navbar-fixed {
     position: fixed;
-    top:0;
+    top: 0;
     background: rgba(0,0,0,.8);
 }
 
@@ -230,9 +229,7 @@ html, body {
         margin-top: 150px;
         height: 250px;
         width: 500px;
-        //background-color: rgba(0,0,0,.4);
-        padding:35px;
-        border-radius: 2px;
+        padding: 35px;
 
         h1 {
             font-size: $large-font;
@@ -259,7 +256,7 @@ html, body {
         }
 
         #beta-signup:hover {
-            background: #B45B99;
+            background: $theme-color-hover;
         }
     }
 }
@@ -299,31 +296,31 @@ html, body {
     height: 285px;
     width: 285px;
     top: 190px;
-    right:50px;
+    right: 50px;
     border: 3px white solid;
 }
 
 #cube-image-2 {
     background-image: url('../images/jackjack.png');
-    height:200px;
-    width:200px;
-    top:430px;
-    left:670px;
+    height: 200px;
+    width: 200px;
+    top: 430px;
+    left: 670px;
     border: 3px white solid;
 }
 
 .pitch-point-parag {
-    line-height:22px;
+    line-height: 22px;
     width: 500px;
     display: block;
-    padding-top:10px;
-    padding-bottom:60px; 
+    padding-top: 10px;
+    padding-bottom: 60px; 
 }
 
 #explanation-content, #splash-2 {
     position: relative;
     z-index: 10;
-    background-position:0 0;
+    background-position: 0 0;
     
     * {
         font-size: $small-explanation;
@@ -332,7 +329,7 @@ html, body {
 
     .section-title {
         * {
-            float:left;
+            float: left;
         }
 
         h2 {
@@ -340,14 +337,15 @@ html, body {
             text-align: center;
             color: $theme-color;
             margin-bottom: 15px;
-            width:380px;
+            width: 380px;
         }
+
         .title-line {
             bottom-border: black 1px solid;
-            width:310px;
-            height:1px;
-            background-color:rgba(0,0,0,.3);
-            margin-top:10px;
+            width: 310px;
+            height: 1px;
+            background-color: rgba(0,0,0,.3);
+            margin-top: 10px;
         }
     }
 
@@ -373,10 +371,11 @@ html, body {
     h3 {
         padding: 10px;
         color: $theme-color;
+        border-radius: 2px;
+
         i {
             margin-right:10px;
         }
-        border-radius: 2px;
     }
 }
 
@@ -391,6 +390,7 @@ html, body {
 
 #cube-image-5 {
     background-image: url('../images/open-book.png');
+    background-position-x: -20px;
     height:200px;
     width:200px;
     top:430px;
@@ -405,12 +405,11 @@ html, body {
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center center;
-    //background-attachment: fixed;
 
     .content-container {
         padding: 30px 50px;
-        overflow:auto;
-        position:relative;
+        overflow: auto;
+        position: relative;
     }
 
     .splash-2-shadow {
@@ -486,6 +485,7 @@ html, body {
 /*                 TESTIMONIALS PANEL                  */
 /*******************************************************/
 
+/* // THIS NEEDS TO REMAIN HIDDEN FOR NOW SINCE WE DON'T HAVE ANY
 #testimonials-splash {
     background: url('../images/talk.jpg') no-repeat center center;
     background-position: 0 -100px;
@@ -550,7 +550,7 @@ html, body {
         }
     }
 }
-
+*/
 
 
 /*******************************************************/
@@ -558,10 +558,9 @@ html, body {
 /*******************************************************/
 
 #faq {
-    //background: url('../images/symbol-bg.jpg') no-repeat center center;
     background-size: 100% auto;
-    width:100%;
-    height:800px;
+    width: 100%;
+    height: 900px;
     $gray-color: #888;
 
     * {
@@ -570,8 +569,7 @@ html, body {
     }
 
     .section-title {
-        padding-top:80px;
-
+        padding-top: 80px;
 
         * {
             float: left;
@@ -596,47 +594,50 @@ html, body {
 
     .questions-container {
         clear:both;
-        //border: purple 1px dashed;
+        height: 600px;
         width: 1100px;
         margin: auto;
-        height: 600px;
         padding-top: 80px;
 
-
         .questions-column {
-            //border: blue 1px dashed;
             width: 49%;
-            float:left;
+            float: left;
 
             .faq-question {
                 position: relative;
-                overflow: auto;
-                border: 1px red dashed;
+                //border: 1px red dashed;
                 float: left;
-                min-height: 50px;
+                min-height: 170px;
 
                 p {
-                    display: none;
+                    //display: none;
                     position: absolute;
                     top: 40px;
                     font-size: $small-explanation;
-
                 }
 
                 h3 {
-                    //float: left;
                     font-weight:bold;
-                    //margin-bottom:120px;
                     font-size: $large-explanation;
+                    color: $theme-color;
+                    float:right;
                 }
 
                 i {
                     margin-right: 20px;
                     font-size: 20pt;
+                    background-image: url('../images/gray-hexagon.png'); 
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    background-size: 100% 100%;
+                    width: 17px;
+                    height: 18px;
+                    display: block;
+                    float: left;
+                    opacity: 0.75;
                     position: relative;
                     top:2px;
                 }
-
 
                 .faq-a {
                     margin-left: 42px;
@@ -644,33 +645,31 @@ html, body {
                 }
             }
         }
-
-        h3:hover {
-            color: $theme-color;
-            cursor: pointer;
-        }
     }
 }
 
 
+/*******************************************************/
+/*                  FOOTER PANEL                       */
+/*******************************************************/
+
 #footer {
     height: 500px;
+    width: 100%;
     background: url('../images/symbol-bg.jpg') no-repeat center center;
     background-size: 100% auto;
-    width: 100%;
     border-top: 1px solid #888;
     position: relative;
 
     h3 {
         font-size: $large-font;
-        margin-top: 60px;
-        margin-bottom: 40px;
+        margin: 60px 0px 50px 0px;
+        color: #888;
     }
 
     .contact-container {
         height: 100%;
     }
-
 
     form {
         width: 500px;
@@ -680,15 +679,13 @@ html, body {
         
         #contact-fields {
             overflow: auto;
-           // border: red 1px dashed;
-            float:left;
+            float: left;
         }
 
-
         input, textarea {
+            @include border-radius;
             float: left;
             clear: both;
-            @include border-radius;
             border: 1px #ccc solid;
             margin-bottom:15px;
         }
@@ -702,16 +699,11 @@ html, body {
             resize: none;
         }
 
-        #contact-submit:hover {
-            background-color: #B45B99;
-        }
-
         #contact-message {
             width: $field-width;
         }
 
         #contact-info-container {
-            //border: blue 1px dashed;
             float: left;
             height: 260px;
             width: 200px;
@@ -728,25 +720,28 @@ html, body {
             }
 
             .drop-a-line {
-                margin-left: 18px;
-                margin-top:62px;
+                margin: 62px 0px 0px 18px;
                 width: 100px;
             }
 
             #contact-submit {
+                @include border-radius;
                 clear: none;
                 background-color: $theme-color;
                 color: $white-color;
-                @include border-radius;
-                width:100px;
-                height:33px;
+                width: 100px;
+                height: 33px;
                 margin-left: 18px;
                 position: absolute;
                 bottom: 2px;
                 left: 0px;
+                cursor: pointer;
+            }
+
+            #contact-submit:hover {
+                background-color: $theme-color-hover;
             }
         }
-
     }
 
     #copyright {
