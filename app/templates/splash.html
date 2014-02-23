@@ -14,7 +14,10 @@
     <script type="text/javascript" src="/static/js/include/jquery-ui-1.10.4.custom.min.js"></script>
     <script type="text/javascript" src="/static/js/splashScroll.js"></script>
 
-    <script src="/static/js/splashFaq.js"></script>
+    {# TODO: Convert all these javascript files into a bundle. #}
+    <script type="text/javascript" src="/static/js/splash/scroll.js"></script>
+    <script type="text/javascript" src="/static/js/splash/faq.js"></script>
+    <script type="text/javascript" src="/static/js/splash/email-signup.js"></script>
 {% endblock %}
 
 {% block main %}
@@ -31,10 +34,16 @@
                     <li class="contact-button"><a>CONTACT</a></li>
                 </ul>
                 <div id="login-button"> LOG IN</div>
-                <form>
-                    <input class="submit-button" type="submit" value="SIGN UP">
-                    <input class="textfield" type="text" name="email" placeholder="Email Address">
-                </form>
+                <form class="email-signup">
+                  {% if has_signed_up %}
+                  <span class="email-confirmation">
+                    Thank you! We'll notify you when the beta begins.
+                  </span>
+                  {% else %}
+                    <input class="submit-button" type="submit" value="SIGN UP" />
+                    <input class="textfield" type="text" name="email" placeholder="Email Address" />
+                  {% endif %}
+                  </form>
             </div>
         </div>
         <div id="splash-main-content" class="content-container">

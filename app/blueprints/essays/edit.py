@@ -8,6 +8,6 @@ from app.decorators import login_required
 def edit_essay(essayid):
     essay = Essay.query.filter_by(eid=essayid).first()
     if essay and g.user.uid == essay.uid:
-        return render_template('essays/editor.html', current_essay=essay)
+        return render_template('essays/editor.html', current_essay=essay, current_draft=essay.get_current_draft())
     else:
         return redirect(url_for('essays.essays_index'))

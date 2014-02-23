@@ -87,10 +87,31 @@ peernoteNS.essays.initEditor = function() {
   $('.page-container .content').keydown(peernoteNS.essays.keydown);
 };
 
+peernoteNS.essays.initReviewButton = function() {
+  $('#review').click(function() {
+
+    params = {
+      uid: peernoteNS.essays.uid,
+      did: peernoteNS.essays.did
+    };
+
+    $.post('/api/create_review', params, function(data) {
+      if (data.success) {
+        $('.status-line').text('Draft has been finalized: /reviews/' + data.urlhash);
+
+        // should have a new draft now, store the did
+        peernoteNS.essays.did = data.did;
+        console.log(data.urlhash)
+      }
+    });
+  })
+};
+
 $(document).ready(function(e) {
   if (peernoteNS.essays.uid == null || peernoteNS.essays.did == null) {
-      return;
+    return;
   }
 
   peernoteNS.essays.initEditor();
+  peernoteNS.essays.initReviewButton();
 });

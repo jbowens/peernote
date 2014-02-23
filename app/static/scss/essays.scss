@@ -60,7 +60,7 @@ ul.essay-container {
     }
 
     .center-container {
-        width: auto;
+        @include calc(width, "#{$contentwidth}");
         margin: 0 auto;
         padding-top: 50px;
         position: relative;
