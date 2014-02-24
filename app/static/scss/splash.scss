@@ -170,11 +170,13 @@ html, body {
 
 #splash-main-image {
     height:100%;
+    min-width: 1150px; // ? i dunno why this works
     background: url('../images/julian.jpg') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+
 }
 
 /* // USE THESE ROTATED BLOCKS IF YOU WANT TO MAKE SLANTED SECTION EDGES
@@ -392,7 +394,7 @@ html, body {
     background-image: url('../images/typing.jpg');
     height: 285px;
     width: 285px;
-    top: 190px;
+    top: 200px;
     right: 50px;
     border: 3px white solid;
 }
@@ -401,7 +403,7 @@ html, body {
     background-image: url('../images/jackjack.png');
     height: 200px;
     width: 200px;
-    top: 430px;
+    top: 440px;
     left: 670px;
     border: 3px white solid;
 }
@@ -411,7 +413,7 @@ html, body {
     width: 500px;
     display: block;
     padding-top: 10px;
-    padding-bottom: 60px; 
+    padding-bottom: 70px; 
 }
 
 #explanation-content, #splash-2 {
@@ -459,10 +461,10 @@ html, body {
 }
 
 #explanation-content {
-    height: 750px;
+    height: 820px;
 
     .section-title {
-        padding-top:70px;
+        padding-top: 90px;
     }
 
     h3 {
@@ -480,7 +482,7 @@ html, body {
     background-image: url('../images/help.png');
     height: 285px;
     width: 285px;
-    top: 190px;
+    top: 162px;
     left:50px;
     background-position: -36px;
 }
@@ -490,18 +492,20 @@ html, body {
     background-position-x: -20px;
     height:200px;
     width:200px;
-    top:430px;
+    top:424px;
     right:670px;
 }
 
 #splash-2 {
-    height: 810px;
+    height: 840px;
+    min-width: 1150px;
     padding-top:70px;
     width: 100%;
     background-image: url('../images/stocky-stock-dark.jpg');
-    background-size: 100% auto;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+
 
     .content-container {
         padding: 30px 50px;
@@ -545,7 +549,7 @@ html, body {
         clear:both;
         text-align: center;
         font-size: $small-explanation;
-        margin-bottom: 50px;
+        margin-bottom: 60px;
     }
 
     .pitch-panel {
@@ -657,7 +661,7 @@ html, body {
 #faq {
     background-size: 100% auto;
     width: 100%;
-    height: 900px;
+    height: 950px;
     $gray-color: #888;
 
     * {
@@ -666,7 +670,7 @@ html, body {
     }
 
     .section-title {
-        padding-top: 80px;
+        padding-top: 100px;
 
         * {
             float: left;
@@ -851,7 +855,7 @@ html, body {
     #copyright {
         position: absolute;
         bottom: 15px;
-        width: 300px;
+        width: 320px;
         margin: auto;
     }
 }
