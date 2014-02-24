@@ -6,30 +6,31 @@ peernoteNS.splash.signupEmail = function (email, isPopup) {
     return;
 
   $.post('/email-signup', {email: email}, function (res) {
-    if (isPopup) { // submit came from popup form
-      $(".sign-up-pane form input").css("display", "none");
-        $(".email-confirmation-popup").fadeIn();
-    } else {       // submit came from navbar form
-      $('#navbar form.email-signup').html(
-        '<span class="email-confirmation">Thank you! We\'ll' +
-        ' notify you when the beta begins.</span>');
-    }
+    $(".sign-up-pane form input").css("display", "none");
+    $(".email-confirmation-popup").fadeIn();
+    $('#navbar form.email-signup').html(
+      '<span class="email-confirmation">Thank you! We\'ll' +
+      ' notify you when the beta begins.</span>');
   });
 };
 
 peernoteNS.splash.initEmailSignup = function () {
-  var $form = $('#navbar form.email-signup, .sign-up-pane form');
+  var $navForm = $("#navbar form.email-signup");
+  var $popupForm = $(".sign-up-pane form");
+  peernoteNS.splash.formSend($navForm, false);
+  peernoteNS.splash.formSend($popupForm, true);
+};
 
+peernoteNS.splash.formSend = function ($form,isPopup) {
   $form.submit(function (e) {
     e.preventDefault();
     var email = $form.find('input[name="email"]').val();
-    if ($(e.target).attr('class') === "email-signup") {
-      peernoteNS.splash.signupEmail(email, false); // submit is from nav
+    if (isPopup) {
+      peernoteNS.splash.signupEmail(email, true); // submit is from nav
     } else {
-      peernoteNS.splash.signupEmail(email, true); // submit is from popup
+      peernoteNS.splash.signupEmail(email, false); // submit is from popup
     }
   });
-
 };
 
 $(document).ready(function() {
