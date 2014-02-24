@@ -13,8 +13,8 @@ $(document).ready(function() {
         var targetClass = $(event.target).attr('class');
         if (targetClass === "sign-up-center-align" || targetClass === "fa fa-times") {
             $("#sign-up-shadow").fadeOut(100, "linear"); 
+            $("html, body").css({"overflow": "visible"}); // enable scrolling
         }
-        $("html, body").css({"overflow": "auto"}); // enable scrolling
     });
 
 
@@ -24,6 +24,7 @@ $(document).ready(function() {
 
     /* Automatically scroll to certain locations on the page */
     $("#faq-id").click(function() {
+        alert("!");
         $.scrollTo('#faq', 800, {});
     });
 
