@@ -1,6 +1,7 @@
 from flask import Flask, g, request, render_template, session
 from flask.ext.assets import Environment, Bundle
 from flask.ext.sqlalchemy import SQLAlchemy
+from getpass import getuser
 from os import environ
 
 # Set up the flask application.
@@ -9,6 +10,8 @@ app.debug = True
 app.config.from_pyfile('../config/default.cfg')
 if environ.get('REMOTE_DB'):
     app.config.from_pyfile('../config/remote_db.cfg')
+if getuser() == 'peernote':
+    app.config.from_pyfile('../config/production.cfg')
 
 # bundles for css
 import bundles
