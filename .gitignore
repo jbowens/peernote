@@ -44,4 +44,4 @@ app/static/.webassets-cache/*
 migrations
 
 # etc
-.swp
+*.swp
