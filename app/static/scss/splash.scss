@@ -497,9 +497,10 @@ html, body {
 }
 
 #splash-2 {
-    height: 840px;
+    height: 770px;
     min-width: 1150px;
-    padding-top:70px;
+    padding-top:80px;
+    padding-bottom:80px;
     width: 100%;
     background-image: url('../images/stocky-stock-dark.jpg');
     background-size: cover;
@@ -516,6 +517,7 @@ html, body {
     .splash-2-shadow {
         background: rgba(0,0,0,.6);
         width:100%;
+        height: 776px;
     }
 
     * {
@@ -757,8 +759,9 @@ html, body {
 #footer {
     height: 500px;
     width: 100%;
+    min-width: 1150px;
     background: url('../images/symbol-bg.jpg') no-repeat center center;
-    background-size: 100% auto;
+    background-size: cover;
     border-top: 1px solid #888;
     position: relative;
 
