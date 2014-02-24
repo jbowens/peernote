@@ -24,7 +24,6 @@ $(document).ready(function() {
 
     /* Automatically scroll to certain locations on the page */
     $("#faq-id").click(function() {
-        alert("!");
         $.scrollTo('#faq', 800, {});
     });
 
