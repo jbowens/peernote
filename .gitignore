@@ -45,3 +45,4 @@ migrations
 
 # etc
 *.swp
+.DS_Store
