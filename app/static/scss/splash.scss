@@ -28,7 +28,7 @@ html, body {
     height: 100%;
 }
 
-input:focus {
+*:focus {
     outline: none;
 }
 
@@ -840,6 +840,12 @@ input:focus {
                 background-color: $theme-color-hover;
             }
         }
+    }
+    
+    .confirmation {
+        display: none;
+        color: green;
+        font-weight: bold;
     }
 
     #copyright {

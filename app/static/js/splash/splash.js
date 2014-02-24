@@ -6,6 +6,7 @@ $(document).ready(function() {
 
     $("#beta-signup, #faq-a-1 a").click(function() {
         $("#sign-up-shadow").css("display","table");
+        $("html, body").css({"overflow": "hidden"}); // stop scrolling
     });
 
     $("#sign-up-shadow").click(function(event) {
@@ -13,6 +14,7 @@ $(document).ready(function() {
         if (targetClass === "sign-up-center-align" || targetClass === "fa fa-times") {
             $("#sign-up-shadow").fadeOut(100, "linear"); 
         }
+        $("html, body").css({"overflow": "auto"}); // enable scrolling
     });
 
 
@@ -39,10 +41,13 @@ $(document).ready(function() {
 
     $(".contact-button a").click(function() {
         $.scrollTo('#footer', 600);
+        $('.contact-form-name').focus();
     });
 
-    /* Turn on parallax scrolling for the window */
-    //$(window).stellar({horizontalScrolling: false});
+    $('#faq-a-8 a').click(function() {
+       $.scrollTo('#footer', 200);
+       $('.contact-form-name').focus();
+    });
 
     /* Hide the learn more button when scrolling from top */
     $(window).scroll(function() {
@@ -53,5 +58,6 @@ $(document).ready(function() {
             $('#learn-more').fadeOut();
         }
     });
+
     
 });
