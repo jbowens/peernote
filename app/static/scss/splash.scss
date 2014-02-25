@@ -326,10 +326,11 @@ html, body {
     }
 
     #intro-spiel {
-        margin-top: 150px;
+        margin-top: 140px;
         height: 250px;
         width: 500px;
         padding: 35px;
+        padding-left:20px;
 
         h1 {
             font-size: $large-font;

@@ -29,6 +29,8 @@
                     {% if not has_signed_up %}
                     <input type="text" name="email" placeholder="Email Address" class="sign-up-pane-email">
                     <input type="submit" value="SIGN UP" class="sign-up-pane-submit">
+
+                    <span class="email-confirmation-popup">Thank you! We'll notify you when the beta begins</span>
                     {% else %} 
                     <span class="email-confirmation-popup" style="display: block;">Thank you! We'll notify you when the beta begins</span>
                     {% endif %}
