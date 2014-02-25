@@ -15,6 +15,11 @@ def email_signup():
     if not validate_email(email):
         return jsonify(error='not a valid email', status='error')
 
+    email_db_obj = Email.query.filter_by(email=email).first()
+    if email_db_obj:
+        # This email is already subscribed.
+        return jsonify(error='already subscribed', status='error')
+
     email_db_obj = Email()
     email_db_obj.email = request.form.get('email')
     db.session.add(email_db_obj)
