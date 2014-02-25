@@ -4,7 +4,7 @@ $(document).ready(function() {
     /* Signup Overlay Display Code */
     /*******************************/
 
-    $("#beta-signup, #faq-a-1 a").click(function() {
+    $(".beta-signup, #faq-a-1 a").click(function() {
         $("#sign-up-shadow").css("display","table");
         $("html, body").css({"overflow": "hidden"}); // stop scrolling
     });
