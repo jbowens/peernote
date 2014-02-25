@@ -7,7 +7,12 @@ def inject_user_data():
     """
     Makes the user object available to all templates directly.
     """
-    return dict(user=g.user, is_logged_in=g.user is not None)
+    d = {
+        'user': g.user,
+        'is_logged_in': g.user is not None,
+        'server_host': app.config.get('SERVER_HOST')
+    }
+    return d
 
 gravatar = Gravatar(app,
                     size=100,
