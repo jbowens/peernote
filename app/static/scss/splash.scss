@@ -171,6 +171,7 @@ html, body {
 #splash-main-image {
     height:100%;
     min-width: 1150px; // ? i dunno why this works
+    min-height: 600px;
     background: url('../images/julian.jpg') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -326,23 +327,44 @@ html, body {
     }
 
     #intro-spiel {
-        margin-top: 140px;
+        @include border-radius;
+        margin-top: 120px;
         height: 250px;
-        width: 500px;
+        width: 440px;
         padding: 35px;
         padding-left:20px;
+        padding-top:20px;
+        padding-bottom: 45px;
 
         h1 {
-            font-size: $large-font;
+            font-size: 34pt;
+            line-height:44px;
+            width: 480px;
+            text-shadow: 2px 2px black;
         }
+
 
         p {
-            font-size: $large-explanation;
-            line-height: 30px;
             margin-top: 25px;
+            width:430px;
+
+            span {
+                font-size: $large-explanation;
+                font-weight: 400;
+                line-height: 30px;
+                padding: 2px 0;
+            }
         }
 
-        #beta-signup {
+        /*.beta-signup-wrapper {
+            padding: 10px;
+            background-color: rgba(0,0,0,.4);
+            margin-top: 30px;
+            width: 253px;
+        }
+        */
+
+        .beta-signup {
             @include border-radius;
             @include unselectable;
             background-color: $theme-color;
@@ -350,13 +372,14 @@ html, body {
             width: 250px;
             text-align: center;
             padding-top: 20px;
-            margin-top: 50px;
+            margin-top: 30px;
             font-size: $large-explanation;
             font-weight: bold;
             cursor: pointer;
+            border: 1px solid #444;
         }
 
-        #beta-signup:hover {
+        .beta-signup:hover {
             background: $theme-color-hover;
         }
     }
