@@ -11,3 +11,4 @@ from login import *
 from logout import *
 from settings import *
 from profile import *
+from forgot_password import *
