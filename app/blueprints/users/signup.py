@@ -5,6 +5,8 @@ from wtforms.validators import *
 from wtforms.validators import ValidationError
 from app.models.user import User
 from app.blueprints.users import users
+from app.mailer.templates.welcome import Welcome
+from app.mailer import Mailer
 from app import db
 
 def email_uniqueness(form, field):
@@ -36,6 +38,14 @@ def signup():
         newuser.set_password(request.form['pw'])
         db.session.add(newuser)
         db.session.commit()
+
+        # Send the welcome email.
+        mailer = Mailer()
+        params = {
+            'subject': 'Welcome to Peernote',
+            'user': newuser
+        }
+        mailer.send(Welcome(), params, newuser.email)
 
         # Log this user in.
         session['uid'] = newuser.uid
