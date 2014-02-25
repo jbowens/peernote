@@ -2,6 +2,7 @@ from flask import request, jsonify, session
 from app.models.email import Email
 from app.blueprints.front import front
 from app.mailer.templates.beta_signup_confirmation import BetaSignupConfirmation
+from validate_email import validate_email
 from app.mailer import Mailer
 from app import db
 
@@ -10,6 +11,9 @@ def email_signup():
     email = request.form.get('email') 
     if not email:
         return jsonify(error='no email', status='error')
+
+    if not validate_email(email):
+        return jsonify(error='not a valid email', status='error')
 
     email_db_obj = Email()
     email_db_obj.email = request.form.get('email')
