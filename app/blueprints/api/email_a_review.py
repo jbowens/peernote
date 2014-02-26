@@ -2,6 +2,7 @@ from flask import request, current_app, jsonify, g
 from app.blueprints.api import api
 from app.models.draft import Draft
 from app.models.review import Review
+from app import app
 from app import db
 import uuid
 from validate_email import validate_email
@@ -61,7 +62,7 @@ def email_a_review():
         # send emailz
         params = {
             'sender': g.user.username,
-            'review_url': 'www.peernote.me/reviews/' + review.urlhash
+            'review_url': 'http://' + app.config.get('SERVER_HOST') + '/reviews/' + review.urlhash
         }
         mailer = Mailer()
         mailer.send(ReviewADraft(), params, email)
