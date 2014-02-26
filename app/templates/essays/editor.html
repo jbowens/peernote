@@ -44,6 +44,9 @@
 
 <div class="editor-background">
     <div class="center-container">
+        <div class="toolbar">
+            <a href="{{ url_for('essays.print_essay', essayid=current_essay.eid) }}" class="fa fa-print" target="_blank"></a>
+        </div>
         <div class="status-line"></div>
         <div class="timeline">
             <a id="review" class="btn btn-primary alt">Reviewify</a>

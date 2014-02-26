@@ -27,6 +27,7 @@ assets.register('home_css',
 assets.register('essays_css',
     Bundle(
         "scss/essays.scss",
+        "scss/essays_print.scss",
         filters="scss,cssmin",
         output="gen/essays.css"
     )
