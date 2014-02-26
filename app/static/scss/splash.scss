@@ -1,18 +1,5 @@
-
-/***********************************************/
-/*                GLOBAL VARIABLES             */
-/***********************************************/
-
-$radius: 2px;
-$theme-color: #a6538d;
-$theme-color-hover: #B45B99;
-$large-font: 30pt;
-$large-font-2: 20pt;
-$large-explanation: 15pt;  
-$small-explanation: 13pt;
-$button-font-size: 10pt;
-$white-color: #e5e5e5;
-
+@import "shared/_variables.scss";
+@import "shared/_mixins.scss";
 
 /***********************************************/
 /*                PAGE-WIDE STYLING            */
@@ -30,22 +17,6 @@ html, body {
 
 *:focus {
     outline: none;
-}
-
-@mixin unselectable {
-    -webkit-user-select: none;        
-    -moz-user-select: none; 
-    -ms-user-select: none; 
-    -o-user-select: none;
-    user-select: none;
-}
-
-@mixin border-radius {
-    -webkit-border-radius: $radius;
-    -moz-border-radius: $radius;
-    -ms-border-radius: $radius;
-    -o-border-radius: $radius;
-    border-radius: $radius;
 }
 
 #everything-wrapper {

@@ -1,4 +1,6 @@
 @import "bootstrap.scss";
+@import "shared/_variables.scss";
+@import "shared/_mixins.scss";
 
 ul.essay-container {
     display: block;
@@ -321,3 +323,94 @@ ul.essay-container {
 
     }
 }
+
+/***********************************/
+/*         EMAIL OVERLAY           */
+/***********************************/
+
+#send-review-shadow {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,.85);;
+    z-index: 100;
+    display: none;
+
+    .send-review-center-align {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    
+    .send-review-pane {
+        @include border-radius;
+        width: 400px;
+        height: 230px;
+        margin: auto;
+        background: white;
+        padding: 50px 60px;
+
+        * {
+            font-size: $small-explanation;
+            line-height: 24px;
+        }
+
+        i {
+            float: right;
+            position: relative;
+            bottom: 40px;
+            left: 40px;
+        }
+
+        i:hover {
+            color: #888;
+            cursor: pointer;
+        }
+
+        h3 {
+            font-size: $large-font-2;
+            margin-bottom: 20px;
+        }
+
+        .send-review-pane-submit {
+            @include border-radius;
+            background-color: $theme-color;
+            width: 100px;
+            height: 30px;
+            cursor: pointer;
+            border: 0px;
+            color: $white-color;
+            font-size: $button-font-size;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        .send-review-pane-submit:hover {
+            background-color: $theme-color-hover;
+        }
+
+        .send-review-pane-email {
+            @include border-radius;
+            height: 30px;
+            border: 1px #ddd solid;
+            padding-left: 5px;
+            width: 250px;
+            font-size: $button-font-size;
+        }
+
+        form {
+            overflow: auto;
+            width: 400px;
+            margin-top:50px;
+            height: 100px;
+        }
+
+        .email-confirmation-popup {
+            color: green;
+            position:relative;
+            top:10px;
+            margin-top: 30px;
+            display: none;
+        }
+    }
+}
+
