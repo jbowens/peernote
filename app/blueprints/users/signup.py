@@ -10,13 +10,11 @@ from app.mailer import Mailer
 from app import db
 
 def email_uniqueness(form, field):
-    user = User.query.filter_by(email=field.data).first()
-    if user:
+    if User.is_email_used(field.data):
         raise ValidationError('That email is already registered.')
 
 def username_uniqueness(form, field):
-    user = User.query.filter_by(username=field.data).first()
-    if user:
+    if User.is_username_used(field.data):
         raise ValidationError('That username is already registered.')
 
 class SignUpForm(Form):
