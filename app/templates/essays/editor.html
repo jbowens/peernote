@@ -15,6 +15,11 @@
         peernoteNS.essays = peernoteNS.essays || {};
         peernoteNS.essays.uid = {{ current_essay.uid }};
         peernoteNS.essays.did = {{ current_draft.did }};
+        {% if current_draft.finalized %}
+            peernoteNS.essays.finalized = true;
+        {% else %}
+            peernoteNS.essays.finalized = false;
+        {% endif %}
     </script>
 
     <script src="/static/js/essays/editor.js"></script>

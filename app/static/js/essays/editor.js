@@ -52,8 +52,13 @@ peernoteNS.essays.save = function() {
     $status_line.text('Saving…');
     $status_line.css('opacity', '1.0');
     $.post('/api/save_draft', params, function(data) {
-      if (data.success) {
+      if (data.status == "success") {
         $status_line.text('Saved');
+
+        // check if created a new draft. If so, hold onto new draft id
+        if (data.did) {
+          peernoteNS.essays.did = data.did;
+        }
       }
     });
   }
@@ -92,23 +97,6 @@ peernoteNS.essays.initReviewButton = function() {
     // pop up dialog for sending an email
     $("#send-review-shadow").css("display","table");
     $("html, body").css({"overflow": "hidden"}); // stop scrolling
-
-    /*
-    params = {
-      uid: peernoteNS.essays.uid,
-      did: peernoteNS.essays.did
-    };
-
-    $.post('/api/create_review', params, function(data) {
-      if (data.success) {
-        $('.status-line').text('Draft has been finalized: /reviews/' + data.urlhash);
-
-        // should have a new draft now, store the did
-        peernoteNS.essays.did = data.did;
-        console.log(data.urlhash)
-      }
-    });
-    */
   })
 };
 
@@ -122,7 +110,30 @@ peernoteNS.essays.initEmailPopup = function() {
     }
   });
 
-    var $popupForm = $(".send-review-pane form");
+  var $popupForm = $(".send-review-pane form");
+  $popupForm.submit(function (e) {
+    e.preventDefault();
+    var email = $popupForm.find('input[name="email"]').val();
+    params = {
+      uid: peernoteNS.essays.uid,
+      did: peernoteNS.essays.did,
+      email: email
+    };
+
+    $.post('/api/email_a_review', params, function(data) {
+      if (data.status == "success") {
+        // TODO: pass stuff to /essays to display a message
+        window.location = "/essays";
+      }
+    });
+
+  });
+}
+
+peernoteNS.essays.alertIfFinalized = function() {
+  if (peernoteNS.essays.finalized) {
+    alert("This essay is finalized ALERT ALERT ALERT");
+  }
 }
 
 $(document).ready(function(e) {
@@ -130,6 +141,7 @@ $(document).ready(function(e) {
     return;
   }
 
+  peernoteNS.essays.alertIfFinalized();
   peernoteNS.essays.initEditor();
   peernoteNS.essays.initReviewButton();
   peernoteNS.essays.initEmailPopup();
