@@ -89,7 +89,11 @@ peernoteNS.essays.initEditor = function() {
 
 peernoteNS.essays.initReviewButton = function() {
   $('#review').click(function() {
+    // pop up dialog for sending an email
+    $("#send-review-shadow").css("display","table");
+    $("html, body").css({"overflow": "hidden"}); // stop scrolling
 
+    /*
     params = {
       uid: peernoteNS.essays.uid,
       did: peernoteNS.essays.did
@@ -104,8 +108,22 @@ peernoteNS.essays.initReviewButton = function() {
         console.log(data.urlhash)
       }
     });
+    */
   })
 };
+
+peernoteNS.essays.initEmailPopup = function() {
+
+  $("#send-review-shadow").click(function(event) {
+    var targetClass = $(event.target).attr('class');
+    if (targetClass === "send-review-center-align" || targetClass === "fa fa-times") {
+      $("#send-review-shadow").fadeOut(100, "linear"); 
+      $("html, body").css({"overflow": "visible"}); // enable scrolling
+    }
+  });
+
+    var $popupForm = $(".send-review-pane form");
+}
 
 $(document).ready(function(e) {
   if (peernoteNS.essays.uid == null || peernoteNS.essays.did == null) {
@@ -114,4 +132,5 @@ $(document).ready(function(e) {
 
   peernoteNS.essays.initEditor();
   peernoteNS.essays.initReviewButton();
+  peernoteNS.essays.initEmailPopup();
 });

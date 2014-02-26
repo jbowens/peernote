@@ -1,4 +1,5 @@
 @import "bootstrap.scss";
+@import "shared/_mixins.scss";
 
 /***********************************************/
 /*                GLOBAL VARIABLES             */
@@ -31,22 +32,6 @@ html, body {
 
 *:focus {
     outline: none;
-}
-
-@mixin unselectable {
-    -webkit-user-select: none;        
-    -moz-user-select: none; 
-    -ms-user-select: none; 
-    -o-user-select: none;
-    user-select: none;
-}
-
-@mixin border-radius {
-    -webkit-border-radius: $radius;
-    -moz-border-radius: $radius;
-    -ms-border-radius: $radius;
-    -o-border-radius: $radius;
-    border-radius: $radius;
 }
 
 #everything-wrapper {
