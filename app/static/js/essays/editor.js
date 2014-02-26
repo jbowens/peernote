@@ -147,16 +147,21 @@ peernoteNS.essays.initTimeline = function() {
   $draftList.each(function(i) {
 
     // TODO: probably should debounce...
-    // TODO: dont fetch again if already have that version
     $(this).click(function() {
-      var did = peernoteNS.essays.drafts[i];
+      var cur_did = peernoteNS.essays.drafts[i];
+      if (peernoteNS.essays.did == cur_did) {
+        return;
+      }
+
       params = {
-        did: did,
+        did: cur_did,
         uid: peernoteNS.essays.uid
       }
 
       $.post('/api/fetch_draft', params, function(data) {
         if (data.status == "success") {
+          peernoteNS.essays.did = cur_did;
+
           // because content editables are weird, start from scratch
           $('.content').empty();
           $('.content').append($("<h1 id='essay-title' class='essay-title'>"));
@@ -168,9 +173,11 @@ peernoteNS.essays.initTimeline = function() {
           if (peernoteNS.essays.drafts.length == i + 1) {
             peernoteNS.essays.enable_autosave = true;
             $('.status-line').text('');
+            $('#review.btn').css('visibility', 'visible');
           } else {
             peernoteNS.essays.enable_autosave = false;
             $('.status-line').text('Saving disabled for old drafts');
+            $('#review.btn').css('visibility', 'hidden');
           }
         }
       });
