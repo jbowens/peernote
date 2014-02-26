@@ -1,6 +1,13 @@
 {% extends 'base/application.html' %}
 
+
 {% block main %}
     {% include "shared/signed_in_nav.html" %}
-    {% block content %} {% endblock %}
+    <div class="wrapper">
+        {% block content %} {% endblock %}
+        <div class="push"></div> <!-- this makes the footer stay at the bottom -->
+    </div>
+    <div class="footer"> 
+        Copywrite &copy; 2014 Peernote. All Rights Reserved. 
+    </div>
 {% endblock %}
