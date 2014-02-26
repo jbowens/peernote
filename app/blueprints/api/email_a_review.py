@@ -15,9 +15,6 @@ Expects:
 email: address of email to send to
 did: id of draft to review
 uid: id of user who owns draft
-
-Returns:
-urlhash: hash for /reviews/<urlhash>
 """
 
 @api.route('/email_a_review', methods=['POST'])
