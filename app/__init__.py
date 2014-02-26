@@ -3,6 +3,7 @@ from flask.ext.assets import Environment, Bundle
 from flask.ext.sqlalchemy import SQLAlchemy
 from getpass import getuser
 from os import environ
+import os
 
 # Set up the flask application.
 app = Flask(__name__)
@@ -10,6 +11,12 @@ app.debug = True
 app.config.from_pyfile('../config/default.cfg')
 if environ.get('REMOTE_DB'):
     app.config.from_pyfile('../config/remote_db.cfg')
+
+user_config_file = 'config/' + getuser() + '.cfg'
+if os.path.exists(user_config_file):
+    app.logger.debug('Loading custom config file for ' + getuser())
+    app.config.from_pyfile('../' + user_config_file)
+
 if getuser() == 'peernote':
     app.config.from_pyfile('../config/production.cfg')
 
