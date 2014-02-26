@@ -9,6 +9,7 @@
     {% include "shared/flashes.html" %}
 
     <form method="post">
+        {% include "shared/csrf.html" %}
         <div class="field">
             <label for="new_username">Username</label>
             <input type="text" id="new_username" name="username" value="{{ user.username }}" />
