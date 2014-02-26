@@ -1,9 +1,33 @@
 {% extends 'base/application_main.html' %}
 
 {% block content %}
-<div class="page-container top-margin bottom-margin">
+<div class="page-container top-margin bottom-margin settings">
     <h1>Settings</h1>
 
     <p>Change yo settings here.</p>
+
+    {% include "shared/flashes.html" %}
+
+    <form method="post">
+        <div class="field">
+            <label for="new_username">Username</label>
+            <input type="text" id="new_username" name="username" value="{{ user.username }}" />
+        </div>
+        <div class="field">
+            <label for="new_email">Email</label>
+            <input type="text" id="new_email" name="email" value="{{ user.email }}" />
+        </div>
+        <div class="field">
+            <label for="new_password">New password</label>
+            <input type="password" id="new_password" name="password" />
+        </div>
+        <div class="field">
+            <label for="new_password_again">New password again</label>
+            <input type="password" id="new_password_again" name="password_again" />
+        </div>
+        <div class="button-field">
+            <input type="submit" value="Save" />
+        </div>
+    </form>
 </div>
 {% endblock %}

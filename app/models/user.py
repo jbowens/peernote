@@ -20,3 +20,13 @@ class User(db.Model):
         the stored hash.
         """
         return check_password_hash(self.password, password)
+
+    @staticmethod
+    def is_email_used(email):
+        user = User.query.filter_by(email=email).first()
+        return user is not None
+
+    @staticmethod
+    def is_username_used(username):
+        user = User.query.filter_by(username=username).first()
+        return user is not None

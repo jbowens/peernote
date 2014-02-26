@@ -1,75 +1,91 @@
-@import "bootstrap.scss";
+@import "shared/_variables.scss";
 
 html, body {
     height: 100%;
 }
 
-.help-center-nav {
-    float: left;
-    background-color: #f5f5f5;
-    width: 250px;
-    height: 3714px;
+.content-wrapper-terms {
+    height: 4065px;
+}
 
-    .nav-wrapper {
-        float: right;
-        margin-right: 20px;
+.content-wrapper-privacy {
+    height: 2720px;
+}
 
-        h2 {
-            padding: 10px;
-            padding-top: 40px;
-        }
+.content-wrapper {
+    overflow: auto;
 
+    .help-center-nav {
+        float: left;
+        background-color: #f5f5f5;
+        width: 250px;
+        height: 100%;
 
-        ul {
+        .nav-wrapper {
+            float: right;
+            margin-right: 20px;
 
-            li {
-                border-bottom: 1px solid #dcdcdc;
+            h2 {
                 padding: 10px;
-                width: 140px;
+                padding-top: 40px;
+            }
+
+            ul {
+                li {
+                    border-bottom: 1px solid #dcdcdc;
+                    padding: 10px;
+                    width: 140px;
+
+                    a {
+                        color: black;
+                        font-weight:300;
+                        color: #888;
+                    }
+                }
             }
         }
     }
-}
 
-.content {
-    float: left;
-    width: 800px;
-    border-left: 1px solid #dcdcdc;
-    padding: 40px;
-
-    h1 {
-        font-size: 30pt;
-        margin-bottom: 20px;
-    }
-
-    .intro-paragraph {
-        color: #888;
-        margin-bottom: 20px;
-    }
-
-    .term {
+    .content {
+        float: left;
         width: 800px;
-        margin-bottom: 35px;
-        h2 {
-            color: $theme-color;
-            margin-bottom: 10px;
-            border-bottom: 1px #dcdcdc solid;
-            padding-bottom: 5px;
-        }
-        p {
-            line-height:17px;
+        border-left: 1px solid #dcdcdc;
+        padding: 40px;
+
+
+        h1 {
+            font-size: 30pt;
+            margin-bottom: 40px;
         }
 
+        .intro-paragraph {
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .term {
+            width: 800px;
+            margin-bottom: 35px;
+
+            li {
+                margin-bottom: 20px;
+                h3 {
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                }
+            }
+
+
+            h2 {
+                color: $theme-color;
+                margin-bottom: 10px;
+                border-bottom: 1px #dcdcdc solid;
+                padding-bottom: 5px;
+            }
+
+            p {
+                line-height:17px;
+            }
+        }
     }
-}
-
-.wrapper {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    margin: 0 auto -4em;
-}
-
-.footer, .push {
-    height: 4em;
 }
