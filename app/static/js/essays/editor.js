@@ -54,11 +54,6 @@ peernoteNS.essays.save = function() {
     $.post('/api/save_draft', params, function(data) {
       if (data.status == "success") {
         $status_line.text('Saved');
-
-        // check if created a new draft. If so, hold onto new draft id
-        if (data.did) {
-          peernoteNS.essays.did = data.did;
-        }
       }
     });
   }
@@ -105,7 +100,7 @@ peernoteNS.essays.initEmailPopup = function() {
   $("#send-review-shadow").click(function(event) {
     var targetClass = $(event.target).attr('class');
     if (targetClass === "send-review-center-align" || targetClass === "fa fa-times") {
-      $("#send-review-shadow").fadeOut(100, "linear"); 
+      $("#send-review-shadow").fadeOut(100, "linear");
       $("html, body").css({"overflow": "visible"}); // enable scrolling
     }
   });
@@ -122,7 +117,8 @@ peernoteNS.essays.initEmailPopup = function() {
 
     $.post('/api/email_a_review', params, function(data) {
       if (data.status == "success") {
-        // TODO: pass stuff to /essays to display a message
+        // TODO: for now, just kick out to /essays. In the future
+        // will be better to just fux with essay timeline
         window.location = "/essays";
       }
     });
@@ -130,18 +126,11 @@ peernoteNS.essays.initEmailPopup = function() {
   });
 }
 
-peernoteNS.essays.alertIfFinalized = function() {
-  if (peernoteNS.essays.finalized) {
-    alert("This essay is finalized ALERT ALERT ALERT");
-  }
-}
-
 $(document).ready(function(e) {
   if (peernoteNS.essays.uid == null || peernoteNS.essays.did == null) {
     return;
   }
 
-  peernoteNS.essays.alertIfFinalized();
   peernoteNS.essays.initEditor();
   peernoteNS.essays.initReviewButton();
   peernoteNS.essays.initEmailPopup();

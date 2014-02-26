@@ -10,7 +10,8 @@ from app.mailer import Mailer
 from app.mailer.templates.review_a_draft import ReviewADraft
 
 """
-Given a draft, sends it to an email for review. Also finalizes the draft.
+Given a draft, sends it to an email for review.
+Finalizes the draft and constructs a new one.
 
 Expects:
 email: address of email to send to
@@ -57,6 +58,11 @@ def email_a_review():
         review.urlhash = gen_hash
 
         db.session.add(review)
+        db.session.flush()
+
+        # make a new draft for the writer
+        new_draft = Draft.next_draft(draft)
+        db.session.add(new_draft)
         db.session.commit()
 
         # send emailz

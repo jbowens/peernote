@@ -21,3 +21,8 @@ class Essay(db.Model):
         """
         draft = Draft.query.filter_by(eid=self.eid).order_by(Draft.version.desc()).first()
         return draft
+
+    def get_all_drafts(self):
+        drafts = Draft.query.filter_by(eid=self.eid).order_by(Draft.version.asc())
+        return drafts
+

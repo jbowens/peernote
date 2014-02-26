@@ -1,6 +1,7 @@
 @import "bootstrap.scss";
-@import "shared/_variables.scss";
 @import "shared/_mixins.scss";
+
+$centerwidth: 1100px;
 
 ul.essay-container {
     display: block;
@@ -62,7 +63,7 @@ ul.essay-container {
     }
 
     .center-container {
-        @include calc(width, "#{$contentwidth}");
+        @include calc(width, "#{$centerwidth}");
         margin: 0 auto;
         padding-top: 50px;
         position: relative;
@@ -72,7 +73,7 @@ ul.essay-container {
         }
 
         .status-line {
-            @include calc(width, "#{$contentwidth}");
+            @include calc(width, "#{$centerwidth} - 400px");
             height: 2em;
             margin: 0 auto;
             font-size: 0.9em;
@@ -80,8 +81,8 @@ ul.essay-container {
         }
 
         .page-container {
-            @include calc(width, "#{$contentwidth} - 100px");
-            @include calc(min-height, "#{$contentwidth} * (11 / 8.5)");
+            @include calc(width, "#{$centerwidth} - 500px");
+            @include calc(min-height, "#{$centerwidth} * (11 / 8.5)");
             padding: 50px;
             border: 1px solid $border;
             background-color: white;
@@ -414,3 +415,12 @@ ul.essay-container {
     }
 }
 
+.timeline {
+    width: 150px;
+    position: absolute;
+    @include calc(min-height, "#{$centerwidth} * (11 / 8.5)");
+
+    ul {
+        margin-top: 10px;
+    }
+}

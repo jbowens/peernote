@@ -15,11 +15,6 @@
         peernoteNS.essays = peernoteNS.essays || {};
         peernoteNS.essays.uid = {{ current_essay.uid }};
         peernoteNS.essays.did = {{ current_draft.did }};
-        {% if current_draft.finalized %}
-            peernoteNS.essays.finalized = true;
-        {% else %}
-            peernoteNS.essays.finalized = false;
-        {% endif %}
     </script>
 
     <script src="/static/js/essays/editor.js"></script>
@@ -45,7 +40,15 @@
 <div class="editor-background">
     <div class="center-container">
         <div class="status-line"></div>
-        <a id="review" class="btn btn-primary alt">Reviewify</a>
+        <div class="timeline">
+            <a id="review" class="btn btn-primary alt">Reviewify</a>
+            <h2>Essay Timeline</h2>
+            <ul>
+                {% for draft in current_essay.get_all_drafts() %}
+                    <li><a> Draft {{ draft.version }} </a></li>
+                {% endfor %}
+            </ul>
+        </div>
         {% include "shared/essays/essay_content.html" %}
     </div>
 </div>

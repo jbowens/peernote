@@ -4,17 +4,13 @@ from app.models.draft import Draft
 from app import db
 
 """
-Given a draft, saves it to the db. If the draft is finalized, then create
-a new draft and save that one instead.
+Given a draft, saves it to the db.
 
 Expects:
 did: id of draft to save
 uid: id of user who owns draft
 title: new title for draft
 text: new text for draft
-
-Returns:
-did: null if not a new draft, id if a new draft
 """
 @api.route('/save_draft', methods=['POST'])
 def save_draft():
@@ -29,7 +25,7 @@ def save_draft():
 
         draft = Draft.query.filter_by(did=did).first()
 
-        if not draft or draft.uid != g.user.uid:
+        if not draft or draft.uid != g.user.uid or draft.finalized:
             return jsonify(error='Invalid params'), 400
 
         new_did = None
