@@ -7,6 +7,6 @@ from app.decorators import login_required
 def show_user_profile(name):
     user = User.query.filter_by(username=name).first()
     if user:
-        return render_template('users/profile.html', viewed_user=user)
+        return render_template('users/profile.html', viewed_user=user, page_title="Dashboard",nav_extra="dashboard")
     else:
         return "USER DONT EXIST"

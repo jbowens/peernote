@@ -45,3 +45,11 @@ assets.register('splash_css',
         output="gen/splash.css"
     )
 )
+
+assets.register('terms-and-conditions_css',
+    Bundle(
+        "scss/terms-and-conditions.scss",
+        filters="scss,cssmin",
+        output="gen/terms-and-conditions.css"
+    )
+)

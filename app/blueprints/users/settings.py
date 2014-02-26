@@ -5,4 +5,4 @@ from app.decorators import login_required
 @users.route('/settings', methods=['GET','POST'])
 @login_required
 def settings():
-    return render_template('users/settings.html')
+    return render_template('users/settings.html',page_title="Settings")

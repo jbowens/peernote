@@ -27,9 +27,9 @@
             <a href="/">
                 <span id="logo">
                     <div id="eraser"></div>
-                    <div id="metal"></div>
+                    <!-- <div id="metal"></div> -->
                     <div id="pencil"> P </div>
-                    <div id="tip"></div>
+                    <!--<div id="tip"></div>-->
                 </span>
                 <span id="logo-name"> PEERNOTE </span>
             </a>
@@ -50,3 +50,12 @@
 
     </div> <!-- header-container -->
 </nav>
+<div class="nav-section">
+    <div class="page-width">
+        <h1>{{ page_title }}</h1>
+        {% if nav_extra=="dashboard" %}
+            <div class="new-doc-button"><i class="fa fa-plus"></i>New Document</div>
+
+        {% endif %}
+    </div>
+</div>
