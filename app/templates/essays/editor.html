@@ -15,6 +15,11 @@
         peernoteNS.essays = peernoteNS.essays || {};
         peernoteNS.essays.uid = {{ current_essay.uid }};
         peernoteNS.essays.did = {{ current_draft.did }};
+
+        peernoteNS.essays.drafts = [];
+        {% for draft in current_essay.get_all_drafts() %}
+            peernoteNS.essays.drafts.push({{draft.did}});
+        {% endfor %}
     </script>
 
     <script src="/static/js/essays/editor.js"></script>

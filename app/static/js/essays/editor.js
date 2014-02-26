@@ -3,6 +3,10 @@
  */
 var peernoteNS = peernoteNS || {};
 peernoteNS.essays = peernoteNS.essays || {uid: null, did: null};
+
+// Assumption being made that first opened draft will be the newest.
+peernoteNS.essays.enable_autosave = true;
+
 peernoteNS.essays.AUTOSAVE_PAUSE_MILLIS = 1000;
 
 /* setTimeout() timer handle used for implementing
@@ -68,11 +72,15 @@ peernoteNS.essays.keydown = function(e) {
 };
 
 peernoteNS.essays.keystroke = function(e) {
+  if (!peernoteNS.essays.enable_autosave) {
+      return;
+  }
+
   if (peernoteNS.autosave_timer) {
     clearTimeout(peernoteNS.autosave_timer);
     peernoteNS.autosave_timer = null;
   }
- 
+
   // Remove the saved text, the state has probs changed.
   $('.status-line').text('');
 
@@ -126,6 +134,49 @@ peernoteNS.essays.initEmailPopup = function() {
   });
 }
 
+/*
+ * For each draft in the timeline, setup a click handler so when pressed,
+ * we query the api for that draft's title and text. We then go into
+ * content and replace pre-existing titles and text with this.
+ *
+ * Note that we also disable autosaving if we go to an old draft. We do
+ * not want to save old drafts.
+ */
+peernoteNS.essays.initTimeline = function() {
+  var $draftList = $('.timeline ul li');
+  $draftList.each(function(i) {
+
+    // TODO: probably should debounce...
+    $(this).click(function() {
+      var did = peernoteNS.essays.drafts[i];
+      params = {
+        did: did,
+        uid: peernoteNS.essays.uid
+      }
+
+      $.post('/api/fetch_draft', params, function(data) {
+        if (data.status == "success") {
+          // because content editables are weird, start from scratch
+          $('.content').empty();
+          $('.content').append($("<h1 id='essay-title' class='essay-title'>"));
+          $('.content').append($("<p class='text-container'>"));
+          $('#essay-title').text(data.title);
+          $('.text-container').text(data.text);
+
+          // disable autosaving if this is an old draft
+          if (peernoteNS.essays.drafts.length == i + 1) {
+            peernoteNS.essays.enable_autosave = true;
+            $('.status-line').text('');
+          } else {
+            peernoteNS.essays.enable_autosave = false;
+            $('.status-line').text('Saving disabled for old drafts');
+          }
+        }
+      });
+    });
+  });
+}
+
 $(document).ready(function(e) {
   if (peernoteNS.essays.uid == null || peernoteNS.essays.did == null) {
     return;
@@ -134,4 +185,5 @@ $(document).ready(function(e) {
   peernoteNS.essays.initEditor();
   peernoteNS.essays.initReviewButton();
   peernoteNS.essays.initEmailPopup();
+  peernoteNS.essays.initTimeline();
 });

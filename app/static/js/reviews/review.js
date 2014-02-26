@@ -107,7 +107,7 @@ $(document).ready(function () {
 
     bindListeners();
 
-	textBody = $('#text-container').html();
+	textBody = $('.text-container').html();
 
     // key listener for custom text editor behavior
     //$('.content').keypress(function(e) {
@@ -252,11 +252,11 @@ function writeInlineText(keyEvent) {
 	// edgecase fix, if user is typing from location
 	// where span just got removed.
 	if ($(parentHTML).hasClass("content")) {
-		parentHTML = document.getElementById('text-container');
+		parentHTML = document.getElementByClassNa,e('text-container');
 	}
 
 	// generates an inline edit span
-	if (parentHTML.id === 'text-container') {
+	if (parentHTML.className === 'text-container') {
 		var keyPressed = String.fromCharCode(keyEvent.which);
 		var startPos = selection.baseOffset;
 		var selectionRange = document.createRange();
