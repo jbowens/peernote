@@ -147,6 +147,7 @@ peernoteNS.essays.initTimeline = function() {
   $draftList.each(function(i) {
 
     // TODO: probably should debounce...
+    // TODO: dont fetch again if already have that version
     $(this).click(function() {
       var did = peernoteNS.essays.drafts[i];
       params = {
