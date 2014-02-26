@@ -7,4 +7,4 @@ api = Blueprint('api', __name__)
 
 # Import the endpoints.
 from save_draft import *
-from create_review import *
+from email_a_review import *
