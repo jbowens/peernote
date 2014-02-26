@@ -114,8 +114,14 @@ peernoteNS.essays.initEmailPopup = function() {
   });
 
   var $popupForm = $(".send-review-pane form");
+  var formSubmitting = false;
   $popupForm.submit(function (e) {
     e.preventDefault();
+    if (formSubmitting) {
+      return;
+    }
+    formSubmitting = true;
+
     var email = $popupForm.find('input[name="email"]').val();
     params = {
       uid: peernoteNS.essays.uid,
@@ -124,6 +130,7 @@ peernoteNS.essays.initEmailPopup = function() {
     };
 
     $.post('/api/email_a_review', params, function(data) {
+      formSubmitting = false;
       if (data.status == "success") {
         // TODO: for now, just kick out to /essays. In the future
         // will be better to just fux with essay timeline
