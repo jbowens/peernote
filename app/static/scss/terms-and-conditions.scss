@@ -10,11 +10,23 @@ html, body {
     width: 250px;
     height: 3714px;
 
-    ul {
+    .nav-wrapper {
         float: right;
-        li {
-            border-bottom: 1px solid #dcdcdc;
+        margin-right: 20px;
+
+        h2 {
             padding: 10px;
+            padding-top: 40px;
+        }
+
+
+        ul {
+
+            li {
+                border-bottom: 1px solid #dcdcdc;
+                padding: 10px;
+                width: 140px;
+            }
         }
     }
 }
@@ -23,7 +35,7 @@ html, body {
     float: left;
     width: 800px;
     border-left: 1px solid #dcdcdc;
-    padding: 30px;
+    padding: 40px;
 
     h1 {
         font-size: 30pt;
@@ -37,7 +49,7 @@ html, body {
 
     .term {
         width: 800px;
-        margin-bottom: 30px;
+        margin-bottom: 35px;
         h2 {
             color: $theme-color;
             margin-bottom: 10px;
