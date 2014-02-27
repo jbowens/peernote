@@ -11,9 +11,6 @@ class DocumentParser(object):
     def accepts_extension(self, extension):
         return extension in self.file_extensions
 
-    def get_file_extensions(self):
-        raise NotImplementedError('Someone dun fucked up.')
-
     def parse_file(self, file_contents):
         raise NotImplementedError('Someone dun fucked up.')
 
