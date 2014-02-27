@@ -9,12 +9,10 @@
 
 {% block scripts %}
     {{ super() }}
-    <script type="text/javascript" src="/static/js/include/jquery.scrollTo.min.js"></script>
 
-    {# TODO: Convert all these javascript files into a bundle. #}
-    <script type="text/javascript" src="/static/js/splash/email-signup.js"></script>
-    <script type="text/javascript" src="/static/js/splash/splash.js"></script>
-    <script type="text/javascript" src="/static/js/splash/drop-a-line.js"></script>
+    {% assets "splash_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
 {% endblock %}
 
 {% block main %}

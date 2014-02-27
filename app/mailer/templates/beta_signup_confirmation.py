@@ -5,6 +5,7 @@ class BetaSignupConfirmation(MailTemplate):
 
   def __init__(self):
     self.body_template = 'beta_signup_confirmation'
+    self.unsubscribe_type = 'beta'
 
   def render(self, to_email, from_email, bindings):
     msg = MIMEMultipart()

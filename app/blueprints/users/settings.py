@@ -1,12 +1,13 @@
 from flask import render_template, request, g, flash
 from app.blueprints.users import users
-from app.decorators import login_required
+from app.decorators import login_required, csrf_post_protected
 from app.models.user import User
 from validate_email import validate_email
 from app import db
 
 @users.route('/settings', methods=['GET','POST'])
 @login_required
+@csrf_post_protected
 def settings():
     if request.method == 'POST':
         # They submitted the form. Let's update some shit!

@@ -13,6 +13,7 @@ from app.parsers import parsers
 @essays.route('/upload', methods=['GET','POST'])
 @login_required
 def upload_essay():
+
     if request.method == 'POST' and 'paper' in request.files:
         f = request.files['paper']
         title = request.form.get('title', None)
@@ -68,4 +69,10 @@ def upload_essay():
         db.session.commit()
 
         return redirect(url_for('essays.edit_essay', essayid=new_essay.eid))
-    return render_template('essays/upload.html')
+
+    accepted_extensions = set([])
+    for parser in parsers:
+        for ext in parser.get_file_extensions():
+            accepted_extensions.add(ext)
+
+    return render_template('essays/upload.html', accepted_extensions=', '.join(list(accepted_extensions)))

@@ -37,6 +37,7 @@ nosetests.xml
 
 # webassets
 *.css
+app/static/gen/*.js
 app/static/.webassets-cache/*
 !app/static/.webassets-cache/.gitignore
 

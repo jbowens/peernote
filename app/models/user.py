@@ -6,6 +6,10 @@ class User(db.Model):
     username = db.Column(db.String(30), unique=True)
     email = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(128))
+    may_email = db.Column(db.Boolean)
+
+    def __init__(self):
+        self.may_email = True
 
     def set_password(self, password):
         """

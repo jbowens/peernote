@@ -3,11 +3,15 @@ from flask.ext.assets import Environment, Bundle
 from flask.ext.sqlalchemy import SQLAlchemy
 from getpass import getuser
 from os import environ
-import os
+import os, uuid
 
 # Set up the flask application.
 app = Flask(__name__)
 app.debug = True
+
+# set webassets env debug value so we dont minify in dev
+Environment.debug = app.debug
+
 app.config.from_pyfile('../config/default.cfg')
 if environ.get('REMOTE_DB'):
     app.config.from_pyfile('../config/remote_db.cfg')
@@ -62,6 +66,10 @@ def initialize_database():
 
 @app.before_request
 def process_session():
+    if not session.get('csrf'):
+        session['csrf'] = uuid.uuid4().hex
+    g.csrf_token = session['csrf']
+
     g.user = None
     if session.get('uid', None): 
         # This user is logged in. Grab the user object.

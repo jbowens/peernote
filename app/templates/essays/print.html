@@ -1,0 +1,32 @@
+{% extends 'base/application.html' %}
+
+{% block styles %}
+    {{ super() }}
+    {% assets "essays_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{# TODO: Add support for closing the window automatically in Chrome. #}
+<script type="text/javascript">
+(function() {
+    var afterPrint = function() {
+        window.close();
+    };
+    window.onafterprint = afterPrint;
+    $(window).load(function() {
+        if (window.print) {
+            window.print();
+        }
+    });
+}());
+</script>
+{% endblock %}
+
+{% block main %}
+<div class="print-view">
+    {% include "shared/essays/essay_content.html" %}
+</div>
+{% endblock %}

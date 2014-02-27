@@ -10,7 +10,7 @@ from app.mailer import Mailer
 from app import db
 
 def email_uniqueness(form, field):
-    if User.is_email_used(field.data):
+    if User.is_email_used(field.data.lower()):
         raise ValidationError('That email is already registered.')
 
 def username_uniqueness(form, field):
@@ -32,7 +32,7 @@ def signup():
         # Create the user in the database
         newuser = User()
         newuser.username = request.form['username']
-        newuser.email = request.form['email']
+        newuser.email = request.form['email'].lower()
         newuser.set_password(request.form['pw'])
         db.session.add(newuser)
         db.session.commit()

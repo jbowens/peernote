@@ -15,14 +15,16 @@
         peernoteNS.essays = peernoteNS.essays || {};
         peernoteNS.essays.uid = {{ current_essay.uid }};
         peernoteNS.essays.did = {{ current_draft.did }};
-        {% if current_draft.finalized %}
-            peernoteNS.essays.finalized = true;
-        {% else %}
-            peernoteNS.essays.finalized = false;
-        {% endif %}
+
+        peernoteNS.essays.drafts = [];
+        {% for draft in current_essay.get_all_drafts() %}
+            peernoteNS.essays.drafts.push({{draft.did}});
+        {% endfor %}
     </script>
 
-    <script src="/static/js/essays/editor.js"></script>
+    {% assets "editor_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
 {% endblock %}
 
 {% block content %}
@@ -192,6 +194,14 @@
                 </div>
             </div>
 
+        </div>
+        <div class="timeline">
+            <h2>Essay Timeline</h2>
+            <ul>
+                {% for draft in current_essay.get_all_drafts() %}
+                    <li><a> Draft {{ draft.version }} </a></li>
+                {% endfor %}
+            </ul>
         </div>
 
     </div>

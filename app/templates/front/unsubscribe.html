@@ -1,0 +1,13 @@
+{% extends 'base/application_main.html' %}
+{% block content %}
+<div class="page-container top-margin bottom-margin unsubscribe">
+    <h1>You're unsubscribed.</h1>
+    <p>
+    {% if all_emails %}
+        You've been unsubscribed from <em>all</em> Peernote emails.
+    {% else %}
+        You've been unsubscribed from those emails.
+    {% endif %}
+    </p>
+</div>
+{% endblock %}

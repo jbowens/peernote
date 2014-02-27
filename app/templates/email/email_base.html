@@ -1,0 +1,26 @@
+{#
+    This is the base email template for all Peernote emails.
+#}
+<!DOCTYPE html>
+<html>
+    <head>
+        {# NOTE: Apparently some email clients/servers dont' like title tags.
+           and very few actually do anything with the title tag. Don't send
+           title tags. #}
+    </head>
+    <body>
+        <div id="container">
+            <div id="content">
+                {% block content %}{% endblock %}
+            </div>
+            <div id="footer">
+                {% if unsubscribe_type_token %}
+                <a href="http://{{ server_host }}/unsubscribe/{{ unsubscribe_type_token }}" class="unsubscribe">Unsubscribe from these emails</a>
+                {% endif %}
+                {% if unsubscribe_all_token %}
+                <a href="http://{{ server_host }}/unsubscribe/{{ unsubscribe_all_token }}" class="unsubscribe">Unsubscribe from all email</a>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

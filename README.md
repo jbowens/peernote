@@ -7,5 +7,5 @@ Peernote in Python using Flask.
 [Sass/Scss](http://sass-lang.com/install)
 ```bash
 
-pip install Flask Flask-Assets cssmin flask-sqlalchemy Flask-WTF Flask-Gravatar boto psycopg2 docx lxml PIL mandrill html2text validate_email
+pip install -r requirements.txt
 ```
