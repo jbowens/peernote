@@ -48,6 +48,7 @@ from blueprints.users import users
 from blueprints.essays import essays
 from blueprints.reviews import reviews
 from blueprints.api import api
+from blueprints.admin import admin
 
 app.register_blueprint(front)
 if not app.config.get('IS_PRODUCTION'):
@@ -55,6 +56,7 @@ if not app.config.get('IS_PRODUCTION'):
     app.register_blueprint(essays, url_prefix='/essays')
     app.register_blueprint(reviews, url_prefix='/reviews')
     app.register_blueprint(api, url_prefix='/api')
+    app.register_blueprint(admin, url_prefix='/admin')
 
 if app.config.get('IS_PRODUCTION'):
     @app.route('/<path:path>', methods=['GET'])

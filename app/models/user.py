@@ -7,9 +7,11 @@ class User(db.Model):
     email = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(128))
     may_email = db.Column(db.Boolean)
+    is_admin = db.Column(db.Boolean)
 
     def __init__(self):
         self.may_email = True
+        self.is_admin = False
 
     def set_password(self, password):
         """
