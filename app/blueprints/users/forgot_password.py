@@ -51,7 +51,7 @@ def forgot_password():
 
         if validate_email(uinput):
             # They entered an email. Get the user obj by the email.
-            user_to_recover = User.query.filter_by(email=uinput).first() 
+            user_to_recover = User.query.filter_by(email=uinput.lower()).first() 
         else:
             # They entered a username. Get the user obj by the username.
             user_to_recover = User.query.filter_by(username=uinput).first()

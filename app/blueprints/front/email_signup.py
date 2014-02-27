@@ -8,7 +8,7 @@ from app import db
 
 @front.route('/email-signup', methods=['POST'])
 def email_signup():
-    email = request.form.get('email') 
+    email = request.form.get('email').lower()
     if not email:
         return jsonify(error='no email', status='error')
 
