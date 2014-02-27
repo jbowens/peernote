@@ -1,4 +1,16 @@
 {% extends 'admin/base.html' %}
 {% block admin_content %}
 <h1>Hi {{ user.username }}</h1>
+
+<h2>Stats</h2>
+<table>
+    <tr>
+        <td>Users</td>
+        <td>{{ num_users }}</td>
+    </tr>
+    <tr>
+        <td>Beta subscriptions</td>
+        <td>{{ num_beta_subscribers }}</td>
+    </tr>
+</table>
 {% endblock %}
