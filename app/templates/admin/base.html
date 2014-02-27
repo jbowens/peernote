@@ -1,0 +1,17 @@
+{% extends 'base/application_main.html' %}
+
+{% block page_title %}Admin Control Panel{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    {% assets "admin_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+{% endblock %}
+
+{% block content %}
+<div class="page-container top-margin bottom-margin admin-cp">
+    {% block admin_content %}
+    {% endblock %}
+</div>
+{% endblock %}
