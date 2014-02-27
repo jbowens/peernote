@@ -22,7 +22,9 @@
         {% endfor %}
     </script>
 
-    <script src="/static/js/essays/editor.js"></script>
+    {% assets "editor_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
 {% endblock %}
 
 {% block content %}

@@ -8,6 +8,10 @@ import os, uuid
 # Set up the flask application.
 app = Flask(__name__)
 app.debug = True
+
+# set webassets env debug value so we dont minify in dev
+Environment.debug = app.debug
+
 app.config.from_pyfile('../config/default.cfg')
 if environ.get('REMOTE_DB'):
     app.config.from_pyfile('../config/remote_db.cfg')

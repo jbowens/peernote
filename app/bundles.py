@@ -3,6 +3,9 @@ from app import app
 
 assets = Environment(app)
 
+"""
+CSS BUNDLES
+"""
 assets.register('base_css',
     Bundle(
         "scss/reset.scss",
@@ -54,5 +57,39 @@ assets.register('terms-and-conditions_css',
         "scss/terms-and-conditions.scss",
         filters="scss,cssmin",
         output="gen/terms-and-conditions.css"
+    )
+)
+
+"""
+JAVASCRIPT BUNDLES
+"""
+assets.register('splash_js',
+    "js/include/jquery.scrollTo.min.js",
+    Bundle(
+        "js/splash/email-signup.js",
+        "js/splash/splash.js",
+        "js/splash/drop-a-line.js",
+        filters="rjsmin",
+        output="gen/splash.js"
+    )
+)
+
+assets.register('editor_js',
+    Bundle(
+        "js/essays/editor.js",
+        filters="rjsmin",
+        output="gen/editor.js"
+    )
+)
+
+assets.register('reviewer_js',
+    "js/include/rangy-1.2.3/rangy-core.js",
+    "js/include/rangy-1.2.3/rangy-cssclassapplier.js",
+    "js/include/jquery-ui-1.10.4.custom.min.js",
+    "js/include/jquery.qtip-1.0.0-rc3.js",
+    Bundle(
+        "js/reviews/review.js",
+        filters="rjsmin",
+        output="gen/editor.js"
     )
 )
