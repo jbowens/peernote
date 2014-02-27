@@ -5,6 +5,7 @@ class DropALine(MailTemplate):
 
     def __init__(self):
         self.body_template = 'drop_a_line'
+        self.include_unsubscribe_all = False
 
     def render(self, to_email, from_email, bindings):
         msg = MIMEMultipart()

@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Peernote Feedback</title>
-    </head>
-    <body>
-        <h1>Peernote Feedback</h1>
-        <div><strong>Name:</strong> {{ name }}</div>
-        <div><strong>Email:</strong> {{ email }}</div>
-        <div><strong>Subject:</strong> {{ subject }}</div>
-        <p>
-            {{ message }}
-        </p>
-    </body>
-</html>
+{% extends 'email/email_base.html' %}
+{% block content %}
+    <h1>Peernote Feedback</h1>
+    <div><strong>Name:</strong> {{ name }}</div>
+    <div><strong>Email:</strong> {{ email }}</div>
+    <div><strong>Subject:</strong> {{ subject }}</div>
+    <p>
+        {{ message }}
+    </p>
+{% endblock %}
