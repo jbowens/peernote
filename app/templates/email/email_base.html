@@ -15,7 +15,7 @@
             </div>
             <div id="footer">
                 {% if unsubscribe_type_token %}
-                <a href="http//{{ server_host }}/unsubscribe/{{ unsubscribe_type_token }}" class="unsubscribe">Unsubscribe from these emails</a>
+                <a href="http://{{ server_host }}/unsubscribe/{{ unsubscribe_type_token }}" class="unsubscribe">Unsubscribe from these emails</a>
                 {% endif %}
                 {% if unsubscribe_all_token %}
                 <a href="http://{{ server_host }}/unsubscribe/{{ unsubscribe_all_token }}" class="unsubscribe">Unsubscribe from all email</a>
