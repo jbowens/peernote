@@ -200,7 +200,6 @@ html, body {
     overflow: auto;
 
     * {
-        @include unselectable;
         color: $white-color;
     }
 
@@ -227,6 +226,10 @@ html, body {
     li {
         float: left;
         height: 66px;
+
+        * {
+            @include unselectable;
+        }
 
         a {
             display:block;
