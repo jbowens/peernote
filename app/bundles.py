@@ -63,6 +63,15 @@ assets.register('terms-and-conditions_css',
 """
 JAVASCRIPT BUNDLES
 """
+assets.register('base_js',
+    "js/jquery-2.1.0.min.js",
+    Bundle(
+        "js/navbar.js",
+        filters="rjsmin",
+        output="gen/base.js"
+    )
+)
+
 assets.register('splash_js',
     "js/include/jquery.scrollTo.min.js",
     Bundle(
@@ -90,6 +99,6 @@ assets.register('reviewer_js',
     Bundle(
         "js/reviews/review.js",
         filters="rjsmin",
-        output="gen/editor.js"
+        output="gen/reviewer.js"
     )
 )
