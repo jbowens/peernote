@@ -64,7 +64,7 @@ assets.register('terms-and-conditions_css',
 JAVASCRIPT BUNDLES
 """
 assets.register('base_js',
-    "js/jquery-2.1.0.min.js",
+    "js/include/jquery-2.1.0.min.js",
     Bundle(
         "js/navbar.js",
         filters="rjsmin",
