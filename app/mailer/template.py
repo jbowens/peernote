@@ -39,7 +39,7 @@ class MailTemplate:
         if self.unsubscribe_type:
             # We should include an unsubscribe link for this type of
             # email.
-            token = UnsubscribeToken.create(msg['To'], 'all')
+            token = UnsubscribeToken.create(msg['To'], self.unsubscribe_type)
             bindings['unsubscribe_type_token'] = token.token
 
         body = self.render_body_template(bindings, template)
