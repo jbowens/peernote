@@ -1,0 +1,13 @@
+Flask==0.10.1
+Flask-Assets==0.8
+Flask-Gravatar==0.4.1
+Flask-SQLAlchemy==1.0
+Flask-WTF==0.9.4
+boto==2.25.0
+cssmin==0.2.0
+docx==0.2.4
+html2text==3.200.3
+lxml==3.3.1
+mandrill==1.0.53
+psycopg2==2.5.2
+validate-email==1.1
