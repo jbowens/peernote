@@ -9,14 +9,12 @@
 
 {% block scripts %}
     {{ super() }}
-    <script src="/static/js/include/rangy-1.2.3/rangy-core.js"></script>
-    <script src="/static/js/include/rangy-1.2.3/rangy-cssclassapplier.js"></script>
-    <script src="/static/js/include/jquery-ui-1.10.4.custom.min.js"></script>
-    <script src="/static/js/include/jquery.qtip-1.0.0-rc3.js"></script>
-    <script src="/static/js/reviews/review.js"></script>
-
     <!-- damnit bryce -->
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    {% assets "reviewer_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+
 {% endblock %}
 
 {% block content %}

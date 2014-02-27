@@ -15,8 +15,9 @@
         {% endblock %}
 
         {% block scripts %}
-            <script src="/static/js/include/jquery-2.1.0.min.js"></script>
-            <script src="/static/js/navbar.js"></script>
+            {% assets "base_js" %}
+                <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+            {% endassets %}
         {% endblock %}
 
     </head>
