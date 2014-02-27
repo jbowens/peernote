@@ -1,4 +1,4 @@
-from flask import Flask, g, request, render_template, session
+from flask import Flask, g, request, render_template, session, redirect, url_for
 from flask.ext.assets import Environment, Bundle
 from flask.ext.sqlalchemy import SQLAlchemy
 from getpass import getuser
@@ -50,10 +50,16 @@ from blueprints.reviews import reviews
 from blueprints.api import api
 
 app.register_blueprint(front)
-app.register_blueprint(users)
-app.register_blueprint(essays, url_prefix='/essays')
-app.register_blueprint(reviews, url_prefix='/reviews')
-app.register_blueprint(api, url_prefix='/api')
+if not app.config.get('IS_PRODUCTION'):
+    app.register_blueprint(users)
+    app.register_blueprint(essays, url_prefix='/essays')
+    app.register_blueprint(reviews, url_prefix='/reviews')
+    app.register_blueprint(api, url_prefix='/api')
+
+if app.config.get('IS_PRODUCTION'):
+    @app.route('/<path:path>', methods=['GET'])
+    def catchall(path):
+        return redirect(url_for('front.index'))
 
 # Sometime before the first request we need to create all of the
 # database tables.
