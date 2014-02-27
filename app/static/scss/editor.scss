@@ -1,8 +1,18 @@
 @import "bootstrap.scss";
+@import "shared/_variables.scss";
 @import "shared/_mixins.scss";
 
-$centerwidth: 1100px;
+body, html {
+    height: 100%;
+}
 
+nav {
+    position: fixed;
+    width: 100%;
+    z-index:101;
+}
+
+/* Bryce says: what the fuck is this? */
 ul.essay-container {
     display: block;
     float: right;
@@ -42,16 +52,167 @@ ul.essay-container {
     }
 }
 
-.sidenav {
+/* What the fuck is this? */
+/*.sidenav {
     #upload-btn {
         display: block;
         width: 80px;
     }
+}*/
+
+/* This is normally so footer sticks to bottom. but 
+ I need this div to be 100% hegiht so its children
+ can be 100% height */
+.wrapper {
+    height: 100% !important;
 }
+
+.tools {
+    height: 100%;
+    overflow: auto;
+    margin-top:50px;
+
+    .toolkit { // this is the left column of tools
+        background: #373737;
+        width: 510px;
+        float: left;
+        height: 100%;
+        position: fixed;
+        z-index: 20; //2000; <-- changed this value for testing
+
+        .toolkit-left {
+            height: 100%;
+            width: 250px;
+            border: 1px red dashed;
+            float: left;
+        }
+
+        .toolkit-right {
+            width: 250px;
+            border: 1px red dashed;
+            height: 100%;
+            float: left;
+        }
+
+        .toolkit-region h2 {
+            color: #999;
+            font-weight: 500;
+            margin-left: 20px;
+        }   
+
+        .toolkit-region {
+            border-bottom: 1px solid #404040;
+            padding: 20px 0;
+        }
+
+        .toolkit-region-light {
+            background-color: #373737;
+            color: $white-color;
+            
+            .fa-arrow-right {
+                margin-left: 15px;
+            }
+
+            .fa-arrow-left {
+                margin-right: 15px;
+            }
+        }
+
+        .draft-number {
+            padding: 20px;
+            
+        }
+
+        .reviewer-button {
+            cursor: pointer;
+        }
+
+
+        .toolkit-region-dark {
+            background-color: #1e1e1e;
+            padding: 20px 0;
+            border-top: 1px solid #404040;
+        }
+
+        ul {
+            margin-top: 20px;
+
+            * {
+                font-size: 13pt;
+            }
+
+            li {
+                padding: 10px 20px;
+                cursor: pointer;
+                color: $white-color;
+                width: 100%;
+
+                i {
+                    margin-right: 10px;
+                    color: #999;
+                }
+            }
+
+            li:hover {
+                background-color: black;
+                * {
+                    color: white;
+                }
+            }
+
+        }
+    }
+
+    .main-panel-push {
+        width: 250px;
+        float: left;
+        height: 100%;
+        opacity: 0;
+        position: relative;
+        z-index:10;
+    }
+
+    .main-panel {
+        //border: red 1px dashed;
+        height: 100%;
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: auto;
+        box-shadow: 0 0px 17px rgba(0,0,0,.9);
+        background-color: whitesmoke;
+
+        .page-container {
+            position: relative;
+            z-index: 100;
+            background: whitesmoke;
+            overflow: auto;
+            width: 100%;
+
+            .page {
+                background: white;
+                width: 700px;
+                height: 1000px;
+                border: 1px solid #d2d2d2;
+                margin: auto;
+                margin-top: 70px;
+                padding: 50px;
+                outline: none;
+            }
+        }
+
+        .buttons-container {
+            display: table;
+            margin: auto;
+        }
+    }
+
+}
+
 
 .editor-background {
     background-color: $base; 
-    padding-bottom: 50px;
+    height: 100%;
 
     #review-submit {
         text-align: right;
@@ -63,95 +224,25 @@ ul.essay-container {
     }
 
     .center-container {
-        @include calc(width, "#{$centerwidth}");
+        @include calc(width, "#{$contentwidth}");
         margin: 0 auto;
         padding-top: 50px;
         position: relative;
+        height: 100%;
+
 
         &.toolbar-padding {
             padding-top: 90px;
         }
 
         .status-line {
-            @include calc(width, "#{$centerwidth} - 400px");
+            @include calc(width, "#{$contentwidth}");
             height: 2em;
             margin: 0 auto;
             font-size: 0.9em;
             color: #666;
         }
 
-        .page-container {
-            @include calc(width, "#{$centerwidth} - 500px");
-            @include calc(min-height, "#{$centerwidth} * (11 / 8.5)");
-            padding: 50px;
-            border: 1px solid $border;
-            background-color: white;
-
-            .content {
-                position: relative;
-                line-height: 24px;
-                white-space: pre-wrap;
-
-                .essay-title {
-                    text-align: center;
-                }
-
-               .edited {
-                   background-color: #fff0b4;
-                   -webkit-user-select: none;
-                   -moz-user-select: none;
-                   -ms-user-select: none;
-                   user-select: none;
- 
-                   &:hover {
-                       background-color: #ffe169;
-                   }
-
-               }
-
-               .inline-edit {
-                    color: green;
-                    font-weight: bold;
-               }
-               
-               .highlight {
-                   background-color: #ffe169;
-                   -webkit-user-select: none;
-                   -moz-user-select: none;
-                   -ms-user-select: none;
-                   user-select: none;
-               }
-               
-               .strike {
-                   -webkit-user-select: none;
-                   -moz-user-select: none;
-                   -ms-user-select: none;
-                   user-select: none;
-                   text-decoration: line-through;
-                   color: red;
-
-                   &:hover {
-                       background-color: pink;
-                   }
-
-                   .removeStrike {
-                       color: pink;
-                       position: relative;
-
-                       a {
-                           color: $dark;
-                           position: absolute;
-                           font-size: 16px;
-                           top: -10px;
-                       }
-                   }
-               }
-
-               &:focus {
-                   outline: none;
-               }
-            }
-        }
 
         .notes {
             position: absolute;
@@ -199,15 +290,15 @@ ul.essay-container {
         }
     }
 
-    .buttons-position-fixed {
-        position: fixed;
-        top:0;
+	.buttons-position-fixed {
+		position: fixed;
+		top: 0;
 
-    }
+	}
 
-    .buttons-position-absolute {
+	.buttons-position-absolute {
         position: absolute;
-    }
+	}
 
     .buttons {
         height: 40px;
@@ -215,8 +306,10 @@ ul.essay-container {
         text-align: center;
         border-bottom: 1px solid $border;
         width: 100%;
-        z-index: 100;
-        background-color: white;
+        z-index: 102;
+		background-color: white;
+        overflow: hidden;
+        position: fixed;
 
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -224,6 +317,20 @@ ul.essay-container {
         -moz-user-select: moz-none;
         -ms-user-select: none;
         user-select: none;
+
+        .toolkit-open-button {
+            height: 40px;
+            width: 40px;
+            background: gray;
+            float:left;
+
+            i {
+                height: 40px;
+                width: 40px;
+                color: white;
+                cursor: pointer;
+            }
+        }
 
         .btn-set {
             padding: 0 20px;
@@ -334,7 +441,7 @@ ul.essay-container {
     width: 100%;
     position: fixed;
     background-color: rgba(0,0,0,.85);;
-    z-index: 100;
+    z-index: 104;
     display: none;
 
     .send-review-center-align {
@@ -415,12 +522,3 @@ ul.essay-container {
     }
 }
 
-.timeline {
-    width: 150px;
-    position: absolute;
-    @include calc(min-height, "#{$centerwidth} * (11 / 8.5)");
-
-    ul {
-        margin-top: 10px;
-    }
-}

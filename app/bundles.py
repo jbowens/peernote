@@ -32,6 +32,14 @@ assets.register('essays_css',
     )
 )
 
+assets.register('editor_css',
+    Bundle(
+        "scss/editor.scss",
+        filters="scss,cssmin",
+        output="gen/editor.css"
+    )
+)
+
 assets.register('users_css',
     Bundle(
         "scss/users.scss",

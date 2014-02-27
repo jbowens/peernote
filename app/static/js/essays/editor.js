@@ -136,6 +136,46 @@ peernoteNS.essays.alertIfFinalized = function() {
   }
 }
 
+
+peernoteNS.essays.toolDisplayer = function() {
+    var open = true; // is toolkit open or closed
+
+    // Set the width of the button panel dynamically so that it can stay centered
+    var width = $(document).width();
+    $(".buttons").css("width",(width-250) +"px");
+    $(".toolkit-open-button").click(toggleToolKit);
+
+    $(window).resize(function () {
+        var width = $(document).width();
+        if (open) {
+            $(".buttons").css("width",(width-250) +"px");
+        } else {
+            $(".buttons").css("width", width +"px");
+        }
+    });
+
+    // JS to open left column toolkit
+    function toggleToolKit() {
+        var buttonPanelWidthSetting = $(".buttons").css("width");
+        var buttonPanelWidth = parseInt(buttonPanelWidthSetting
+            .substring(0,buttonPanelWidthSetting.length-2));
+
+        if (open) {
+            $(".main-panel-push").animate({width: "0px"}, {duration: 250, queue: true});
+            $(".buttons").animate(
+                    {width: (buttonPanelWidth+250) + "px"}, 
+                    {duration: 250, queue: true});
+        } else {
+            $(".main-panel-push").animate({width: "250px"}, {duration: 250, queue: false});
+            $(".buttons").animate(
+                    {width: (buttonPanelWidth-250) + "px"}, 
+                    {duration: 250, queue: false});
+        }
+        open = !open;
+    }
+
+}
+
 $(document).ready(function(e) {
   if (peernoteNS.essays.uid == null || peernoteNS.essays.did == null) {
     return;
@@ -145,4 +185,5 @@ $(document).ready(function(e) {
   peernoteNS.essays.initEditor();
   peernoteNS.essays.initReviewButton();
   peernoteNS.essays.initEmailPopup();
+  peernoteNS.essays.toolDisplayer();
 });
