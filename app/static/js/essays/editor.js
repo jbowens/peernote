@@ -129,6 +129,7 @@ peernoteNS.essays.initEmailPopup = function() {
       email: email
     };
 
+    debugger;
     $.post('/api/email_a_review', params, function(data) {
       formSubmitting = false;
       if (data.status == "success") {
