@@ -48,6 +48,9 @@
             </tr>
 
         </table>
+    </form>
+    <form method="post">
+        {% include "shared/csrf.html" %}
         <h1>Change Password</h1>
         <table>
             <tr class="field">
@@ -72,6 +75,9 @@
                 </td>
             </tr>
         </table>
+    </form>
+    <form method="post">
+        {% include "shared/csrf.html" %}
         <h1>Mail Settings</h1>
         <p>Please email me when...</p>
         <table class="mail-settings-table">
@@ -105,12 +111,15 @@
                 </td>
             </tr>
         </table>
-        <h1> Delete Account</h1>
+    </form>
+    <form method="post">
+        {% include "shared/csrf.html" %}
+        <h1>Delete Account</h1>
         <p>Deleting your account will permanently delete all of your documents. This cannot be undone.</p>
         <table>
             <tr class="field">
                 <td>
-                    <input class="button-field" type="submit" value="I understand, delete my account" />
+                    <input class="button-field" type="submit" value="I understand, delete my account" name="delete-my-account" />
                 </td>
             </tr>
         </table>
