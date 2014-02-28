@@ -19,18 +19,18 @@
         <table>
             <tr class="field">
                 <td>
-                    <label for="new_name">Name</label>
+                    <label for="first_name">First Name (Required)</label>
                 </td>
                 <td>
-                    <input class="textfield" type="text" id="new_name" name="name" />
+                    <input class="textfield" type="text" id="first_name" name="name" />
                 </td>
             </tr>
             <tr class="field">
                 <td>
-                    <label for="new_username">Username (Required)</label>
+                    <label for="last_name">Last Name (Required)</label>
                 </td>
                 <td>
-                    <input class="textfield" type="text" id="new_username" name="username" value="{{ user.username }}" />
+                    <input class="textfield" type="text" id="last_name" name="name" />
                 </td>
             </tr>
             <tr class="field">
@@ -77,26 +77,26 @@
         <table class="mail-settings-table">
             <tr class="field">
                 <td class="mail">
-                    <label>Someone finishes reviewing my document</label>
+                    <label for="check-1">Someone finishes reviewing my document</label>
                 </td>
                 <td>
-                    <input class="checkbox" type="checkbox" />
+                    <input id="check-1" class="checkbox" type="checkbox" checked />
                 </td>
             </tr>
             <tr class="field">
                 <td class="mail">
-                    <label>I receive a notification</label>
+                    <label for="check-2">I receive a notification</label>
                 </td>
                 <td>
-                    <input class="checkbox" type="checkbox" />
+                    <input id="check-2" class="checkbox" type="checkbox" checked />
                 </td>
             </tr>
             <tr class="field">
                 <td class="mail">
-                    <label>Someone requests a review from me</label>
+                    <label for="check-3">Someone requests a review from me</label>
                 </td>
                 <td>
-                    <input class="checkbox" type="checkbox" />
+                    <input id="check-3" class="checkbox" type="checkbox" checked/>
                 </td>
             </tr>
             <tr>
