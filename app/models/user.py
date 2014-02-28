@@ -1,9 +1,11 @@
+import random
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 
 class User(db.Model):
     uid = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(80), unique=True)
+    url_keyword = db.Column(db.String(80), unique=True)
     first_name = db.Column(db.String(30))
     last_name = db.Column(db.String(30))
     password = db.Column(db.String(128))
@@ -33,6 +35,27 @@ class User(db.Model):
         Returns the first letter of the user's last name.
         """
         return self.last_name[0]
+
+    @staticmethod
+    def generate_url_keyword(first_name, last_name):
+        first_name = first_name.lower()
+        last_name = last_name.lower()
+        
+        base = first_name + '-' + last_name[0]
+
+        def is_taken(keyword):
+            return User.query.filter_by(url_keyword=keyword).first() is not None
+
+        if not is_taken(base):
+            return base
+
+        hash_len = 4
+        hash_range = 16 ** hash_len - (16 ** (hash_len - 1))
+        i = random.randint(0, hash_range) + (16 ** (hash_len - 1))
+        while is_taken(hex(i)[2:] + '-' + base):
+            i = random.randint(0, hash_range) + (16 ** (hash_len - 1))
+            
+        return hex(i)[2:] + '-' + base
 
     @staticmethod
     def is_email_used(email):

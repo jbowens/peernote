@@ -47,6 +47,7 @@ def signup():
         newuser.email = request.form['email'].lower()
         newuser.first_name = request.form['first_name']
         newuser.last_name = request.form['last_name']
+        newuser.url_keyword = User.generate_url_keyword(newuser.first_name, newuser.last_name)
         newuser.set_password(request.form['pw'])
         db.session.add(newuser)
         db.session.commit()
