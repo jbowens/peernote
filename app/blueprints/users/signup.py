@@ -36,11 +36,13 @@ def signup():
     # Check the captcha
     captcha_passed = False
     if request.method == 'POST':
-        lowered_titles = [x.lower() for x in session.get('captcha_title')]
+        lowered_titles = [x.lower() for x in session.get('captcha_title', [])]
         if request.form.get('cover','').lower() in lowered_titles:
             captcha_passed = True
         else:
             flash('The text in the image did not match.', 'error')
+        # It's important to only allow one attempt for each session title
+        session.pop('captcha_title')
 
     if request.method == 'POST' and form.validate_on_submit() and captcha_passed:
         # Create the user in the database
