@@ -10,8 +10,8 @@ Distortion layers for visual CAPTCHAs
 # PyCAPTCHA Package
 # Copyright (C) 2004 Micah Dowty <micah@navi.cx>
 #
-import ImageDraw, Image
 import random, math
+from PIL import Image, ImageDraw
 
 class WigglyBlocks(object):
     """Randomly select and shift blocks of the image"""
