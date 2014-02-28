@@ -47,6 +47,24 @@ assets.register('signup_css',
     )
 )
 
+assets.register("forgot-password_css",
+    Bundle(
+        "scss/forgot-password.scss",
+        filters="scss,cssmin",
+        depends="scss/shared/*.scss",
+        output="gen/forgot-password.css"
+    )
+)
+
+assets.register("reset-password_css",
+    Bundle(
+        "scss/reset-password.scss",
+        filters="scss,cssmin",
+        depends="scss/shared/*.scss",
+        output="gen/reset-password.css"
+    )
+)
+
 assets.register('login_css',
     Bundle(
         "scss/login.scss",
