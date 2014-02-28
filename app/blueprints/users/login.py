@@ -7,12 +7,12 @@ from app import db
 def log_in():
     if request.method == 'POST':
         # They submitted the form and we should process it.
-        user = User.query.filter_by(username=request.form.get('username', None)).first()
+        user = User.query.filter_by(email=request.form.get('email', None)).first()
 
         if user and user.check_password(request.form.get('password', '')):
             session['uid'] = user.uid
             next_location = request.form.get('next_location')
             return redirect(next_location if next_location else url_for('front.index'))
-        flash('No user with the given username and password combination was found.')
+        flash('No user with the given email and password combination was found.')
 
     return render_template('users/log_in.html', next_location=request.args.get('next'),page_title="Login")

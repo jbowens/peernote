@@ -13,18 +13,21 @@ def settings():
         # They submitted the form. Let's update some shit!
         user = g.user
 
-        username = request.form.get('username')
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
         email = request.form.get('email')
         password = request.form.get('password')
         password_confirm = request.form.get('password_again')
 
-        # Username
-        if username and username.lower() != user.username.lower():
-            if User.is_username_used(username):
-                flash('That username is already taken.', 'error')
-            else:
-                user.username = username
-                flash('Your username has been updated.')
+        # First name
+        if first_name and first_name != user.first_name:
+            user.first_name = first_name
+            flash('Your first name has been updated.')
+
+        # Last name
+        if last_name and last_name != user.last_name:
+            user.last_name = last_name
+            flash('Your last name has been updated.')
 
         # Email
         if email and email.lower() != user.email.lower():

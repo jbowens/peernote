@@ -13,7 +13,7 @@
         <div id="user-profile">
             <img src="{{ viewed_user.email | gravatar }}" />
             <div id="user-info">
-                <h1>{{ viewed_user.username }}</h1>
+                <h1>{{ viewed_user.first_name }} {{ viewed_user.last_initial() }}.</h1>
                 <div>Member!</div>
             </div>
         </div>
