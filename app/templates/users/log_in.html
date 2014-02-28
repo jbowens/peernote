@@ -19,6 +19,8 @@
     </div>
     {% else %}
     {% include "shared/flashes.html" %}
+    <div class="table-wrapper">
+    <h1 id="welcome">Welcome Back </h2>
     <table>
         <form method="post" id="log-in">
             {% if next_location %}
@@ -41,16 +43,19 @@
                 </td>
             </tr>
             <tr>
-                <td></td>
                 <td>
                     <input id="login" class="button-field" type="submit" value="Log In" />`
+                </td>
+                <td>
+                    <p class="forgot-password"> 
+                        <a href="{{ url_for('users.signup') }}">Still need to sign up?</a >
+                        <a href="{{ url_for('users.forgot_password') }}">Forgot your password?</a> 
+                    </p>
                 </td>
             </tr>
         </form>
     </table>
-    <p class="forgot-password">
-        <a href="{{ url_for('users.forgot_password') }}">Forgot your password?</a> &mdash; <a href="{{ url_for('users.signup') }}">Still need to sign up?</a>
-    </p>
+</div>
     {% endif %}
 </div>
 
