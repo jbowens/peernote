@@ -18,7 +18,6 @@ email: address of email to send to
 did: id of draft to review
 uid: id of user who owns draft
 """
-
 @api.route('/email_a_review', methods=['POST'])
 def email_a_review():
     current_app.logger.debug('emailing review for a draft')
@@ -67,7 +66,7 @@ def email_a_review():
 
         # send emailz
         params = {
-            'sender': g.user.username,
+            'sender': g.user.first_name + ' ' + g.user.last_name,
             'review_url': 'http://' + app.config.get('SERVER_HOST') + '/reviews/' + review.urlhash
         }
         mailer = Mailer()
