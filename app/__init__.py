@@ -49,6 +49,7 @@ from blueprints.essays import essays
 from blueprints.reviews import reviews
 from blueprints.api import api
 from blueprints.admin import admin
+from error import *
 
 app.register_blueprint(front)
 if not app.config.get('IS_PRODUCTION'):

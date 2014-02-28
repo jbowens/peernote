@@ -15,7 +15,6 @@
         peernoteNS.essays = peernoteNS.essays || {};
         peernoteNS.essays.uid = {{ current_essay.uid }};
         peernoteNS.essays.did = {{ current_draft.did }};
-
         peernoteNS.essays.drafts = [];
         {% for draft in current_essay.get_all_drafts() %}
             peernoteNS.essays.drafts.push({{draft.did}});
@@ -65,10 +64,12 @@
                             <i class="fa fa-folder-open folder-button"></i> Open
                         </li>
                         <li>
+                            <i class="fa fa-archive"></i> Archive Draft
+                        </li>
+                        <li>
                             <i class="fa fa-trash-o"></i> Delete Document
                         </li>
                         <li>
-
                             <a href="{{ url_for('essays.print_essay', essayid=current_essay.eid) }}" target="_blank">
                                 <i class="fa fa-print"></i>Print
                             </a>
@@ -87,6 +88,14 @@
                 <div class="toolkit-region toolkit-region-light">
                     <h2>REQUEST REVIEW</h2>
                     <a id="review" class="reviewify">Reviewify</a>
+                </div>
+                <div class="toolkit-region toolkit-region-light timeline">
+                    <h2>Essay Timeline</h2>
+                    <ul>
+                        {% for draft in current_essay.get_all_drafts() %}
+                        <li><a> Draft {{ draft.version }} </a></li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
             <div class="toolkit-right">
@@ -118,14 +127,6 @@
                     <h2>TOOLKIT</h2>
                     <i class="fa fa-strikethrough"></i>
                     <i class="fa fa-comment"></i>
-                </div>
-                <div class="timeline">
-                    <h2>Essay Timeline</h2>
-                    <ul>
-                        {% for draft in current_essay.get_all_drafts() %}
-                        <li><a> Draft {{ draft.version }} </a></li>
-                        {% endfor %}
-                    </ul>
                 </div>
             </div>
         </div>
