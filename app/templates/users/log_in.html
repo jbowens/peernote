@@ -1,8 +1,15 @@
+
 {% extends 'base/application_main.html' %}
+{% block styles %}
+    {{ super() }}
+    {% assets "login_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+{% endblock %}
+
 {% block content %}
 
 <div class="page-container top-margin bottom-margin log-in">
-    <h1>Log in</h1>
     {% if is_logged_in %}
     <div class="error">
         You're already logged in!
@@ -12,25 +19,38 @@
     </div>
     {% else %}
     {% include "shared/flashes.html" %}
-    <form method="post" id="log-in">
-        {% if next_location %}
-        <input type="hidden" name="next_location" value="{{ next_location }}" />
-        {% endif %}
-        <div class="field">
-            <label for="login_username">Username</label>
-            <input type="text" id="login_username" name="username" />
-        </div>
-        <div class="field">
-            <label for="login_password">Password</label>
-            <input type="password" id="login_password" name="password" />
-        </div>
-        <div class="button-field">
-            <input type="submit" value="Log in" />
-        </div>
-        <p class="forgot-password">
+    <table>
+        <form method="post" id="log-in">
+            {% if next_location %}
+            <input type="hidden" name="next_location" value="{{ next_location }}" />
+            {% endif %}
+            <tr class="field">
+                <td>
+                    <label for="login_username">Username</label>
+                </td>
+                <td>
+                    <input class="textfield" type="text" id="login_username" name="username" />
+                </td>
+            </tr>
+            <tr class="field">
+                <td>
+                    <label for="login_password">Password</label>
+                </td>
+                <td>
+                    <input class="textfield" type="password" id="login_password" name="password" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="login" class="button-field" type="submit" value="Log In" />`
+                </td>
+            </tr>
+        </form>
+    </table>
+    <p class="forgot-password">
         <a href="{{ url_for('users.forgot_password') }}">Forgot your password?</a> &mdash; <a href="{{ url_for('users.signup') }}">Still need to sign up?</a>
-        </p>
-    </form>
+    </p>
     {% endif %}
 </div>
 

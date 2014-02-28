@@ -32,6 +32,7 @@ assets.register('essays_css',
         "scss/essays.scss",
         "scss/essays_print.scss",
         filters="scss,cssmin",
+        depends="scss/shared/*.scss",
         output="gen/essays.css"
     )
 )
@@ -40,6 +41,16 @@ assets.register('signup_css',
     Bundle(
         "scss/signup.scss",
         filters="scss,cssmin",
+        depends="scss/shared/*.scss",
+        output="gen/signup.css"
+    )
+)
+
+assets.register('login_css',
+    Bundle(
+        "scss/login.scss",
+        filters="scss,cssmin",
+        depends="scss/shared/*.scss",
         output="gen/signup.css"
     )
 )
@@ -48,6 +59,7 @@ assets.register('editor_css',
     Bundle(
         "scss/editor.scss",
         filters="scss,cssmin",
+        depends="scss/shared/*.scss",
         output="gen/editor.css"
     )
 )
@@ -56,6 +68,7 @@ assets.register('users_css',
     Bundle(
         "scss/users.scss",
         filters="scss,cssmin",
+        depends="scss/shared/*.scss",
         output="gen/users.css"
     )
 )
@@ -64,6 +77,7 @@ assets.register('splash_css',
     Bundle(
         "scss/splash.scss",
         filters="scss,cssmin",
+        depends="scss/shared/*.scss",
         output="gen/splash.css"
     )
 )
@@ -72,6 +86,7 @@ assets.register('terms-and-conditions_css',
     Bundle(
         "scss/terms-and-conditions.scss",
         filters="scss,cssmin",
+        depends="scss/shared/*.scss",
         output="gen/terms-and-conditions.css"
     )
 )
@@ -80,6 +95,7 @@ assets.register('settings_css',
     Bundle(
         "scss/settings.scss",
         filters="scss,cssmin",
+        depends="scss/shared/*.scss",
         output="gen/settings.css"
     )
 )
