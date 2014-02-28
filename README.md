@@ -8,5 +8,3 @@ Peernote in Python using Flask.
 ```bash
 pip install -r requirements.txt
 ```
-If you get complaints about PIL, run
-` pip install PIL --allow-external PIL --allow-unverified PIL `

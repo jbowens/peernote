@@ -1,0 +1,56 @@
+@import "shared/_form_default.scss";
+
+.wrapper {
+    background-color: $off-white-bg-color;
+}
+
+#login {
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-top: 10px;
+}
+
+.table-wrapper {
+    padding: 20px;
+    border: 1px solid #ddd;
+    width: 500px;
+    margin: auto;
+    background: white;
+    overflow: auto;
+    position: relative;
+}
+
+#welcome {
+    width: 500px !important;
+    margin:auto;
+    margin-bottom: 30px;
+}
+
+table {
+    width:426px;
+    margin: auto;
+    margin-bottom: 20px !important;
+    td {
+        width: 100px !important;
+    }
+}
+
+.forgot-password {
+    margin: auto;
+    margin-top: 0px !important;
+    display: block;
+    position: absolute;
+    top:245px;
+
+    a {
+        display:block;
+        color: #888;
+        float: left;
+        clear: both;
+        margin-right: 20px;
+    }
+
+    a:hover {
+        color: #999;
+    }
+}
