@@ -27,6 +27,9 @@
         <div class="button-field">
             <input type="submit" value="Log in" />
         </div>
+        <p class="forgot-password">
+        <a href="{{ url_for('users.forgot_password') }}">Forgot your password?</a> &mdash; <a href="{{ url_for('users.signup') }}">Still need to sign up?</a>
+        </p>
     </form>
     {% endif %}
 </div>
