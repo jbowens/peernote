@@ -13,15 +13,12 @@ def email_uniqueness(form, field):
     if User.is_email_used(field.data.lower()):
         raise ValidationError('That email is already registered.')
 
-def username_uniqueness(form, field):
-    if User.is_username_used(field.data):
-        raise ValidationError('That username is already registered.')
-
 class SignUpForm(Form):
-    username = TextField('username', validators=[DataRequired(),
-                                                 Length(max=30),
-                                                 username_uniqueness])
     email = TextField('email', validators=[DataRequired(), Email(), email_uniqueness])
+    first_name = TextField('first_name', validators=[DataRequired(),
+                                                 Length(max=30)])
+    last_name = TextField('last_name', validators=[DataRequired(),
+                                                 Length(max=30)])
     pw = PasswordField('pw', validators=[DataRequired()])
     pw_again = PasswordField('pw_again', validators=[DataRequired(), EqualTo('pw')])
 
@@ -47,8 +44,9 @@ def signup():
     if request.method == 'POST' and form.validate_on_submit() and captcha_passed:
         # Create the user in the database
         newuser = User()
-        newuser.username = request.form['username']
         newuser.email = request.form['email'].lower()
+        newuser.first_name = request.form['first_name']
+        newuser.last_name = request.form['last_name']
         newuser.set_password(request.form['pw'])
         db.session.add(newuser)
         db.session.commit()

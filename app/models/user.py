@@ -3,8 +3,9 @@ from app import db
 
 class User(db.Model):
     uid = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(30), unique=True)
     email = db.Column(db.String(80), unique=True)
+    first_name = db.Column(db.String(30))
+    last_name = db.Column(db.String(30))
     password = db.Column(db.String(128))
     may_email = db.Column(db.Boolean)
     is_admin = db.Column(db.Boolean)
@@ -27,12 +28,13 @@ class User(db.Model):
         """
         return check_password_hash(self.password, password)
 
+    def last_initial(self):
+        """
+        Returns the first letter of the user's last name.
+        """
+        return self.last_name[0]
+
     @staticmethod
     def is_email_used(email):
         user = User.query.filter_by(email=email).first()
-        return user is not None
-
-    @staticmethod
-    def is_username_used(username):
-        user = User.query.filter_by(username=username).first()
         return user is not None

@@ -12,4 +12,4 @@ def index():
     if g.user == None:
         return render_template('index.html')
     else:
-        return show_user_profile(g.user.username)
+        return show_user_profile(g.user.uid)
