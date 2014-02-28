@@ -9,6 +9,7 @@
 
 {% block content %}
 <div class="page-container top-margin bottom-margin settings">
+    <div class="forms-wrapper">
     <h1>Basic Info</h1>
 
     {% include "shared/flashes.html" %}
@@ -75,7 +76,7 @@
         <p>Please email me when...</p>
         <table class="mail-settings-table">
             <tr class="field">
-                <td>
+                <td class="mail">
                     <label>Someone finishes reviewing my document</label>
                 </td>
                 <td>
@@ -83,7 +84,7 @@
                 </td>
             </tr>
             <tr class="field">
-                <td>
+                <td class="mail">
                     <label>I receive a notification</label>
                 </td>
                 <td>
@@ -91,7 +92,7 @@
                 </td>
             </tr>
             <tr class="field">
-                <td>
+                <td class="mail">
                     <label>Someone requests a review from me</label>
                 </td>
                 <td>
@@ -108,12 +109,12 @@
         <p>Deleting your account will permanently delete all of your documents. This cannot be undone.</p>
         <table>
             <tr class="field">
-                <td></td>
                 <td>
                     <input class="button-field" type="submit" value="I understand, delete my account" />
                 </td>
             </tr>
         </table>
     </form>
+</div>
 </div>
 {% endblock %}

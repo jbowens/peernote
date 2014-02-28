@@ -1,8 +1,19 @@
 @import "shared/_form_default.scss";
 
-.mail-settings-table {
-    td {
-        width:  250px;
-    }    
+.mail {
+    width: 300px !important;
+}
+
+.wrapper {
+
+    background-color: $off-white-bg-color;
+
+    .forms-wrapper {
+        background-color: white;
+        border: 1px solid $generic-divider-color;
+        padding: 40px;
+        position: relative;
+        bottom: 10px;
+    }
 }
 

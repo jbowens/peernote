@@ -14,6 +14,7 @@ assets.register('base_css',
         "scss/shared/_footer.scss",
         "scss/shared/_base.scss",
         "scss/errors.scss",
+        depends="scss/shared/*.scss",
         filters="scss,cssmin",
         output="gen/base.css",
     )
