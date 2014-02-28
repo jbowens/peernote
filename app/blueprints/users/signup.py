@@ -66,4 +66,4 @@ def signup():
         current_app.logger.debug('Logging in as uid = %d', session['uid'])
         return redirect('/')
         
-    return render_template('users/signup.html', form=form)
+    return render_template('users/signup.html', form=form,page_title="Welcome")

@@ -1,4 +1,11 @@
 {% extends 'base/application_main.html' %}
+{% block styles %}
+    {{ super() }}
+    {% assets "signup_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+{% endblock %}
+
 {% block content %}
 
 <div class="page-container top-margin bottom-margin">
@@ -16,34 +23,55 @@
     <h1>Sign up</h1>
     <form method="post">
         {{ form.csrf_token }}
-
-        <div class="field">
-            <label for="signup_username">Username</label>
-            <input type="text" id="signup_username" name="username" />
-        </div>
-        <div class="field">
-            <label for="signup_email">Email</label>
-            <input type="text" id="signup_email" name="email" />
-        </div>
-        <div class="field">
-            <label for="signup_password">Password</label>
-            <input type="password" id="signup_password" name="pw" />
-        </div>
-        <div class="field">
-            <label for="signup_password_confirm">Password again</label>
-            <input type="password" id="signup_password_confirm" name="pw_again" />
-        </div>
-        <div class="field captcha">
-            <h3>Are you human?</h3>
-            <img src="/captcha.png" /> <input type="text" name="cover" />
-            <p class="explanation">
-            Please enter the text in the image to the left. Case does not matter. Words should be
-            separated by spaces.
-            </p>
-        </div>
-        <div class="button-field">
-            <input type="submit" value="Sign up" />
-        </div>
+        <table>
+            <tr class="field">
+                <td>
+                    <label for="signup_username">Username</label>
+                </td>
+                <td>
+                    <input class="textfield" type="text" id="signup_username" name="username" />
+                </td>
+            </tr>
+            <tr class="field">
+                <td>
+                    <label for="signup_email">Email</label>
+                </td>
+                <td>
+                    <input class="textfield" type="text" id="signup_email" name="email" />
+                </td>
+            </tr>
+            <tr class="field">
+                <td>
+                    <label for="signup_password">Password</label>
+                </td>
+                <td>
+                    <input class="textfield" type="password" id="signup_password" name="pw" />
+                </td>
+            </tr>
+            <tr class="field">
+                <td>
+                    <label for="signup_password_confirm">Password again</label>
+                </td>
+                <td>
+                    <input class="textfield" type="password" id="signup_password_confirm" name="pw_again" />
+                </td>
+            </tr>
+        </table>
+            <div class="field captcha">
+                <p>Are you human?</p>
+                <img src="/captcha.png" />
+                <input class="textfield" type="text" name="cover" />
+                <p class="explanation">
+                    Please enter the text in the image to the left. Case does not matter. Separate words by spaces.
+                </p>
+            </div>
+            <table>
+            <tr>
+                <td>
+                    <input class="button-field" type="submit" value="Sign up" />
+                </td>
+            </tr>
+        </table>
     </form>
     {% endif %}
 </div>
