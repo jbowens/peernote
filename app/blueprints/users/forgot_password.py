@@ -47,14 +47,9 @@ def forgot_password():
     if request.method == 'POST' and request.form.get('user_to_recover'): 
         
         uinput = request.form.get('user_to_recover')
-        username = None
 
-        if validate_email(uinput):
-            # They entered an email. Get the user obj by the email.
-            user_to_recover = User.query.filter_by(email=uinput.lower()).first() 
-        else:
-            # They entered a username. Get the user obj by the username.
-            user_to_recover = User.query.filter_by(username=uinput).first()
+        # They entered an email. Get the user obj by the email.
+        user_to_recover = User.query.filter_by(email=uinput.lower()).first() 
 
         if user_to_recover:
             # Generate a password recovery token for the user.
@@ -70,6 +65,6 @@ def forgot_password():
             email_sent = True
         else:
             # No such user exists. Print an error.
-            flash('No user exists with the given ' + ('email address' if email else 'username') + '.')
+            flash('No user exists with the given email address exists.')
 
     return render_template('users/forgot_password.html', email_sent=email_sent, user_to_recover=user_to_recover)
