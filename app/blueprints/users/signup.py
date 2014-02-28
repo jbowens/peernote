@@ -36,7 +36,8 @@ def signup():
     # Check the captcha
     captcha_passed = False
     if request.method == 'POST':
-        if request.form.get('cover','').lower() == session.get('captcha_title').lower():
+        lowered_titles = [x.lower() for x in session.get('captcha_title')]
+        if request.form.get('cover','').lower() in lowered_titles:
             captcha_passed = True
         else:
             flash('The text in the image did not match.', 'error')
