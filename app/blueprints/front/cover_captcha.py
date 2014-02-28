@@ -1,4 +1,5 @@
-import random, json, Image
+import random, json
+from PIL import Image
 from cStringIO import StringIO
 from flask import Response, session, current_app, send_file
 from app.blueprints.front import front
