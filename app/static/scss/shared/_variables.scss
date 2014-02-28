@@ -2,15 +2,28 @@
 /*                GLOBAL VARIABLES             */
 /***********************************************/
 
+
+/******** Sizing *********/
+$page-width: 940px; // this is the width of all pages
 $radius: 2px;
-$theme-color: #a6538d;
-$theme-color-hover: #B45B99;
+
+/******** Fonts and Font Sizes ********/
 $large-font: 30pt;
 $large-font-2: 20pt;
 $large-explanation: 15pt;  
 $small-explanation: 13pt;
 $button-font-size: 10pt;
-$white-color: #e5e5e5;
 
-$off-white-bg-color: #f5f5f5;
-$generic-divider-color: #dcdcdc;
+/******** Colors *********/
+$main-dark: rgb(30,30,30);       // this is the main dark color (think nav bar)
+$white-color: #e5e5e5;           // this is an off-white text color
+$off-white-bg-color: #f5f5f5;    // this is a neutral light background shade for divs
+$generic-divider-color: #dcdcdc; // use this to divide white divs
+//$theme-color: #a072db;//#9653ad;//#a6538d;           // this is our site's theme color!
+$theme-color-hover: #B45B99; 
+$background: white;              // this is the main bg to our entire site. it's white yo!
+$main-color-1: #a06acc;//#956acc;
+$main-color-2: #b06acc;
+$main-color-2-hover: #AB7BD1;
+$main-color-hover: #b17ef2;
+

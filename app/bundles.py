@@ -68,6 +68,15 @@ assets.register('terms-and-conditions_css',
     )
 )
 
+assets.register('settings_css',
+    Bundle(
+        "scss/settings.scss",
+        filters="scss,cssmin",
+        output="gen/settings.css"
+    )
+)
+
+
 """
 JAVASCRIPT BUNDLES
 """

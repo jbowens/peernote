@@ -1,7 +1,7 @@
-@import "bootstrap.scss";
+@import "shared/_variables.scss";
 
 nav {
-    background-color: $main;
+    background-color: $main-dark;
     height: 50px;
     line-height: 50px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.4);
@@ -10,7 +10,7 @@ nav {
     .header-container {
 
         position: relative;
-        width: 95%;
+        width: $page-width;
         margin: 0 auto;
 
         .nav-left {
@@ -21,35 +21,25 @@ nav {
                 #eraser{
                     width: 50px;
                     height: 10px;
-                    background-color: $accent-alt;
+                    background-color: $main-color-2;
                 }
 
                 #metal {
                     width: 50px;
                     height: 3px;
                     margin-bottom: 1px;
-                    background-color: $accent-alt;
+                    background-color: $main-color-2;
                 }
 
                 #pencil {
                     width: 50px;
                     height: 40px;
-                    background-color: $accent-alt;
+                    background-color: $main-color-2;
                     line-height: 34px;
                     text-align: center;
-                    color: $main;
+                    color: $main-dark;
                     font-size: 24px;
                     font-family: 'Pacifico', cursive;
-                }
-
-                #tip {
-                    width: 0;
-                    height: 0;
-                    border-left: 25px solid transparent;
-                    border-right: 25px solid transparent;
-                    border-top: 13px solid $accent-alt;
-					position: relative;
-					z-index: 1000;
                 }
             }
 
@@ -57,12 +47,11 @@ nav {
                 margin-left: 70px;
                 letter-spacing: 5px;
                 font-weight: 100;
-                color: $base;
+                color: $white-color;
                 &:hover {
-                    color: $base;
+                    color: white;
                 }
             }
-
         }
 
         .nav-right {
@@ -70,11 +59,11 @@ nav {
             float: right;
 
             a {
-                color: $base;
+                color: $white-color;
                 font-weight: 100;
 
                 &:hover {
-                    color: $accent-light;
+                    color: white;
                 }
             }
     
@@ -112,11 +101,10 @@ nav {
                 }
             }
         }
-
        
         .dropdown {
             background-color: $background;
-            border: 1px solid $border;
+            border: 1px solid $generic-divider-color;
             position: absolute;
             z-index: 1001;
             line-height: 20px;
@@ -135,9 +123,8 @@ nav {
     border-bottom: 1px #d2d2d2 solid;
     overflow: auto;
 
-
     .page-width {
-        width: 95%;
+        width: $page-width;
         margin: auto;
         padding: 10px;
         height: 40px;
@@ -152,7 +139,7 @@ nav {
     .new-doc-button {
         float: left;
         padding: 7px;
-        background: $accent-alt;
+        background: $main-color-2;
         border-radius: 3px;
         color: white;
         margin-top: 8px;

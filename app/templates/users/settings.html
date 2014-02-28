@@ -1,34 +1,119 @@
 {% extends 'base/application_main.html' %}
 
+{% block styles %}
+    {{ super() }}
+    {% assets "settings_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+{% endblock %}
+
 {% block content %}
 <div class="page-container top-margin bottom-margin settings">
-    <h1>Settings</h1>
-
-    <p>Change yo settings here.</p>
+    <h1>Basic Info</h1>
 
     {% include "shared/flashes.html" %}
 
     <form method="post">
         {% include "shared/csrf.html" %}
-        <div class="field">
-            <label for="new_username">Username</label>
-            <input type="text" id="new_username" name="username" value="{{ user.username }}" />
-        </div>
-        <div class="field">
-            <label for="new_email">Email</label>
-            <input type="text" id="new_email" name="email" value="{{ user.email }}" />
-        </div>
-        <div class="field">
-            <label for="new_password">New password</label>
-            <input type="password" id="new_password" name="password" />
-        </div>
-        <div class="field">
-            <label for="new_password_again">New password again</label>
-            <input type="password" id="new_password_again" name="password_again" />
-        </div>
-        <div class="button-field">
-            <input type="submit" value="Save" />
-        </div>
+        <table>
+            <tr class="field">
+                <td>
+                    <label for="new_name">Name</label>
+                </td>
+                <td>
+                    <input class="textfield" type="text" id="new_name" name="name" />
+                </td>
+            </tr>
+            <tr class="field">
+                <td>
+                    <label for="new_username">Username (Required)</label>
+                </td>
+                <td>
+                    <input class="textfield" type="text" id="new_username" name="username" value="{{ user.username }}" />
+                </td>
+            </tr>
+            <tr class="field">
+                <td>
+                    <label for="new_email">Email (Required)</label>
+                </td>
+                <td>
+                    <input type="text" class="textfield" id="new_email" name="email" value="{{ user.email }}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="button-field" type="submit" value="Update Info" />
+                </td>
+            </tr>
+
+        </table>
+        <h1>Change Password</h1>
+        <table>
+            <tr class="field">
+                <td>
+                    <label for="new_password">New Password</label>
+                </td>
+                <td>
+                    <input type="password" class="textfield" id="new_password" name="password" />
+                </td>
+            </tr>
+            <tr class="field">
+                <td>
+                    <label for="new_password_again">New Password Again</label>
+                </td>
+                <td>
+                    <input type="password" class="textfield" id="new_password_again" name="password_again" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="button-field" type="submit" value="Update Password" />
+                </td>
+            </tr>
+        </table>
+        <h1>Mail Settings</h1>
+        <p>Please email me when...</p>
+        <table class="mail-settings-table">
+            <tr class="field">
+                <td>
+                    <label>Someone finishes reviewing my document</label>
+                </td>
+                <td>
+                    <input class="checkbox" type="checkbox" />
+                </td>
+            </tr>
+            <tr class="field">
+                <td>
+                    <label>I receive a notification</label>
+                </td>
+                <td>
+                    <input class="checkbox" type="checkbox" />
+                </td>
+            </tr>
+            <tr class="field">
+                <td>
+                    <label>Someone requests a review from me</label>
+                </td>
+                <td>
+                    <input class="checkbox" type="checkbox" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="button-field" type="submit" value="Update Info" />
+                </td>
+            </tr>
+        </table>
+        <h1> Delete Account</h1>
+        <p>Deleting your account will permanently delete all of your documents. This cannot be undone</p>
+        <table>
+            <tr class="field">
+                <td></td>
+                <td>
+                    <input class="button-field" type="submit" value="I understand, delete my account" />
+                </td>
+            </tr>
+        </table>
     </form>
 </div>
 {% endblock %}

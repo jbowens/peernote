@@ -52,13 +52,19 @@ ul.essay-container {
     }
 }
 
-/* What the fuck is this? */
-/*.sidenav {
-    #upload-btn {
-        display: block;
-        width: 80px;
+
+/* override navbar css */
+.header-container {
+    width: 100% !important;
+    
+    .nav-right {
+        margin-right: 40px;
     }
-}*/
+    .nav-left {
+        margin-left: 30px;
+    }
+}
+
 
 /* This is normally so footer sticks to bottom. but 
  I need this div to be 100% hegiht so its children
