@@ -1,3 +1,4 @@
+from datetime import datetime
 import random
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
@@ -11,6 +12,7 @@ class User(db.Model):
     password = db.Column(db.String(128))
     may_email = db.Column(db.Boolean)
     is_admin = db.Column(db.Boolean)
+    signup_date = db.Column(db.DateTime, default=datetime.now)
 
     def __init__(self):
         self.may_email = True

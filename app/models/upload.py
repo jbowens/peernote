@@ -1,3 +1,4 @@
+from datetime import datetime
 from app import db
 
 class Upload(db.Model):
@@ -9,3 +10,4 @@ class Upload(db.Model):
     size = db.Column(db.Integer, nullable=False)
     mimetype = db.Column(db.String(80))
     filename = db.Column(db.String(100))
+    upload_date = db.Column(db.DateTime, default=datetime.now)

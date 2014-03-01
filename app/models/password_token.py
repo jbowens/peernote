@@ -13,11 +13,8 @@ class PasswordToken(db.Model):
     token = db.Column(db.String(80), unique=True)
     uid = db.Column(db.Integer, db.ForeignKey('user.uid'), nullable=False)
     email = db.Column(db.String(80))
-    date_sent = db.Column(db.DateTime)
+    date_sent = db.Column(db.DateTime, default=datetime.now)
     used = db.Column(db.Boolean)
-
-    def __init__(self):
-        self.date_sent = datetime.utcnow()
 
     def is_valid(self):
         return not self.used and not ((datetime.now() - self.date_sent) > token_life_length)

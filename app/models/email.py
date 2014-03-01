@@ -7,4 +7,4 @@ class Email(db.Model):
     signup_date = db.Column(db.DateTime)
 
     def __init__(self):
-      self.signup_date = datetime.utcnow()
+      self.signup_date = datetime.now
