@@ -63,6 +63,34 @@ peernoteNS.essays.save = function() {
   }
 };
 
+/**
+ * Saves a snapshot.
+ */
+peernoteNS.essays.snapshot = function(is_auto) {
+  var $title = $('#essay-title');
+  var title = $title.text();
+  var text = peernoteNS.essays.extractText();
+
+  var params = {
+    title: title,
+    text: text,
+    uid: peernoteNS.essays.uid,
+    did: peernoteNS.essays.did
+  };
+
+  if (typeof is_auto != 'undefined')
+    params['auto'] = !!is_auto;
+
+  $.post('/api/snapshot', params, function(data) {
+    if (data.status == "success") {
+      // TODO: Make this not an alert. -.-
+      alert('Snapshot saved.');
+    } else {
+      console.log("Error saving snapshot: " + data['error']);
+    }
+  });
+};
+
 peernoteNS.essays.keydown = function(e) {
   // We want tabs to be treated as a literal tab characters,
   // not for navigation.
@@ -100,7 +128,15 @@ peernoteNS.essays.initReviewButton = function() {
     // pop up dialog for sending an email
     $("#send-review-shadow").css("display","table");
     $("html, body").css({"overflow": "hidden"}); // stop scrolling
-  })
+  });
+};
+
+peernoteNS.essays.initToolkit = function() {
+  $toolkit = $('.toolkit');
+  $toolkit.find('.archive').click(function(e) {
+    e.preventDefault();
+    peernoteNS.essays.snapshot(false);
+  });
 };
 
 peernoteNS.essays.initEmailPopup = function() {
@@ -242,4 +278,5 @@ $(document).ready(function(e) {
   peernoteNS.essays.initEmailPopup();
   peernoteNS.essays.toolDisplayer();
   peernoteNS.essays.initTimeline();
+  peernoteNS.essays.initToolkit();
 });

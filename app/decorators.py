@@ -16,7 +16,7 @@ def json_login_required(f):
     def decorated_function(*args, **kwargs):
         if g.user == None: 
             # This user is not logged in. Print a json error payload.
-            return jsonify(status='error', message='You must be logged in to do that.'), 403
+            return jsonify(status='error', error='You must be logged in to do that.'), 403
         return f(*args, **kwargs)
     return decorated_function
 
