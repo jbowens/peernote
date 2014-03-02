@@ -5,6 +5,9 @@ from app.models.snapshot import Snapshot
 from app.models.draft import Draft
 from app import db
 
+"""
+CURRENTLY UNUSED
+"""
 @api.route('/snapshot', methods=['POST'])
 @json_login_required
 def save_snapshot():

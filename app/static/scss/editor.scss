@@ -172,6 +172,7 @@ ul.essay-container {
                 }
             }
 
+
             li:hover {
                 background-color: black;
                 * {
@@ -179,6 +180,11 @@ ul.essay-container {
                 }
             }
 
+            li.active-draft {
+                * {
+                    color: $main-color-2;
+                }
+            }
         }
     }
 
