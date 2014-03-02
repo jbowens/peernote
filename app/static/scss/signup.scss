@@ -8,9 +8,52 @@
     border: 1px $generic-divider-color solid;
     padding: 50px;    
     padding-top: 40px;
+    padding-bottom: 30px;
     background: white;
     position: relative;
     bottom: 10px;
 }
 
+table {
+    width: 480px;
+    margin: auto;
+    margin-bottom:10px !important;
 
+    td {
+        width: 200px !important;
+    }
+}
+
+h1.sign-up {
+    width: 480px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.page-container {
+    width: 650px;
+}
+
+.captcha {
+    width: 480px;
+    margin: auto;
+
+    .you-human-textfield {
+        float: right;
+        margin-right: 33px;
+    }
+
+    img {
+        float: left;
+    }
+
+    .explanation {
+        margin-top: 15px;
+        width: 249px;
+        float: right;
+    }
+}
+
+.button-field {
+    padding: 10px 25px 10px 25px !important;
+}

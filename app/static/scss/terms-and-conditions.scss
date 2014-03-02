@@ -1,24 +1,47 @@
 @import "shared/_variables.scss";
 
+$terms-height: 4325px;
+$privacy-height: 2855px;
+
 html, body {
     height: 100%;
 }
 
 .content-wrapper-terms {
-    height: 4065px;
+    height: $terms-height;
+    width: $page-width;
+    margin: auto;
 }
 
 .content-wrapper-privacy {
-    height: 2720px;
+    height: $privacy-height;
+    width: $page-width;
+    margin: auto;
+}
+
+.offwhite-bg {
+    width: 50%;
+    float: left;
+    height: $terms-height;
+    position: absolute;
+    left: 0;
+    background-color: $off-white-bg-color;
+    z-index: 1;
+}
+
+.privacy-bg {
+    height: $privacy-height;
 }
 
 .content-wrapper {
     overflow: auto;
+    position: relative;
+    z-index: 10;
 
     .help-center-nav {
         float: left;
         background-color: #f5f5f5;
-        width: 250px;
+        width: 173px;
         height: 100%;
 
         .nav-wrapper {
@@ -48,10 +71,11 @@ html, body {
 
     .content {
         float: left;
-        width: 800px;
+        width: 726px;
         border-left: 1px solid #dcdcdc;
         padding: 40px;
-
+        padding-right: 0px;
+        background-color: white;
 
         h1 {
             font-size: 30pt;
@@ -64,17 +88,17 @@ html, body {
         }
 
         .term {
-            width: 800px;
+            width: 726px;
             margin-bottom: 35px;
 
             li {
                 margin-bottom: 20px;
+
                 h3 {
                     font-weight: bold;
                     margin-bottom: 5px;
                 }
             }
-
 
             h2 {
                 color: $main-color-2;
