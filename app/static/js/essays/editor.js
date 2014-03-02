@@ -226,12 +226,12 @@ peernoteNS.essays.selectDraft = function(event) {
         // current draft
         peernoteNS.essays.enable_autosave = true;
         $('.status-line').text('');
-        $('li.next-draft').show();
+        $('li.next-draft').slideDown();
       } else {
         // old draft
         peernoteNS.essays.enable_autosave = false;
         $('.status-line').text('Saving disabled for old drafts');
-        $('li.next-draft').hide();
+        $('li.next-draft').slideUp();
       }
     }
   });
