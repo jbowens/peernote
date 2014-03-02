@@ -41,6 +41,7 @@ from app.models.upload import Upload
 from app.models.draft import Draft
 from app.models.email import Email
 from app.models.password_token import PasswordToken
+from app.models.snapshot import Snapshot
 
 # Setup all the blueprints
 from blueprints.front import front

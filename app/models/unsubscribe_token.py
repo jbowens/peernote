@@ -6,11 +6,8 @@ class UnsubscribeToken(db.Model):
     utid = db.Column(db.Integer, primary_key=True)
     token = db.Column(db.UnicodeText, unique=True)
     email = db.Column(db.String(80))
-    sent_date = db.Column(db.DateTime)
+    sent_date = db.Column(db.DateTime, default=datetime.now)
     email_type = db.Column(db.String(80))
-
-    def __init__(self):
-        self.sent_date = datetime.utcnow()
 
     @staticmethod
     def create(email, email_type):

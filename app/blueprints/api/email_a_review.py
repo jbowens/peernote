@@ -10,7 +10,7 @@ from app.mailer import Mailer
 from app.mailer.templates.review_a_draft import ReviewADraft
 
 """
-Given a draft, sends it to an email for review.
+Given a unfinalized draft, sends it to an email for review.
 Finalizes the draft and constructs a new one.
 
 Expects:
@@ -30,7 +30,7 @@ def email_a_review():
 
         draft = Draft.query.filter_by(did=did).first()
 
-        if not draft or draft.uid != g.user.uid:
+        if not draft or draft.uid != g.user.uid or draft.finalized:
             return jsonify(error="Bad params"), 400
 
         if not validate_email(email):

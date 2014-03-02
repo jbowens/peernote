@@ -63,6 +63,33 @@ peernoteNS.essays.save = function() {
   }
 };
 
+/**
+ * Creates a new draft
+ */
+peernoteNS.essays.createNextDraft = function() {
+  var params = {
+    uid: peernoteNS.essays.uid,
+    did: peernoteNS.essays.did
+  };
+
+  $.post('/api/next_draft', params, function(data) {
+    if (data.status == "success") {
+
+      // Next draft created in backend, update timeline to show new draft
+      peernoteNS.essays.drafts.push(data.did);
+      var $newLi = $('<li> <a> Draft ' + data.version + '</a> </li>');
+      $newLi.hide();
+      $('.timeline ul').append($newLi);
+      $newLi.slideDown();
+      $newLi.click({i: peernoteNS.essays.drafts.length - 1, clicked: $newLi}, peernoteNS.essays.selectDraft);
+
+      $newLi.click();
+    } else {
+      console.log("Error creating new draft: " + data['error']);
+    }
+  });
+};
+
 peernoteNS.essays.keydown = function(e) {
   // We want tabs to be treated as a literal tab characters,
   // not for navigation.
@@ -100,7 +127,15 @@ peernoteNS.essays.initReviewButton = function() {
     // pop up dialog for sending an email
     $("#send-review-shadow").css("display","table");
     $("html, body").css({"overflow": "hidden"}); // stop scrolling
-  })
+  });
+};
+
+peernoteNS.essays.initToolkit = function() {
+  $toolkit = $('.toolkit');
+  $toolkit.find('.next-draft').click(function(e) {
+    e.preventDefault();
+    peernoteNS.essays.createNextDraft();
+  });
 };
 
 peernoteNS.essays.initEmailPopup = function() {
@@ -151,44 +186,56 @@ peernoteNS.essays.initEmailPopup = function() {
  */
 peernoteNS.essays.initTimeline = function() {
   var $draftList = $('.timeline ul li');
+
+  $draftList.last().addClass('active-draft');
+
   $draftList.each(function(i) {
-
     // TODO: probably should debounce...
-    $(this).click(function() {
-      var cur_did = peernoteNS.essays.drafts[i];
-      if (peernoteNS.essays.did == cur_did) {
-        return;
+    $(this).click({i: i, clicked: $(this)}, peernoteNS.essays.selectDraft);
+  });
+}
+
+peernoteNS.essays.selectDraft = function(event) {
+  var i = event.data.i;
+  var clicked = event.data.clicked;
+  $('li.active-draft').removeClass('active-draft');
+  clicked.addClass('active-draft');
+
+  var cur_did = peernoteNS.essays.drafts[i];
+  if (peernoteNS.essays.did == cur_did) {
+    return;
+  }
+
+  params = {
+    did: cur_did,
+    uid: peernoteNS.essays.uid
+  }
+
+
+  $.post('/api/fetch_draft', params, function(data) {
+    if (data.status == "success") {
+      peernoteNS.essays.did = cur_did;
+
+      // because content editables are weird, start from scratch
+      $('.content').empty();
+      $('.content').append($("<h1 id='essay-title' class='essay-title'>"));
+      $('.content').append($("<p class='text-container'>"));
+      $('#essay-title').text(data.title);
+      $('.text-container').text(data.text);
+
+      // disable autosaving / hide next draft button if this is an old draft
+      if (peernoteNS.essays.drafts.length == i + 1) {
+        // current draft
+        peernoteNS.essays.enable_autosave = true;
+        $('.status-line').text('');
+        $('li.next-draft').slideDown();
+      } else {
+        // old draft
+        peernoteNS.essays.enable_autosave = false;
+        $('.status-line').text('Saving disabled for old drafts');
+        $('li.next-draft').slideUp();
       }
-
-      params = {
-        did: cur_did,
-        uid: peernoteNS.essays.uid
-      }
-
-      $.post('/api/fetch_draft', params, function(data) {
-        if (data.status == "success") {
-          peernoteNS.essays.did = cur_did;
-
-          // because content editables are weird, start from scratch
-          $('.content').empty();
-          $('.content').append($("<h1 id='essay-title' class='essay-title'>"));
-          $('.content').append($("<p class='text-container'>"));
-          $('#essay-title').text(data.title);
-          $('.text-container').text(data.text);
-
-          // disable autosaving if this is an old draft
-          if (peernoteNS.essays.drafts.length == i + 1) {
-            peernoteNS.essays.enable_autosave = true;
-            $('.status-line').text('');
-            $('#review.btn').css('visibility', 'visible');
-          } else {
-            peernoteNS.essays.enable_autosave = false;
-            $('.status-line').text('Saving disabled for old drafts');
-            $('#review.btn').css('visibility', 'hidden');
-          }
-        }
-      });
-    });
+    }
   });
 }
 
@@ -242,4 +289,5 @@ $(document).ready(function(e) {
   peernoteNS.essays.initEmailPopup();
   peernoteNS.essays.toolDisplayer();
   peernoteNS.essays.initTimeline();
+  peernoteNS.essays.initToolkit();
 });

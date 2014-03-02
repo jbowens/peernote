@@ -1,4 +1,5 @@
 from flask import request, render_template, current_app, jsonify, g
+from app.decorators import json_login_required
 from app.blueprints.api import api
 from app.models.draft import Draft
 from app import db
@@ -13,6 +14,7 @@ title: new title for draft
 text: new text for draft
 """
 @api.route('/save_draft', methods=['POST'])
+@json_login_required
 def save_draft():
     current_app.logger.debug('saving draft')
 

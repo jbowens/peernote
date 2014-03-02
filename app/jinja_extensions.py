@@ -11,7 +11,8 @@ def inject_user_data():
         'user': g.user,
         'is_logged_in': g.user is not None,
         'server_host': app.config.get('SERVER_HOST'),
-        'csrf_token': g.csrf_token 
+        'csrf_token': g.csrf_token,
+        'is_production': app.config.get('IS_PRODUCTION')
     }
     return d
 

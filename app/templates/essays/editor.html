@@ -57,19 +57,19 @@
                 <div class="toolkit-region toolkit-region-dark">
                     <h2>DOC MANAGER</h2>
                     <ul>
-                        <li>
+                        <li class="new">
                             <i class="fa fa-plus"></i> New Document
                         </li>
-                        <li>
+                        <li class="open">
                             <i class="fa fa-folder-open folder-button"></i> Open
                         </li>
-                        <li>
-                            <i class="fa fa-archive"></i> Archive Draft
+                        <li class="next-draft">
+                            <i class="fa fa-archive"></i> Next Draft
                         </li>
-                        <li>
+                        <li class="delete">
                             <i class="fa fa-trash-o"></i> Delete Document
                         </li>
-                        <li>
+                        <li class="print">
                             <a href="{{ url_for('essays.print_essay', essayid=current_essay.eid) }}" target="_blank">
                                 <i class="fa fa-print"></i>Print
                             </a>
