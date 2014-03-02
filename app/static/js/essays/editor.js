@@ -77,8 +77,10 @@ peernoteNS.essays.createNextDraft = function() {
 
       // Next draft created in backend, update timeline to show new draft
       peernoteNS.essays.drafts.push(data.did);
-      $('.timeline ul').append('<li> <a> Draft ' + data.version + '</a> </li>');
-      var $newLi = $('.timeline ul li').last();
+      var $newLi = $('<li> <a> Draft ' + data.version + '</a> </li>');
+      $newLi.hide();
+      $('.timeline ul').append($newLi);
+      $newLi.slideDown();
       $newLi.click({i: peernoteNS.essays.drafts.length - 1, clicked: $newLi}, peernoteNS.essays.selectDraft);
 
       $newLi.click();
