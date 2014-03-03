@@ -239,44 +239,62 @@ peernoteNS.essays.selectDraft = function(event) {
   });
 }
 
-
+/* Javascript to handle the showing and hiding of the toolkit and comment columns.
+ * Also javascript to keep the top toolbar centered when showing and hiding the 
+ * toolkit and comment columns 
+ */
 peernoteNS.essays.toolDisplayer = function() {
-    var open = true; // is toolkit open or closed
+    var toolkitOpen = true; // is toolkit open or closed
+    var commentsOpen = false;
+    var toolkitWidth = 250;
+    var commentsWidth = 350;
 
     // Set the width of the button panel dynamically so that it can stay centered
     var width = $(document).width();
     $(".buttons").css("width",(width-250) +"px");
-    $(".toolkit-open-button").click(toggleToolKit);
+    $(".toolkit-open-button").click(function() {
+        toolkitOpen = togglePane($(".main-panel-push"), toolkitOpen, toolkitWidth);   
+    });
 
+    $(".toolkit-comment-button").click(function() {
+        commentsOpen = togglePane($(".comment-panel-push"), commentsOpen, commentsWidth);   
+    });
+
+    // Make sure that top toolbar is always centered
     $(window).resize(function () {
         var width = $(document).width();
-        if (open) {
-            $(".buttons").css("width",(width-250) +"px");
+        if (toolkitOpen && commentsOpen) {
+            $(".buttons").css("width", (width - toolkitWidth - commentsWidth) +"px");
+        } else if (toolkitOpen) {
+            $(".buttons").css("width", (width-toolkitWidth) +"px");
+        } else if (commentsOpen) {
+            $(".buttons").css("width", (width-commentsWidth) +"px");
         } else {
             $(".buttons").css("width", width +"px");
         }
     });
 
-    // JS to open left column toolkit
-    function toggleToolKit() {
+    // JS to open and close panels
+    function togglePane($panel,isOpen, width) {
         var buttonPanelWidthSetting = $(".buttons").css("width");
         var buttonPanelWidth = parseInt(buttonPanelWidthSetting
             .substring(0,buttonPanelWidthSetting.length-2));
 
-        if (open) {
-            $(".main-panel-push").animate({width: "0px"}, {duration: 250, queue: true});
+        if (isOpen) {
+            $panel.animate({width: "0px"}, {duration: 300 });
             $(".buttons").animate(
-                    {width: (buttonPanelWidth+250) + "px"}, 
-                    {duration: 250, queue: true});
+                    {width: (buttonPanelWidth+width) + "px"}, 
+                    {duration: 300, queue: true});
+            console.log("touch closed");
         } else {
-            $(".main-panel-push").animate({width: "250px"}, {duration: 250, queue: false});
+            $panel.animate({width: width + "px"}, {duration: 300 });
             $(".buttons").animate(
-                    {width: (buttonPanelWidth-250) + "px"}, 
-                    {duration: 250, queue: false});
+                    {width: (buttonPanelWidth-width) + "px"}, 
+                    {duration: 300, queue: false});
+            console.log("touch open");
         }
-        open = !open;
+        return !isOpen;
     }
-
 }
 
 $(document).ready(function(e) {

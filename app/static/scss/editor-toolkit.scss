@@ -1,0 +1,117 @@
+/* This is the SCSS for the toolkit (left column tools) of the editor */
+
+.tools {
+    height: 100%;
+    overflow: auto;
+    margin-top:50px;
+
+    .toolkit { // this is the left column of tools
+        background: #373737;
+        width: 510px;
+        float: left;
+        height: 100%;
+        position: fixed;
+        z-index: 20; //2000; <-- changed this value for testing
+
+        .toolkit-left {
+            height: 100%;
+            width: 250px;
+            //border: 1px red dashed;
+            float: left;
+        }
+
+        .toolkit-right {
+            width: 250px;
+            border: 1px red dashed;
+            height: 100%;
+            float: left;
+        }
+
+        .toolkit-region h2 {
+            color: #999;
+            font-weight: 500;
+            margin-left: 20px;
+        }   
+
+        .toolkit-region {
+            border-bottom: 1px solid #404040;
+            padding: 20px 0;
+        }
+
+        .toolkit-region-light {
+            background-color: #373737;
+            color: $white-color;
+            
+            .fa-arrow-right {
+                margin-left: 15px;
+            }
+
+            .fa-arrow-left {
+                margin-right: 15px;
+            }
+
+        }
+
+        .draft-number {
+            padding: 20px;
+            
+        }
+
+        .reviewer-button {
+            cursor: pointer;
+        }
+
+
+        .toolkit-region-dark {
+            background-color: #1e1e1e;
+            padding: 20px 0;
+            border-top: 1px solid #404040;
+        }
+
+        ul {
+            margin-top: 20px;
+
+            * {
+                font-size: 11pt;
+            }
+
+            li {
+                padding: 10px 20px;
+                cursor: pointer;
+                color: $white-color;
+                width: 210px;
+
+                a {
+                    color: $white-color;
+                    cursor: pointer;
+                    width: 100%;
+                    display: block;
+                    font-weight: 100;
+                }
+
+                i {
+                    margin-right: 12px;
+                    color: #999;
+                }
+
+                i.folder-button {
+                    margin-right: 8px;
+                }
+            }
+
+
+            li:hover {
+                background-color: black;
+                * {
+                    color: white;
+                }
+            }
+
+            li.active-draft {
+                * {
+                    color: $main-color-2;
+                }
+            }
+        }
+    }
+}
