@@ -87,7 +87,7 @@ ul.essay-container {
 
 /* invisible panel that pushes the comments panel open */
 .comment-panel-push {
-    width: 350px;
+    width: 0px;
     float: right;
     height: 100%;
     position: relative;
@@ -95,7 +95,7 @@ ul.essay-container {
 }
 
 .buttons {
-    width: 967px !important;
+    //width: 967px !important;
 }
 .comment-panel {
     width: 250px;
