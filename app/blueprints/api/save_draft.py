@@ -1,7 +1,9 @@
+from datetime import datetime
 from flask import request, render_template, current_app, jsonify, g
 from app.decorators import json_login_required
 from app.blueprints.api import api
 from app.models.draft import Draft
+from app.models.essay import Essay
 from app import db
 
 """
@@ -43,6 +45,10 @@ def save_draft():
             db.session.add(new_draft)
             db.session.commit()
             new_did = new_draft.did
+
+        # Update the last modified time.
+        Essay.query.filter_by(eid=draft.eid).update({'modified_date': datetime.now()})
+        db.session.commit()
 
         return jsonify(status='success', did=new_did)
     else:

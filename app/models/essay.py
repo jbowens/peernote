@@ -8,6 +8,7 @@ class Essay(db.Model):
     upload_id = db.Column(db.Integer, db.ForeignKey('upload.upload_id'), nullable=True)
     deleted = db.Column(db.Boolean, default=False)
     created_date = db.Column(db.DateTime, default=datetime.now)
+    modified_date = db.Column(db.DateTime, default=datetime.now)
 
     def get_paragraphs(self):
       """
