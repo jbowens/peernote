@@ -285,16 +285,69 @@ peernoteNS.essays.toolDisplayer = function() {
             $(".buttons").animate(
                     {width: (buttonPanelWidth+width) + "px"}, 
                     {duration: 300, queue: true});
-            console.log("touch closed");
         } else {
             $panel.animate({width: width + "px"}, {duration: 300 });
             $(".buttons").animate(
                     {width: (buttonPanelWidth-width) + "px"}, 
                     {duration: 300, queue: false});
-            console.log("touch open");
         }
         return !isOpen;
     }
+}
+
+
+/* JS to switch between tabs on the comments panel */
+peernoteNS.essays.initCommentTabs = function () {
+    var currentTabIsComments = true;
+    $noteTab = $(".tab-top-notes");
+    $commentTab = $(".tab-top-comments");
+    $commentTabContainer = $(".comment-tab-line-comments");
+    $noteTabContainer = $(".comment-tab-notes");
+
+    $noteTab.click(function() {
+        if (currentTabIsComments) {
+            $noteTab.addClass("tab-selected");
+            $noteTab.removeClass("tab-unselected");
+            $commentTab.removeClass("tab-selected");
+            $commentTab.addClass("tab-unselected");
+            $commentTabContainer.addClass("tab-container-unselected");
+            $commentTabContainer.removeClass("tab-container-selected");
+            $noteTabContainer.addClass("tab-container-selected");
+            $noteTabContainer.removeClass("tab-container-unselected");
+        }
+        currentTabIsComments = !currentTabIsComments;
+    });
+
+    $(".tab-top-comments").click(function() {
+        if (!currentTabIsComments) {
+            $noteTab.addClass("tab-unselected");
+            $noteTab.removeClass("tab-selected");
+            $commentTab.removeClass("tab-unselected");
+            $commentTab.addClass("tab-selected");
+            $commentTabContainer.addClass("tab-container-selected");
+            $commentTabContainer.removeClass("tab-container-unselected");
+            $noteTabContainer.addClass("tab-container-unselected");
+            $noteTabContainer.removeClass("tab-container-selected");
+        }
+        currentTabIsComments = !currentTabIsComments;
+    });
+
+}
+
+peernoteNS.essays.initTimeline = function () {
+    var isOpen = false;
+    $(".history-container").click(function() {
+        if (!isOpen) {
+            $(".page").animate({"margin-top": "80px"}, {duration: 100},{queue: true});
+            $(".draft-history").animate({"width": "100%"}, {duration: 400}, {queue: true});
+        } else {
+            $(".draft-history").animate({"width": "0"}, {duration: 400},{queue: true});
+            $(".page").animate({"margin-top": "80px"}, {duration: 100},{queue: true});
+        }
+        isOpen = !isOpen;
+    });
+
+
 }
 
 $(document).ready(function(e) {
@@ -304,6 +357,8 @@ $(document).ready(function(e) {
 
   peernoteNS.essays.initEditor();
   peernoteNS.essays.initReviewButton();
+  peernoteNS.essays.initCommentTabs();
+  peernoteNS.essays.initTimeline();
   peernoteNS.essays.initEmailPopup();
   peernoteNS.essays.toolDisplayer();
   peernoteNS.essays.initTimeline();

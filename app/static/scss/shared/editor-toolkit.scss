@@ -7,11 +7,11 @@
 
     .toolkit { // this is the left column of tools
         background: #373737;
-        width: 510px;
+        width: 300px;
         float: left;
         height: 100%;
         position: fixed;
-        z-index: 20; //2000; <-- changed this value for testing
+        z-index: 200; //20; <-- changed this value for testing
 
         .toolkit-left {
             height: 100%;
@@ -21,7 +21,7 @@
         }
 
         .toolkit-right {
-            width: 250px;
+            width: 50px;
             border: 1px red dashed;
             height: 100%;
             float: left;

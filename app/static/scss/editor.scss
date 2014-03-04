@@ -1,7 +1,6 @@
 @import "bootstrap.scss";
 @import "shared/_variables.scss";
 @import "shared/_mixins.scss";
-@import "editor-toolkit.scss";
 
 body, html {
     height: 100%;
@@ -107,16 +106,22 @@ ul.essay-container {
     z-index: 20; //2000; <-- changed this value for testing
     right:0;
     
+    .tab-container-selected {
+        z-index: 100;
+    }   
+
     .comments-panel-tab {
         height: 100%;
         position: absolute;
         width: 350px;
         left: 0px;
-        top: 00px;
+        top: 50px;
 
         .tab-content, .tab-top {
             float: left;
             clear: both;
+            position: relative;
+            top: -50px;
         }
 
         $tab-width: 100px;
@@ -125,7 +130,6 @@ ul.essay-container {
             width: $tab-width;
             height: 35px;
             padding-top: 10px;
-            border-radius: 5px 5px 0 0;
             text-align: center;
             cursor: pointer;
         }
@@ -138,10 +142,6 @@ ul.essay-container {
             border-left: 3px solid $white-color;
             z-index: 1;
         }
-
-        .tab-container-selected {
-            z-index: 100;
-        }   
 
         .tab-unselected {
             border-top: 3px solid #373737;
@@ -221,7 +221,6 @@ ul.essay-container {
                     i {
                         height: 10px;
                         width: 10px;
-
                     }
 
                     .caret-right {
@@ -238,8 +237,181 @@ ul.essay-container {
         }
     }
 
-    
+}
 
+/* This is the panel that contains the toolkit */
+.tools {
+    height: 100%;
+    overflow: auto;
+    margin-top:50px;
+
+    .toolkit { // this is the left column of tools
+        background: #373737;
+        width: 250px;
+        float: left;
+        height: 100%;
+        position: fixed;
+        z-index: 20; //20; <-- changed this value for testing
+
+        .toolkit-left {
+            height: 100%;
+            width: 250px;
+            //border: 1px red dashed;
+            float: left;
+        }
+
+        .toolkit-right {
+            width: 38px;
+            border: 1px $generic-divider-color solid;
+            height: 100%;
+            float: left;
+            position:absolute;
+            right: -40px;
+            top: 40px;
+            background-color: $off-white-bg-color;
+        }
+
+        .toolkit-region h2 {
+            color: #999;
+            font-weight: 500;
+            margin-left: 20px;
+        }   
+
+        .toolkit-region {
+            border-bottom: 1px solid #404040;
+            padding: 20px 0;
+        }
+
+        .toolkit-region-light {
+            background-color: #373737;
+            color: $white-color;
+            
+            .fa-arrow-right {
+                margin-left: 15px;
+            }
+
+            .fa-arrow-left {
+                margin-right: 15px;
+            }
+        }
+
+        .toolkit-region-dark {
+            background-color: #1e1e1e;
+            padding: 20px 0;
+            border-top: 1px solid #404040;
+        }
+
+        // the toolkit row that states the mode and draft #
+        .draft-num-row {
+            height: 39px;
+            padding: 0;
+
+           .draft-num-container {
+                width: 200px;
+                margin-left: 20px;
+                font-size: 11pt;
+                position:relative;
+                top:12px;
+
+                * {
+                    color: #999;
+                }
+
+                .draft-number {
+                   padding: 0;
+                   margin-right: 20px;
+               }
+
+               .edit-mode {
+                   color: #39BD41;
+               }
+
+               .review-mode {
+                   // TODO
+               }
+
+               .view-mode {
+                  // TODO
+               }
+            }
+        }
+
+        // the draft history toolkit row
+
+        .toolkit-region-history {
+            padding: 12px 0;
+
+            .history-container {
+                color: $white-color;
+                margin-left: 20px;
+                position: relative;
+                cursor: pointer;
+
+                i {
+                    margin-right: 10px;
+                }
+
+                .fa-angle-right {
+                    position: absolute;
+                    font-size:20pt;
+                    right: 20px;
+                    top: -5px;
+                }
+            }
+        }
+
+        .reviewer-button {
+            cursor: pointer;
+        }
+
+
+
+        ul {
+            margin-top: 20px;
+
+            * {
+                font-size: 11pt;
+            }
+
+            li {
+                padding: 10px 20px;
+                cursor: pointer;
+                color: $white-color;
+                width: 210px;
+
+                a {
+                    color: $white-color;
+                    cursor: pointer;
+                    width: 100%;
+                    display: block;
+                    font-weight: 100;
+                }
+
+                i {
+                    margin-right: 12px;
+                    color: #999;
+                }
+
+                i.folder-button {
+                    margin-right: 8px;
+                }
+            }
+
+
+            li:hover {
+                background-color: black;
+                * {
+                    color: white;
+                }
+            }
+
+            li.active-draft {
+                * {
+                    color: $main-color-2;
+                }
+            }
+        }
+    }
 }
 
 /* This is the panel that contains the text editor */
@@ -264,7 +436,7 @@ ul.essay-container {
             width: 700px;
             height: 1000px;
             border: 1px solid #d2d2d2;
-            margin: 70px auto 60px auto;
+            margin: 80px auto 60px auto;
             padding: 50px;
             outline: none;
         }
@@ -274,6 +446,16 @@ ul.essay-container {
         display: table;
         margin: auto;
     }
+}
+
+.draft-history {
+    height: 5px;
+    background-color: $main-color-2;
+    position:relative;
+    top: 15px;
+
+
+   // border-bottom: 2px solid #404040;
 }
 
 .editor-background {
@@ -365,14 +547,18 @@ ul.essay-container {
         position: absolute;
 	}
 
+    .toolbar {
+        background: white;
+        border-bottom: 1px solid $border;
+    }
+
     .buttons {
-        height: 40px;
+        height: 100px;
         line-height: 40px;
         text-align: center;
-        border-bottom: 1px solid $border;
         width: 100%;
         z-index: 102;
-		background-color: white;
+        background: rgba(0,0,0,0);
         overflow: hidden;
         position: fixed;
 
@@ -384,8 +570,8 @@ ul.essay-container {
         user-select: none;
 
         .toolkit-open-button, .toolkit-comment-button {
-            height: 40px;
-            width: 40px;
+            height: 41px;
+            width: 41px;
             background: gray;
 
             i {
@@ -398,7 +584,6 @@ ul.essay-container {
 
         .toolkit-open-button {
             float:left;
-
         }
 
         .toolkit-comment-button {

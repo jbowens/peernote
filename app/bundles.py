@@ -78,7 +78,7 @@ assets.register('editor_css',
     Bundle(
         "scss/editor.scss",
         filters="scss,cssmin",
-        depends="scss/shared/*.scss",
+        depends="scss/shared/*.scss, scss/editor-toolkit.scss",
         output="gen/editor.css"
     )
 )
