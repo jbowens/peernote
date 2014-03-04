@@ -8,6 +8,7 @@ import uuid
 from validate_email import validate_email
 from app.mailer import Mailer
 from app.mailer.templates.review_a_draft import ReviewADraft
+from app.decorators import json_login_required
 
 """
 Given a unfinalized draft, sends it to an email for review.
@@ -19,10 +20,11 @@ did: id of draft to review
 uid: id of user who owns draft
 """
 @api.route('/email_a_review', methods=['POST'])
+@json_login_required
 def email_a_review():
     current_app.logger.debug('emailing review for a draft')
 
-    if g.user and 'did' in request.form and 'uid' in request.form and 'email' in request.form:
+    if 'did' in request.form and 'uid' in request.form and 'email' in request.form:
 
         did = request.form['did']
         uid = request.form['uid']

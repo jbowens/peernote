@@ -20,7 +20,7 @@ text: new text for draft
 def save_draft():
     current_app.logger.debug('saving draft')
 
-    if g.user and 'title' in request.form and 'text' in request.form and 'did' in request.form and 'uid' in request.form:
+    if 'title' in request.form and 'text' in request.form and 'did' in request.form and 'uid' in request.form:
 
         title = request.form['title']
         text = request.form['text']
