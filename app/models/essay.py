@@ -5,6 +5,7 @@ class Essay(db.Model):
     eid = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, db.ForeignKey('user.uid'), nullable=False)
     upload_id = db.Column(db.Integer, db.ForeignKey('upload.upload_id'), nullable=True)
+    deleted = db.Column(db.Boolean, default=False)
 
     def get_paragraphs(self):
       """
@@ -12,7 +13,6 @@ class Essay(db.Model):
       text in the editor.
       """
       return self.get_current_draft().get_paragraphs()
-
 
     def get_current_draft(self):
         """
