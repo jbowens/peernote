@@ -5,9 +5,9 @@ from app import app
 def page_not_found(e):
     return render_template('static/error404.html'), 404
 
-@app.errorhandler(505)
-def error_505(e):
-    return render_template('static/error404.html'), 500
+@app.errorhandler(500)
+def error_500(e):
+    return render_template('static/error500.html'), 500
 
 @app.route('/oops', methods=['GET'])
 def oops():
