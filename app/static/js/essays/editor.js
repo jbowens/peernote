@@ -212,7 +212,7 @@ peernoteNS.essays.selectDraft = function(event) {
   }
 
 
-  $.post('/api/fetch_draft', params, function(data) {
+  $.get('/api/fetch_draft', params, function(data) {
     if (data.status == "success") {
       peernoteNS.essays.did = cur_did;
 
@@ -232,7 +232,7 @@ peernoteNS.essays.selectDraft = function(event) {
       } else {
         // old draft
         peernoteNS.essays.enable_autosave = false;
-        $('.status-line').text('Saving disabled for old drafts');
+        $('.status-line').text('');
         $('li.next-draft').slideUp();
       }
     }

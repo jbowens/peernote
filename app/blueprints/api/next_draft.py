@@ -1,4 +1,5 @@
 from flask import request, current_app, jsonify, g
+from app.decorators import json_login_required
 from app.blueprints.api import api
 from app.models.draft import Draft
 from app import app
@@ -17,10 +18,11 @@ did: id of new draft
 version: version of new draft
 """
 @api.route('/next_draft', methods=['POST'])
+@json_login_required
 def next_draft():
     current_app.logger.debug('creating next draft')
 
-    if g.user and 'did' in request.form and 'uid' in request.form:
+    if 'did' in request.form and 'uid' in request.form:
 
         did = request.form['did']
         uid = request.form['uid']

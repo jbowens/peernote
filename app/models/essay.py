@@ -1,3 +1,4 @@
+from datetime import datetime
 from app import db
 from draft import Draft
 
@@ -5,6 +6,9 @@ class Essay(db.Model):
     eid = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, db.ForeignKey('user.uid'), nullable=False)
     upload_id = db.Column(db.Integer, db.ForeignKey('upload.upload_id'), nullable=True)
+    deleted = db.Column(db.Boolean, default=False)
+    created_date = db.Column(db.DateTime, default=datetime.now)
+    modified_date = db.Column(db.DateTime, default=datetime.now)
 
     def get_paragraphs(self):
       """
@@ -13,6 +17,12 @@ class Essay(db.Model):
       """
       return self.get_current_draft().get_paragraphs()
 
+    def can_view(self, user):
+        """
+        Returns a boolean determining whether the given user can view this essay. This
+        checks ownership as well as whether or not the essay has been deleted.
+        """
+        return not self.deleted and user.uid == self.uid
 
     def get_current_draft(self):
         """

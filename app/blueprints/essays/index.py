@@ -6,5 +6,5 @@ from app.models.essay import Essay
 @essays.route('/')
 @login_required
 def essays_index():
-    essays = Essay.query.filter_by(uid=g.user.uid).all()
+    essays = Essay.query.filter_by(uid=g.user.uid, deleted=False).all()
     return render_template('essays/index.html', essays=essays, page_title="Documents")
