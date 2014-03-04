@@ -1,3 +1,6 @@
+from sqlalchemy import exc
+from sqlalchemy import event
+from sqlalchemy.pool import Pool
 from flask import Flask, g, request, render_template, session, redirect, url_for
 from flask.ext.assets import Environment, Bundle
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -64,6 +67,22 @@ if app.config.get('IS_PRODUCTION'):
     @app.route('/<path:path>', methods=['GET'])
     def catchall(path):
         return redirect(url_for('front.index'))
+
+# Be careful about connections that might have gone stale.
+@event.listens_for(Pool, "checkout")
+def ping_connection(dbapi_connection, connection_record, connection_proxy):
+    cursor = dbapi_connection.cursor()
+    try:
+        cursor.execute("SELECT 1")
+    except:
+        # optional - dispose the whole pool
+        # instead of invalidating one at a time
+        # connection_proxy._pool.dispose()
+
+        # raise DisconnectionError - pool will try
+        # connecting again up to three times before raising.
+        raise exc.DisconnectionError()
+    cursor.close()
 
 # Sometime before the first request we need to create all of the
 # database tables.
