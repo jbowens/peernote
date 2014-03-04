@@ -710,7 +710,7 @@ html, body {
 
     .questions-container {
         clear:both;
-        height: 600px;
+        height: 700px;
         width: 1100px;
         margin: auto;
         padding-top: 80px;
@@ -721,19 +721,16 @@ html, body {
 
             .faq-question {
                 position: relative;
-                //border: 1px red dashed;
                 float: left;
-                min-height: 170px;
+                min-height: 180px;
 
                 p {
-                    //display: none;
                     position: absolute;
                     top: 40px;
                     font-size: $small-explanation;
                 }
 
                 h3 {
-                    //font-weight:bold;
                     font-size: $large-explanation;
                     color: $theme-color;
                     float:right;
