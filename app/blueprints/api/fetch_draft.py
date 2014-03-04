@@ -1,4 +1,5 @@
 from flask import request, render_template, current_app, jsonify, g
+from app.decorators import json_login_required
 from app.blueprints.api import api
 from app.models.draft import Draft
 from app import db
@@ -14,14 +15,16 @@ Returns:
 title: title of the draft
 text: text of the draft
 """
-@api.route('/fetch_draft', methods=['POST'])
+
+@api.route('/fetch_draft', methods=['GET'])
+@json_login_required
 def fetch_draft():
     current_app.logger.debug('fetching draft')
 
-    if g.user and 'did' in request.form and 'uid' in request.form:
+    if 'did' in request.args and 'uid' in request.args:
 
-        did = request.form['did']
-        uid = request.form['uid']
+        did = request.args['did']
+        uid = request.args['uid']
 
         draft = Draft.query.filter_by(did=did).first()
 
