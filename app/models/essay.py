@@ -1,3 +1,4 @@
+from datetime import datetime
 from app import db
 from draft import Draft
 
@@ -6,6 +7,7 @@ class Essay(db.Model):
     uid = db.Column(db.Integer, db.ForeignKey('user.uid'), nullable=False)
     upload_id = db.Column(db.Integer, db.ForeignKey('upload.upload_id'), nullable=True)
     deleted = db.Column(db.Boolean, default=False)
+    created_date = db.Column(db.DateTime, default=datetime.now)
 
     def get_paragraphs(self):
       """
