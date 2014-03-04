@@ -14,6 +14,13 @@ class Essay(db.Model):
       """
       return self.get_current_draft().get_paragraphs()
 
+    def can_view(self, user):
+        """
+        Returns a boolean determining whether the given user can view this essay. This
+        checks ownership as well as whether or not the essay has been deleted.
+        """
+        return not self.deleted and user.uid == self.uid
+
     def get_current_draft(self):
         """
         Returns draft with the highest draft number associated with
