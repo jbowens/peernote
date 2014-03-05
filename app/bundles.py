@@ -161,6 +161,14 @@ assets.register('editor_js',
     )
 )
 
+assets.register('essays_index_js',
+    Bundle(
+        "js/essays/index.js",
+        filters="rjsmin",
+        output="gen/essays_index.js"
+    )
+)
+
 assets.register('reviewer_js',
     "js/include/rangy-1.2.3/rangy-core.js",
     "js/include/rangy-1.2.3/rangy-cssclassapplier.js",
