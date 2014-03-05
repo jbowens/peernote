@@ -36,3 +36,8 @@ class Essay(db.Model):
         drafts = Draft.query.filter_by(eid=self.eid).order_by(Draft.version.asc())
         return drafts
 
+    def pretty_created_date(self):
+        return self.created_date.strftime('%m/%d/%Y - %I:%M %p')
+
+    def pretty_modified_date(self):
+        return self.modified_date.strftime('%m/%d/%Y - %I:%M %p')

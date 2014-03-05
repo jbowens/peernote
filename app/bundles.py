@@ -28,6 +28,7 @@ assets.register('home_css',
     )
 )
 
+# TODO: essays.scss needs to go eventually
 assets.register('essays_css',
     Bundle(
         "scss/essays.scss",
@@ -35,6 +36,15 @@ assets.register('essays_css',
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/essays.css"
+    )
+)
+
+assets.register('essays_index_css',
+    Bundle(
+        "scss/essays_index.scss",
+        filters="scss,cssmin",
+        depends="scss/shared/*.scss",
+        output="gen/essays_index.css"
     )
 )
 
