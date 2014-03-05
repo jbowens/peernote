@@ -25,16 +25,36 @@
         <a class="btn btn-primary" href="{{ url_for('essays.create_essay') }}"> Write Paper </a>
         <a class="btn btn-primary" href="{{ url_for('essays.upload_essay') }}"> Upload Paper </a>
 
+        <div class="recent-essays">
+            Recent Documents:
+            <ul>
+            {% if recent_essays %}
+            {% for essay in recent_essays %}
+                <li>
+                    <a href="{{ url_for('essays.edit_essay', essayid=essay.eid) }}">
+                        {{ essay.get_current_draft().title }}
+                    </a>
+                </li>
+            {% endfor %}
+            {% endif %}
+            
+            <li> <a href="{{ url_for('essays.essays_index') }}"> All documents </a></li>
+            </ul>
+        </div>
+
+
         {% set reviews = user.get_assigned_reviews(5) %}
         {% if reviews %}
-            <div class="assigned-reviews">
-                Reviews assigned to you:
-                <ul>
-                    {% for review in reviews %}
-                        <li> <a href=/reviews/{{ review.urlhash }}> {{ review.get_draft().title }} </a> </li>
-                    {% endfor %}
-                </ul>
-            </div>
+        <div class="assigned-reviews">
+            Assigned Reviews:
+            <ul>
+                {% for review in reviews %}
+                <li>
+                    <a href="{{ url_for('reviews.review_draft', reviewhash=review.urlhash) }}"> {{ review.get_draft().title }} </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
         {% endif %}
     </div>
 {% endif %}
