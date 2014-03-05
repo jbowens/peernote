@@ -1,5 +1,7 @@
 {% extends 'email/email_base.html' %}
 {% block content %}
-    <h1>Review your friend's draft on Peernote</h1>
-    <p>{{ sender }} wrote an essay on Peernote and would love for you to review it. You can check it out <a href="{{ review_url }}">here</a>.</p>
+  <p style="color:#474747;">Hello,</p>
+  <p style="color:#474747;">{{ sender }} wrote an essay on Peernote and would like for you to review it. You can check it out <a href="{{ review_url }}">here</a>.</p>
+  <p style="color:#474747;"> Thanks a bunch!</p>
+  <p style="color:#474747;">- The Peernote Team</p>
 {% endblock %}

@@ -4,23 +4,94 @@
 <!DOCTYPE html>
 <html>
     <head>
-        {# NOTE: Apparently some email clients/servers dont' like title tags.
-           and very few actually do anything with the title tag. Don't send
-           title tags. #}
     </head>
-    <body>
-        <div id="container">
-            <div id="content">
-                {% block content %}{% endblock %}
-            </div>
-            <div id="footer">
-                {% if unsubscribe_type_token %}
-                <a href="http://{{ server_host }}/unsubscribe/{{ unsubscribe_type_token }}" class="unsubscribe">Unsubscribe from these emails</a>
-                {% endif %}
-                {% if unsubscribe_all_token %}
-                <a href="http://{{ server_host }}/unsubscribe/{{ unsubscribe_all_token }}" class="unsubscribe">Unsubscribe from all email</a>
-                {% endif %}
-            </div>
-        </div>
-    </body>
+
+
+<body style="margin:0; padding:0; height:100%;">
+    <table style="margin:0; 
+                  padding:0; 
+                  width:100%; 
+                  height:100%; 
+                  background-color:#fafafa; 
+                  background-image: url('http://{{ server_host }}/static/images/p5.png');">
+        <tr style="height:40px;"></tr>
+        <tr align="center" style="margin:0; padding:0; vertical-align:top;">
+            <td>
+                <table style=
+                    "width:650px;
+                    background-color: white;
+                    border: 1px #ddd solid;
+                    box-shadow: 4px 4px 22px #ddd;
+                    overflow:auto;">
+                    <tr align="center">
+                        <td>
+                        <table style="width:530px;">
+                            <tr style="height:30px;"></tr>
+                            <tr align="center">
+                                <td>
+                                    <a style=
+                                        "display:block;
+                                        height:80px;
+                                        width:254px;
+                                        border-bottom:1px solid #ddd;"
+                                        href="http://peernote.me">
+                                        <img style="height:80px; width:254px;"
+                                        src="http://{{ server_host }}/static/images/logo.png"
+                                            height="80px">
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td>
+                                    <table>
+                                        <tr style="height:20px;"></tr>
+                                        <tr>
+                                            <td>
+                                                {% block content %}{% endblock %}
+                                            </td>
+                                        </tr>
+                                        <tr style="height:100px;"></tr>
+                                        <tr>
+                                            <td>
+                                                <table style="width:530px;border-top:1px #ddd solid;" id="footer">
+                                                    <tr align="center" style="height:40px;"><td>
+                                                        {% if unsubscribe_type_token %}
+                                                            <td>
+                                                                <a style="text-decoration:none; color:#888;"
+                                                                    href="http://{{ server_host }}/unsubscribe/{{ unsubscribe_type_token }}" class="unsubscribe">
+                                                                    Unsubscribe from these emails
+                                                                </a>
+                                                            </td>
+                                                            <td style="color:#888">|</td>
+                                                        {% endif %}
+                                                        {% if unsubscribe_all_token %}
+                                                            <td>
+                                                                <a style="text-decoration:none; color:#888;"
+                                                                    href="http://{{ server_host }}/unsubscribe/{{ unsubscribe_all_token }}" class="unsubscribe">
+                                                                    Unsubscribe from all emails
+                                                                </a>
+                                                            </td>
+                                                            <td style="color:#888">|</td>
+                                                        {% endif %}
+                                                        <td><a style="text-decoration:none; color:#888;" href="http://peernote.me/terms-of-service">Terms of Service</a></td>
+                                                        <td style="color:#888">|</td>
+                                                        <td><a style="text-decoration:none; color:#888;" href="http://peernote.me/privacy-policy">Privacy Policy</a></td>
+                                                        <td style="color:#888">|</td>
+                                                        <td><a style="text-decoration:none; color:#888;" href="http://peernote.me">Site</a></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        <tr style="height:30px;"></tr>
+    </table>
+</body>
 </html>
