@@ -24,6 +24,18 @@
     <div class="page-container bottom-margin">
         <a class="btn btn-primary" href="{{ url_for('essays.create_essay') }}"> Write Paper </a>
         <a class="btn btn-primary" href="{{ url_for('essays.upload_essay') }}"> Upload Paper </a>
+
+        {% set reviews = user.get_assigned_reviews(5) %}
+        {% if reviews %}
+            <div class="assigned-reviews">
+                Reviews assigned to you:
+                <ul>
+                    {% for review in reviews %}
+                        <li> <a href=/reviews/{{ review.urlhash }}> {{ review.get_draft().title }} </a> </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
     </div>
 {% endif %}
 

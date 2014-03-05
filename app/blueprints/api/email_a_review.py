@@ -46,6 +46,7 @@ def email_a_review():
         # create review pointing to the draft
         review = Review()
         review.did = draft.did
+        review.email = email
 
         # really good code to generate a unique url hash for the review
         unique_hash = False

@@ -12,7 +12,7 @@ def review_draft(reviewhash):
     if not review:
         abort(404)
 
-    draft = Draft.query.filter_by(did=review.did).first()
+    draft = review.get_draft()
     if not draft:
         # This should never happen. We don't actually delete the drafts from the database.
         current_app.logger.error('Reviewer had valid review hash for nonexistent draft.')

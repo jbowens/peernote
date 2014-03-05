@@ -1,14 +1,64 @@
 {% extends 'base/application_main.html' %}
 
+{% block styles %}
+    {{ super() }}
+    {% assets "essays_index_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+        var peernoteNS = peernoteNS || {};
+        peernoteNS.essays = peernoteNS.essays || {};
+        peernoteNS.essays.essayIds = [];
+        {% for essay in essays|sort(attribute='eid') %}
+            peernoteNS.essays.essayIds.push({{essay.eid}});
+        {% endfor %}
+    </script>
+
+    {% assets "essays_index_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+
+{% endblock %}
+
+
 {% block content %}
 <div class="page-container top-margin bottom-margin">
     <h1>My essays</h1>
+
     {% if essays %}
-    <ul class="essays">
+    <div class="essays-header">
+        <div class="essay-name"> Name </div>
+        <div class="essay-created"> Created </div>
+        <div class="essay-modified"> Modified </div>
+        <div class="draft-number"> Draft </div>
+    </div>
+    <ul class="essays-list">
         {% for essay in essays|sort(attribute='eid') %}
-        <li><a href='/essays/edit/{{ essay.eid }}'> {{ essay.get_current_draft().title }} </a></li>
+        <li>
+            <div class="essay-name">
+                <a href='/essays/edit/{{ essay.eid }}'> {{ essay.get_current_draft().title }} </a>
+            </div>
+            <div class="essay-created">
+                {{ essay.pretty_created_date() }}
+            </div>
+            <div class="essay-modified">
+                {{ essay.pretty_modified_date() }}
+            </div>
+            <div class="draft-number">
+                {{ essay.get_current_draft().version }}
+            </div>
+            <div class="trash-essay trash-essay-{{loop.index0}}">
+                <i class="fa fa-trash-o"></i>
+            </div>
+        </li>
         {% endfor %}
     </ul>
+    {% else %}
+    You have no essays. Would you like to <a href="/essays/create"> write</a> one?
     {% endif %}
 </div>
 {% endblock %}

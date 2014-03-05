@@ -2,6 +2,7 @@ from datetime import datetime
 import random
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
+from review import Review
 
 class User(db.Model):
     uid = db.Column(db.Integer, primary_key=True)
@@ -38,11 +39,19 @@ class User(db.Model):
         """
         return self.last_name[0]
 
+    def get_assigned_reviews(self, count):
+        """
+        Returns count number of most recently assigned reviews to user's
+        email address.
+        """
+        return Review.query.filter_by(email=self.email).order_by(Review.created_date.desc())[:count]
+
+
     @staticmethod
     def generate_url_keyword(first_name, last_name):
         first_name = first_name.lower()
         last_name = last_name.lower()
-        
+
         base = first_name + '-' + last_name[0]
 
         def is_taken(keyword):
@@ -56,7 +65,7 @@ class User(db.Model):
         i = random.randint(0, hash_range) + (16 ** (hash_len - 1))
         while is_taken(hex(i)[2:] + '-' + base):
             i = random.randint(0, hash_range) + (16 ** (hash_len - 1))
-            
+
         return hex(i)[2:] + '-' + base
 
     @staticmethod
