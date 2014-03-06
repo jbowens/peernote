@@ -93,9 +93,6 @@ ul.essay-container {
     z-index: 10;
 }
 
-.buttons {
-    //width: 967px !important;
-}
 .comment-panel {
     width: 250px;
     background: #373737;
@@ -433,12 +430,15 @@ ul.essay-container {
 
         .page {
             background: white;
-            width: 700px;
+            width: 660px;
             height: 1000px;
             border: 1px solid #d2d2d2;
             margin: 80px auto 60px auto;
-            padding: 50px;
+            padding: 80px;
             outline: none;
+            font-weight: 500;
+            line-height: 18px;
+            overflow-y: auto;
         }
     }
 
@@ -559,7 +559,6 @@ ul.essay-container {
         width: 100%;
         z-index: 102;
         background: rgba(0,0,0,0);
-        overflow: hidden;
         position: fixed;
 
         -webkit-touch-callout: none;
