@@ -39,7 +39,8 @@ def signup():
         else:
             flash('The text in the image did not match.', 'error')
         # It's important to only allow one attempt for each session title
-        session.pop('captcha_title')
+        if 'captcha_title' in session:
+            session.pop('captcha_title')
 
     if request.method == 'POST' and form.validate_on_submit() and captcha_passed:
         # Create the user in the database
