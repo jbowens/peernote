@@ -334,21 +334,6 @@ peernoteNS.essays.initCommentTabs = function () {
 
 }
 
-peernoteNS.essays.initTimeline = function () {
-    var isOpen = false;
-    $(".history-container").click(function() {
-        if (!isOpen) {
-            $(".page").animate({"margin-top": "80px"}, {duration: 100},{queue: true});
-            $(".draft-history").animate({"width": "100%"}, {duration: 400}, {queue: true});
-        } else {
-            $(".draft-history").animate({"width": "0"}, {duration: 400},{queue: true});
-            $(".page").animate({"margin-top": "80px"}, {duration: 100},{queue: true});
-        }
-        isOpen = !isOpen;
-    });
-
-
-}
 
 $(document).ready(function(e) {
   if (peernoteNS.essays.uid == null || peernoteNS.essays.did == null) {
@@ -358,7 +343,6 @@ $(document).ready(function(e) {
   peernoteNS.essays.initEditor();
   peernoteNS.essays.initReviewButton();
   peernoteNS.essays.initCommentTabs();
-  peernoteNS.essays.initTimeline();
   peernoteNS.essays.initEmailPopup();
   peernoteNS.essays.toolDisplayer();
   peernoteNS.essays.initTimeline();
