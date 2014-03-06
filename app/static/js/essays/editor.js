@@ -117,9 +117,21 @@ peernoteNS.essays.keystroke = function(e) {
   }, peernoteNS.essays.AUTOSAVE_PAUSE_MILLIS);
 };
 
+// Set up all editor functions
 peernoteNS.essays.initEditor = function() {
   $('.page-container').keyup(peernoteNS.essays.keystroke);
   $('.page-container .content').keydown(peernoteNS.essays.keydown);
+
+  // undo functionality 
+  $('#undo').click(function() {
+    document.execCommand('undo',false,null);
+  });
+
+  // redo functionality
+  $('#redo').click(function() {
+    document.execCommand('redo',false,null);
+  });
+
 };
 
 peernoteNS.essays.initReviewButton = function() {
@@ -331,9 +343,48 @@ peernoteNS.essays.initCommentTabs = function () {
         }
         currentTabIsComments = !currentTabIsComments;
     });
-
 }
 
+// Make all the toolbar buttons work
+peernoteNS.essays.initToolbar = function () {
+    // toggle zoom dropdown
+    $('.curr-zoom').click(function(e) {
+        $('.zoom').toggle();
+    });
+
+    // toggle line height dropdown
+    $('.line-height-btn').click(function(e) {
+        $('.spacing').toggle();
+        $(this).toggleClass('button-border');
+    });
+
+    // hide line height/zoom dropdown when anything else is clicked
+    $(document).click(function(e) {
+        var $target = $(e.target);
+        if (!$target.hasClass('line-height-click')) {
+            $('.line-height-btn').removeClass('border');
+            $('.spacing').hide();
+        }
+        if (!$target.hasClass('zoom-click')) $('.zoom').hide();
+    });
+
+    // update zoom
+    $('.zoom-size').click(function() {
+        $('.zoom').hide();
+        var percent = $(this).html();
+        $('.page-container').css('zoom', percent);
+        $('.curr-zoom').html(percent + " <i class='fa fa-caret-down zoom-click'></i>");
+        var scale = $(this).attr('scale');
+        $('.content').css('line-height', (scale * 24) + 'px')
+    });
+
+    // update line height
+    $('.line-height').click(function(e) {
+        $('.spacing').hide();
+        var scale = $(this).attr('scale');
+        $('.content').css('line-height', (scale * 24) + 'px');
+    });
+}
 
 $(document).ready(function(e) {
   if (peernoteNS.essays.uid == null || peernoteNS.essays.did == null) {
@@ -347,4 +398,5 @@ $(document).ready(function(e) {
   peernoteNS.essays.toolDisplayer();
   peernoteNS.essays.initTimeline();
   peernoteNS.essays.initToolkit();
+  peernoteNS.essays.initToolbar();
 });
