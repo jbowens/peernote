@@ -15,7 +15,6 @@ def delete_essay():
     if essay.uid != g.user.uid:
         return jsonify(status='error', error='Unauthorized.'), 403
 
-    # Mark the essay as deleted.
-    essay.deleted = True
+    db.session.delete(essay)
     db.session.commit()
     return jsonify(status='success')

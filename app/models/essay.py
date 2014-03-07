@@ -6,7 +6,6 @@ class Essay(db.Model):
     eid = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, db.ForeignKey('user.uid', ondelete='cascade'), nullable=False)
     upload_id = db.Column(db.Integer, db.ForeignKey('upload.upload_id'), nullable=True)
-    deleted = db.Column(db.Boolean, default=False)
     created_date = db.Column(db.DateTime, default=datetime.now)
     modified_date = db.Column(db.DateTime, default=datetime.now)
 
@@ -22,7 +21,7 @@ class Essay(db.Model):
         Returns a boolean determining whether the given user can view this essay. This
         checks ownership as well as whether or not the essay has been deleted.
         """
-        return not self.deleted and user.uid == self.uid
+        return user.uid == self.uid
 
     def get_current_draft(self):
         """
