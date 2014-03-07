@@ -11,7 +11,7 @@ class PasswordToken(db.Model):
     __tablename__ = 'password_token'
     ptid = db.Column(db.Integer, primary_key=True)
     token = db.Column(db.String(80), unique=True)
-    uid = db.Column(db.Integer, db.ForeignKey('user.uid'), nullable=False)
+    uid = db.Column(db.Integer, db.ForeignKey('user.uid', ondelete='cascade'), nullable=False)
     email = db.Column(db.String(80))
     date_sent = db.Column(db.DateTime, default=datetime.now)
     used = db.Column(db.Boolean)
