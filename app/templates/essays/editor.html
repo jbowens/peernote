@@ -10,9 +10,11 @@
 {% block scripts %}
     {{ super() }}
 
+    {% assets "editor_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+
     <script>
-        var peernoteNS = peernoteNS || {};
-        peernoteNS.essays = peernoteNS.essays || {};
         peernoteNS.essays.uid = {{ current_essay.uid }};
         peernoteNS.essays.did = {{ current_draft.did }};
         peernoteNS.essays.drafts = [];
@@ -21,9 +23,6 @@
         {% endfor %}
     </script>
 
-    {% assets "editor_js" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
 {% endblock %}
 
 {% block content %}

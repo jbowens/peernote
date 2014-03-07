@@ -18,27 +18,10 @@ essays: prettified json representation of essay
 @api.route('/users/essays', methods=['GET'])
 @json_login_required
 def get_user_essays():
-    current_app.logger.debug('getting user essays')
+    current_app.logger.debug('getting logged in users essays')
+    essays_json = []
+    essays = Essay.query.filter_by(uid=g.user.uid, deleted=False).order_by(Essay.modified_date.desc())
+    for essay in essays:
+        essays_json.append(essay.to_dict())
 
-    if 'uid' in request.args:
-        uid = int(request.args['uid'])
-        if uid != g.user.uid:
-            return jsonify(status='error', error='Unauthorized.'), 403
-
-        essays_json = []
-        essays = Essay.query.filter_by(uid=uid).order_by(Essay.modified_date.desc())
-        for essay in essays:
-            essay_json = {
-                'eid': essay.eid,
-                'created_date': essay.pretty_created_date(),
-                'modified_date': essay.pretty_modified_date(),
-                'created_date': essay.pretty_created_date(),
-                'version': essay.get_current_draft().version
-            }
-            essays_json.append(essay_json)
-
-        return jsonify(status='success', essays=essays_json)
-    else:
-        return jsonify(error='Invalid params'), 400
-
-
+    return jsonify(status='success', essays=essays_json)

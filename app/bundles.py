@@ -50,7 +50,7 @@ assets.register('essays_css',
 
 assets.register('essays_index_css',
     Bundle(
-        "scss/essays_index.scss",
+        "scss/widgets/essays_list.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/essays_index.css"
@@ -172,6 +172,7 @@ assets.register('editor_js',
 
 assets.register('essays_index_js',
     Bundle(
+        "js/widgets/essays_list.js",
         "js/essays/index.js",
         filters="rjsmin",
         output="gen/essays_index.js"

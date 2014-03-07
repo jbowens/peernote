@@ -41,3 +41,12 @@ class Essay(db.Model):
 
     def pretty_modified_date(self):
         return self.modified_date.strftime('%m/%d/%Y - %I:%M %p')
+
+    def to_dict(self):
+        return {
+            'eid': self.eid,
+            'created_date': self.pretty_created_date(),
+            'modified_date': self.pretty_modified_date(),
+            'version': self.get_current_draft().version,
+            'title': self.get_current_draft().title
+        }
