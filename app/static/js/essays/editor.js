@@ -398,7 +398,10 @@ $.extend(peernoteNS.essays, {
 
 
   initOpenButton: function() {
-    peernoteNS.widgets.essaysList.init($('.essays-selector'), {});
+    peernoteNS.widgets.essaysList.init($('.essays-selector'), {
+      newTab: true,
+      deletable: false
+    });
 
     $(".essays-list-shadow").click(function(event) {
       var targetClass = $(event.target).attr('class');

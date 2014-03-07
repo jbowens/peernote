@@ -13,18 +13,31 @@ peernoteNS.widgets.essaysList = {
       '<ul class="essays-list"> </ul>';
   },
 
-  listElementHtml: function(essay, index) {
+  listElementHtml: function(essay, index, options) {
+    var aHtml = '<a href="/essays/edit/' + essay.eid +'" '
+
+    if (options.newTab) {
+      aHtml += 'target="_blank"'
+    }
+    aHtml += '>' + essay.title + '</a>'
+
+    var deletableHtml = '';
+    if (options.deletable) {
+      deletableHtml +=  '' +
+        '<div class="trash-essay trash-essay-' + index + '">' +
+          '<i class="fa fa-trash-o"></i>' +
+        '</div>'
+    }
+
     return '' +
       '<li>' +
         '<div class="essay-name">' +
-          '<a href="/essays/edit/' + essay.eid +'">' + essay.title + '</a>' +
+        aHtml +
         '</div>' +
         '<div class="essay-created">' + essay.created_date + '</div>' +
         '<div class="essay-modified">' + essay.modified_date + '</div>' +
         '<div class="draft-number">' + essay.version + '</div>' +
-        '<div class="trash-essay trash-essay-' + index + '">' +
-          '<i class="fa fa-trash-o"></i>' +
-        '</div>' +
+        deletableHtml +
       '</li>';
   },
 
@@ -53,6 +66,8 @@ peernoteNS.widgets.essaysList = {
   /*
    * options: {
    *   essays: optional jsonified essays. If null fetches.
+   *   newTab: boolean specifying whether to open essays in a new tab
+   *   deletable: boolean specifying whether you can delete essays
    * }
    */
   init : function(parent_container, options) {
@@ -60,6 +75,14 @@ peernoteNS.widgets.essaysList = {
     var $essaysList = $(_this.html())
     parent_container.append($essaysList);
     $essaysUl = parent_container.find('.essays-list');
+
+    if (!("newTab" in options)) {
+      options.newTab = false;
+    }
+
+    if (!("deletable" in options)) {
+      options.deletable = true;
+    }
 
     if (!options.essays) {
       $.get('/api/users/essays', function(data) {
@@ -71,7 +94,7 @@ peernoteNS.widgets.essaysList = {
           }
 
           for (var i = 0; i < data.essays.length; i++) {
-            $essaysUl.append(_this.listElementHtml(data.essays[i], i));
+            $essaysUl.append(_this.listElementHtml(data.essays[i], i, options));
           }
 
           _this.initTrashButtons(data.essays);
