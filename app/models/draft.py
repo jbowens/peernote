@@ -2,8 +2,8 @@ from app import db
 
 class Draft(db.Model):
     did = db.Column(db.Integer, primary_key=True)
-    eid = db.Column(db.Integer, db.ForeignKey('essay.eid'), nullable=False)
-    uid = db.Column(db.Integer, db.ForeignKey('user.uid'), nullable=False)
+    eid = db.Column(db.Integer, db.ForeignKey('essay.eid', ondelete='cascade'), nullable=False)
+    uid = db.Column(db.Integer, db.ForeignKey('user.uid', ondelete='cascade'), nullable=False)
     version = db.Column(db.Integer, nullable=False, default=1)
     title = db.Column(db.String(80))
     text = db.Column(db.UnicodeText)

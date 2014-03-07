@@ -4,7 +4,7 @@ from draft import Draft
 
 class Essay(db.Model):
     eid = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.Integer, db.ForeignKey('user.uid'), nullable=False)
+    uid = db.Column(db.Integer, db.ForeignKey('user.uid', ondelete='cascade'), nullable=False)
     upload_id = db.Column(db.Integer, db.ForeignKey('upload.upload_id'), nullable=True)
     deleted = db.Column(db.Boolean, default=False)
     created_date = db.Column(db.DateTime, default=datetime.now)
