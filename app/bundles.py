@@ -28,6 +28,15 @@ assets.register('home_css',
     )
 )
 
+assets.register('meet-the-team_css',
+    Bundle(
+        "scss/meet-the-team.scss",
+        filters="scss,cssmin",
+        depends="scss/shared/*.scss",
+        output="gen/home.css",
+    )
+)
+
 # TODO: essays.scss needs to go eventually
 assets.register('essays_css',
     Bundle(

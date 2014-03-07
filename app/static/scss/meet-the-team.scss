@@ -1,0 +1,187 @@
+@import "shared/_variables.scss";
+
+.wrapper {
+    background: $off-white-bg-color;
+}
+.page-container {
+    $padding: 60px;
+    padding: $padding;
+    width:  $page-width - ($padding*2);
+    margin: auto;
+    overflow: auto;
+    height: 1550px;
+    padding-top: 50px;
+    background: white;
+    margin-top: 30px;
+    border: 1px $generic-divider-color solid;
+
+    .team-bio {
+        padding-bottom: 50px;
+        margin-bottom: 30px;
+        overflow: auto;
+        border-bottom: 1px solid #e5e5e5;
+
+        .team-text {
+            float:left;
+
+            h2 {
+                color: $main-color-2;
+                font-size: 22pt;
+                line-height: 22pt;
+                margin-bottom: 20px;
+                width: 100%;
+                border-bottom: 1px solid $generic-divider-color;
+                padding-bottom: 10px;
+            }
+
+            .intro-paragraph {
+                display: block;
+                float: left;
+                width: 460px;
+                font-size: 15px;
+                line-height: 19px;
+                font-weight: 400;
+                margin-bottom:19px;
+                clear: both;
+            }
+        }
+
+        .team-photo-wrapper {
+            float: right;
+            margin-top:60px;
+        }
+
+        .photo-wrapper {
+            padding: 10px;
+            overflow: auto;
+            border: 1px solid #e5e5e5;
+
+            .team-photo {
+                background-image: url('../images/team.jpg');
+                height: 226px;
+                width: 303px;
+                background-size: cover;
+            }
+        }
+    }
+
+    .team-member-container {
+        clear: both;
+
+        .team-member {
+            clear: both;
+            margin-bottom: 50px;
+            overflow: auto;
+
+            .bio {
+                float: left;
+                width: 644px;
+                
+                h2 {
+                    border-bottom: 1px solid #e5e5e5;
+                    padding: 10px 0 10px 20px;
+                    margin-bottom: 10px;
+                    color: $main-color-2;
+                    font-size: 14pt;
+
+                    .position {
+                        color: #aaa;
+                        font-weight: 400;
+                    }
+                }
+
+                p {
+                    padding: 0 0 0 20px;
+                    font-size: 15px;
+                    font-weight:400;
+                    line-height: 19px;
+                }
+
+                .social-links {
+                    float: right;
+                }
+
+                .icon-wrapper {
+                    background-color: $main-color-2;
+                    border-radius:10px;
+                    display: block;
+                    float: right;
+                    height: 20px;
+                    width: 20px;
+                    margin-left: 4px;
+
+                    i {
+                        display: block;
+                        font-size: 14px;
+                        color: $white-color;
+                        position: relative;
+                    }
+
+                    .fa-twitter {
+                        top: 3px;
+                        left: 3px;
+                    }
+
+                    .fa-github {
+                        top: 3px;
+                        left: 4px;
+
+                    }
+
+                    .fa-facebook {
+                        top: 3px;
+                        left: 7px;
+                    }
+
+                    .fa-linkedin {
+                        top: 3px;
+                        left: 4px;
+                    }
+
+                    .fa-pencil {
+                        top: 3px;
+                        left: 4px;
+                    }
+                }
+            }
+
+            .photo-wrapper {
+                $headshot-width: 150px;
+                width: $headshot-width;
+                height: $headshot-width;
+                float: left;
+                padding: 10px;
+                overflow: auto;
+                border: 1px solid #e5e5e5;
+
+                .photo {
+                    background-size: cover;
+                    height: $headshot-width;
+                    width: $headshot-width;
+                }
+            }
+
+            .photo-bryce {
+                background-image: url('../images/bryce.png');
+            }
+
+            .photo-jeff {
+                background-image: url('../images/jeff.png');
+            }
+
+            .photo-alec {
+                background-image: url('../images/alec.png');
+            }
+
+            .photo-jackson {
+                background-image: url('../images/jackson.png');
+            }
+
+            .photo-linh {
+                background-image: url('../images/linh.png');
+            }
+        }
+    }
+}
+
+
