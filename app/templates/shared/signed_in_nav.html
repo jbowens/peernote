@@ -1,20 +1,22 @@
 <nav>
     <div class="header-container">
         <ul class="nav-right">
-            {% if is_logged_in %}
-                <li>
-                    <a href="/essays">
-                        <i class="fa fa-file-text fa-lg"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="light username show-dropdown">
-                        {{ user.first_name }}
-                        <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-            {% else %}
-                <a href="/log-in">Sign In</a>
+            {% if not is_production  %}
+                {% if is_logged_in %}
+                    <li>
+                        <a href="/essays">
+                            <i class="fa fa-file-text fa-lg"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="light username show-dropdown">
+                            {{ user.first_name }}
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </li>
+                {% else %}
+                    <a href="/log-in">Sign In</a>
+                {% endif %}
             {% endif %}
         </ul> <!-- nav-right -->
 

@@ -14,13 +14,10 @@ def review_draft(reviewhash):
 
     draft = review.get_draft()
     if not draft:
-        # This should never happen. We don't actually delete the drafts from the database.
-        current_app.logger.error('Reviewer had valid review hash for nonexistent draft.')
         abort(404)
 
     essay = Essay.query.get(draft.eid)
-    if essay.deleted:
-        # TODO: Make this error page prettier.
-        return 'Sorry, that essay has been deleted.'
+    if not essay:
+        abort(404)
 
     return render_template('reviews/reviewer.html', current_draft=draft)
