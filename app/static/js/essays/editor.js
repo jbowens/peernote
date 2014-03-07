@@ -410,6 +410,10 @@ $.extend(peernoteNS.essays, {
       }
     });
 
+    $("ul.essays-list").click(function() {
+      $(".essays-list-shadow").fadeOut(100, "linear");
+    });
+
     $("li.open").click(function() {
       $(".essays-list-shadow").css("display","table");
     });
