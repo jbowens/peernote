@@ -112,7 +112,7 @@
             </tr>
         </table>
     </form>
-    <form method="post">
+    <form method="post" action="{{ url_for('users.delete_account') }}">
         {% include "shared/csrf.html" %}
         <h1>Delete Account</h1>
         <p>Deleting your account will permanently delete all of your documents. This cannot be undone.</p>
