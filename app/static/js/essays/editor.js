@@ -394,7 +394,24 @@ $.extend(peernoteNS.essays, {
           var scale = $(this).attr('scale');
           $('.content').css('line-height', (scale * 24) + 'px');
       });
+  },
+
+
+  initOpenButton: function() {
+    peernoteNS.widgets.essaysList.init($('.essays-selector'), {});
+
+    $(".essays-list-shadow").click(function(event) {
+      var targetClass = $(event.target).attr('class');
+      if (targetClass === "essays-list-center-align") {
+        $(".essays-list-shadow").fadeOut(100, "linear");
+      }
+    });
+
+    $("li.open").click(function() {
+      $(".essays-list-shadow").css("display","table");
+    });
   }
+
 });
 
 $(document).ready(function(e) {
@@ -410,4 +427,6 @@ $(document).ready(function(e) {
   peernoteNS.essays.initTimeline();
   peernoteNS.essays.initToolkit();
   peernoteNS.essays.initToolbar();
+  peernoteNS.essays.initOpenButton();
+
 });

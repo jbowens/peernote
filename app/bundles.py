@@ -95,6 +95,7 @@ assets.register('login_css',
 
 assets.register('editor_css',
     Bundle(
+        "scss/widgets/essays_list.scss",
         "scss/editor.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss, scss/editor-toolkit.scss",
@@ -164,6 +165,7 @@ assets.register('splash_js',
 
 assets.register('editor_js',
     Bundle(
+        "js/widgets/essays_list.js",
         "js/essays/editor.js",
         filters="rjsmin",
         output="gen/editor.js"
