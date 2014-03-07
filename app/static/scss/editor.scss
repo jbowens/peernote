@@ -784,3 +784,26 @@ ul.essay-container {
     }
 }
 
+.essays-list-shadow {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,.85);;
+    z-index: 104;
+    display: none;
+
+    .essays-list-center-align {
+        display: table-cell;
+        vertical-align: middle;
+        height: 800px;
+
+        .essays-list-container {
+            width: 800px;
+            min-height: 400px;
+            padding: 30px;
+            background-color: white;
+            margin: auto;
+        }
+    }
+}
+
