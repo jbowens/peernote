@@ -2,7 +2,8 @@
  * Client side JS for essay editor
  */
 var peernoteNS = peernoteNS || {};
-peernoteNS.essays = {
+peernoteNS.essays = peernoteNS.essays || {}
+$.extend(peernoteNS.essays, {
   // Assumption being made that first opened draft will be the newest.
   enable_autosave: true,
 
@@ -394,7 +395,7 @@ peernoteNS.essays = {
           $('.content').css('line-height', (scale * 24) + 'px');
       });
   }
-}
+});
 
 $(document).ready(function(e) {
   if (peernoteNS.essays.uid == null || peernoteNS.essays.did == null) {
