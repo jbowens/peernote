@@ -12,3 +12,4 @@ mandrill==1.0.53
 psycopg2==2.5.2
 validate-email==1.1
 Pillow==2.3.0
+Flask-Migrate==1.2.0
