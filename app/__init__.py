@@ -4,9 +4,8 @@ from sqlalchemy.pool import Pool
 from flask import Flask, g, request, render_template, session, redirect, url_for
 from flask.ext.assets import Environment, Bundle
 from flask.ext.sqlalchemy import SQLAlchemy
-from getpass import getuser
 from os import environ
-import os, uuid
+import os, uuid, socket
 
 # Set up the flask application.
 app = Flask(__name__)
@@ -18,13 +17,11 @@ app.config.from_pyfile('../config/default.cfg')
 if environ.get('REMOTE_DB'):
     app.config.from_pyfile('../config/remote_db.cfg')
 
-user_config_file = 'config/' + getuser() + '.cfg'
-if os.path.exists(user_config_file):
-    app.logger.debug('Loading custom config file for ' + getuser())
-    app.config.from_pyfile('../' + user_config_file)
-
-if getuser() == 'peernote':
-    app.config.from_pyfile('../config/production.cfg')
+hostname = socket.gethostname()
+machine_config_file = 'config/' + hostname + '.cfg'
+if os.path.exists(machine_config_file):
+    app.logger.debug('Loading custom config file for ' + hostname)
+    app.config.from_pyfile('../' + machine_config_file)
 
 # bundles for css
 import bundles
