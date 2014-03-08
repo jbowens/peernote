@@ -5,11 +5,9 @@ from app.blueprints.front.splash import splash
 
 @front.route('/', methods=['GET'])
 def index():
-    if current_app.config.get('IS_PRODUCTION'):
-        return splash();
     # If a user is logged in, render html for the user homepage. Otherwise
     # render the splash page
     if g.user == None:
-        return render_template('index.html')
+        return splash()
     else:
         return show_user_profile(g.user.url_keyword)
