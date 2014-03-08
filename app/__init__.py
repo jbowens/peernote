@@ -10,9 +10,6 @@ import os, uuid, socket
 # Set up the flask application.
 app = Flask(__name__)
 
-# set webassets env debug value so we dont minify in dev
-Environment.debug = app.debug
-
 app.config.from_pyfile('../config/default.cfg')
 if environ.get('REMOTE_DB'):
     app.config.from_pyfile('../config/remote_db.cfg')
@@ -22,6 +19,10 @@ machine_config_file = 'config/' + hostname + '.cfg'
 if os.path.exists(machine_config_file):
     app.logger.debug('Loading custom config file for ' + hostname)
     app.config.from_pyfile('../' + machine_config_file)
+
+
+# set webassets env debug value so we dont minify in dev
+Environment.debug = app.debug
 
 # bundles for css
 import bundles
