@@ -80,14 +80,6 @@ def ping_connection(dbapi_connection, connection_record, connection_proxy):
         raise exc.DisconnectionError()
     cursor.close()
 
-# Sometime before the first request we need to create all of the
-# database tables.
-@app.before_first_request
-def initialize_database():
-    if environ.get('RESET_DB'):
-        app.logger.debug('RECREATING ALL DATABASE TABLES')
-        db.drop_all()
-    db.create_all()
 
 @app.before_request
 def process_session():
