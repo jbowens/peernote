@@ -74,7 +74,11 @@
                     <h2>DOC MANAGER</h2>
                     <ul>
                         <li class="new">
-                            <i class="fa fa-plus"></i> New Document
+                            <a href="{{ url_for('essays.create_essay') }}" target="_blank" >
+                                <i class="fa fa-plus"></i> 
+                                New Document
+                            </a>
+
                         </li>
                         <li class="open">
                             <i class="fa fa-folder-open folder-button"></i> Open
