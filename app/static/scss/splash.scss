@@ -204,28 +204,28 @@ html, body {
     }
 
     .about-button {
-        width: 100px;
+        width: 110px;
     }
 
     .services-button {
-        width: 130px;
+        width: 140px;
     }
 
     .team-button {
-        width: 90px;
+        width: 95px;
     }
 
     .faq-button {
-        width: 80px;
+        width: 75px;
     }
 
     .contact-button {
-        width: 100px;
+        width: 110px;
     }
 
     li {
         float: left;
-        height: 66px;
+        height: 50px;
 
         * {
             @include unselectable;
@@ -233,10 +233,10 @@ html, body {
 
         a {
             display:block;
-            padding:25px 0px;
+            padding:15px 0px;
             width:100%;
             text-align: center;
-            font-size: 12pt;
+            font-size: 11pt;
         }
 
         a:hover {
@@ -246,14 +246,28 @@ html, body {
 
     #login-button {
         @include unselectable;
-        margin: 15px 15px 0px 0px;
+        margin: 0px 15px 0px 0px;
         height: $button-height - 7px;
         width: 100px;
-        font-size: 11px;
-        padding-top: 7px;
-        background: gray;
-        display: none;
+        font-size: 10px;
+        padding-top: 6px;
+        background: rgba(0,0,0,0);
+
+        a {
+            height: 100%;
+            width: 100%;
+            display: block;
+            background-color: $main-color-2;//rgba(10,10,10,.8);
+            padding-top:9px;
+            padding-bottom: 2px;
+            @include border-radius;
+        }
+
+        a:hover {
+            background-color: $main-color-2-hover;
+        }
     }
+
 
     form {
         padding-top:15px;
@@ -332,7 +346,6 @@ html, body {
             text-shadow: 2px 2px black;
         }
 
-
         p {
             margin-top: 25px;
             width: 462px;
@@ -345,30 +358,67 @@ html, body {
             }
         }
 
-        /*.beta-signup-wrapper {
-            padding: 10px;
-            background-color: rgba(0,0,0,.4);
-            margin-top: 30px;
-            width: 253px;
-        }
-        */
-
-        .beta-signup {
+        .signup {
             @include border-radius;
             @include unselectable;
             background-color: $theme-color;
             height: 40px;
             width: 250px;
             text-align: center;
-            padding-top: 20px;
+            padding-top: 6px;
+padding-bottom: 14px;
             margin-top: 30px;
             font-size: $large-explanation;
             font-weight: bold;
             cursor: pointer;
+
+            a {
+                overflow:auto;
+            }
         }
 
-        .beta-signup:hover {
-            background: $theme-color-hover;
+        .signup {
+            -moz-box-shadow:inset 0px 1px 0px 0px #d197fe;
+            -webkit-box-shadow:inset 0px 1px 0px 0px #d197fe;
+            box-shadow:inset 0px 1px 0px 0px #d197fe;
+            background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a973b4), color-stop(1, #a874b4) );
+            background:-moz-linear-gradient( center top, #a973b4 5%, #a874b4 100% );
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a973b4', endColorstr='#a874b4');
+            background-color:#a973b4;
+            -webkit-border-top-left-radius:4px;
+            -moz-border-radius-topleft:4px;
+            border-top-left-radius:4px;
+            -webkit-border-top-right-radius:4px;
+            -moz-border-radius-topright:4px;
+            border-top-right-radius:4px;
+            -webkit-border-bottom-right-radius:4px;
+            -moz-border-radius-bottomright:4px;
+            border-bottom-right-radius:4px;
+            -webkit-border-bottom-left-radius:4px;
+            -moz-border-radius-bottomleft:4px;
+            border-bottom-left-radius:4px;
+            text-indent:0;
+            border:1px solid #9e76bf;
+            display:inline-block;
+            color:#ffffff;
+            font-size:$large-explanation;
+            font-weight:bold;
+            font-style:normal;
+            height:40px;
+            line-height:50px;
+            width:250px;
+            text-decoration:none;
+            text-align:center;
+            text-shadow:1px 0px 0px #7d15cd;
+        }
+        .signup:hover {
+            background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a874b4), color-stop(1, #a973b4) );
+            background:-moz-linear-gradient( center top, #a874b4 5%, #a973b4 100% );
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a874b4', endColorstr='#a973b4');
+            background-color:$theme-color-hover;
+        }.signup:active {
+            position:relative;
+            top:1px;
         }
     }
 }

@@ -17,6 +17,7 @@
 
 {% block main %}
 <div id="everything-wrapper">
+    {% if is_production %}
     <div id="sign-up-shadow">
         <div class="sign-up-center-align">
             <div class="sign-up-pane"> 
@@ -36,6 +37,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 
     <div id="splash-main-image" class="splash-container" data-stellar-background-ratio=".8" data-stellar-vertical-offset="100">
         <div id="navbar">
@@ -47,31 +49,40 @@
                     <li class="faq-button"><a id="faq-id">FAQ</a></li>
                     <li class="contact-button"><a>CONTACT</a></li>
                 </ul>
-                <div id="login-button">LOG IN</div>
-                <form class="email-signup">
-                    {% if has_signed_up %}
-                    <span class="email-confirmation">
-                        Thank you! We'll notify you when the beta begins.
-                    </span>
-                    {% else %}
-                    <input class="submit-button" type="submit" value="SIGN UP" />
-                    <input class="textfield" type="text" name="email" placeholder="Email Address" />
-                    {% endif %}
-                </form>
+                {% if not is_production %}
+                    <div id="login-button"><a href="/log-in">SIGN IN</a></div>
+                {% else %}
+                    <form class="email-signup">
+                        {% if has_signed_up %}
+                            <span class="email-confirmation">
+                                Thank you! We'll notify you when the beta begins.
+                            </span>
+                        {% else %}
+                            <input class="submit-button" type="submit" value="SIGN UP" />
+                            <input class="textfield" type="text" name="email" placeholder="Email Address" />
+                        {% endif %}
+                    </form>
+                {% endif %}
             </div>
         </div>
         <div id="splash-main-content" class="content-container">
             <div id="intro-spiel">
                 <div class="intro-spiel-shadow">
-                <h1>Welcome to Peernote</h1>
-                <p>
-                <span>Peernote is an educational platform that connects writers and instructors, providing tools to create and collaboratively review papers.
-                </span>
-                </p>
-            </div>
-            <div class="beta-signup-wrapper">
-                <div class="beta-signup">BETA SIGN UP </div>
-            </div>
+                    <h1>Welcome to Peernote</h1>
+                    <p>
+                    <span>Peernote is an educational platform that connects writers and instructors, providing tools to create and collaboratively review papers.
+                    </span>
+                    </p>
+                </div>
+                {% if is_production %}
+                <div class="beta-signup-wrapper">
+                    <div class="signup">BETA SIGN UP </div>
+                </div>
+                {% else %}
+                <div class="beta-signup-wrapper">
+                    <a href="/sign-up"><div class="signup">SIGN UP</div></a>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
