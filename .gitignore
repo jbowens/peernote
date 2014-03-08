@@ -41,9 +41,6 @@ app/static/gen/*.js
 app/static/.webassets-cache/*
 !app/static/.webassets-cache/.gitignore
 
-# database migrations
-migrations
-
 # etc
 *.swp
 .DS_Store
