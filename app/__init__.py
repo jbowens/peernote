@@ -10,7 +10,6 @@ import os, uuid
 
 # Set up the flask application.
 app = Flask(__name__)
-app.debug = True
 
 # set webassets env debug value so we dont minify in dev
 Environment.debug = app.debug
