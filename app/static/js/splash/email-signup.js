@@ -37,6 +37,6 @@ $.extend(peernoteNS.splash, {
   }
 });
 
-$(document).ready(function() {
+peernoteNS.init(function() {
   peernoteNS.splash.initEmailSignup();
 });

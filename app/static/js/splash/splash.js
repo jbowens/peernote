@@ -1,4 +1,4 @@
-$(document).ready(function() {
+peernoteNS.init(function() {
 
     /*******************************/
     /* Signup Overlay Display Code */
@@ -58,6 +58,5 @@ $(document).ready(function() {
             $('#learn-more').fadeOut();
         }
     });
-
     
 });

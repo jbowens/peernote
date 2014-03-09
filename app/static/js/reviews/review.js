@@ -66,7 +66,7 @@ function bindListeners() {
 }
 
 // main
-$(document).ready(function () {
+peernoteNS.init(function () {
 
 	$('#strikethrough-button, #comment-button, #help-button, #undo, #redo').qtip({
 		style: {

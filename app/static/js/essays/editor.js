@@ -106,8 +106,8 @@ $.extend(peernoteNS.essays, {
     }
 
     if (peernoteNS.essays.autosave_timer) {
-      clearTimeout(_this.autosave_timer);
-      _this.autosave_timer = null;
+      clearTimeout(peernoteNS.essays.autosave_timer);
+      peernoteNS.essays.autosave_timer = null;
     }
 
     // Remove the saved text, the state has probs changed.
@@ -421,7 +421,7 @@ $.extend(peernoteNS.essays, {
 
 });
 
-$(document).ready(function(e) {
+peernoteNS.init(function() {
   if (peernoteNS.essays.uid == null || peernoteNS.essays.did == null) {
     return;
   }
@@ -435,5 +435,4 @@ $(document).ready(function(e) {
   peernoteNS.essays.initToolkit();
   peernoteNS.essays.initToolbar();
   peernoteNS.essays.initOpenButton();
-
 });

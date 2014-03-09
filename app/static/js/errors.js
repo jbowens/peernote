@@ -20,6 +20,21 @@ peernoteNS.errors = {
     $.post('/api/record-error', data, function(resp) {
       console.log('Logged javascript error', data);
     });
+  },
+
+  /*
+   * Takes a function and returns the same function but wrapped in
+   * error logging.
+   */
+  wrap: function(f) {
+    return function() {
+      var args = Array.prototype.slice.call(arguments);
+      try {
+        f.apply(null, args);
+      } catch (err) {
+        peernoteNS.errors.record(err);
+      }
+    };
   }
 
 };
