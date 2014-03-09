@@ -7,11 +7,12 @@ def record_error():
     if 'message' not in request.form:
         return jsonify(status='error'), 400
 
-    error_type = 'error' if request.form.get('type') == 'error' else 'warning'
+    is_error = request.form.get('type') == 'error'
+    serialized_data = pprint.pformat(request.form)
 
-    if error_type == 'error':
-        current_app.logger.error('[JS] %s, %s', request.form.get('message'), pprint.pformat(request.form))
+    if is_error:
+        current_app.logger.error('[JS] %s, %s', request.form.get('message',''), serialized_data)
     else:
-        current_app.logger.warning('[JS] %s, %s', request.form.get('message'), pprint.pformat(request.form))
+        current_app.logger.warning('[JS] %s, %s', request.form.get('message',''), serialized_data)
 
-    return jsonify(status='yay')
+    return jsonify(status='success')
