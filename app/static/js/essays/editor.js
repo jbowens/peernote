@@ -96,7 +96,27 @@ $.extend(peernoteNS.essays, {
     // We want tabs to be treated as a literal tab characters,
     // not for navigation.
     if (e.keyCode == 9) {
+      // TODO: DELETE THIS FUCKING CODE IT'S DISGUSTING AND I HATE IT
       e.preventDefault();
+      var selection = window.getSelection();
+      console.log(selection);
+      var node = selection.extentNode;
+      var offset = selection.extentOffset;
+      if (node.nodeType != 3) {
+        var tab = document.createTextNode('\t');
+        if (node.childNodes.length) {
+          node.insertBefore(tab, node.firstChild);
+        } else {
+          node.appendChild(tab);
+        }
+      } else {
+        var txt = node.nodeValue;
+        node.nodeValue = txt.substr(0, offset) + '\t' + txt.substr(offset);
+      }
+      selection.removeAllRanges();
+      var range = document.createRange();
+      range.setStart(node, offset+1);
+      selection.addRange(range);
     }
   },
 
