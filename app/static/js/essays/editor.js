@@ -392,7 +392,7 @@ $.extend(peernoteNS.essays, {
       $('.line-height').click(function(e) {
           $('.spacing').hide();
           var scale = $(this).attr('scale');
-          $('.content').css('line-height', (scale * 24) + 'px');
+          $('.content').css('line-height', scale + 'em');
       });
   },
 
