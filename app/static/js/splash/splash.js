@@ -60,3 +60,8 @@ peernoteNS.init(function() {
     });
     
 });
+
+
+peernoteNS.setGAOptions({
+    pagename: '/splash'
+});

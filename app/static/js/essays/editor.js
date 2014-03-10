@@ -436,3 +436,7 @@ peernoteNS.init(function() {
   peernoteNS.essays.initToolbar();
   peernoteNS.essays.initOpenButton();
 });
+
+peernoteNS.setGAOptions({
+  pagename: '/essays/edit'
+});
