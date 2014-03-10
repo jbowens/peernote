@@ -5,7 +5,7 @@ from flask import Flask, g, request, render_template, session, redirect, url_for
 from flask.ext.assets import Environment, Bundle
 from flask.ext.sqlalchemy import SQLAlchemy
 from os import environ
-import os, uuid, socket
+import os, uuid, socket, logging
 
 # Set up the flask application.
 app = Flask(__name__)
@@ -20,6 +20,22 @@ if os.path.exists(machine_config_file):
     app.logger.debug('Loading custom config file for ' + hostname)
     app.config.from_pyfile('../' + machine_config_file)
 
+if not app.config.get('DEBUG'):
+    # If we're not in debug mode, only output warning events and above.
+    log = logging.getLogger('werkzeug')
+    log.setLevel(logging.WARNING)
+
+if app.config.get('LOG_FILE'):
+    # If a log file is specified, setup a log file to store warnings
+    # and errors.
+    file_handler = logging.FileHandler(app.config.get('LOG_FILE'))
+    file_handler.setLevel(logging.WARNING)
+    file_handler.setFormatter(logging.Formatter(
+        '[%(levelname)s] [%(module)s] %(filename)s + %(lineno)d\t'
+        '%(asctime)s\t'
+        '%(message)s\n'
+    ))
+    app.logger.addHandler(file_handler)
 
 # set webassets env debug value so we dont minify in dev
 Environment.debug = app.debug
