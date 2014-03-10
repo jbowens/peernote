@@ -26,12 +26,37 @@ $.extend(peernoteNS.docutils, {
     if (s.type == "Range") {
       // The user has text selected. We should replace the selected text
       // with the given parameter.
-
-      // TODO: Not yet implemented.
+      var sNode = s.baseNode;
+      var sOffset = s.baseOffset;
+      s.deleteFromDocument();
+      this._addToNodeAtOffset(sNode, text, sOffset);
+      s.removeAllRanges();
+      var range = document.createRange();
+      range.setStart(sNode, sOffset + text.length);
+      s.addRange(range);
     } else {
       // The user just has a caret in a specific location. We should insert
       // into the document and mantain the caret location.
-      if (node.nodeType != 3) {
+      this._addToNodeAtOffset(node, text, offset);
+      
+      // As soon as we've fucked with the nodes, we're going to lose our
+      // selection. We need to restore the selection.
+      s.removeAllRanges();
+      var range = document.createRange();
+      range.setStart(node, offset + text.length);
+      s.addRange(range);
+    }
+  },
+
+  _addToNodeAtOffset: function(node, text, offset) {
+    if (node.nodeType == 3) {
+      // It's a text node.
+      var currText = node.nodeValue;
+      var newText = currText.substr(0, offset);
+      newText += text;
+      newText += currText.substr(offset);
+      node.nodeValue = newText;
+    } else {
         // The caret is on an element, not a text node. We should insert the
         // text into the element as a new text node at the beginning.
         var newTextNode = document.createTextNode(text);
@@ -43,21 +68,6 @@ $.extend(peernoteNS.docutils, {
           // The element is empty. Just append the text node.
           node.appendChild(newTextNode);
         }
-      } else {
-        // The caret is within a text node. We can just modify the text node
-        // to also cointain the new text.
-        var currText = node.nodeValue;
-        var newText = currText.substr(0, offset);
-        newText += text;
-        newText += currText.substr(offset);
-        node.nodeValue = newText;
-      }
-      // As soon as we've fucked with the nodes, we're going to lose our
-      // selection. We need to restore the selection.
-      s.removeAllRanges();
-      var range = document.createRange();
-      range.setStart(node, offset + text.length);
-      s.addRange(range);
     }
   }
 
