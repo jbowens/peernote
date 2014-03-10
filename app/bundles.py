@@ -7,6 +7,7 @@ assets = Environment(app)
 CSS BUNDLES
 """
 assets.register('base_css',
+    "include/font-awesome/css/font-awesome.min.css",
     Bundle(
         "scss/reset.scss",
         "scss/bootstrap.scss",
