@@ -15,7 +15,8 @@ class MarkdownParser(DocumentParser):
         md_file = ''
         # If there's a title, print it as a heading.
         if draft.title:
-            md_file = md_file + '## ' + draft.title + '\n\n'
+            md_file = md_file + draft.title + '\n'
+            md_file = md_file + ('=' * len(draft.title)) + '\n\n'
 
         text = draft.text
         # Markdown doesn't count separate paragraphs unless there are blank
