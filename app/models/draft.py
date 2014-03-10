@@ -16,6 +16,13 @@ class Draft(db.Model):
       """
       return self.text.split('\n')
 
+    def get_filename_base(self):
+        """
+        Returns a copy of the title that could be used as the base
+        of a filename.
+        """
+        title = self.title if self.title else 'Untitled'
+        return ''.join(ch for ch in title if ch.isalnum())
 
     @classmethod
     def next_draft(cls, draft):
