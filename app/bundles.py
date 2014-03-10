@@ -167,6 +167,7 @@ assets.register('splash_js',
 
 assets.register('editor_js',
     Bundle(
+        "js/essays/docutils.js",
         "js/widgets/essays_list.js",
         "js/essays/editor.js",
         filters="rjsmin",
@@ -189,6 +190,7 @@ assets.register('reviewer_js',
     "js/include/jquery-ui-1.10.4.custom.min.js",
     "js/include/jquery.qtip-1.0.0-rc3.js",
     Bundle(
+        "js/essays/docutils.js",
         "js/reviews/review.js",
         filters="rjsmin",
         output="gen/reviewer.js"
