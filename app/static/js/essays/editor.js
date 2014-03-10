@@ -384,15 +384,13 @@ $.extend(peernoteNS.essays, {
           var percent = $(this).html();
           $('.page-container').css('zoom', percent);
           $('.curr-zoom').html(percent + " <i class='fa fa-caret-down zoom-click'></i>");
-          var scale = $(this).attr('scale');
-          $('.content').css('line-height', (scale * 24) + 'px')
       });
 
       // update line height
       $('.line-height').click(function(e) {
           $('.spacing').hide();
           var scale = $(this).attr('scale');
-          $('.content').css('line-height', scale + 'em');
+          $('.content').css('line-height', scale);
       });
   },
 
