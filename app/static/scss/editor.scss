@@ -437,8 +437,9 @@ ul.essay-container {
             padding: 80px;
             outline: none;
             font-weight: 500;
-            line-height: 18px;
+            line-height: 1.5;
             overflow-y: auto;
+            white-space: pre-wrap;
         }
     }
 

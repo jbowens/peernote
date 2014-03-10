@@ -41,6 +41,9 @@ app/static/gen/*.js
 app/static/.webassets-cache/*
 !app/static/.webassets-cache/.gitignore
 
+# Log files
+*.log
+
 # etc
 *.swp
 .DS_Store

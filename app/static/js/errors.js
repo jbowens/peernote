@@ -2,7 +2,7 @@ var peernoteNS = peernoteNS || {};
 peernoteNS.errors = {
 
   record: function(err, isWarning) {
-    isWarning = isWarning ? true : false;
+    isWarning = !!isWarning;
     var data = {
       'url': window.location.toString(),
       'path': window.location.pathname,
