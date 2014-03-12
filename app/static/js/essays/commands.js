@@ -14,6 +14,15 @@ $.extend(peernoteNS.commands, {
   // The redo stack of commands
   _redo_stack: [],
 
+  // command types enum
+  TYPES: {
+    UNDEFINED:  0,
+    TEXT:       1,
+    BOLD:       2,
+    ITALIC:     3,
+    UNDERLINE:  4
+  },
+
   /*
    * Performs the given command and adds it to the undo stack.
    *
@@ -21,7 +30,7 @@ $.extend(peernoteNS.commands, {
    */
   execute: function(cmd) {
     // Verify that the command object is valid.
-    if (!cmd.execute || !cmd.revert) {
+    if (!cmd.execute || !cmd.revert || !cmd.type) {
       peernoteNS.errors.record({'msg': 'Attempted to execute a non command object: ' + cmd});
       return false;
     }

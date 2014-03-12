@@ -9,6 +9,76 @@ var peernoteNS = peernoteNS || {};
 peernoteNS.docutils = peernoteNS.docutils || {};
 $.extend(peernoteNS.docutils, {
 
+  /* Retrieves the current position of the caret (or selection)
+   * in terms of plain text offset. Returns an object with information
+   * including whether it's a selection or not, and offsets.
+   *
+   * @param doc  the document to find the selection position within.
+   * @return an object with start and end positions, or false if the
+   *         focus is not currently on the document.
+   */
+  getCaretPosition: function(doc) {
+    var s = document.getSelection();
+    var pos = {
+      isSelection: s.anchorNode != s.focusNode || s.anchorOffset != s.focusOffset,
+      start: this.getOffset(doc, s.anchorNode, s.anchorOffset),
+      end: this.getOffset(doc, s.focusNode, s.focusOffset)
+    };
+
+    if (pos.start === false && pos.end === false) {
+      // The selection is not even within the document.
+      return false;
+    }
+
+    pos.text = pos.isSelection ? s.toString() : '';
+
+    return pos;
+  },
+
+  /* Calculates the text offset of an offset within a node. This is useful
+   * for converting cursor positions to text offsets.
+   *
+   * @param doc the parent doc DOM element
+   * @param node the node to calculate the offset of
+   * @param nodeOffset the offset within the given node
+   *
+   * @return the text offset of the given node offset position, or false
+   *         if the node was never found.
+   */
+  getOffset: function(doc, node, nodeOffset) {
+    var offset = 0;
+
+    // Do a depth first search on the document, counting text
+    // characters as we go.
+    var toVisit = [doc];
+    var found = false;
+    while (toVisit.length > 0) {
+      var curr = toVisit.pop();
+
+      if (curr == node) {
+        // We found the node we were looking for. Break out.
+        found = true;
+        break;
+      }
+
+      if (curr.nodeType == 3) {
+        // This is a text node. Just add its characters.
+        offset += curr.nodeValue.length;
+      } else {
+        // This is an element. We should descend into its children.
+        if (curr.childNodes.length) {
+          // Push them in the opposite order so that the first child is
+          // the first thing on the stack.
+          for (var i = curr.childNodes.length - 1; i >= 0; --i) {
+            toVisit.push(curr.childNodes[i]);
+          }
+        }
+      }
+    }
+  
+    return found ? offset + nodeOffset : false;
+  },
+
   /* This function will insert plain text into the document at
    * the current cursor location. If the user currently has a
    * selection, then the selection will be replaced with the
