@@ -35,6 +35,42 @@ $.extend(peernoteNS.docutils, {
     return pos;
   },
 
+  /* Traverses the document, finding the node at the given plain
+   * text offset. This function is the inverse of docutils.getOffset().
+   * It will return resulting node and nodeOffset in an object, or
+   * return false if the document isn't long enough for textOffset.
+   *
+   * @param doc  the document to search within
+   * @param textOffset  the text offset to search for
+   * @return an object with 'node' and 'nodeOffset' members, or
+   *         false if textOffset is longer than the document.
+   */
+  getNodeAtOffset: function(doc, textOffset) {
+    var target = null;
+    var toVisit = [doc];
+    while (toVisit.length > 0) {
+      var curr = toVisit.pop();
+      if (curr.nodeType == 3) {
+        var len = curr.nodeValue.length;
+        if (textOffset > len) {
+          // The node we're looking for is later than this.
+          textOffset -= len;
+        } else {
+          // This is the node we're looking for.
+          target = curr;
+          break;
+        }
+      } else {
+        // This is an element. We should descend into its children.
+        for (var i = curr.childNodes.length - 1; i >= 0; --i) {
+          toVisit.push(curr.childNodes[i]);
+        }
+      }
+    }
+
+    return target ? {node: target, nodeOffset: textOffset} : false;
+  },
+
   /* Calculates the text offset of an offset within a node. This is useful
    * for converting cursor positions to text offsets.
    *
@@ -66,12 +102,10 @@ $.extend(peernoteNS.docutils, {
         offset += curr.nodeValue.length;
       } else {
         // This is an element. We should descend into its children.
-        if (curr.childNodes.length) {
-          // Push them in the opposite order so that the first child is
-          // the first thing on the stack.
-          for (var i = curr.childNodes.length - 1; i >= 0; --i) {
-            toVisit.push(curr.childNodes[i]);
-          }
+        // Push them in the opposite order so that the first child is
+        // the first thing on the stack.
+        for (var i = curr.childNodes.length - 1; i >= 0; --i) {
+          toVisit.push(curr.childNodes[i]);
         }
       }
     }
