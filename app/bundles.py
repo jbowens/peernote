@@ -170,7 +170,7 @@ assets.register('editor_js',
     Bundle(
         "js/essays/docutils.js",
         "js/widgets/essays_list.js",
-        "js/essays/editor.js",
+        "js/essays/controller.js",
         filters="rjsmin",
         output="gen/editor.js"
     )
