@@ -32,16 +32,11 @@ def email_a_review():
 
         draft = Draft.query.filter_by(did=did).first()
 
-        if not draft or draft.uid != g.user.uid or draft.finalized:
-            return jsonify(error="Bad params"), 400
+        if not draft or draft.uid != g.user.uid:
+            return jsonify(error="Invalid draft"), 400
 
         if not validate_email(email):
             return jsonify(error="Invalid email"), 400
-
-        # finalize the draft
-        draft.finalized = True
-        db.session.add(draft)
-        db.session.flush()
 
         # create review pointing to the draft
         review = Review()
@@ -60,12 +55,19 @@ def email_a_review():
         review.urlhash = gen_hash
 
         db.session.add(review)
-        db.session.flush()
 
-        # make a new draft for the writer
-        new_draft = Draft.next_draft(draft)
-        db.session.add(new_draft)
-        db.session.commit()
+        # if the draft was not finalized, finalize it and create a new one
+        if not draft.finalized:
+            draft.finalized = True
+            db.session.add(draft)
+            db.session.flush()
+
+            # make a new draft for the writer
+            new_draft = Draft.next_draft(draft)
+            db.session.add(new_draft)
+            db.session.commit()
+        else:
+            db.session.commit()
 
         # send emailz
         params = {
