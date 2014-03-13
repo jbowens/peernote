@@ -76,20 +76,27 @@ $.extend(peernoteNS.essays, {
 
     $.post('/api/next_draft', params, function(data) {
       if (data.status == "success") {
-
-        // Next draft created in backend, update timeline to show new draft
-        _this.drafts.push(data.did);
-        var $newLi = $('<li> <a> Draft ' + data.version + '</a> </li>');
-        $newLi.hide();
-        $('.timeline ul').append($newLi);
-        $newLi.slideDown();
-        $newLi.click({i: _this.drafts.length - 1, clicked: $newLi}, _this.selectDraft);
-
-        $newLi.click();
+        _this.addNewDraftAndOpen(data.did, data.version);
       } else {
         console.log("Error creating new draft: " + data['error']);
+        peernoteNS.displayErrorFlash('Error creating new draft');
       }
     });
+  },
+
+  /*
+   * Given a dreft id and a version number, appends a draft to the timeline
+   * and emulates a click on the new draft to open it.
+   */
+  addNewDraftAndOpen: function(did, version) {
+    this.drafts.push(did);
+    var $newLi = $('<li> <a> Draft ' + version + '</a> </li>');
+    $newLi.hide();
+    $('.timeline ul').append($newLi);
+    $newLi.slideDown();
+    $newLi.click({i: this.drafts.length - 1, clicked: $newLi}, this.selectDraft);
+
+    $newLi.click();
   },
 
   keydown: function(e) {
@@ -185,12 +192,20 @@ $.extend(peernoteNS.essays, {
       $.post('/api/email_a_review', params, function(data) {
         formSubmitting = false;
         if (data.status == "success") {
-          // TODO: for now, just kick out to /essays. In the future
-          // will be better to just fux with essay timeline
-          window.location = "/essays";
+          if (data.new_did != null && data.new_version != null) {
+            // If emailing the review finalized a draft, add to draft timeline
+            _this.addNewDraftAndOpen(data.new_did, data.new_version);
+          }
+          peernoteNS.displayFlash('Review sent');
+        } else {
+          console.log("Error emailing review : " + data['error']);
+          peernoteNS.displayErrorFlash('Error sending review');
         }
-      });
 
+        // hide the send review popup
+        $("#send-review-shadow").fadeOut(100, "linear");
+        $("html, body").css({"overflow": "visible"});
+      });
     });
   },
 

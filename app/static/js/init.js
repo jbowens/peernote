@@ -38,3 +38,16 @@ peernoteNS.init = function(cb) {
     }
   });
 };
+
+peernoteNS.displayFlash = function(text) {
+  $('.js-flash').text(text);
+  $('.js-flash').slideDown().delay(3000).slideUp();
+};
+
+peernoteNS.displayErrorFlash = function(text) {
+  $('.js-flash').text(text);
+  $('.js-flash').addClass('error-flash');
+  $('.js-flash').slideDown().delay(3000).slideUp(function() {
+    $('.js-flash').removeClass('error-flash');
+  });
+};
