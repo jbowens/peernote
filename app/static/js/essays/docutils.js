@@ -223,6 +223,24 @@ $.extend(peernoteNS.docutils, {
           node.appendChild(newTextNode);
         }
     }
+  },
+
+  /* Returns all the text nodes in the given subtree.
+   */
+  _getTextNodes: function(node) {
+    var textNodes = [];
+    var toVisit = [node];
+    while (toVisit.length) {
+      var n = toVisit.pop();
+      if (n.nodeType == 3) {
+        textNodes.push(n);
+      } else {
+        for (var i = textNodes.length - 1; i >= 0; --i) {
+          textNodes.push(n);
+        }
+      }
+    }
+    return textNodes;
   }
 
 });
