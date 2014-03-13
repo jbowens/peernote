@@ -9,6 +9,56 @@ var peernoteNS = peernoteNS || {};
 peernoteNS.docutils = peernoteNS.docutils || {};
 $.extend(peernoteNS.docutils, {
 
+  /* Finds all elements in the text offset range.
+   *
+   * @param doc the document to search in
+   * @param start  start offset
+   * @param eend  end offset
+   * @return a list of elements in the range
+   */
+  getRange: function(doc, start, end) {
+    // Nodes within the region.
+    var nodes = [];
+
+    var offset = 0;
+    var toVisit = [doc];
+    var found = false;
+    while (toVisit.length > 0) {
+      var curr = toVisit.pop();
+      var s = offset;
+      var e = s + (curr.nodeType == 3 ? curr.length : curr.innerText.length);
+
+      if (curr.nodeType == 3) {
+        if (!(e < start || s > end)) {
+          nodes.push(curr);
+        }
+        // This is a text node. Just add its characters.
+        offset += curr.length;
+      } else {
+        if (s >= start && e <= end) {
+          // This element is completely contained within the range.
+          nodes.push(curr);
+        }
+        else {
+          // This is an element. We should descend into its children.
+          // Push them in the opposite order so that the first child is
+          // the first thing on the stack.
+          for (var i = curr.childNodes.length - 1; i >= 0; --i) {
+            toVisit.push(curr.childNodes[i]);
+          }
+        }
+      }
+    }
+
+    var startPos = this.getNodeAtOffset(doc, start);
+    var endPos = this.getNodeAtOffset(doc, end);
+    return {
+      nodes: nodes,
+      startOffset: startPos.nodeOffset, 
+      endOffset: endPos.nodeOffset
+    };
+  },
+
   /* Retrieves the current position of the caret (or selection)
    * in terms of plain text offset. Returns an object with information
    * including whether it's a selection or not, and offsets.
