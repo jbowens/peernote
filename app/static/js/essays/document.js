@@ -47,6 +47,58 @@ $.extend(peernoteNS.doc, {
     }
   },
 
+  render: function() {
+    // Covert the modifiers into a more digestible format.
+    var breaks = [];
+    for (var i = 0; i < this._modifiers.length; ++i) {
+      breaks.push({
+        type: this._modifiers[i].type,
+        isStart: true,
+        pos: this._modifiers[i].start
+      });
+      breaks.push({
+        type: this._modifiers[i].type,
+        isStart: false,
+        pos: this._modifiers[i].end
+      });
+    }
+    // Sort the breaks by position, ascending
+    breaks.sort(function(a, b) { return a.pos - b.pos; });
+
+    var lastIndex = 0;
+    var activeModifiers = [];
+    var root = document.createElement('div');
+    for (var i = 0; i < breaks.length; ++i) {
+      var b = breaks[i];
+      var span = this._makeNode(activeModifiers, lastIndex, b.pos);
+      root.appendChild(span);
+
+      if (b.isStart) {
+        activeModifiers.push(b.type);
+      } else {
+        activeModifiers.splice($.inArray(b.type, activeModifiers), 1);
+      }
+      lastIndex = b.pos;
+    }
+
+    // Add the last node
+    var span = this._makeNode(activeModifiers, lastIndex, this._text.length);
+    root.appendChild(span);
+
+    return root;
+  },
+
+  _makeNode: function(activeModifiers, start, end) {
+    var span = document.createElement('span');
+    var txt = this._text.substr(start, end);
+    var txtNode = document.createTextNode(txt);
+    span.appendChild(txtNode);
+    for (var j = 0; j < activeModifiers.length; ++j) {
+      $(span).addClass(activeModifiers[j]);
+    }
+    return span;
+  },
+
   /* Retrieves all modifiers in effect at the given text position.
    *
    * @param position the text offset we're looking up
@@ -81,4 +133,8 @@ $.extend(peernoteNS.doc, {
     return null;
   }
 
+});
+
+peernoteNS.init(function() {
+  peernoteNS.doc._text = $('.page-container .content')[0].innerText;
 });

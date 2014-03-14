@@ -169,6 +169,7 @@ assets.register('splash_js',
 
 assets.register('editor_js',
     Bundle(
+        "js/essays/document.js",
         "js/essays/commands.js",
         "js/essays/docutils.js",
         "js/widgets/essays_list.js",
