@@ -69,13 +69,19 @@ $.extend(peernoteNS.doc, {
     if (startMod && endMod && startMod == endMod) {
       // There's one big modifier that extends over this interval. We need to split it
       // into two modifiers.
-      var newModifier = {
-        type: modifierType,
-        start: end,
-        end: endMod.end
-      };
+      if (endMod.end > end) {
+        var newModifier = {
+          type: modifierType,
+          start: end,
+          end: endMod.end
+        };
+        this._modifiers.push(newModifier);
+      }
       startMod.end = start;
-      this._modifiers.push(newModifier);
+      if (startMod.end == startMod.start) {
+        // This is a zero-length modifier. Just remove it.
+        this._modifiers.splice($.inArray(startMod, this._modifiers), 1);
+      }
     } else {
       if (startMod) {
         // Make the modifier at the beginning end earlier.
@@ -86,7 +92,6 @@ $.extend(peernoteNS.doc, {
         endMod.start = end;
       }
     }
-
   },
 
   render: function() {
