@@ -6,9 +6,6 @@
         <div class="nav-section">
             <div class="page-width">
                 <h1>{% block page_title %}{{ page_title }}{% endblock %}</h1>
-                {% if nav_extra=="dashboard" %}
-                    <div class="new-doc-button"><i class="fa fa-plus"></i>New Document</div>
-                {% endif %}
             </div>
         </div>
         {% block content %} {% endblock %}
