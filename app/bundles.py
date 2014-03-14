@@ -97,6 +97,7 @@ assets.register('login_css',
 
 assets.register('editor_css',
     Bundle(
+        "scss/editor-modifiers.scss",
         "scss/widgets/essays_list.scss",
         "scss/editor.scss",
         filters="scss,cssmin",

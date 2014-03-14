@@ -85,6 +85,9 @@ $.extend(peernoteNS.doc, {
     var span = this._makeNode(activeModifiers, lastIndex, this._text.length);
     root.appendChild(span);
 
+    var content = $('.page-container .page')[0];
+    $(content).empty();
+    content.appendChild(root);
     return root;
   },
 
@@ -94,7 +97,7 @@ $.extend(peernoteNS.doc, {
     var txtNode = document.createTextNode(txt);
     span.appendChild(txtNode);
     for (var j = 0; j < activeModifiers.length; ++j) {
-      $(span).addClass(activeModifiers[j]);
+      $(span).addClass('mod-' + activeModifiers[j]);
     }
     return span;
   },
