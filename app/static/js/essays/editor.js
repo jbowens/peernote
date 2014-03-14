@@ -12,23 +12,23 @@ $.extend(peernoteNS.editor, {
     return sel;
   },
   
-  bold: function(e) {
+  bold: peernoteNS.errors.wrap(function(e) {
     var sel = peernoteNS.editor._getSel();
     peernoteNS.doc.applyModifier('bold', sel.start, sel.end);
     peernoteNS.doc.render();
-  },
+  }),
 
-  italic: function(e) {
+  italic: peernoteNS.errors.wrap(function(e) {
     var sel = peernoteNS.editor._getSel();
     peernoteNS.doc.applyModifier('italic', sel.start, sel.end);
     peernoteNS.doc.render();
-  },
+  }),
 
-  underline: function(e) {
+  underline: peernoteNS.errors.wrap(function(e) {
     var sel = peernoteNS.editor._getSel();
     peernoteNS.doc.applyModifier('underline', sel.start, sel.end);
     peernoteNS.doc.render();
-  },
+  }),
 
   initDocument: function() {
     var docContainer = $('.page-container .page')[0];
