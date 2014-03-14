@@ -86,9 +86,9 @@ $.extend(peernoteNS.editor, {
 
   initToolbar: function() {
     var toolbar = $('.toolbar');
-    toolbar.find('.fa-bold').click(peernoteNS.editor.bold);
-    toolbar.find('.fa-italic').click(peernoteNS.editor.italic);
-    toolbar.find('.fa-underline').click(peernoteNS.editor.underline);
+    toolbar.find('button.bold').click(peernoteNS.editor.bold);
+    toolbar.find('button.italic').click(peernoteNS.editor.italic);
+    toolbar.find('button.underline').click(peernoteNS.editor.underline);
     toolbar.find('button#undo').click(peernoteNS.editor.undo);
     toolbar.find('button#redo').click(peernoteNS.editor.redo);
   }
