@@ -66,6 +66,14 @@ $.extend(peernoteNS.editor, {
     peernoteNS.commands.execute(cmd);
   }),
 
+  undo: peernoteNS.errors.wrap(function(e) {
+    peernoteNS.commands.undo();
+  }),
+
+  redo: peernoteNS.errors.wrap(function(e) {
+    peernoteNS.commands.redo();
+  }),
+
   initDocument: function() {
     var docContainer = $('.page-container .page')[0];
     this._doc = docContainer;
@@ -75,10 +83,11 @@ $.extend(peernoteNS.editor, {
 
   initToolbar: function() {
     var toolbar = $('.toolbar');
-    // TODO: Setup error reporting for handlers
     toolbar.find('.fa-bold').click(peernoteNS.editor.bold);
     toolbar.find('.fa-italic').click(peernoteNS.editor.italic);
     toolbar.find('.fa-underline').click(peernoteNS.editor.underline);
+    toolbar.find('button#undo').click(peernoteNS.editor.undo);
+    toolbar.find('button#redo').click(peernoteNS.editor.redo);
   }
 });
 

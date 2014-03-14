@@ -26,15 +26,16 @@ $.extend(peernoteNS.doc, {
     }
 
     if (startMod && endMod) {
+      if (startMod == endMod) {
+        /* This region already has the given modifier type applied by a
+         * single modifier. There's no need to do anything. */
+        return;
+      }
       /* This modifier is already applied on both the start and end times.
        * We should just coalesce them into one modifier. */
       startMod.end = endMod.end;
       // Remove the end modifier
       this._modifiers.splice($.inArray(endMod, this._modifiers), 1);
-      // Reparent the end modifier's nodes
-      for (var i = 0; i < endMod.nodes.length; i++) {
-        startMod.nodes.push(endMod.nodes[i]);
-      }
     } else if (startMod) {
       startMod.end = end;
     } else if (endMod) {
@@ -43,11 +44,49 @@ $.extend(peernoteNS.doc, {
       var newModifier = {
         type: modifierType,
         start: start,
-        end: end,
-        nodes: []
+        end: end
       };
       this._modifiers.push(newModifier);
     }
+  },
+
+  /* Removes the all modifiers of the given type over the given range.
+   *
+   * @param modiferType the type of modifier to remvoe
+   * @param start the start text offset
+   * @param end the ending text offset
+   */
+  removeModifier: function(modifierType, start, end) {
+    var startMod = this._getModifierOfTypeAt(modifierType, start);
+    var endMod = this._getModifierOfTypeAt(modifierType, end);
+
+    // Delete modifiers completely contained within the interval.
+    var defuntModifiers = this._getModifiersOfTypeWithinRange(modifierType, start, end);
+    for (var i = 0; i < defuntModifiers.length; ++i) {
+      this._modifiers.splice($.inArray(defuntModifiers[i], this._modifiers), 1);
+    }
+
+    if (startMod && endMod && startMod == endMod) {
+      // There's one big modifier that extends over this interval. We need to split it
+      // into two modifiers.
+      var newModifier = {
+        type: modifierType,
+        start: end,
+        end: endMod.end
+      };
+      startMod.end = start;
+      this._modifiers.push(newModifier);
+    } else {
+      if (startMod) {
+        // Make the modifier at the beginning end earlier.
+        startMod.end = start;
+      }
+      if (endMod) {
+        // Make the modifier on the end start later.
+        endMod.start = end;
+      }
+    }
+
   },
 
   render: function() {
