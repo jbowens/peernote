@@ -93,7 +93,7 @@ $.extend(peernoteNS.doc, {
 
   _makeNode: function(activeModifiers, start, end) {
     var span = document.createElement('span');
-    var txt = this._text.substr(start, end);
+    var txt = this._text.substr(start, end - start);
     var txtNode = document.createTextNode(txt);
     span.appendChild(txtNode);
     for (var j = 0; j < activeModifiers.length; ++j) {
@@ -136,8 +136,4 @@ $.extend(peernoteNS.doc, {
     return null;
   }
 
-});
-
-peernoteNS.init(function() {
-  peernoteNS.doc._text = $('.page-container .content')[0].innerText;
 });
