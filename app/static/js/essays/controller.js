@@ -197,15 +197,15 @@ $.extend(peernoteNS.essays, {
             _this.addNewDraftAndOpen(data.new_did, data.new_version);
           }
           peernoteNS.displayFlash('Review sent');
-        } else {
-          console.log("Error emailing review : " + data['error']);
-          peernoteNS.displayErrorFlash('Error sending review');
         }
-
-        // hide the send review popup
-        $("#send-review-shadow").fadeOut(100, "linear");
-        $("html, body").css({"overflow": "visible"});
+      }).fail(function() {
+        formSubmitting = false;
+        peernoteNS.displayErrorFlash('Error sending review');
       });
+
+      // hide the send review popup
+      $("#send-review-shadow").fadeOut(100, "linear");
+      $("html, body").css({"overflow": "visible"});
     });
   },
 
