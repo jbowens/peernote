@@ -80,6 +80,13 @@ $.extend(peernoteNS.docutils, {
       return false;
     }
 
+    // Reverse start and end if they're backwards.
+    if (pos.start > pos.end) {
+      var tmp = pos.end;
+      pos.end = pos.start;
+      pos.start = tmp;
+    }
+
     pos.text = pos.isSelection ? s.toString() : '';
 
     return pos;
