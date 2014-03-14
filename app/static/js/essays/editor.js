@@ -14,20 +14,56 @@ $.extend(peernoteNS.editor, {
   
   bold: peernoteNS.errors.wrap(function(e) {
     var sel = peernoteNS.editor._getSel();
-    peernoteNS.doc.applyModifier('bold', sel.start, sel.end);
-    peernoteNS.doc.render();
+    var apply = function() {
+      peernoteNS.doc.applyModifier('bold', sel.start, sel.end);
+      peernoteNS.doc.render();
+    };
+    var unapply = function() {
+      peernoteNS.doc.removeModifier('bold', sel.start, sel.end);
+      peernoteNS.doc.render();
+    };
+    var cmd = {
+      type: peernoteNS.commands.TYPES.BOLD,
+      execute: apply,
+      revert: unapply
+    };
+    peernoteNS.commands.execute(cmd);
   }),
 
   italic: peernoteNS.errors.wrap(function(e) {
     var sel = peernoteNS.editor._getSel();
-    peernoteNS.doc.applyModifier('italic', sel.start, sel.end);
-    peernoteNS.doc.render();
+    var apply = function() {
+      peernoteNS.doc.applyModifier('italic', sel.start, sel.end);
+      peernoteNS.doc.render();
+    };
+    var unapply = function() {
+      peernoteNS.doc.removeModifier('italic', sel.start, sel.end);
+      peernoteNS.doc.render();
+    };
+    var cmd = {
+      type: peernoteNS.commands.TYPES.ITALIC,
+      execute: apply,
+      revert: unapply
+    };
+    peernoteNS.commands.execute(cmd);
   }),
 
   underline: peernoteNS.errors.wrap(function(e) {
     var sel = peernoteNS.editor._getSel();
-    peernoteNS.doc.applyModifier('underline', sel.start, sel.end);
-    peernoteNS.doc.render();
+    var apply = function() {
+      peernoteNS.doc.applyModifier('underline', sel.start, sel.end);
+      peernoteNS.doc.render();
+    };
+    var unapply = function() {
+      peernoteNS.doc.removeModifier('underline', sel.start, sel.end);
+      peernoteNS.doc.render();
+    };
+    var cmd = {
+      type: peernoteNS.commands.TYPES.UNDERLINE,
+      execute: apply,
+      revert: unapply
+    };
+    peernoteNS.commands.execute(cmd);
   }),
 
   initDocument: function() {

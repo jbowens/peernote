@@ -16,7 +16,7 @@ $.extend(peernoteNS.commands, {
 
   // command types enum
   TYPES: {
-    UNDEFINED:  0,
+    UNDEFINE:   0,
     TEXT:       1,
     BOLD:       2,
     ITALIC:     3,
