@@ -149,9 +149,9 @@ JAVASCRIPT BUNDLES
 assets.register('base_js',
     "js/include/jquery-2.1.0.min.js",
     Bundle(
+        "js/errors.js",
         "js/init.js",
         "js/navbar.js",
-        "js/errors.js",
         filters="rjsmin",
         output="gen/base.js"
     )
