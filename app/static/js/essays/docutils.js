@@ -9,37 +9,6 @@ var peernoteNS = peernoteNS || {};
 peernoteNS.docutils = peernoteNS.docutils || {};
 $.extend(peernoteNS.docutils, {
 
-  toggleInlineClass: function(doc, className, start, end) {
-    var range = this.getRange(doc, start, end);
-
-    if (range.nodes.length == 1) {
-      // We're just splitting a *single* node.
-      var toSplit = range.nodes[0];
-      var parentNode = toSplit.parentNode;
-      var txtNodes = this._splitTextNode(toSplit);
-      var span = document.createElement('span');
-      $(span).addClass(className);
-      span.appendChild(txtNodes.middle);
-
-      // Insert the leading text node if it exists
-      if (txtNodes.leading)
-        parentNode.insertBefore(txtNodes.leading, toSplit);
-      // Insert the span we created
-      parentNode.insertBefore(span, toSplit);
-      // Insert trailing text node if it exists
-      if (txtNodes.trailing)
-        parentNode.insertBefore(txtNodes.trailing, toSplit);
-      // Remove the old text node from the DOM.
-      parentNode.removeChild(toSplit);
-    } else {
-      //
-
-
-
-
-    }
-  },
-
   /* Finds all elements in the text offset range.
    *
    * @param doc the document to search in
