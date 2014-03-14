@@ -19,8 +19,11 @@ $.extend(peernoteNS.doc, {
     var startMod = this._getModifierOfTypeAt(modifierType, start);
     var endMod = this._getModifierOfTypeAt(modifierType, end);
 
-    // TODO: Handle modifiers completely contained within 
-    // (start, end) that we're not removing.
+    // Delete modifiers completely contained within the interval.
+    var defuntModifiers = this._getModifiersOfTypeWithinRange(modifierType, start, end);
+    for (var i = 0; i < defuntModifiers.length; ++i) {
+      this._modifiers.splice($.inArray(defuntModifiers[i], this._modifiers), 1);
+    }
 
     if (startMod && endMod) {
       /* This modifier is already applied on both the start and end times.
@@ -134,6 +137,28 @@ $.extend(peernoteNS.doc, {
       }
     }
     return null;
-  }
+  },
+
+  /* Retrieves modifiers within the given range of the given type. It only
+   * includes modifiers that are COMPLETELY contained within the interval.
+   * It does not include modifiers that start or end exactly on the bounds
+   * of the interval.
+   * 
+   * @param modifierType the type of modifier to lookup
+   * @param start the start offset
+   * @param end the end offset
+   * @return a list of modifiers
+   */
+  _getModifiersOfTypeWithinRange: function(modifierType, start, end) {
+    var mods = [];
+    for (var i = 0; i < this._modifiers.length; ++i) {
+      if (this._modifiers[i].start > start && 
+          this._modifiers[i].end < end &&
+          this._modifiers[i].type == modifierType) {
+        mods.push(this._modifiers[i]);
+      }
+    }
+    return mods;
+  },
 
 });
