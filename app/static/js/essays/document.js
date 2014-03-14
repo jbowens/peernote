@@ -149,8 +149,19 @@ $.extend(peernoteNS.doc, {
     root.appendChild(span);
 
     var content = $('.page-container .page')[0];
+    // Save the selection for after we rerender.
+    var selection = peernoteNS.docutils.getCaretPosition(content);
+
     $(content).empty();
     content.appendChild(root);
+
+    // Re-rendering the document will have cleared the selection.
+    // We should restore it.
+    if (selection.isSelection)
+      peernoteNS.docutils.setSelection(content, selection.start, selection.end);
+    else
+      peernoteNS.docutils.setSelection(content, selection.start);
+
     return root;
   },
 
