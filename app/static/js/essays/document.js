@@ -9,6 +9,22 @@ $.extend(peernoteNS.doc, {
 
   _modifiers: [],
 
+  /* Finds all modifiers in effect at the given position.
+   *
+   * @param position the position to find modifiers for
+   * @return a list of all the modifiers in effect
+   */
+  getModifiers: function(position) {
+    var mods = [];
+    for (var i = 0; i < this._modifiers.length; ++i) {
+      if (this._modifiers[i].start <= position &&
+          this._modifiers[i].end >= position) {
+        mods.push(this._modifiers[i].type);
+      }
+    }
+    return mods;
+  },
+
   /* Applies the given modifier for the given range.
    *
    * @param modifierType the type of modifier to apply
