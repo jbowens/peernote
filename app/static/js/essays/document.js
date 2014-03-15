@@ -13,6 +13,16 @@ $.extend(peernoteNS.doc, {
     return this._text;
   },
 
+  /* Returns an object encapsulating the entire state of the
+   * document.
+   */
+  getState: function() {
+    return {
+      text: this._text,
+      modifiers: this._modifiers
+    };
+  },
+
   updateDocument: function(newText, position, charsDiff) {
     /* Update the raw plain text of the document. */
     this._text = newText;
