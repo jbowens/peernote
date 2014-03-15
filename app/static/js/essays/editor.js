@@ -13,6 +13,18 @@ $.extend(peernoteNS.editor, {
     var sel = peernoteNS.docutils.getCaretPosition(peernoteNS.editor._doc);
     return sel;
   },
+
+  /* Keypress handler for the editor. This function handles everything that
+   * should happen on key press in the editor.
+   */
+  keypress: peernoteNS.errors.wrap(function(e) {
+    // Update the document text.
+    if (peernoteNS.doc._text != peernoteNS.editor._doc.innerText) {
+      peernoteNS.doc._text = peernoteNS.editor._doc.innerText;
+      // Update all the modifiers.
+      console.log(e);
+    }
+  }),
   
   bold: peernoteNS.errors.wrap(function(e) {
     var sel = peernoteNS.editor._getSel();
@@ -103,6 +115,7 @@ $.extend(peernoteNS.editor, {
     this._doc = docContainer;
     peernoteNS.doc._text = docContainer.innerText;
     peernoteNS.doc.render();
+    $(docContainer).keypress(peernoteNS.editor.keypress);
   },
 
   initToolbar: function() {
