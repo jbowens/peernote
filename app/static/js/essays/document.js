@@ -9,6 +9,25 @@ $.extend(peernoteNS.doc, {
 
   _modifiers: [],
 
+  getText: function() {
+    return this._text;
+  },
+
+  updateDocument: function(newText, position, charsDiff) {
+    /* Update the raw plain text of the document. */
+    this._text = newText;
+
+    /* Update all modifiers with the new offsets. */
+    for (var i = 0; i < this._modifiers.length; ++i) {
+      if (this._modifiers[i].start >= position) {
+        this._modifiers[i].start += charsDiff;
+      }
+      if (this._modifiers[i].end >= position) {
+        this._modifiers[i].end += charsDiff;
+      }
+    }
+  },
+
   /* Finds all modifiers in effect at the given position.
    *
    * @param position the position to find modifiers for

@@ -19,10 +19,10 @@ $.extend(peernoteNS.editor, {
    */
   keypress: peernoteNS.errors.wrap(function(e) {
     // Update the document text.
-    if (peernoteNS.doc._text != peernoteNS.editor._doc.innerText) {
-      peernoteNS.doc._text = peernoteNS.editor._doc.innerText;
-      // Update all the modifiers.
-      console.log(e);
+    if (peernoteNS.doc.getText() != peernoteNS.editor._doc.innerText) {
+      var charDiff = peernoteNS.editor._doc.innerText.length - peernoteNS.doc._text.length;
+      var pos = peernoteNS.docutils.getCaretPosition(peernoteNS.editor._doc);
+      peernoteNS.doc.updateDocument(peernoteNS.editor._doc.innerText, pos.start - charDiff, charDiff);
     }
   }),
   
@@ -115,7 +115,7 @@ $.extend(peernoteNS.editor, {
     this._doc = docContainer;
     peernoteNS.doc._text = docContainer.innerText;
     peernoteNS.doc.render();
-    $(docContainer).keypress(peernoteNS.editor.keypress);
+    $(docContainer).keyup(peernoteNS.editor.keypress);
   },
 
   initToolbar: function() {
