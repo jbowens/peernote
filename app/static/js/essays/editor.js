@@ -39,9 +39,19 @@ $.extend(peernoteNS.editor, {
         peernoteNS.commands.execute(cmd);
       } else {
         // TODO: Maybe turn this into an undo-able command.
+        
+        var pos = peernoteNS.docutils.getCaretPosition(_this._doc);
+
+        // Check for out of date pending modifiers from other locations
+        if (_this._pendingModifiers.length &&
+            pos.start != _this._pendingModifiersPos) {
+          _this._pendingModifiers = [];
+        }
+
         var pendingIndex = $.inArray(modifierType, _this._pendingModifiers);
         if (pendingIndex == -1) {
           _this._pendingModifiers.push(modifierType);
+          _this._pendingModifiersPos = pos.start;
         } else {
           _this._pendingModifiers.splice(pendingIndex, 1);
         }
@@ -56,6 +66,7 @@ $.extend(peernoteNS.editor, {
  */
 $.extend(peernoteNS.editor, {
 
+  _pendingModifiersPos: null,
   _pendingModifiers: [],
 
   _doc: null,
@@ -79,6 +90,22 @@ $.extend(peernoteNS.editor, {
       peernoteNS.doc.updateDocument(_this._doc.innerText,
                                     pos.start - charDiff,
                                     charDiff);
+
+      if (_this._pendingModifiers.length && 
+          _this._pendingModifiersPos == pos.start - charDiff) {
+        if (charDiff > 0) {
+          // If they added characters, we should now wrap those characters
+          // in the pending modifiers.
+          for (var i = 0; i < _this._pendingModifiers.length; ++i) {
+            var type = _this._pendingModifiers[i];
+            peernoteNS.doc.applyModifier(type, pos.start-charDiff, pos.start);
+          }
+          // Re-render the document to reflect the new modifier.
+          peernoteNS.doc.render();
+        }
+        // Clear pending modifiers
+        _this._pendingModifiers = [];
+      }
     }
   }),
 
