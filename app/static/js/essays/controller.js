@@ -99,15 +99,6 @@ $.extend(peernoteNS.essays, {
     $newLi.click();
   },
 
-  keydown: function(e) {
-    // We want tabs to be treated as a literal tab characters,
-    // not for navigation.
-    if (e.keyCode == 9) {
-      e.preventDefault();
-      peernoteNS.docutils.insertRawTextAtCursor('\t');
-    }
-  },
-
   keystroke: function(e) {
     if (!peernoteNS.essays.enable_autosave) {
         return;
@@ -131,7 +122,6 @@ $.extend(peernoteNS.essays, {
   initEditor: function() {
     var _this = this;
     $('.page-container').keyup(_this.keystroke);
-    $('.page-container .content').keydown(_this.keydown);
 
     // undo functionality
     $('#undo').click(function() {

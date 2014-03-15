@@ -65,11 +65,12 @@ $.extend(peernoteNS.editor, {
     return sel;
   },
 
-  /* Keypress handler for the editor. This function handles everything that
+  /* Keyup handler for the editor. This function handles everything that
    * should happen on key press in the editor.
    */
-  keypress: peernoteNS.errors.wrap(function(e) {
+  keyup: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.editor;
+
     // Did the document change?
     if (peernoteNS.doc.getText() != _this._doc.innerText) {
       var charDiff = _this._doc.innerText.length - peernoteNS.doc._text.length;
@@ -78,6 +79,17 @@ $.extend(peernoteNS.editor, {
       peernoteNS.doc.updateDocument(_this._doc.innerText,
                                     pos.start - charDiff,
                                     charDiff);
+    }
+  }),
+
+  /* Keydown handler for the editor.
+   */
+  keydown: peernoteNS.errors.wrap(function(e) {
+    // We want tabs to be treated as a literal tab characters,
+    // not for navigation.
+    if (e.keyCode == 9) {
+      e.preventDefault();
+      peernoteNS.docutils.insertRawTextAtCursor('\t');
     }
   }),
 
@@ -114,7 +126,8 @@ $.extend(peernoteNS.editor, {
     this._doc = docContainer;
     peernoteNS.doc._text = docContainer.innerText;
     peernoteNS.doc.render();
-    $(docContainer).keyup(peernoteNS.editor.keypress);
+    $(docContainer).keyup(peernoteNS.editor.keyup);
+    $(docContainer).keydown(peernoteNS.editor.keydown);
   },
 
   initToolbar: function() {
