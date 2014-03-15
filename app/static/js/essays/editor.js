@@ -5,6 +5,8 @@ var peernoteNS = peernoteNS || {};
 peernoteNS.editor = peernoteNS.editor || {};
 $.extend(peernoteNS.editor, {
 
+  _pendingModifiers: [],
+
   _doc: null,
 
   _getSel: function() {
@@ -14,59 +16,78 @@ $.extend(peernoteNS.editor, {
   
   bold: peernoteNS.errors.wrap(function(e) {
     var sel = peernoteNS.editor._getSel();
-    var isApply = $.inArray('bold', peernoteNS.doc.getModifiers(sel.start)) == -1;
-    var apply = function() {
-      peernoteNS.doc.applyModifier('bold', sel.start, sel.end);
-      peernoteNS.doc.render();
-    };
-    var unapply = function() {
-      peernoteNS.doc.removeModifier('bold', sel.start, sel.end);
-      peernoteNS.doc.render();
-    };
-    var cmd = {
-      type: peernoteNS.commands.TYPES.BOLD,
-      execute: isApply ? apply : unapply,
-      revert: isApply ? unapply : apply
-    };
-    peernoteNS.commands.execute(cmd);
+    if (sel.isSelection) {
+      var isApply = $.inArray('bold', peernoteNS.doc.getModifiers(sel.start)) == -1;
+      var apply = function() {
+        peernoteNS.doc.applyModifier('bold', sel.start, sel.end);
+        peernoteNS.doc.render();
+      };
+      var unapply = function() {
+        peernoteNS.doc.removeModifier('bold', sel.start, sel.end);
+        peernoteNS.doc.render();
+      };
+      var cmd = {
+        type: peernoteNS.commands.TYPES.BOLD,
+        execute: isApply ? apply : unapply,
+        revert: isApply ? unapply : apply
+      };
+      peernoteNS.commands.execute(cmd);
+    } else {
+      // TODO: Maybe turn this into an undo-able command.
+      if ($.inArray('bold', peernoteNS.editor._pendingModifiers) == -1) {
+        peernoteNS.editor._pendingModifiers.push('bold');
+      } else {
+        peernoteNS.editor._pendingModifiers.splice($.inArray('bold', peernoteNS.editor._pendingModifiers), 1);
+      }
+    }
   }),
 
   italic: peernoteNS.errors.wrap(function(e) {
     var sel = peernoteNS.editor._getSel();
-    var isApply = $.inArray('italic', peernoteNS.doc.getModifiers(sel.start)) == -1;
-    var apply = function() {
-      peernoteNS.doc.applyModifier('italic', sel.start, sel.end);
-      peernoteNS.doc.render();
-    };
-    var unapply = function() {
-      peernoteNS.doc.removeModifier('italic', sel.start, sel.end);
-      peernoteNS.doc.render();
-    };
-    var cmd = {
-      type: peernoteNS.commands.TYPES.ITALIC,
-      execute: isApply ? apply : unapply,
-      revert: isApply ? unapply : apply
-    };
-    peernoteNS.commands.execute(cmd);
+    if (sel.isSelection) {
+      var isApply = $.inArray('italic', peernoteNS.doc.getModifiers(sel.start)) == -1;
+      var apply = function() {
+        peernoteNS.doc.applyModifier('italic', sel.start, sel.end);
+        peernoteNS.doc.render();
+      };
+      var unapply = function() {
+        peernoteNS.doc.removeModifier('italic', sel.start, sel.end);
+        peernoteNS.doc.render();
+      };
+      var cmd = {
+        type: peernoteNS.commands.TYPES.ITALIC,
+        execute: isApply ? apply : unapply,
+        revert: isApply ? unapply : apply
+      };
+      peernoteNS.commands.execute(cmd);
+    } else {
+      // TODO: Maybe turn this into an undo-able command.
+      peernoteNS.editor._pendingModifiers.push('italic');
+    }
   }),
 
   underline: peernoteNS.errors.wrap(function(e) {
     var sel = peernoteNS.editor._getSel();
-    var isApply = $.inArray('underline', peernoteNS.doc.getModifiers(sel.start)) == -1;
-    var apply = function() {
-      peernoteNS.doc.applyModifier('underline', sel.start, sel.end);
-      peernoteNS.doc.render();
-    };
-    var unapply = function() {
-      peernoteNS.doc.removeModifier('underline', sel.start, sel.end);
-      peernoteNS.doc.render();
-    };
-    var cmd = {
-      type: peernoteNS.commands.TYPES.UNDERLINE,
-      execute: isApply ? apply : unapply,
-      revert: isApply ? unapply : apply
-    };
-    peernoteNS.commands.execute(cmd);
+    if (sel.isSelection) {
+      var isApply = $.inArray('underline', peernoteNS.doc.getModifiers(sel.start)) == -1;
+      var apply = function() {
+        peernoteNS.doc.applyModifier('underline', sel.start, sel.end);
+        peernoteNS.doc.render();
+      };
+      var unapply = function() {
+        peernoteNS.doc.removeModifier('underline', sel.start, sel.end);
+        peernoteNS.doc.render();
+      };
+      var cmd = {
+        type: peernoteNS.commands.TYPES.UNDERLINE,
+        execute: isApply ? apply : unapply,
+        revert: isApply ? unapply : apply
+      };
+      peernoteNS.commands.execute(cmd);
+    } else {
+      // TODO: Maybe turn this into an undo-able command.
+      peernoteNS.editor._pendingModifiers.push('underline');
+    }
   }),
 
   undo: peernoteNS.errors.wrap(function(e) {

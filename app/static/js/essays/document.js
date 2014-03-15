@@ -60,7 +60,8 @@ $.extend(peernoteNS.doc, {
       var newModifier = {
         type: modifierType,
         start: start,
-        end: end
+        end: end,
+        nodes: []
       };
       this._modifiers.push(newModifier);
     }
@@ -89,7 +90,8 @@ $.extend(peernoteNS.doc, {
         var newModifier = {
           type: modifierType,
           start: end,
-          end: endMod.end
+          end: endMod.end,
+          nodes: []
         };
         this._modifiers.push(newModifier);
       }
@@ -117,13 +119,18 @@ $.extend(peernoteNS.doc, {
       breaks.push({
         type: this._modifiers[i].type,
         isStart: true,
-        pos: this._modifiers[i].start
+        pos: this._modifiers[i].start,
+        modifier: this._modifiers[i]
       });
       breaks.push({
         type: this._modifiers[i].type,
         isStart: false,
-        pos: this._modifiers[i].end
+        pos: this._modifiers[i].end,
+        modifier: this._modifiers[i]
       });
+      // Clear nodes associated with the modifier since we're
+      // re-rendering
+      this._modifiers[i].nodes = [];
     }
     // Sort the breaks by position, ascending
     breaks.sort(function(a, b) { return a.pos - b.pos; });
@@ -139,6 +146,10 @@ $.extend(peernoteNS.doc, {
       if (b.isStart) {
         activeModifiers.push(b.type);
       } else {
+        if (b.modifier.start == b.modifier.end) {
+          // This is an empty modifier.
+          b.modifier.node = span;
+        }
         activeModifiers.splice($.inArray(b.type, activeModifiers), 1);
       }
       lastIndex = b.pos;
@@ -157,10 +168,11 @@ $.extend(peernoteNS.doc, {
 
     // Re-rendering the document will have cleared the selection.
     // We should restore it.
-    if (selection.isSelection)
+    if (selection.isSelection) {
       peernoteNS.docutils.setSelection(content, selection.start, selection.end);
-    else
+    } else {
       peernoteNS.docutils.setSelection(content, selection.start);
+    }
 
     return root;
   },
@@ -231,5 +243,21 @@ $.extend(peernoteNS.doc, {
     }
     return mods;
   },
+
+  /* Retrieves all zero-length modifiers at the given position.
+   *
+   * @param pos the position to lookup
+   * @return a list of all zero-length modifiers at the given position
+   */
+  _getZeroLengthModifiersAt: function(pos) {
+    var zeroLengthMods = [];
+    var mods = this._getModifiersAt(pos);
+    for (var i = 0; i < mods.length; ++i) {
+      if (mods[i].start == mods[i].end) {
+        zeroLengthMods.push(mods[i]);
+      }
+    }
+    return zeroLengthMods;
+  }
 
 });
