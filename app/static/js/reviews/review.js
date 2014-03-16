@@ -66,7 +66,7 @@ function bindListeners() {
 }
 
 // main
-$(document).ready(function () {
+peernoteNS.init(function () {
 
 	$('#strikethrough-button, #comment-button, #help-button, #undo, #redo').qtip({
 		style: {
@@ -107,7 +107,7 @@ $(document).ready(function () {
 
     bindListeners();
 
-	textBody = $('.text-container').html();
+	textBody = $('#text-container').html();
 
     // key listener for custom text editor behavior
     //$('.content').keypress(function(e) {
@@ -252,11 +252,11 @@ function writeInlineText(keyEvent) {
 	// edgecase fix, if user is typing from location
 	// where span just got removed.
 	if ($(parentHTML).hasClass("content")) {
-		parentHTML = document.getElementByClassNa,e('text-container');
+		parentHTML = document.getElementById('text-container');
 	}
 
 	// generates an inline edit span
-	if (parentHTML.className === 'text-container') {
+	if (parentHTML.id === 'text-container') {
 		var keyPressed = String.fromCharCode(keyEvent.which);
 		var startPos = selection.baseOffset;
 		var selectionRange = document.createRange();

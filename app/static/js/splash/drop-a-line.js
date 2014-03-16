@@ -66,6 +66,6 @@ $.extend(peernoteNS.splash, {
   }
 });
 
-$(document).ready(function (e) {
+peernoteNS.init(function () {
   peernoteNS.splash.initContactForm();
 });

@@ -1,10 +1,5 @@
-from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
-
 from flask.ext.script import Manager
 from flask.ext.migrate import Migrate, MigrateCommand
-from os import environ
-import os, uuid, socket
 
 from app import app
 from app import db

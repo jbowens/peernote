@@ -41,6 +41,12 @@ app/static/gen/*.js
 app/static/.webassets-cache/*
 !app/static/.webassets-cache/.gitignore
 
+#
+!app/static/include/font-awesome/css/*.css
+
+# Log files
+*.log
+
 # etc
 *.swp
 .DS_Store

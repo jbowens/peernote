@@ -7,12 +7,14 @@ assets = Environment(app)
 CSS BUNDLES
 """
 assets.register('base_css',
+    "include/font-awesome/css/font-awesome.min.css",
     Bundle(
         "scss/reset.scss",
         "scss/bootstrap.scss",
         "scss/top_nav.scss",
         "scss/shared/_footer.scss",
         "scss/shared/_base.scss",
+        "scss/shared/_flashes.scss",
         "scss/errors.scss",
         depends="scss/shared/*.scss",
         filters="scss,cssmin",
@@ -146,7 +148,9 @@ JAVASCRIPT BUNDLES
 assets.register('base_js',
     "js/include/jquery-2.1.0.min.js",
     Bundle(
+        "js/init.js",
         "js/navbar.js",
+        "js/errors.js",
         filters="rjsmin",
         output="gen/base.js"
     )
@@ -165,8 +169,10 @@ assets.register('splash_js',
 
 assets.register('editor_js',
     Bundle(
+        "js/essays/commands.js",
+        "js/essays/docutils.js",
         "js/widgets/essays_list.js",
-        "js/essays/editor.js",
+        "js/essays/controller.js",
         filters="rjsmin",
         output="gen/editor.js"
     )
@@ -187,6 +193,7 @@ assets.register('reviewer_js',
     "js/include/jquery-ui-1.10.4.custom.min.js",
     "js/include/jquery.qtip-1.0.0-rc3.js",
     Bundle(
+        "js/essays/docutils.js",
         "js/reviews/review.js",
         filters="rjsmin",
         output="gen/reviewer.js"

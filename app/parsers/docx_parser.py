@@ -20,6 +20,6 @@ class DocxParser(DocumentParser):
         parsed_contents = {'text': '\n'.join(paragraphs)}
         return parsed_contents
 
-    def create_file(self, essay):
+    def create_file(self, draft):
         # TODO: Implement
         raise NotImplementedError('Will figure out later.')

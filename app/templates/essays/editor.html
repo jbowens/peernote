@@ -33,7 +33,7 @@
         <div class="send-review-pane">
             <i class="fa fa-times"></i>
             <h3>Send a review</h3>
-            <div>Let your friend review your essay </div>
+            <div>Let your friend review this draft of your essay</div>
             <form>
                 <input type="text" name="email" placeholder="Email Address" class="send-review-pane-email">
                 <input type="submit" value="SEND REVIEW" class="send-review-pane-submit">
@@ -74,7 +74,11 @@
                     <h2>DOC MANAGER</h2>
                     <ul>
                         <li class="new">
-                            <i class="fa fa-plus"></i> New Document
+                            <a href="{{ url_for('essays.create_essay') }}" target="_blank" >
+                                <i class="fa fa-plus"></i> 
+                                New Document
+                            </a>
+
                         </li>
                         <li class="open">
                             <i class="fa fa-folder-open folder-button"></i> Open
@@ -207,10 +211,7 @@
 
             {# #}
             <div class="page-container">
-                <div class="page content" contenteditable="true" spellcheck="false">
-                    <h1 id="essay-title" class=essay-title>{{ current_draft.title|escape }}</h1>
-                    <p id="text-container">{{ current_draft.text }}</p>
-                </div>
+                <div class="page content" contenteditable="true" spellcheck="false"><h1 id="essay-title" class=essay-title>{{ current_draft.title|escape }}</h1><p class="text-container">{{ current_draft.text }}</p></div>
             </div>
         </div>
     </div>
