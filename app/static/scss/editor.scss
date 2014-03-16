@@ -155,6 +155,7 @@ ul.essay-container {
             left: $tab-width + 10px;
         }
 
+
         .tab-content {
             background: white;
             height: 900px;
@@ -233,8 +234,30 @@ ul.essay-container {
                 }
             }
         }
-    }
 
+        .tab-notes {
+            width: 290px;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 30px;
+            background-image: url('../images/handmadepaper.png');
+            overflow-y: scroll;
+
+            .tab-explanation {
+            line-height: 27px;
+                outline: none;
+                height:100%;
+                background-image:  
+                -webkit-linear-gradient(left, rgba(255,85,91, 0), rgba(255,85,91, 0)), 
+                -webkit-linear-gradient(left, rgba(255,85,91, 0), rgba(255,85,91, 0)), 
+                -webkit-linear-gradient(top, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 69px, rgba(255,255,255,0) 70px), 
+                -webkit-repeating-linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 18px, #d1d1d1 19px, white 20px);
+                background-size: 1px, 1px, auto, auto 27px;
+                background-repeat: repeat-y, repeat-y, no-repeat, repeat;
+                background-position:0 4px;
+            }
+        }
+    }
 }
 
 /* This is the panel that contains the toolkit */
@@ -299,6 +322,11 @@ ul.essay-container {
             border-top: 1px solid #404040;
         }
 
+        // request review button
+        #review {
+            cursor: pointer;
+        }
+
         // the toolkit row that states the mode and draft #
         .draft-num-row {
             height: 39px;
@@ -335,7 +363,6 @@ ul.essay-container {
         }
 
         // the draft history toolkit row
-
         .toolkit-region-history {
             padding: 12px 0;
 
@@ -361,8 +388,6 @@ ul.essay-container {
         .reviewer-button {
             cursor: pointer;
         }
-
-
 
         ul {
             margin-top: 20px;
@@ -394,7 +419,6 @@ ul.essay-container {
                     margin-right: 8px;
                 }
             }
-
 
             li:hover {
                 background-color: black;
@@ -455,9 +479,6 @@ ul.essay-container {
     background-color: $main-color-2;
     position:relative;
     top: 15px;
-
-
-   // border-bottom: 2px solid #404040;
 }
 
 .editor-background {
@@ -612,7 +633,6 @@ ul.essay-container {
             .button-border {
                 border: 1px solid $border;
             }
-
 
             button {
                 background-color: transparent;

@@ -74,22 +74,22 @@
                     <h2>DOC MANAGER</h2>
                     <ul>
                         <li class="new">
-                            <a href="{{ url_for('essays.create_essay') }}" target="_blank" >
-                                <i class="fa fa-plus"></i> 
-                                New Document
-                            </a>
+                        <a href="{{ url_for('essays.create_essay') }}" target="_blank" >
+                            <i class="fa fa-plus"></i> 
+                            New Document
+                        </a>
 
                         </li>
                         <li class="open">
-                            <i class="fa fa-folder-open folder-button"></i> Open
+                        <i class="fa fa-folder-open folder-button"></i> Open
                         </li>
                         <li class="next-draft">
-                            <i class="fa fa-archive"></i> Next Draft
+                        <i class="fa fa-archive"></i> Next Draft
                         </li>
                         <li class="print">
-                            <a href="{{ url_for('essays.print_essay', essayid=current_essay.eid) }}" target="_blank">
-                                <i class="fa fa-print"></i>Print
-                            </a>
+                        <a href="{{ url_for('essays.print_essay', essayid=current_essay.eid) }}" target="_blank">
+                            <i class="fa fa-print"></i>Print
+                        </a>
                         </li>
                     </ul>
                 </div>
@@ -97,8 +97,7 @@
                     <h2>REVIEW MODE <i class="fa fa-arrow-right"></i></h2>
                 </div>
                 <div class="toolkit-region toolkit-region-light">
-                    <h2>REQUEST REVIEW</h2>
-                    <a id="review" class="reviewify">Reviewify</a>
+                    <h2 id="review">REQUEST REVIEW</h2>
                 </div>
                 <div class="toolkit-region toolkit-region-light timeline">
                     <h2>Essay Timeline</h2>
@@ -138,8 +137,8 @@
             </div>
             <div class="comments-panel-tab comment-tab-notes">
                 <div class="tab-top tab-top-notes tab-unselected">Notepad</div>
-                <div class="tab-content">
-                    <div class="tab-explanation">Leave general notes here.</div>
+                <div class="tab-content tab-notes">
+                    <div class="tab-explanation" contenteditable="true" spellcheck="false">Leave general notes here.</div>
                 </div>
             </div>
         </div>
