@@ -65,6 +65,15 @@ $.extend(peernoteNS.editor, {
  *
  */
 $.extend(peernoteNS.editor, {
+  // Assumption being made that first opened draft will be the newest.
+  enable_autosave: true,
+
+  AUTOSAVE_PAUSE_MILLIS: 1000,
+
+  /* setTimeout() timer handle used for implementing
+   * autosaving after a pause in writing.
+   */
+  autosave_timer: null,
 
   _pendingModifiersPos: null,
   _pendingModifiers: [],
@@ -148,6 +157,55 @@ $.extend(peernoteNS.editor, {
     peernoteNS.commands.redo();
   }),
 
+  /**
+   * Saves the draft to the db via ajax. This is called by
+   * this.keystroke()
+   */
+  save: function() {
+    var _this = this;
+
+    // TODO: Handle the title.
+    var state = peernoteNS.doc.getState();
+
+    var params = {
+      text: state.text,
+      uid: peernoteNS.essays.uid,
+      did: peernoteNS.essays.did
+    };
+
+    $status_line = $('.status-line');
+    $status_line.text('Saving…');
+    $status_line.css('opacity', '1.0');
+    $.post('/api/save_draft', params, function(data) {
+      if (data.status == "success") {
+        $status_line.text('Saved');
+      }
+      console.log(data);
+    });
+  },
+
+  /* Event listener for handling autosaving.
+   */
+  keystroke: peernoteNS.errors.wrap(function(e) {
+    var _this = peernoteNS.editor;
+    if (!_this.enable_autosave) {
+        return;
+    }
+
+    if (_this.autosave_timer) {
+      clearTimeout(_this.autosave_timer);
+      _this.autosave_timer = null;
+    }
+
+    // Remove the saved text, the state has probs changed.
+    $('.status-line').text('');
+
+    _this.autosave_timer = setTimeout(function() {
+      _this.save();
+      _this.autosave_timer = null;
+    }, _this.AUTOSAVE_PAUSE_MILLIS);
+  }),
+
   initDocument: function() {
     var docContainer = $('.page-container .page')[0];
     this._doc = docContainer;
@@ -164,10 +222,15 @@ $.extend(peernoteNS.editor, {
     toolbar.find('button.underline').click(peernoteNS.editor.underline);
     toolbar.find('button#undo').click(peernoteNS.editor.undo);
     toolbar.find('button#redo').click(peernoteNS.editor.redo);
+  },
+
+  initAutosaver: function() {
+    $(this._doc).keyup(peernoteNS.editor.keystroke);
   }
 });
 
 peernoteNS.init(function() {
   peernoteNS.editor.initDocument();
   peernoteNS.editor.initToolbar();
+  peernoteNS.editor.initAutosaver();
 });

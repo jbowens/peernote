@@ -4,16 +4,6 @@
 var peernoteNS = peernoteNS || {};
 peernoteNS.essays = peernoteNS.essays || {}
 $.extend(peernoteNS.essays, {
-  // Assumption being made that first opened draft will be the newest.
-  enable_autosave: true,
-
-  AUTOSAVE_PAUSE_MILLIS: 1000,
-
-  /* setTimeout() timer handle used for implementing
-   * autosaving after a pause in writing.
-   */
-  autosave_timer: null,
-
   /**
    * Extracts the text of the essay from the editor. This is necessary in order
    * to properly handle the different ways content-editable input can appear.
@@ -34,34 +24,6 @@ $.extend(peernoteNS.essays, {
 
     var text = lines.join('\n');
     return text;
-  },
-
-  /**
-   * Saves the draft to the db via ajax.
-   */
-  save: function() {
-    var _this = this;
-    var $title = $('#essay-title');
-    var title = $title.text();
-    var text = _this.extractText();
-
-    var params = {
-      title: title,
-      text: text,
-      uid: _this.uid,
-      did: _this.did
-    };
-
-    if (title.length > 0 && title.length <= 80) {
-      $status_line = $('.status-line');
-      $status_line.text('Saving…');
-      $status_line.css('opacity', '1.0');
-      $.post('/api/save_draft', params, function(data) {
-        if (data.status == "success") {
-          $status_line.text('Saved');
-        }
-      });
-    }
   },
 
   /**
@@ -97,42 +59,6 @@ $.extend(peernoteNS.essays, {
     $newLi.click({i: this.drafts.length - 1, clicked: $newLi}, this.selectDraft);
 
     $newLi.click();
-  },
-
-  keystroke: function(e) {
-    if (!peernoteNS.essays.enable_autosave) {
-        return;
-    }
-
-    if (peernoteNS.essays.autosave_timer) {
-      clearTimeout(peernoteNS.essays.autosave_timer);
-      peernoteNS.essays.autosave_timer = null;
-    }
-
-    // Remove the saved text, the state has probs changed.
-    $('.status-line').text('');
-
-    peernoteNS.essays.autosave_timer = setTimeout(function() {
-      peernoteNS.essays.save();
-      peernoteNS.essays.autosave_timer = null;
-    }, peernoteNS.essays.AUTOSAVE_PAUSE_MILLIS);
-  },
-
-  // Set up all editor functions
-  initEditor: function() {
-    var _this = this;
-    $('.page-container').keyup(_this.keystroke);
-
-    // undo functionality
-    $('#undo').click(function() {
-      document.execCommand('undo',false,null);
-    });
-
-    // redo functionality
-    $('#redo').click(function() {
-      document.execCommand('redo',false,null);
-    });
-
   },
 
   initReviewButton: function() {
@@ -487,7 +413,6 @@ peernoteNS.init(function() {
     return;
   }
 
-  peernoteNS.essays.initEditor();
   peernoteNS.essays.initReviewButton();
   peernoteNS.essays.initCommentTabs();
   peernoteNS.essays.initEmailPopup();
