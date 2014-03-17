@@ -5,28 +5,6 @@ var peernoteNS = peernoteNS || {};
 peernoteNS.essays = peernoteNS.essays || {}
 $.extend(peernoteNS.essays, {
   /**
-   * Extracts the text of the essay from the editor. This is necessary in order
-   * to properly handle the different ways content-editable input can appear.
-   * Most content will be in a <div> or <p> but some will be floating just as
-   * a text node.
-   */
-  extractText: function() {
-    var children = $('.editor-background .content')[0].childNodes;
-    var lines = [];
-    for (var i = 0; i < children.length; i++) {
-      if (children[i].nodeType == 3) {
-        lines.push(children[i].textContent);
-      }
-      else if (children[i].nodeType == 1 && children[i].tagName != 'H1') {
-        lines.push($(children[i]).text());
-      }
-    }
-
-    var text = lines.join('\n');
-    return text;
-  },
-
-  /**
    * Creates a new draft
    */
   createNextDraft: function() {
