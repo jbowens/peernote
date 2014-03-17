@@ -372,12 +372,14 @@ $.extend(peernoteNS.essays, {
 
       /* Init height of comment-tab */
       $window = $(window);
-      $window.resize(function() {
+      var setTabHeight = function () {
         var height = $window.height();
         var navHeight = $("nav").height();
         var tabHeight = $(".tab-top").height();
         $(".tab-content").css("height",height - navHeight - tabHeight +"px"); 
-      });
+      }
+      setTabHeight();
+      $window.resize(setTabHeight);
 
       // TODO: CLEAN THIS UP WHEN YOU FIGURE OUT THE UI
       var mode = "allComments";
