@@ -22,8 +22,7 @@ def save_draft():
         text = request.form['text']
         did = request.form['did']
         uid = request.form['uid']
-
-        current_app.logger.debug(request.form.get('modifiers'));
+        modifiers = request.form.get('modifiers', None)
 
         draft = Draft.query.filter_by(did=did).first()
 
@@ -33,11 +32,13 @@ def save_draft():
         new_did = None
         if not draft.finalized:
             draft.text = text
+            draft.modifiers = modifiers
             db.session.add(draft)
             db.session.commit()
         else:
             new_draft = Draft.next_draft(draft)
             new_draft.text = text
+            new_draft.modifiers = modifiers
             db.session.add(new_draft)
             db.session.commit()
             new_did = new_draft.did

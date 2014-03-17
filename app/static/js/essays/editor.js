@@ -171,7 +171,7 @@ $.extend(peernoteNS.editor, {
       text: state.text,
       uid: peernoteNS.essays.uid,
       did: peernoteNS.essays.did,
-      modifiers: state.modifiers
+      modifiers: JSON.stringify(state.modifiers)
     };
 
     $status_line = $('.status-line');
