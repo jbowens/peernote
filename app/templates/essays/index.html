@@ -2,23 +2,24 @@
 
 {% block styles %}
     {{ super() }}
-    {% assets "essays_index_css" %}
+    {% assets "essays-list_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+    {% assets "essays-index_css" %}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
     {% endassets %}
 {% endblock %}
 
 {% block scripts %}
     {{ super() }}
-
     {% assets "essays_index_js" %}
         <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
-
 {% endblock %}
 
 
 {% block content %}
-<div class="page-container top-margin bottom-margin">
+<div class="page top-margin bottom-margin">
     <div id="essays-list-container"></div>
 </div>
 {% endblock %}

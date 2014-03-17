@@ -50,7 +50,7 @@ assets.register('essays_css',
     )
 )
 
-assets.register('essays_index_css',
+assets.register('essays-index_css',
     Bundle(
         "scss/widgets/essays_list.scss",
         filters="scss,cssmin",
