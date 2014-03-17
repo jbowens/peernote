@@ -138,35 +138,55 @@ $.extend(peernoteNS.essays, {
     if (peernoteNS.essays.did == cur_did) {
       return;
     }
+    
+    // Load the given draft.
+    peernoteNS.essays.loadDraft(cur_did);
+  },
 
-    params = {
-      did: cur_did,
+  /* Loads the given draft. If the callback is provided, it will be
+   * called once the draft is loaded.
+   *
+   * @param did the draft id of the draft to load
+   * @param cb (optional) a callback to call upon completion
+   */
+  loadDraft: function(did, cb) {
+    var params = {
+      did: did,
       uid: peernoteNS.essays.uid
-    }
+    };
+
+    $('.status-line').text('Loading…');
 
     $.get('/api/fetch_draft', params, function(data) {
       if (data.status == "success") {
-        peernoteNS.essays.did = cur_did;
+        peernoteNS.essays.did = did;
 
-        // because content editables are weird, start from scratch
-        $('.content').empty();
-        $('.content').append($("<h1 id='essay-title' class='essay-title'>"));
-        $('.content').append($("<p class='text-container'>"));
-        $('#essay-title').text(data.title);
-        $('.text-container').text(data.text);
+        // We need to deserialize the modifiers.
+        var modifiers = [];
+        if (data.modifiers) {
+          modifiers = JSON.parse(data.modifiers);
+        }
 
-        // disable autosaving / hide next draft button if this is an old draft
-        if (peernoteNS.essays.drafts.length == i + 1) {
-          // current draft
-          peernoteNS.essays.enable_autosave = true;
-          $('.status-line').text('');
+        if (!data.finalized) {
+          // This is the current draft. We should inform the editor that it
+          // should load this draft.
+          peernoteNS.editor.loadDraftState(data.title, data.text, modifiers);
           $('li.next-draft').slideDown();
         } else {
-          // old draft
-          peernoteNS.essays.enable_autosave = false;
-          $('.status-line').text('');
+          // This is an old draft. We need to disable autosaving on the editor.
+          peernoteNS.editor.disableAutosaving();
+          $('.content').empty();
+          $('.content').append($("<p>"));
+          $('.text-container').text(data.text);
           $('li.next-draft').slideUp();
         }
+       $('.status-line').text('');
+
+        if (cb) {
+          cb();
+        }
+      } else {
+        // TODO: Display an error message/flash?
       }
     });
   },
@@ -382,6 +402,12 @@ $.extend(peernoteNS.essays, {
     $("li.open").click(function() {
       $(".essays-list-shadow").css("display","table");
     });
+  },
+
+  /* On DOM ready, loads the actual contents of the essay.
+   */
+  initDraft: function() {
+    this.loadDraft(peernoteNS.essays.did);
   }
 
 });
@@ -399,6 +425,8 @@ peernoteNS.init(function() {
   peernoteNS.essays.initToolkit();
   peernoteNS.essays.initToolbar();
   peernoteNS.essays.initOpenButton();
+
+  peernoteNS.essays.initDraft();
 });
 
 peernoteNS.setGAOptions({

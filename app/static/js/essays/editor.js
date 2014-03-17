@@ -65,8 +65,8 @@ $.extend(peernoteNS.editor, {
  *
  */
 $.extend(peernoteNS.editor, {
-  // Assumption being made that first opened draft will be the newest.
-  enable_autosave: true,
+  // Autosaving isn't enabled until the draft is loaded via ajax.
+  enable_autosave: false,
 
   AUTOSAVE_PAUSE_MILLIS: 1000,
 
@@ -156,6 +156,30 @@ $.extend(peernoteNS.editor, {
     // are actions that my be redone.
     peernoteNS.commands.redo();
   }),
+
+  enableAutosaving: function() {
+    this.enable_autosave = true;
+  },
+
+  disableAutosaving: function() {
+    this.enable_autosave = false;
+  },
+
+  /**
+   * Loads the given draft information into the editor. This will 
+   * update the underlying document and render the editor
+   * appropriately. This is called on page load as well (from the
+   * controller) to load the initial state of the draft)
+   */
+  loadDraftState: function (title, text, modifiers) {
+    // If we're loading something into the editor, it must be
+    // the finalized draft.
+    peernoteNS.doc.loadInitialState(text, modifiers);
+
+    // TODO: Do something with the title. Where are we going to put it?
+
+    this.enableAutosaving();
+  },
 
   /**
    * Saves the draft to the db via ajax. This is called by

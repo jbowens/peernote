@@ -49,6 +49,15 @@ $.extend(peernoteNS.doc, {
     this._documentChanged();
   },
 
+  /* Sets the state of the document to be the given
+   * information.
+   */
+  loadInitialState: function(text, modifiers) {
+    this._text = text;
+    this._modifiers = modifiers;
+    this.render();
+  },
+
   /* Finds all modifiers in effect at the given position.
    *
    * @param position the position to find modifiers for
