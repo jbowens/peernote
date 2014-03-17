@@ -5,9 +5,18 @@ var peernoteNS = peernoteNS || {};
 peernoteNS.doc = peernoteNS.doc || {};
 $.extend(peernoteNS.doc, {
 
+  /* Listeners that should be notified when the document
+   * changed.
+   */
+  _changeListeners: [],
+
   _text: '',
 
   _modifiers: [],
+
+  addChangeListener: function(f) {
+    this._changeListeners.push(f);
+  },
 
   getText: function() {
     return this._text;
@@ -36,6 +45,8 @@ $.extend(peernoteNS.doc, {
         this._modifiers[i].end += charsDiff;
       }
     }
+
+    this._documentChanged();
   },
 
   /* Finds all modifiers in effect at the given position.
@@ -94,6 +105,8 @@ $.extend(peernoteNS.doc, {
       };
       this._modifiers.push(newModifier);
     }
+    
+    this._documentChanged();
   },
 
   /* Removes the all modifiers of the given type over the given range.
@@ -139,6 +152,8 @@ $.extend(peernoteNS.doc, {
         endMod.start = end;
       }
     }
+
+    this._documentChanged();
   },
 
   render: function() {
@@ -204,6 +219,16 @@ $.extend(peernoteNS.doc, {
     }
 
     return root;
+  },
+
+  /* This function should be called whenever the document changes to
+   * notify and listeners that the document has been modified.
+   */
+  _documentChanged: function() {
+    var state = this.getState();
+    for (var i = 0; i < this._changeListeners.length; ++i) {
+      this._changeListeners[i](state); 
+    }
   },
 
   _makeNode: function(activeModifiers, start, end) {

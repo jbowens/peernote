@@ -170,7 +170,8 @@ $.extend(peernoteNS.editor, {
     var params = {
       text: state.text,
       uid: peernoteNS.essays.uid,
-      did: peernoteNS.essays.did
+      did: peernoteNS.essays.did,
+      modifiers: state.modifiers
     };
 
     $status_line = $('.status-line');
@@ -185,7 +186,7 @@ $.extend(peernoteNS.editor, {
 
   /* Event listener for handling autosaving.
    */
-  keystroke: peernoteNS.errors.wrap(function(e) {
+  onDocumentChange: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.editor;
     if (!_this.enable_autosave) {
         return;
@@ -212,6 +213,9 @@ $.extend(peernoteNS.editor, {
     peernoteNS.doc.render();
     $(docContainer).keyup(peernoteNS.editor.keyup);
     $(docContainer).keydown(peernoteNS.editor.keydown);
+    // Subscribe to changes in the document so that we can
+    // autosave appropriately.
+    peernoteNS.doc.addChangeListener(this.onDocumentChange);
   },
 
   initToolbar: function() {
@@ -221,15 +225,11 @@ $.extend(peernoteNS.editor, {
     toolbar.find('button.underline').click(peernoteNS.editor.underline);
     toolbar.find('button#undo').click(peernoteNS.editor.undo);
     toolbar.find('button#redo').click(peernoteNS.editor.redo);
-  },
-
-  initAutosaver: function() {
-    $(this._doc).keyup(peernoteNS.editor.keystroke);
   }
+
 });
 
 peernoteNS.init(function() {
   peernoteNS.editor.initDocument();
   peernoteNS.editor.initToolbar();
-  peernoteNS.editor.initAutosaver();
 });

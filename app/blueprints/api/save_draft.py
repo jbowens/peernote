@@ -23,6 +23,8 @@ def save_draft():
         did = request.form['did']
         uid = request.form['uid']
 
+        current_app.logger.debug(request.form.get('modifiers'));
+
         draft = Draft.query.filter_by(did=did).first()
 
         if not draft or draft.uid != g.user.uid or draft.finalized:
