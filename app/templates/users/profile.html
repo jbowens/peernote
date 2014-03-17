@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class="dashboard">
-    <div class="page-container">
+    <div class="page">
         <div id="user-profile">
             <img src="{{ viewed_user.email | gravatar }}" />
             <div id="user-info">
@@ -21,7 +21,7 @@
 </div>
 
 {% if user and viewed_user.uid == user.uid %}
-    <div class="page-container bottom-margin">
+    <div class="page bottom-margin">
         <a class="btn btn-primary" href="{{ url_for('essays.create_essay') }}"> Write Paper </a>
         <a class="btn btn-primary" href="{{ url_for('essays.upload_essay') }}"> Upload Paper </a>
 

@@ -64,35 +64,25 @@
                         <span class="mode edit-mode edit-mode"> Mode: Editor</span>
                     </div>
                 </div>
-                <div class="toolkit-region toolkit-region-dark toolkit-region-history">
-                    <div class="history-container">
-                        <i class="fa fa-clock-o"></i> Draft History
-                        <i class="fa fa-angle-right"></i>
-                    </div>
-                </div>
                 <div class="toolkit-region toolkit-region-dark">
                     <h2>DOC MANAGER</h2>
                     <ul>
                         <li class="new">
-                            <a href="{{ url_for('essays.create_essay') }}" target="_blank" >
-                                <i class="fa fa-plus"></i> 
-                                New Document
-                            </a>
-
+                        <a href="{{ url_for('essays.create_essay') }}" target="_blank" >
+                            <i class="fa fa-plus"></i> 
+                            New Document
+                        </a>
                         </li>
                         <li class="open">
-                            <i class="fa fa-folder-open folder-button"></i> Open
+                        <i class="fa fa-folder-open folder-button"></i> Open
                         </li>
                         <li class="next-draft">
-                            <i class="fa fa-archive"></i> Next Draft
-                        </li>
-                        <li class="delete">
-                            <i class="fa fa-trash-o"></i> Delete Document
+                        <i class="fa fa-archive"></i> Next Draft
                         </li>
                         <li class="print">
-                            <a href="{{ url_for('essays.print_essay', essayid=current_essay.eid) }}" target="_blank">
-                                <i class="fa fa-print"></i>Print
-                            </a>
+                        <a href="{{ url_for('essays.print_essay', essayid=current_essay.eid) }}" target="_blank">
+                            <i class="fa fa-print"></i>Print
+                        </a>
                         </li>
                     </ul>
                 </div>
@@ -100,11 +90,10 @@
                     <h2>REVIEW MODE <i class="fa fa-arrow-right"></i></h2>
                 </div>
                 <div class="toolkit-region toolkit-region-light">
-                    <h2>REQUEST REVIEW</h2>
-                    <a id="review" class="reviewify">Reviewify</a>
+                    <h2 id="review">REQUEST REVIEW</h2>
                 </div>
                 <div class="toolkit-region toolkit-region-light timeline">
-                    <h2>Essay Timeline</h2>
+                    <h2><i class="fa fa-clock-o"></i>Draft History</h2>
                     <ul>
                         {% for draft in current_essay.get_all_drafts() %}
                         <li><a> Draft {{ draft.version }} </a></li>
@@ -122,27 +111,57 @@
                 <div class="tab-top tab-top-comments tab-selected">Comments</div>
                 <div class="tab-content">
                     <div class="comments-buttons">
-                        <div class="comments-button">All Comments</div>
-                        <div class="comments-button">
-                            <i class="fa fa-caret-left"></i>
-                            Prev
+                        <div class="comments-nav">
+                            <div class="comments-title comments-index-title">All Comments</div>
+                            <div class="comments-title comments-new-title">New Comment</div>
+                            <div class="comments-button all-comments-button">All Comments</div>
+                            <div class="comments-button">
+                                <i class="fa fa-caret-left"></i>
+                                Prev
+                            </div>
+                            <div class="comments-button">
+                                Next
+                                <i class="fa fa-caret-right caret-right"></i>
+                            </div>
                         </div>
-                        <div class="comments-button">
-                            Next
-                            <i class="fa fa-caret-right caret-right"></i>
-                        </div>
+                        <div class="comments-button cancel-comment">Cancel</div>
+                        <div class="comments-button new-comment">New</div>
                     </div>
                     <div class="comment-post">
                         <div class="tab-explanation">Select a region of text and leave a comment.</div>
                         <textarea class="comment-textarea" rows="7" cols="30" placeholder="Comment"></textarea>
                         <div class="comment-submit" >Comment</div>
                     </div>
+                    <div class="comment-thread">
+                        <h3>This is the highlighted text for this comment thread</h3>
+                        <ul>
+                            <li>Comments in the thread here</li> 
+                        </ul>
+                    </div>
+                    <div class="comments-index">
+                        <ul>
+                            <li>
+                                <div class="comment-clickable">
+                                    <h3>This is the highlighted text</h3>
+                                    <div class="comment-count comments-button">2</div>
+                                </div>
+                                <div class="comment-details">
+                                    <img class="comment-poster-img">
+                                    <div class="comment-poster-name">Bryce Aebi | Updated 7 hours ago</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="comment-post-v2-closed">
+                        <textarea class="comment-textarea" rows="7" cols="30" placeholder="Comment"></textarea>
+                    </div>
+                    <div class="comment-post-v2-open"></div>
                 </div>
             </div>
             <div class="comments-panel-tab comment-tab-notes">
                 <div class="tab-top tab-top-notes tab-unselected">Notepad</div>
-                <div class="tab-content">
-                    <div class="tab-explanation">Leave general notes here.</div>
+                <div class="tab-content tab-notes">
+                    <div class="tab-explanation" contenteditable="true" spellcheck="false">Leave general notes here.</div>
                 </div>
             </div>
         </div>

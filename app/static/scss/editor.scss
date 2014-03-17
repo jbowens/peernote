@@ -4,6 +4,7 @@
 
 body, html {
     height: 100%;
+    min-width: 800px;
 }
 
 nav {
@@ -100,7 +101,7 @@ ul.essay-container {
     float: right;
     height: 100%;
     position: fixed;
-    z-index: 20; //2000; <-- changed this value for testing
+    z-index: 19; //2000; <-- changed this value for testing
     right:0;
     
     .tab-container-selected {
@@ -160,9 +161,130 @@ ul.essay-container {
             width: 350px;
             border-left: 3px solid $white-color;
 
-            .comment-post {
-                width: 320px;
+            @mixin comments-button {
+                .comments-button {
+                    float: left;
+                    background-color: $white-color;
+                    color: #373737;
+                    border-radius: 3px;
+                    padding: 6px 11px;
+                    margin-left: 5px;
+                    cursor: pointer;
+
+                    i {
+                        height: 10px;
+                        width: 10px;
+                    }
+
+                    .caret-right {
+                        padding-left:5px;
+                        width: 7px;
+                    }
+                }
+
+                .comments-button:hover {
+                    background: gray;
+                    color: $white-color;
+                }
+            }
+
+            // location of comment-box after first post
+            .comment-post-v2-closed {
+                position: absolute;
+                bottom: 0px;
+                width: 100%;
+                background-color: #373737;
+                height: 80px;
+                display: none;
+            }
+
+            .comment-post-v2-open {
+                position: absolute;
+                bottom: 0px;
+                width: 100%;
+                background-color: #373737;
+                height: 100px;
+                display: none;
+            }
+
+            .comment-thread {
+                display: none;
+                width: 322px;
+                margin:auto;
+                padding-top: 30px;
+
+            }
+
+            h3 {
+                font-weight: 600;
+                font-style: italic;
+                font-size: 14px;
+                background-color: #ffee74;
+                float:left;
+                line-height: 24px;
+                cursor: pointer;
+            }
+
+            // list of opened comments
+            .comments-index {
+                display: none;
+                overflow: auto;
+                width:322px;
                 margin: auto;
+                padding-top: 30px;
+                @include comments-button;
+
+                .comments-button {
+                    padding: 4px 9px;
+                }
+
+                li {
+                    overflow: auto;
+                    padding-bottom: 18px;
+                    border-bottom: 1px solid $generic-divider-color;
+
+                    .comment-clickable {
+                        overflow: auto;
+                        margin-bottom: 10px;
+
+
+                        .comment-count {
+                            float: right;
+                        }
+                    }
+                }
+
+                .comment-clickable:hover {
+                    background-color: whitesmoke;
+                }
+
+                .comment-details {
+                    clear:both;
+                    
+                    * {
+                        float: left;
+                    }
+
+                    .comment-poster-img {
+                        height: 25px;
+                        width: 25px;
+                        background: gray;
+                    }
+
+                    .comment-poster-name {
+                        margin-top: 4px;
+                        margin-left: 10px;
+                        font-style: italic;
+                        color: gray;
+                    }
+                }
+            }
+            
+            // panel that holds new comment form
+            .comment-post {
+                width: 322px;
+                margin: auto;
+                overflow: auto;
 
                 .tab-explanation {
                     width: 100%;
@@ -204,36 +326,66 @@ ul.essay-container {
                 padding-left: 10px;
                 height: 60px;
                 border-bottom: 3px solid $generic-divider-color;
+                @include comments-button;
 
                 .comments-button {
-                    float: left;
-                    background-color: $white-color;
-                    color: #373737;
-                    border-radius: 3px;
-                    padding: 6px 11px;
                     margin-top: 20px;
-                    margin-left: 5px;
-                    cursor: pointer;
+                }
 
-                    i {
-                        height: 10px;
-                        width: 10px;
+                .comments-nav {
+                    overflow: auto;
+                    float: left;
+                    width: 255px;
+                    height: 48px;
+
+                    .comments-title {
+                        margin-left: 8px;
+                        font-size: 22px;
+                        line-height:26px;
+                        margin-top: 19px;
                     }
 
-                    .caret-right {
-                        padding-left:5px;
-                        width: 7px;
+                    .comments-index-title {
+                        display: none;
+                    }
+
+                    .comments-button {
+                        display:none;
                     }
                 }
 
-                .comments-button:hover {
-                    background: gray;
-                    color: $white-color;
+                .new-comment {
+                    display: none;
+                    width: 44px;
+                    text-align: center;
                 }
+
+            }
+        }
+
+        .tab-notes {
+            width: 290px;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 30px;
+            background-image: url('../images/handmadepaper.png');
+            overflow-y: scroll;
+
+            .tab-explanation {
+            line-height: 27px;
+                outline: none;
+                height:100%;
+                background-image:  
+                -webkit-linear-gradient(left, rgba(255,85,91, 0), rgba(255,85,91, 0)), 
+                -webkit-linear-gradient(left, rgba(255,85,91, 0), rgba(255,85,91, 0)), 
+                -webkit-linear-gradient(top, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 69px, rgba(255,255,255,0) 70px), 
+                -webkit-repeating-linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 18px, #d1d1d1 19px, white 20px);
+                background-size: 1px, 1px, auto, auto 27px;
+                background-repeat: repeat-y, repeat-y, no-repeat, repeat;
+                background-position:0 4px;
             }
         }
     }
-
 }
 
 /* This is the panel that contains the toolkit */
@@ -298,6 +450,11 @@ ul.essay-container {
             border-top: 1px solid #404040;
         }
 
+        // request review button
+        #review {
+            cursor: pointer;
+        }
+
         // the toolkit row that states the mode and draft #
         .draft-num-row {
             height: 39px;
@@ -334,7 +491,6 @@ ul.essay-container {
         }
 
         // the draft history toolkit row
-
         .toolkit-region-history {
             padding: 12px 0;
 
@@ -360,8 +516,6 @@ ul.essay-container {
         .reviewer-button {
             cursor: pointer;
         }
-
-
 
         ul {
             margin-top: 20px;
@@ -394,7 +548,6 @@ ul.essay-container {
                 }
             }
 
-
             li:hover {
                 background-color: black;
                 * {
@@ -413,12 +566,12 @@ ul.essay-container {
 
 /* This is the panel that contains the text editor */
 .main-panel {
+    z-index: 20;
     height: 100%;
     position: relative;
     overflow-x: hidden;
     overflow-y: auto;
     width: auto;
-    box-shadow: 0 0px 17px rgba(0,0,0,.9);
     background-color: whitesmoke;
 
     .page-container {
@@ -447,16 +600,6 @@ ul.essay-container {
         display: table;
         margin: auto;
     }
-}
-
-.draft-history {
-    height: 5px;
-    background-color: $main-color-2;
-    position:relative;
-    top: 15px;
-
-
-   // border-bottom: 2px solid #404040;
 }
 
 .editor-background {
@@ -611,7 +754,6 @@ ul.essay-container {
             .button-border {
                 border: 1px solid $border;
             }
-
 
             button {
                 background-color: transparent;

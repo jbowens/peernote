@@ -187,15 +187,15 @@ $.extend(peernoteNS.essays, {
             _this.addNewDraftAndOpen(data.new_did, data.new_version);
           }
           peernoteNS.displayFlash('Review sent');
-        } else {
-          console.log("Error emailing review : " + data['error']);
-          peernoteNS.displayErrorFlash('Error sending review');
         }
-
-        // hide the send review popup
-        $("#send-review-shadow").fadeOut(100, "linear");
-        $("html, body").css({"overflow": "visible"});
+      }).fail(function() {
+        formSubmitting = false;
+        peernoteNS.displayErrorFlash('Error sending review');
       });
+
+      // hide the send review popup
+      $("#send-review-shadow").fadeOut(100, "linear");
+      $("html, body").css({"overflow": "visible"});
     });
   },
 
@@ -323,9 +323,9 @@ $.extend(peernoteNS.essays, {
       }
   },
 
-
-  /* JS to switch between tabs on the comments panel */
+  /* JS to initialte comment tab functionality */
   initCommentTabs: function () {
+      /* JS to switch between tabs on the comments panel */
       var currentTabIsComments = true;
       $noteTab = $(".tab-top-notes");
       $commentTab = $(".tab-top-comments");
@@ -358,6 +358,63 @@ $.extend(peernoteNS.essays, {
               $noteTabContainer.removeClass("tab-container-selected");
           }
           currentTabIsComments = !currentTabIsComments;
+      });
+
+      /* Init height of comment-tab */
+      $window = $(window);
+      var setTabHeight = function () {
+        var height = $window.height();
+        var navHeight = $("nav").height();
+        var tabHeight = $(".tab-top").height();
+        $(".tab-content").css("height",height - navHeight - tabHeight +"px"); 
+      }
+      setTabHeight();
+      $window.resize(setTabHeight);
+
+      // TODO: CLEAN THIS UP WHEN YOU FIGURE OUT THE UI
+      var mode = "allComments";
+      $(".all-comments-button").click(function() {
+        $(".cancel-comment").hide();
+        $(".comments-nav .comments-button").hide();
+        $(".new-comment").show();
+        $(".comment-post").hide();
+        $(".comments-index-title").show();
+        $(".comments-index").show();
+        $(".comments-new-title").hide();
+        $(".comment-thread").hide();
+        $(".comment-post-v2-closed").hide();
+      });
+
+      $(".new-comment").click(function() {
+        $(".cancel-comment").show();
+        $(".comments-new-title").show();
+        //$(".comments-nav .comments-button").show();
+        $(".new-comment").hide();
+        $(".comment-post").show();
+        $(".comments-index-title").hide();
+        $(".comments-index").hide();
+        $(".comment-thread").hide();
+        $(".comment-post-v2-closed").hide();
+      });
+
+      $(".cancel-comment").click(function() {
+        $(".cancel-comment").hide();
+        $(".comments-new-title").hide();
+        $(".comments-nav .comments-button").hide();
+        $(".new-comment").show();
+        $(".comment-post").hide();
+        $(".comments-index-title").show();
+        $(".comments-index").show();
+      });
+
+      $(".comment-submit").click(function() {
+        $(".comments-nav .comments-button").show();
+        $(".comments-new-title").hide();
+        $(".comment-post").hide();
+        $(".comment-thread").show();
+        $(".cancel-comment").hide();
+        $(".new-comment").show();
+        $(".comment-post-v2-closed").show();
       });
   },
 
