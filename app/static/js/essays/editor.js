@@ -180,7 +180,6 @@ $.extend(peernoteNS.editor, {
       if (data.status == "success") {
         $status_line.text('Saved');
       }
-      console.log(data);
     });
   },
 
