@@ -34,7 +34,7 @@ peernoteNS.init = function(cb) {
     try {
       cb();
     } catch(err) {
-      peernoteNS.error.record(err);
+      peernoteNS.errors.record(err);
     }
   });
 };

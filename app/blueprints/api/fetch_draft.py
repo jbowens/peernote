@@ -31,7 +31,8 @@ def fetch_draft():
         if not draft or draft.uid != g.user.uid:
             return jsonify(error='Invalid params'), 400
 
-        return jsonify(status='success', text=draft.text, title=draft.title)
+        return jsonify(status='success', text=draft.text, title=draft.title,
+                       finalized=draft.finalized, modifiers=draft.modifiers)
     else:
         return jsonify(error='Invalid params'), 400
 

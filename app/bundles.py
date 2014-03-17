@@ -97,6 +97,7 @@ assets.register('login_css',
 
 assets.register('editor_css',
     Bundle(
+        "scss/editor-modifiers.scss",
         "scss/widgets/essays_list.scss",
         "scss/editor.scss",
         filters="scss,cssmin",
@@ -148,9 +149,9 @@ JAVASCRIPT BUNDLES
 assets.register('base_js',
     "js/include/jquery-2.1.0.min.js",
     Bundle(
+        "js/errors.js",
         "js/init.js",
         "js/navbar.js",
-        "js/errors.js",
         filters="rjsmin",
         output="gen/base.js"
     )
@@ -169,8 +170,10 @@ assets.register('splash_js',
 
 assets.register('editor_js',
     Bundle(
+        "js/essays/document.js",
         "js/essays/commands.js",
         "js/essays/docutils.js",
+        "js/essays/editor.js",
         "js/widgets/essays_list.js",
         "js/essays/controller.js",
         filters="rjsmin",

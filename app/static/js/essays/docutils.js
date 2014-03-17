@@ -80,9 +80,38 @@ $.extend(peernoteNS.docutils, {
       return false;
     }
 
+    // Reverse start and end if they're backwards.
+    if (pos.start > pos.end) {
+      var tmp = pos.end;
+      pos.end = pos.start;
+      pos.start = tmp;
+    }
+
     pos.text = pos.isSelection ? s.toString() : '';
 
     return pos;
+  },
+
+  /* Sets the selection to be from the given start character to the
+   * given end character. If end is omitted, the caret will be moved
+   * to the start character.
+   *
+   * @param doc the parent document
+   * @param start the start text offset
+   * @param end the end text offset
+   */
+  setSelection: function(doc, start, end) {
+    var s = document.getSelection();
+    s.removeAllRanges();
+    var newRange = document.createRange();
+    var loc = this.getNodeAtOffset(doc, start);
+    newRange.setStart(loc.node, loc.nodeOffset);
+    if (end) {
+      var endLoc = this.getNodeAtOffset(doc, end);
+      newRange.setEnd(endLoc.node, endLoc.nodeOffset);
+    }
+
+    s.addRange(newRange);
   },
 
   /* Traverses the document, finding the node at the given plain
@@ -223,6 +252,29 @@ $.extend(peernoteNS.docutils, {
           node.appendChild(newTextNode);
         }
     }
+  },
+
+  /* Splits the textnode at the firstOffset. If the second offset is provided,
+   * the node will also be split on the second offset.
+   */
+  _splitTextNode: function(textNode, firstOffset, secondOffset) {
+    var leadingNode, middleNode, trailingNode;
+    var rawTxt = textNode.nodeValue;
+
+    if (firstOffset > 0) {
+      // If the first offset is 0, there's no need to create a leading
+      // text node. If it's > 0, we should make a node with the leading text.
+      leadingNode = document.createTextNode(rawTxt.substr(0, firstOffset));
+    }
+
+    if (secondOffset && secondOffset > rawTxt.length) {
+      // There's a second offset and trailing text after it. We should
+      // make a text node with the trailing text.
+      trailingNode = document.createTextNode(rawTxt.substr(secondOffset));
+    }
+
+    var middleNode = document.createTextNode(rawTxt.substr(firstOffset, secondOffset));
+    return {'leading': leadingNode, 'middle': middleNode, 'trailing': trailingNode};
   },
 
   /* Returns all the text nodes in the given subtree.
