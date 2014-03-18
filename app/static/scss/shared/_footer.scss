@@ -5,7 +5,6 @@ $footer-height: 50px;
     border-top: 1px solid #dcdcdc;
     background: #eee;
     height: $footer-height;
-    color: #888;
     margin: auto;
 }
 
@@ -44,10 +43,10 @@ $footer-height: 50px;
         .disclaimer {
             font-size: 12px;
             font-weight: 500;
-            color: #bbb;
+            color: #aab;
 
             a {
-                color: #bbb;
+                color: #aaa;
             }
 
             .middot {
