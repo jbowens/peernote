@@ -36,6 +36,9 @@ $.extend(peernoteNS.doc, {
     /* Update the raw plain text of the document. */
     this._text = newText;
 
+    var len = this._text.length;
+    var l = len;
+
     /* Update all modifiers with the new offsets. */
     for (var i = 0; i < this._modifiers.length; ++i) {
       if (this._modifiers[i].start >= position) {
@@ -44,8 +47,23 @@ $.extend(peernoteNS.doc, {
       if (this._modifiers[i].end >= position) {
         this._modifiers[i].end += charsDiff;
       }
+
+      // If this modifier extends past the end of the document,
+      // shorten it.
+      if (this._modifiers[i].end > len) {
+        this._modifiers[i].end = len;
+      }
+
+      // If this modifier starts past the end of the document, remove it.
+      if (this._modifiers[i].start >= len) {
+        this._modifiers.splice(i, 1);
+        // Since we spliced, the array got re-indexed and we need to
+        // decrement the index so we don't skip an index.
+        i--;
+      }
     }
 
+    this._removeZeroLengthModifiers();
     this._documentChanged();
   },
 
@@ -109,12 +127,12 @@ $.extend(peernoteNS.doc, {
       var newModifier = {
         type: modifierType,
         start: start,
-        end: end,
-        nodes: []
+        end: end
       };
       this._modifiers.push(newModifier);
     }
-    
+   
+    this._removeZeroLengthModifiers();
     this._documentChanged();
   },
 
@@ -141,8 +159,7 @@ $.extend(peernoteNS.doc, {
         var newModifier = {
           type: modifierType,
           start: end,
-          end: endMod.end,
-          nodes: []
+          end: endMod.end
         };
         this._modifiers.push(newModifier);
       }
@@ -162,6 +179,7 @@ $.extend(peernoteNS.doc, {
       }
     }
 
+    this._removeZeroLengthModifiers();
     this._documentChanged();
   },
 
@@ -181,9 +199,6 @@ $.extend(peernoteNS.doc, {
         pos: this._modifiers[i].end,
         modifier: this._modifiers[i]
       });
-      // Clear nodes associated with the modifier since we're
-      // re-rendering
-      this._modifiers[i].nodes = [];
     }
     // Sort the breaks by position, ascending
     breaks.sort(function(a, b) { return a.pos - b.pos; });
@@ -199,10 +214,6 @@ $.extend(peernoteNS.doc, {
       if (b.isStart) {
         activeModifiers.push(b.type);
       } else {
-        if (b.modifier.start == b.modifier.end) {
-          // This is an empty modifier.
-          b.modifier.node = span;
-        }
         activeModifiers.splice($.inArray(b.type, activeModifiers), 1);
       }
       lastIndex = b.pos;
@@ -321,6 +332,17 @@ $.extend(peernoteNS.doc, {
       }
     }
     return zeroLengthMods;
+  },
+  
+  /* Removes all zero length modifiers in the document.
+   */
+  _removeZeroLengthModifiers: function() {
+    for (var i = 0; i < this._modifiers.length; i++) {
+      if (this._modifiers[i].start == this._modifiers[i].end) {
+        this._modifiers.splice(i, 1);
+        i--;
+      }
+    }
   }
 
 });
