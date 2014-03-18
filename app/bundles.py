@@ -152,6 +152,7 @@ assets.register('base_js',
         "js/errors.js",
         "js/init.js",
         "js/navbar.js",
+        "js/footer.js",
         filters="rjsmin",
         output="gen/base.js"
     )

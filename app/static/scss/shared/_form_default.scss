@@ -1,5 +1,9 @@
 @import "_variables.scss";
 
+body {
+    background: whitesmoke;
+}
+
 .page-container {
     width: $page-width;
     margin: auto;

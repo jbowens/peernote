@@ -2,16 +2,33 @@
 
 {% block main %}
 {% include "shared/signed_in_nav.html" %}
-    <div class="wrapper">
-        <div class="nav-section">
-            <div class="page-width">
-                <h1>{% block page_title %}{{ page_title }}{% endblock %}</h1>
-            </div>
+    <div class="nav-section">
+        <div class="page-width">
+            <h1>{% block page_title %}{{ page_title }}{% endblock %}</h1>
         </div>
-        {% block content %} {% endblock %}
-        <div class="push"></div> <!-- this makes the footer stay at the bottom -->
+    </div>
+    <div class="footer-push">
+        <div class="wrapper">
+            {% block content %} {% endblock %}
+        </div>
     </div>
     <div class="footer"> 
-        Copywrite &copy; 2014 Peernote. All Rights Reserved. 
-    </div>
+        <div class="footer-inner">
+            {# Facebook, Twitter, Team, Terms and Conditions, Privacy Policy, Home, Copywrite 2014#}
+            {#<ul class="social-media-list">
+                <li><i class="fa fa-facebook"></i></li>
+                <li><i class="fa fa-twitter"></i></li>
+            </ul>#}
+            <div class="footer-legal">
+                <div class="disclaimer">
+                    <a class="terms-of-service" href="/terms-of-service">Terms of Service</a> 
+                    <span class="middot">&middot;</span> 
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <span class="middot">&middot;</span> 
+                    <a>Contact</a>
+                    <div class="copyright"> Copyright 2014 Peernote. All rights reserved.</div>
+                </div>
+            </div>
+        </div>
+</div>
 {% endblock %}

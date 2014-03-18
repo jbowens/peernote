@@ -1,19 +1,78 @@
+@import "./_variables.scss";
+$footer-height: 50px;
+
 .footer {
     border-top: 1px solid #dcdcdc;
-    padding: 20px;
-    background: #f5f5f5;
-    height: 40px;
+    background: #eee;
+    height: $footer-height;
     color: #888;
+    margin: auto;
+}
+
+.footer-inner {
+    $padding: 20px;
+    height: 100%;
+    width: $page-width;
+    margin: auto;
+    //border: 1px blue dashed;
+    border-bottom: 1px solid $generic-divider-color;
+
+    .social-media-list {
+        float: right;
+
+        li {
+            float: left;
+            background: #ddd;
+            border-radius: 20px;
+            height: 25px;
+            width: 25px;
+            margin-left: 10px;
+
+            i {
+                color: white;
+                position: relative;
+                left: 6px;
+                top: 4px;
+            }
+        }
+    }
+
+    .footer-legal {
+        overflow:auto;
+        padding-top:13px;
+
+        .disclaimer {
+            font-size: 12px;
+            font-weight: 500;
+            color: #bbb;
+
+            a {
+                color: #bbb;
+            }
+
+            .middot {
+                font-size: 20px;
+                position: relative;
+                top: 3px;
+                padding:0 5px;
+            }
+
+            a.terms-of-service {
+                margin-left: 0px;
+                
+            }
+
+            .copyright {
+                float: right;
+            }
+        }
+    }
 }
 
 .wrapper {
-    min-height: 100%;
-    height: 100%;
-    height: auto !important;
-    margin: 0 auto -4em;
     overflow: auto;
 }
 
-.footer, .push {
-    height: 4em;
+.footer-push {
 }
+
