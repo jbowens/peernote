@@ -126,8 +126,7 @@ $.extend(peernoteNS.doc, {
       var newModifier = {
         type: modifierType,
         start: start,
-        end: end,
-        nodes: []
+        end: end
       };
       this._modifiers.push(newModifier);
     }
@@ -158,8 +157,7 @@ $.extend(peernoteNS.doc, {
         var newModifier = {
           type: modifierType,
           start: end,
-          end: endMod.end,
-          nodes: []
+          end: endMod.end
         };
         this._modifiers.push(newModifier);
       }
@@ -198,9 +196,6 @@ $.extend(peernoteNS.doc, {
         pos: this._modifiers[i].end,
         modifier: this._modifiers[i]
       });
-      // Clear nodes associated with the modifier since we're
-      // re-rendering
-      this._modifiers[i].nodes = [];
     }
     // Sort the breaks by position, ascending
     breaks.sort(function(a, b) { return a.pos - b.pos; });
@@ -216,10 +211,6 @@ $.extend(peernoteNS.doc, {
       if (b.isStart) {
         activeModifiers.push(b.type);
       } else {
-        if (b.modifier.start == b.modifier.end) {
-          // This is an empty modifier.
-          b.modifier.node = span;
-        }
         activeModifiers.splice($.inArray(b.type, activeModifiers), 1);
       }
       lastIndex = b.pos;
