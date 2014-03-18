@@ -63,6 +63,7 @@ $.extend(peernoteNS.doc, {
       }
     }
 
+    this._removeZeroLengthModifiers();
     this._documentChanged();
   },
 
@@ -130,7 +131,8 @@ $.extend(peernoteNS.doc, {
       };
       this._modifiers.push(newModifier);
     }
-    
+   
+    this._removeZeroLengthModifiers();
     this._documentChanged();
   },
 
@@ -177,6 +179,7 @@ $.extend(peernoteNS.doc, {
       }
     }
 
+    this._removeZeroLengthModifiers();
     this._documentChanged();
   },
 
@@ -329,6 +332,17 @@ $.extend(peernoteNS.doc, {
       }
     }
     return zeroLengthMods;
+  },
+  
+  /* Removes all zero length modifiers in the document.
+   */
+  _removeZeroLengthModifiers: function() {
+    for (var i = 0; i < this._modifiers.length; i++) {
+      if (this._modifiers[i].start == this._modifiers[i].end) {
+        this._modifiers.splice(i, 1);
+        i--;
+      }
+    }
   }
 
 });
