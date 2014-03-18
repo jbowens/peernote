@@ -67,6 +67,14 @@ $.extend(peernoteNS.commands, {
       this._undo_stack.push(cmd);
       return true;
     }
+  },
+
+  /*
+   * Clears the entire undo-redo stack.
+   */
+  clear: function() {
+    this._undo_stack = [];
+    this._redo_stack = [];
   }
 
 });
