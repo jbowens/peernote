@@ -36,6 +36,9 @@ $.extend(peernoteNS.doc, {
     /* Update the raw plain text of the document. */
     this._text = newText;
 
+    var len = this._text.length;
+    var l = len;
+
     /* Update all modifiers with the new offsets. */
     for (var i = 0; i < this._modifiers.length; ++i) {
       if (this._modifiers[i].start >= position) {
@@ -43,6 +46,20 @@ $.extend(peernoteNS.doc, {
       }
       if (this._modifiers[i].end >= position) {
         this._modifiers[i].end += charsDiff;
+      }
+
+      // If this modifier extends past the end of the document,
+      // shorten it.
+      if (this._modifiers[i].end > len) {
+        this._modifiers[i].end = len;
+      }
+
+      // If this modifier starts past the end of the document, remove it.
+      if (this._modifiers[i].start >= len) {
+        this._modifiers.splice(i, 1);
+        // Since we spliced, the array got re-indexed and we need to
+        // decrement the index so we don't skip an index.
+        i--;
       }
     }
 
