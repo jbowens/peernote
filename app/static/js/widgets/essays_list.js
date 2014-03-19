@@ -71,11 +71,18 @@ peernoteNS.widgets.essaysList = {
     for (var i = 0; i < essays.length; i++) {
 
       (function (i) {
-        $('.trash-essay-' + i).click(function() {
+        $('.trash-essay-' + i + ' .fa-trash-o').click(function() {
           $.post('/api/essays/delete', {eid:essays[i].eid, csrf:peernoteNS.csrf}, function(data) {
             if (data.status == "success") {
               // TODO: not very elegant
               $('.trash-essay-' + i).parent().remove();
+              var table =  $(".essays-table");
+              
+              // This is needed or the table keeps the deleted row in a cache
+              table.trigger("update")
+                .trigger("sorton", table.get(0).config.sortList)
+                .trigger("appendCache")
+                .trigger("applyWidgets");
             } else {
               console.log(data.error);
             }
