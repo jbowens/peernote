@@ -4,41 +4,63 @@ peernoteNS.widgets.essaysList = {
 
   html: function() {
     return '' +
-      '<div class="essays-header">' +
-        '<div class="essay-name"> Name </div>' +
-        '<div class="essay-created"> Name </div>' +
-        '<div class="essay-modified"> Modified </div>' +
-        '<div class="draft-number"> Draft </div>' +
-      '</div>' +
-      '<ul class="essays-list"> </ul>';
+      '<table class="essays-table">' +
+      '<thead class="essays-header">' + 
+        '<tr>' + 
+        '<th class="essay-name">' +  
+        'Name' +
+        '<i class="fa fa-caret-down"></i>' +
+        '<i class="fa fa-caret-up"></i>' +
+        '</th>' +
+        '<th class="essay-created">' +
+        'Created At' +
+        '<i class="fa fa-caret-down"></i>' +
+        '<i class="fa fa-caret-up"></i>' +
+        '</th>' +
+        '<th class="essay-modified">' +
+        'Last Modified' +
+        '<i class="fa fa-caret-down"></i>' +
+        '<i class="fa fa-caret-up"></i>' +
+        '</th>' +
+        '<th class="draft-number">' +
+        'Draft' +
+        '<i class="fa fa-caret-down"></i>' +
+        '<i class="fa fa-caret-up"></i>' +
+        '</th>' +
+        '</tr>'+
+      '</thead>' + 
+      '</table>';
   },
 
   listElementHtml: function(essay, index, options) {
-    var aHtml = '<a href="/essays/edit/' + essay.eid +'" '
+    var aHtmlStart = '<a href="/essays/edit/' + essay.eid +'" '
 
     if (options.newTab) {
-      aHtml += 'target="_blank"'
+      aHtmlStart += 'target="_blank"'
     }
-    aHtml += '>' + essay.title + '</a>'
+    aHtmlStart += '>';
 
     var deletableHtml = '';
     if (options.deletable) {
       deletableHtml +=  '' +
-        '<div class="trash-essay trash-essay-' + index + '">' +
+        '<td class="trash-essay trash-essay-' + index + '">' +
           '<i class="fa fa-trash-o"></i>' +
-        '</div>'
+        '</td>'
     }
 
     return '' +
-      '<li>' +
-        '<div class="essay-name">' +
-        aHtml +
-        '</div>' +
-        '<div class="essay-created">' + essay.created_date + '</div>' +
-        '<div class="essay-modified">' + essay.modified_date + '</div>' +
-        '<div class="draft-number">' + essay.version + '</div>' +
+      '<tr class="row-link">' +
+        '<td class="essay-name">' +
+        aHtmlStart + essay.title + '</a>' +
+        '</td>' +
+        '<td class="essay-created">' + 
+        aHtmlStart + essay.created_date + '</a></td>' +
+        '<td class="essay-modified">' + 
+        aHtmlStart + essay.modified_date + '</a></td>' +
+        '<td class="draft-number">' + 
+        aHtmlStart + essay.version + '</a></td>' +
         deletableHtml +
-      '</li>';
+      '</tr>';
   },
 
   noEssaysHtml: function() {
@@ -74,7 +96,7 @@ peernoteNS.widgets.essaysList = {
     var _this = this;
     var $essaysList = $(_this.html())
     parent_container.append($essaysList);
-    $essaysUl = parent_container.find('.essays-list');
+    $essaysTable = parent_container.find('.essays-table');
 
     if (!("newTab" in options)) {
       options.newTab = false;
@@ -94,10 +116,12 @@ peernoteNS.widgets.essaysList = {
           }
 
           for (var i = 0; i < data.essays.length; i++) {
-            $essaysUl.append(_this.listElementHtml(data.essays[i], i, options));
+            $essaysTable.append(_this.listElementHtml(data.essays[i], i, options));
           }
 
           _this.initTrashButtons(data.essays);
+          $(".essays-table").tablesorter({cssAsc: "show-up", cssDesc: "show-down" });
+          $(".essay-name").trigger("click");
         }
       });
     } else {
