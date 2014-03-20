@@ -941,11 +941,24 @@ ul.essay-container {
         height: 800px;
 
         .essays-list-container {
-            width: 800px;
-            min-height: 400px;
-            padding: 30px;
+            width: 700px;
+            min-height: 350px;
+            max-height: 400px;
+            padding: 50px;
             background-color: white;
             margin: auto;
+            border-radius: 2px;
+
+            h1 {
+                font-size: 30px;
+                margin-bottom: 40px;
+            }
+
+            .essays-selector {
+                height: 350px;
+                overflow: scroll;
+                
+            }
         }
     }
 }
