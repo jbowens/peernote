@@ -50,7 +50,7 @@ select {
     outline: none;
 
     &.btn-primary {
-        background-color: $accent;
+        background-color: #a973b4;
         font-size: 14px;
         color: white;
         padding: 10px 20px;
@@ -76,7 +76,7 @@ a {
     text-decoration: none;
     font-weight: bold;
     cursor: pointer;
-    color: $accent;
+    color: #a973b4;
 
     &:hover {
         color: $accent-light;
@@ -103,26 +103,9 @@ a {
     margin: 0 auto;
 }
 
-.top-margin {
-    margin-top: 50px;
-}
-
-.bottom-margin {
-    margin-bottom: 50px;
-}
-
 .container {
     background-color: $base;
 }
 
-.avatar {
-    width: 150px;
-    height: 150px;
-}
-
-.divider {
-    border-bottom: 1px solid $border;
-    margin: 20px 0;
-}
 
 

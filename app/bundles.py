@@ -52,7 +52,8 @@ assets.register('essays_css',
 
 assets.register('essays-index_css',
     Bundle(
-        "scss/widgets/essays_list.scss",
+        "scss/widgets/essays-list.scss",
+        "scss/essays-index.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/essays_index.css"
@@ -98,7 +99,7 @@ assets.register('login_css',
 assets.register('editor_css',
     Bundle(
         "scss/editor-modifiers.scss",
-        "scss/widgets/essays_list.scss",
+        "scss/widgets/essays-list.scss",
         "scss/editor.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss, scss/editor-toolkit.scss",
@@ -152,6 +153,7 @@ assets.register('base_js',
         "js/errors.js",
         "js/init.js",
         "js/navbar.js",
+        "js/footer.js",
         filters="rjsmin",
         output="gen/base.js"
     )
@@ -175,6 +177,7 @@ assets.register('editor_js',
         "js/essays/docutils.js",
         "js/essays/editor.js",
         "js/widgets/essays_list.js",
+        "js/include/jquery.tablesorter.js",
         "js/essays/controller.js",
         filters="rjsmin",
         output="gen/editor.js"
@@ -185,6 +188,7 @@ assets.register('essays_index_js',
     Bundle(
         "js/widgets/essays_list.js",
         "js/essays/index.js",
+        "js/include/jquery.tablesorter.js",
         filters="rjsmin",
         output="gen/essays_index.js"
     )
