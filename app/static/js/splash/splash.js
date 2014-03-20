@@ -4,17 +4,12 @@ peernoteNS.init(function() {
     /* Signup Overlay Display Code */
     /*******************************/
 
-    $(".signup, #faq-a-1 a").click(function() {
-        $("#sign-up-shadow").css("display","table");
-        $("html, body").css({"overflow": "hidden"}); // stop scrolling
+    var lightbox = peernoteNS.widgets.initLightbox($('.sign-up-pane'), {
+      closeIcon: true
     });
 
-    $("#sign-up-shadow").click(function(event) {
-        var targetClass = $(event.target).attr('class');
-        if (targetClass === "sign-up-center-align" || targetClass === "fa fa-times") {
-            $("#sign-up-shadow").fadeOut(100, "linear"); 
-            $("html, body").css({"overflow": "visible"}); // enable scrolling
-        }
+    $(".signup, #faq-a-1 a").click(function() {
+      lightbox.open();
     });
 
 

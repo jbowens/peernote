@@ -119,6 +119,7 @@ assets.register('users_css',
 assets.register('splash_css',
     Bundle(
         "scss/splash.scss",
+        "scss/widgets/lightbox.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/splash.css"
@@ -163,6 +164,7 @@ assets.register('splash_js',
     "js/include/jquery.scrollTo.min.js",
     Bundle(
         "js/splash/email-signup.js",
+        "js/widgets/lightbox.js",
         "js/splash/splash.js",
         "js/splash/drop-a-line.js",
         filters="rjsmin",
