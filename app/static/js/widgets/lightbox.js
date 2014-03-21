@@ -6,7 +6,8 @@ var peernoteNS = peernoteNS || {};
 peernoteNS.widgets = peernoteNS.widgets || {};
 
 peernoteNS.widgets.initLightbox = function(container, options) {
-  return peernoteNS.widgets.lightbox.init(container, options)
+  // Clone lightbox object and return new one
+  return $.extend({}, peernoteNS.widgets.lightbox).init(container, options);
 };
 
 peernoteNS.widgets.lightbox = {

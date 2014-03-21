@@ -39,14 +39,6 @@ $.extend(peernoteNS.essays, {
     $newLi.click();
   },
 
-  initReviewButton: function() {
-    $('#review').click(function() {
-      // pop up dialog for sending an email
-      $("#send-review-shadow").css("display","table");
-      $("html, body").css({"overflow": "hidden"}); // stop scrolling
-    });
-  },
-
   initToolkit: function() {
     var _this = this
     $toolkit = $('.toolkit');
@@ -59,12 +51,12 @@ $.extend(peernoteNS.essays, {
   initEmailPopup: function() {
     var _this = this;
 
-    $("#send-review-shadow").click(function(event) {
-      var targetClass = $(event.target).attr('class');
-      if (targetClass === "send-review-center-align" || targetClass === "fa fa-times") {
-        $("#send-review-shadow").fadeOut(100, "linear");
-        $("html, body").css({"overflow": "visible"}); // enable scrolling
-      }
+    var lb = peernoteNS.widgets.initLightbox($('.send-review-pane'), {
+      closeIcon: true
+    });
+
+    $('#review').click(function() {
+      lb.open();
     });
 
     var $popupForm = $(".send-review-pane form");
@@ -383,24 +375,17 @@ $.extend(peernoteNS.essays, {
 
 
   initOpenButton: function() {
-    peernoteNS.widgets.essaysList.init($('.essays-selector'), {
-      newTab: true,
+
+    var lightbox = peernoteNS.widgets.initLightbox($('.essays-list-container'), {
+      closeIcon: true
+    });
+
+    peernoteNS.widgets.essaysList.init($('.essays-selector'), { newTab: true,
       deletable: false
     });
 
-    $(".essays-list-shadow").click(function(event) {
-      var targetClass = $(event.target).attr('class');
-      if (targetClass === "essays-list-center-align") {
-        $(".essays-list-shadow").fadeOut(100, "linear");
-      }
-    });
-
-    $("ul.essays-list").click(function() {
-      $(".essays-list-shadow").fadeOut(100, "linear");
-    });
-
     $("li.open").click(function() {
-      $(".essays-list-shadow").css("display","table");
+      lightbox.open();
     });
   },
 
@@ -417,7 +402,6 @@ peernoteNS.init(function() {
     return;
   }
 
-  peernoteNS.essays.initReviewButton();
   peernoteNS.essays.initCommentTabs();
   peernoteNS.essays.initEmailPopup();
   peernoteNS.essays.toolDisplayer();
