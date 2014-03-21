@@ -1,5 +1,11 @@
 var peernoteNS = peernoteNS || {};
 peernoteNS.widgets = peernoteNS.widgets || {};
+
+peernoteNS.widgets.initEssaysList = function(container, options) {
+  // Clone lightbox object and return new one
+  return $.extend({}, peernoteNS.widgets.essaysList).init(container, options);
+};
+
 peernoteNS.widgets.essaysList = {
 
   html: function() {
@@ -134,5 +140,7 @@ peernoteNS.widgets.essaysList = {
     } else {
       // NOT SUPPORTED YET LOL!
     }
+
+    return _this;
   }
 }
