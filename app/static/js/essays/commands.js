@@ -75,6 +75,29 @@ $.extend(peernoteNS.commands, {
   clear: function() {
     this._undo_stack = [];
     this._redo_stack = [];
+  },
+
+  /* Key down event listener that handles undo and
+   * redo keyboard shortcuts.
+   */
+  shortcutKeydownListener: peernoteNS.errors.wrap(function(e) {
+    var _this = peernoteNS.commands;
+    if (e.metaKey) {
+      if (e.keyCode == 90) {
+        // They hit ctrl+z or cmd+z. We should undo.
+        e.preventDefault();
+        _this.undo();
+      }
+      // TODO: Figure out the redo shortcut we want.
+    }
+  }),
+
+  /* Initalize's key handlers to implement keyboard shortcuts.
+   */
+  initShortcuts: function() {
+    $(document).keydown(peernoteNS.commands.shortcutKeydownListener);
   }
 
 });
+
+peernoteNS.init(peernoteNS.commands.initShortcuts);
