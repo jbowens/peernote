@@ -12,6 +12,7 @@ peernoteNS.widgets.initLightbox = function(container, options) {
 
 peernoteNS.widgets.lightbox = {
   container: null,
+  isOpen: null,
 
   _outerHtml: function() {
     return '' +
@@ -28,6 +29,14 @@ peernoteNS.widgets.lightbox = {
     var _this = this;
     _this.container.css("display", "table");
     $("html, body").css({"overflow": "hidden"}); // stop scrolling
+    _this.isOpen = true;
+  },
+
+  _close: function() {
+    var _this = this;
+    _this.container.fadeOut(100, "linear");
+    $("html, body").css({"overflow": "visible"}); // enable scrolling
+    _this.isOpen = false;
   },
 
   /**
@@ -43,6 +52,8 @@ peernoteNS.widgets.lightbox = {
     var $wrapped = innerHtml.wrap(_this._outerHtml);
     _this.container = $wrapped.parents('.lightbox-shadow');
 
+    _this.isOpen = false;
+
     if (options.closeIcon) {
       _this.container.find('.lightbox-horiz-center').prepend('<i class="fa fa-times"/>');
     }
@@ -51,8 +62,15 @@ peernoteNS.widgets.lightbox = {
       var targetClass = $(event.target).attr('class');
       // check for fa-times as well if the inner html has a close button
       if (targetClass === "lightbox-center-align" || targetClass === "fa fa-times") {
-        _this.container.fadeOut(100, "linear");
-        $("html, body").css({"overflow": "visible"}); // enable scrolling
+        _this._close();
+      }
+    });
+
+    $(document).keyup(function(e) {
+      if (e.keyCode == 27) {//esc
+        if (_this.isOpen) {
+          _this._close();
+        }
       }
     });
 

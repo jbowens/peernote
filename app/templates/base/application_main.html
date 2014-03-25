@@ -2,6 +2,7 @@
 
 {% block main %}
 {% include "shared/signed_in_nav.html" %}
+    {% block lightboxes %} {% endblock %}
     <div class="nav-section">
         <div class="page-width">
             <h1>{% block page_title %}{{ page_title }}{% endblock %}</h1>

@@ -138,6 +138,7 @@ assets.register('terms-and-conditions_css',
 
 assets.register('settings_css',
     Bundle(
+        "scss/widgets/lightbox.scss",
         "scss/settings.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
@@ -208,5 +209,14 @@ assets.register('reviewer_js',
         "js/reviews/review.js",
         filters="rjsmin",
         output="gen/reviewer.js"
+    )
+)
+
+assets.register('settings_js',
+    Bundle(
+        "js/widgets/lightbox.js",
+        "js/settings.js",
+        filters="rjsmin",
+        output="gen/splash.js"
     )
 )
