@@ -87,8 +87,11 @@ $.extend(peernoteNS.commands, {
         // They hit ctrl+z or cmd+z. We should undo.
         e.preventDefault();
         _this.undo();
+      } else if (e.keyCode == 89 || (e.keyCode == 90 && e.shiftKey)) {
+        // They hit ctrl+y/ctrl+shift+z. We should undo.
+        e.preventDefault();
+        _this.redo();
       }
-      // TODO: Figure out the redo shortcut we want.
     }
   }),
 
