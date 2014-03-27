@@ -83,7 +83,8 @@
                 <div class="toolkit-region toolkit-region-dark">
                     <h2>Document Mode</h2>
                     <div class="editor-mode-button-container">
-                        <div class="editor-mode-button editor-mode-button-active">
+                        <div id="edit-mode-button" 
+                            class="editor-mode-button editor-mode-button-active">
                             <div class="icon-container">
                                 <i class="fa fa-pencil"></i>
                             </div>
@@ -91,7 +92,8 @@
                         </div>
                     </div>
                     <div class="editor-mode-button-container">
-                        <div class="editor-mode-button editor-mode-button-selectable">
+                        <div id="review-mode-button"
+                            class="editor-mode-button editor-mode-button-selectable">
                             <div class="icon-container">
                                 <i class="fa fa-inbox"></i>
                             </div>
@@ -99,7 +101,8 @@
                         </div>
                     </div>
                     <div class="editor-mode-button-container">
-                        <div class="editor-mode-button editor-mode-button-disabled">
+                        <div id="readonly-mode-button"
+                            class="editor-mode-button editor-mode-button-disabled">
                             <div class="icon-container">
                                 <i class="fa fa-lock"></i>
                             </div>
@@ -107,7 +110,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="toolkit-region toolkit-region-dark">
+                <div id="reviewer-tools"
+                    class="toolkit-region toolkit-region-dark">
+                    <h2>Reviewer Tools</h2>
+                    <div class="editor-tool-container">
+                        <button class="btn-editor bold" title="Bold">
+                            <i class="fa fa-strikethrough"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="editor-tools"
+                    class="toolkit-region toolkit-region-dark">
                     <h2>Editor Tools</h2>
                     <div class="editor-tool-container">
                         <button class="btn-editor bold" title="Bold">

@@ -99,8 +99,51 @@ $.extend(peernoteNS.commands, {
    */
   initShortcuts: function() {
     $(document).keydown(peernoteNS.commands.shortcutKeydownListener);
+  },
+
+  // document modes enum
+  MODES: {
+    EDIT:     0,
+    REVIEW:   1,
+    READONLY: 2
+  },
+
+  // mode the document is currently in
+  //currentMode: peernoteNS.MODES.EDIT,
+
+  initModeSwap: function() {
+    var $buttons = $(".editor-mode-button");
+    var $editModeButton = $("#edit-mode-button");
+    var $reviewModeButton = $("#review-mode-button");
+    var $readonlyButton = $("#readonly-mode-button");
+    var $reviewerTools = $("#reviewer-tools");
+    var $editorTools = $("#editor-tools");
+
+    // change look of mode buttons
+    $editModeButton.click(function(e) {
+        buttonSelect($(this));
+        $reviewerTools.slideUp();
+        $editorTools.slideDown();
+    //    peernoteNS.currentMode = peernoteNS.MODES.EDIT;
+    });
+    $reviewModeButton.click(function() {
+        buttonSelect($(this));
+        $editorTools.slideUp(); 
+        $reviewerTools.slideDown();
+      //  peernoteNS.currentMode = peernoteNS.MODES.REVIEW;
+    });
+
+    function buttonSelect($button) {
+       $buttons.removeClass("editor-mode-button-active");
+       $buttons.addClass("editor-mode-button-selectable");
+       $button.addClass("editor-mode-button-active editor-mode-button-selectable");
+       $readonlyButton.removeClass("editor-mode-button-selectable");
+    }
   }
 
 });
 
-peernoteNS.init(peernoteNS.commands.initShortcuts);
+peernoteNS.init(function() {
+    peernoteNS.commands.initShortcuts();
+    peernoteNS.commands.initModeSwap();
+});

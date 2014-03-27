@@ -368,6 +368,10 @@ nav {
             overflow-y: auto;
         }
 
+        #reviewer-tools {
+            display: none;
+        }
+
         .toolkit-region {
             border-bottom: 1px solid #404040;
             padding: 20px 0;
@@ -392,8 +396,9 @@ nav {
                 .editor-mode-button {
                     overflow: auto;
                     width: 65px;
-                    height: 70px;
+                    height: 60px;
                     margin: auto;
+                    margin-bottom: 10px;
                     cursor: pointer;
                     padding: 0 5px;
                     color: #999;
@@ -422,8 +427,10 @@ nav {
             }
 
             .editor-mode-button-disabled {
+                cursor: default !important;
                 * {
-                    color: #777;
+                    color: #a75d5d;
+                    cursor: default;
                 }
             }
 
@@ -462,6 +469,7 @@ nav {
                     color: #404040;
                 }
             }   
+
 
             .editor-tool-container {
                 margin-left: 20px;
