@@ -18,25 +18,20 @@
 {% block main %}
 <div id="everything-wrapper">
     {% if is_production %}
-    <div id="sign-up-shadow">
-        <div class="sign-up-center-align">
-            <div class="sign-up-pane"> 
-                <i class="fa fa-times"></i>
-                <h3>Peernote Signup</h3>
-                <div>Sign up for beta access. We'll notify you when we're up and running. </div>
-                <form>
-                    {% if not has_signed_up %}
-                    <input type="text" name="email" placeholder="Email Address" class="sign-up-pane-email">
-                    <input type="submit" value="SIGN UP" class="sign-up-pane-submit">
+        <div class="sign-up-pane"> 
+            <h3>Peernote Signup</h3>
+            <div>Sign up for beta access. We'll notify you when we're up and running. </div>
+            <form>
+                {% if not has_signed_up %}
+                <input type="text" name="email" placeholder="Email Address" class="sign-up-pane-email">
+                <input type="submit" value="SIGN UP" class="sign-up-pane-submit">
 
-                    <span class="email-confirmation-popup">Thank you! We'll notify you when the beta begins.</span>
-                    {% else %} 
-                    <span class="email-confirmation-popup" style="display: block;">Thank you! We'll notify you when the beta begins.</span>
-                    {% endif %}
-                </form>
-            </div>
+                <span class="email-confirmation-popup">Thank you! We'll notify you when the beta begins.</span>
+                {% else %} 
+                <span class="email-confirmation-popup" style="display: block;">Thank you! We'll notify you when the beta begins.</span>
+                {% endif %}
+            </form>
         </div>
-    </div>
     {% endif %}
 
     <div id="splash-main-image" class="splash-container" data-stellar-background-ratio=".8" data-stellar-vertical-offset="100">

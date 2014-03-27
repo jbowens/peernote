@@ -27,29 +27,20 @@
 {% block content %}
 
 {# Popup Light Box #}
-<div id="send-review-shadow">
-    <div class="send-review-center-align">
-        <div class="send-review-pane">
-            <i class="fa fa-times"></i>
-            <h3>Send a review</h3>
-            <div>Let your friend review this draft of your essay</div>
-            <form>
-                <input type="text" name="email" placeholder="Email Address" class="send-review-pane-email">
-                <input type="submit" value="SEND REVIEW" class="send-review-pane-submit">
+<div class="send-review-pane">
+    <h3>Send a review</h3>
+    <div>Let your friend review this draft of your essay</div>
+    <form>
+        <input type="text" name="email" placeholder="Email Address" class="send-review-pane-email">
+        <input type="submit" value="SEND REVIEW" class="send-review-pane-submit">
 
-                <span class="email-confirmation-popup">Thank you! An email has been sent.</span>
-            </form>
-        </div>
-    </div>
+        <span class="email-confirmation-popup">Thank you! An email has been sent.</span>
+    </form>
 </div>
 
-<div class="essays-list-shadow">
-    <div class="essays-list-center-align">
-        <div class="essays-list-container">
-            <h1> Your Essays </h1>
-            <div class="essays-selector"></div>
-        </div>
-    </div>
+<div class="essays-list-container">
+    <h1> Your Essays </h1>
+    <div class="essays-selector"></div>
 </div>
 
 <div class="editor-background">

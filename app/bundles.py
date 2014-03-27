@@ -100,6 +100,7 @@ assets.register('editor_css',
     Bundle(
         "scss/editor-modifiers.scss",
         "scss/widgets/essays-list.scss",
+        "scss/widgets/lightbox.scss",
         "scss/editor.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss, scss/editor-toolkit.scss",
@@ -119,6 +120,7 @@ assets.register('users_css',
 assets.register('splash_css',
     Bundle(
         "scss/splash.scss",
+        "scss/widgets/lightbox.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/splash.css"
@@ -136,6 +138,7 @@ assets.register('terms-and-conditions_css',
 
 assets.register('settings_css',
     Bundle(
+        "scss/widgets/lightbox.scss",
         "scss/settings.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
@@ -162,6 +165,7 @@ assets.register('base_js',
 assets.register('splash_js',
     "js/include/jquery.scrollTo.min.js",
     Bundle(
+        "js/widgets/lightbox.js",
         "js/splash/email-signup.js",
         "js/splash/splash.js",
         "js/splash/drop-a-line.js",
@@ -172,11 +176,12 @@ assets.register('splash_js',
 
 assets.register('editor_js',
     Bundle(
+        "js/widgets/lightbox.js",
+        "js/widgets/essays_list.js",
         "js/essays/document.js",
         "js/essays/commands.js",
         "js/essays/docutils.js",
         "js/essays/editor.js",
-        "js/widgets/essays_list.js",
         "js/include/jquery.tablesorter.js",
         "js/essays/controller.js",
         filters="rjsmin",
@@ -204,5 +209,14 @@ assets.register('reviewer_js',
         "js/reviews/review.js",
         filters="rjsmin",
         output="gen/reviewer.js"
+    )
+)
+
+assets.register('settings_js',
+    Bundle(
+        "js/widgets/lightbox.js",
+        "js/settings.js",
+        filters="rjsmin",
+        output="gen/splash.js"
     )
 )

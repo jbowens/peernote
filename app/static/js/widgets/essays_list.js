@@ -1,5 +1,10 @@
 var peernoteNS = peernoteNS || {};
 peernoteNS.widgets = peernoteNS.widgets || {};
+
+peernoteNS.widgets.initEssaysList = function(container, options) {
+  return $.extend({}, peernoteNS.widgets.essaysList).init(container, options);
+};
+
 peernoteNS.widgets.essaysList = {
 
   html: function() {
@@ -134,5 +139,7 @@ peernoteNS.widgets.essaysList = {
     } else {
       // NOT SUPPORTED YET LOL!
     }
+
+    return _this;
   }
 }

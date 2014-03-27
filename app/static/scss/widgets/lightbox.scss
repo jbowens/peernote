@@ -1,0 +1,37 @@
+.lightbox-shadow {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,.85);;
+    z-index: 100;
+    display: none;
+
+    .lightbox-center-align {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+
+        .lightbox-horiz-center {
+            display: inline-block;
+            text-align: left;
+            padding: 10px 20px;
+            background-color: white;
+
+            i.fa-times {
+              display: inline;
+              float: right;
+              font-size: 17px;
+              line-height: 24px;
+            }
+
+            i:hover {
+                color: #888;
+                cursor: pointer;
+            }
+
+            .lightbox-inner-wrapper {
+                padding: 20px 10px;
+            }
+        }
+    }
+}

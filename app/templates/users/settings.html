@@ -7,7 +7,31 @@
     {% endassets %}
 {% endblock %}
 
+{% block scripts %}
+    {{ super() }}
+
+    {% assets "settings_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+{% endblock %}
+
+{% block lightboxes %}
+    <form class="forms-wrapper" id="delete-form" method="post" action="{{ url_for('users.delete_account') }}">
+        {% include "shared/csrf.html" %}
+        <h1>Delete Account</h1>
+        <p>Are you sure you would to delete your account? This cannot be undone.</p>
+        <table>
+            <tr class="field">
+                <td>
+                    <input class="button-field" type="submit" value="I understand, delete my account" name="delete-my-account" />
+                </td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}
+
 {% block content %}
+
 <div class="page-container top-margin bottom-margin settings">
     <div class="forms-wrapper">
     <h1>Basic Info</h1>
@@ -112,18 +136,12 @@
             </tr>
         </table>
     </form>
-    <form method="post" action="{{ url_for('users.delete_account') }}">
-        {% include "shared/csrf.html" %}
-        <h1>Delete Account</h1>
-        <p>Deleting your account will permanently delete all of your documents. This cannot be undone.</p>
-        <table>
-            <tr class="field">
-                <td>
-                    <input class="button-field" type="submit" value="I understand, delete my account" name="delete-my-account" />
-                </td>
-            </tr>
-        </table>
-    </form>
+
+    <h1>Delete Account</h1>
+        <p>Deleting your account will permanently delete all of your documents. </p>
+    <a id="delete-button" class="btn btn-primary">Delete Account</a>
 </div>
 </div>
+
+
 {% endblock %}
