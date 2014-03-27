@@ -351,9 +351,10 @@ $.extend(peernoteNS.essays, {
       $(document).click(function(e) {
           var $target = $(e.target);
           if (!$target.hasClass('line-height-click')) {
-              $('.line-height-btn').removeClass('border');
+              $('.line-height-btn').removeClass('button-border');
               $('.spacing').hide();
           }
+
           if (!$target.hasClass('zoom-click')) $('.zoom').hide();
       });
 
