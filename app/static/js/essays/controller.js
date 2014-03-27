@@ -40,7 +40,7 @@ $.extend(peernoteNS.essays, {
   },
 
   initReviewButton: function() {
-    $('#review').click(function() {
+    $('#review-request').click(function() {
       // pop up dialog for sending an email
       $("#send-review-shadow").css("display","table");
       $("html, body").css({"overflow": "hidden"}); // stop scrolling

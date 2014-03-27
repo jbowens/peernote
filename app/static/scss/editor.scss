@@ -13,47 +13,6 @@ nav {
     z-index:101;
 }
 
-/* Bryce says: what the fuck is this? */
-ul.essay-container {
-    display: block;
-    float: right;
-    border-left: 1px solid $border;
-    padding: 0 30px;
-    width: 540px;
-
-    li.essay {
-        padding: 20px 0;
-        border-bottom: 1px solid $border;
-        height: 110px;
-
-        .doc-preview {
-            display: block;
-            float: left;
-            margin-right: 10px;
-            width: 85px;
-            height: 110px;
-            border: 1px solid $border;
-        }
-
-        .close-btn {
-            float: right;
-            font-size: 10px;
-            color: $border;
-            width: 16px;
-            height: 16px;
-            text-align: center;
-            border: 1px solid $border;
-
-        }
-
-        .close-btn:hover {
-            color: $dark;
-            border: 1px solid $dark;
-        }
-    }
-}
-
-
 /* override navbar css */
 .header-container {
     width: 100% !important;
@@ -66,7 +25,6 @@ ul.essay-container {
         margin-left: 30px;
     }
 }
-
 
 /* This is normally so footer sticks to bottom. but 
  I need this div to be 100% hegiht so its children
@@ -372,7 +330,7 @@ ul.essay-container {
             overflow-y: scroll;
 
             .tab-explanation {
-            line-height: 27px;
+                line-height: 27px;
                 outline: none;
                 height:100%;
                 background-image:  
@@ -424,11 +382,97 @@ ul.essay-container {
             color: #999;
             font-weight: 500;
             margin-left: 20px;
+
+            i {
+                margin-right: 10px;
+            }
         }   
 
         .toolkit-region {
             border-bottom: 1px solid #404040;
             padding: 20px 0;
+            overflow:auto;
+
+            .editor-mode-button-container {
+                width: 80px;
+                overflow: auto;
+                float: left;
+                margin: 20px 0 0 0;
+
+                .editor-mode-button {
+                    overflow: auto;
+                    width: 65px;
+                    height: 70px;
+                    margin: auto;
+                    cursor: pointer;
+                    padding: 0 5px;
+                    color: #999;
+                    text-align:center;
+
+                    .icon-container {
+                        display: inline-block;
+                        height: 32px;
+                        width: 30px;
+                        overflow: auto;
+
+                        i {
+                            text-align:center;
+                            font-size: 25px;
+                            height: 30px;
+                            width: 30px;
+                            position: relative;
+                            top: 2px;
+                        }
+                    }
+
+                    .editor-mode-label {
+                        text-align: center;
+                    }
+                }
+            }
+
+            .editor-mode-button-disabled {
+                * {
+                    color: #777;
+                }
+            }
+
+            .editor-mode-button-selectable:hover {
+                * {
+                    color: white;
+                }
+            }
+
+            .editor-mode-button-active {
+                
+                * {
+                    color: $white-color;
+                }
+
+                .icon-container {
+                    background:$white-color;
+                    border-radius: 3px;
+                    overflow: auto;
+                }
+
+                i {
+                    color: #404040;
+                }
+            }
+
+            .editor-mode-button-active:hover {
+                * {
+                    color: $white-color;
+                }
+
+                .icon-container  {
+                    background: white;
+                }
+
+                i {
+                    color: #404040;
+                }
+            }   
         }
 
         .toolkit-region-light {
@@ -446,7 +490,7 @@ ul.essay-container {
 
         .toolkit-region-dark {
             background-color: #1e1e1e;
-            padding: 20px 0;
+            padding: 10px 0;
             border-top: 1px solid #404040;
         }
 
@@ -518,7 +562,6 @@ ul.essay-container {
         }
 
         ul {
-            margin-top: 20px;
 
             * {
                 font-size: 11pt;
@@ -635,7 +678,6 @@ ul.essay-container {
             color: #666;
         }
 
-
         .notes {
             position: absolute;
             margin-top: 140px;
@@ -682,7 +724,7 @@ ul.essay-container {
         }
     }
 
-	.buttons-position-fixed {
+    .buttons-position-fixed {
 		position: fixed;
 		top: 0;
 	}
@@ -694,10 +736,18 @@ ul.essay-container {
     .toolbar {
         background: white;
         border-bottom: 1px solid $border;
+        overflow: auto;
+
+        .toolbar-left {
+            float: left;
+        }
+
+        .toolbar-right {
+            float: right;
+        }
     }
 
     .buttons {
-        height: 100px;
         line-height: 40px;
         text-align: center;
         width: 100%;
@@ -733,18 +783,25 @@ ul.essay-container {
             float: right;
         }
 
+        .right-border {
+            border-right: 1px solid $border;
+        }
+
+        .left-border {
+            border-left: 1px solid $border;
+        }
+
         .btn-set {
-            padding: 0 20px;
+            padding: 0 10px;
             height: 40px;
             display: inline-block;
-            border-right: 1px solid $border;
 
             &:first-child {
                 border-left: 1px solid $border;
             }
 
             .btn-editor {
-                margin: 0 5px;
+                margin: 0 3px;
             }
 
             .combine-icon {
@@ -768,8 +825,18 @@ ul.essay-container {
             }
         }
 
+        .essay-title {
+            display: block;
+            margin: auto;
+            outline:none;
+            font-size:20px;
+            font-weight: 600;
+            padding: 0 30px;
+            max-width: 500px;
+        }
+
         .line-height-dropdown {
-            width: 60px;
+            width: 55px;
             line-height: 24px;
 
             .border {
@@ -799,6 +866,7 @@ ul.essay-container {
 
         .zoom-dropdown {
             width: 60px;
+            padding: 0 5px;
             line-height: 24px;
 
             .curr-zoom {
@@ -828,7 +896,7 @@ ul.essay-container {
         }
 
         .btn-set-status {
-            width: 80px;
+            width: 60px;
             .status-line {
                 width: 100px;
                 height: 40px;
@@ -836,6 +904,7 @@ ul.essay-container {
         }
     }
 }
+
 
 /***********************************/
 /*         EMAIL OVERLAY           */
@@ -927,6 +996,11 @@ ul.essay-container {
     }
 }
 
+
+/***********************************/
+/*         Open Essay Dialogue     */
+/***********************************/
+
 .essays-list-shadow {
     height: 100%;
     width: 100%;
@@ -942,8 +1016,6 @@ ul.essay-container {
 
         .essays-list-container {
             width: 700px;
-            min-height: 350px;
-            max-height: 400px;
             padding: 50px;
             background-color: white;
             margin: auto;
@@ -955,9 +1027,44 @@ ul.essay-container {
             }
 
             .essays-selector {
-                height: 350px;
                 overflow: scroll;
-                
+            }
+
+            .essays-table {
+                tbody {
+                    display: block;
+                    height: 300px;
+                    overflow: auto;
+                    width: 100%;
+                }   
+
+                thead > tr {
+                    display: block;
+                }
+
+                th {
+                    display:block;
+                    float:left;
+                }
+
+                .essay-name, .essay-created, .essay-modified {
+                    width: 200px;
+                }
+
+                .draft-number {
+                    width: 50px;
+                }
+
+                td {
+                    display:block;
+                    float:left;
+                }
+
+                tr {
+                    display: block;
+                    width: 100%;
+                }
+
             }
         }
     }
