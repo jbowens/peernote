@@ -629,7 +629,8 @@ nav {
         .page {
             background: white;
             width: 660px;
-            height: 1000px;
+            height: auto;
+            min-height: 1000px;
             border: 1px solid #d2d2d2;
             margin: 40px auto 60px auto;
             padding: 80px;
