@@ -372,6 +372,20 @@ $.extend(peernoteNS.essays, {
           var scale = $(this).attr('scale');
           $('.content').css('line-height', scale);
       });
+
+      // set max length on title of essay
+      var $title = $(".essay-title");
+      var titleMaxLength = 60;
+      $title.keydown(function(e) {
+        var title = $title.text();
+        if ((title.trim().length > titleMaxLength 
+            && e.keyCode !== 46  // del
+            && e.keyCode !== 8   // backspace
+            && e.keyCode !== 37  // left arrow
+            && e.keyCode !== 39) // right arrow
+            || e.keyCode === 13  // enter
+        ) { return false; }
+      });
   },
 
 

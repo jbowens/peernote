@@ -363,35 +363,24 @@ nav {
         .toolkit-left {
             height: 100%;
             width: 250px;
-            //border: 1px red dashed;
             float: left;
+            overflow-y: auto;
         }
-
-        .toolkit-right {
-            width: 38px;
-            border: 1px $generic-divider-color solid;
-            height: 100%;
-            float: left;
-            position:absolute;
-            right: -40px;
-            top: 40px;
-            background-color: $off-white-bg-color;
-        }
-
-        .toolkit-region h2 {
-            color: #999;
-            font-weight: 500;
-            margin-left: 20px;
-
-            i {
-                margin-right: 10px;
-            }
-        }   
 
         .toolkit-region {
             border-bottom: 1px solid #404040;
             padding: 20px 0;
             overflow:auto;
+
+            h2 {
+                color: #999;
+                font-weight: 500;
+                margin-left: 20px;
+
+                i {
+                    margin-right: 10px;
+                }
+            }
 
             .editor-mode-button-container {
                 width: 80px;
@@ -439,12 +428,11 @@ nav {
 
             .editor-mode-button-selectable:hover {
                 * {
-                    color: white;
+                    color: $white-color;
                 }
             }
 
             .editor-mode-button-active {
-                
                 * {
                     color: $white-color;
                 }
@@ -473,6 +461,35 @@ nav {
                     color: #404040;
                 }
             }   
+
+            .editor-tool-container {
+                margin-left: 20px;
+                margin-top: 15px;
+                margin-bottom: 10px;
+
+                button {
+                    background: #373737;
+                    border: 0;
+                    color: #999;
+                    font-size: 17px;
+                    border-radius: 2px;
+                    cursor: pointer;
+                    outline: none;
+                    border: 1px rgba(0,0,0,0) solid;
+                    margin-right: 5px;
+                    width: 28px;
+                    height: 28px;
+                }
+
+                button:active {
+                    //color: $white-color;
+                    border: 1px black solid;
+                }
+
+                button:hover {
+                    background: #404040; 
+                }
+            }
         }
 
         .toolkit-region-light {
@@ -492,6 +509,7 @@ nav {
             background-color: #1e1e1e;
             padding: 10px 0;
             border-top: 1px solid #404040;
+            border-bottom: 1px solid black;
         }
 
         // request review button
@@ -739,7 +757,8 @@ nav {
     .toolbar {
         background: white;
         border-bottom: 1px solid $border;
-        overflow: auto;
+        overflow: hidden;
+        height: 41px;
 
         .toolbar-left {
             float: left;
@@ -828,14 +847,20 @@ nav {
             }
         }
 
-        .essay-title {
-            display: block;
+        .essay-title-container { // this allows the essay title to overflow if too long
+            width: auto;
+            max-width: 700px;
             margin: auto;
-            outline:none;
-            font-size:20px;
-            font-weight: 600;
-            padding: 0 30px;
-            max-width: 500px;
+            overflow-y: auto;
+
+            .essay-title {
+                outline: none;
+                font-size: 20px;
+                font-weight: 600;
+                width: auto;
+                min-width: 500px;
+                white-space: nowrap; // don't let text spill over onto next line
+            }
         }
 
         .line-height-dropdown {

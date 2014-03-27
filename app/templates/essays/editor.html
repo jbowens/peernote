@@ -109,24 +109,26 @@
                 </div>
                 <div class="toolkit-region toolkit-region-dark">
                     <h2>Editor Tools</h2>
-                    <button class="btn-editor bold" title="Bold">
-                        <i class="fa fa-bold"></i>
-                    </button>
-                    <button class="btn-editor italic"  title="Italicize">
-                        <i class="fa fa-italic"></i>
-                    </button>
-                    <button class="btn-editor underline" title="Underline">
-                        <i class="fa fa-underline"></i>
-                    </button>
-                    <button class="btn-editor left-align" title="Left Align">
-                        <i class="fa fa-align-left"></i>
-                    </button>
-                    <button class="btn-editor center-align" title="Center Align">
-                        <i class="fa fa-align-center"></i>
-                    </button>
-                    <button class="btn-editor right-align" title="Right Align">
-                        <i class="fa fa-align-right"></i>
-                    </button>
+                    <div class="editor-tool-container">
+                        <button class="btn-editor bold" title="Bold">
+                            <i class="fa fa-bold"></i>
+                        </button>
+                        <button class="btn-editor italic"  title="Italicize">
+                            <i class="fa fa-italic"></i>
+                        </button>
+                        <button class="btn-editor underline" title="Underline">
+                            <i class="fa fa-underline"></i>
+                        </button>
+                        <button class="btn-editor left-align" title="Left Align">
+                            <i class="fa fa-align-left"></i>
+                        </button>
+                        <button class="btn-editor center-align" title="Center Align">
+                            <i class="fa fa-align-center"></i>
+                        </button>
+                        <button class="btn-editor right-align" title="Right Align">
+                            <i class="fa fa-align-right"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="toolkit-region toolkit-region-light timeline">
                     <h2><i class="fa fa-clock-o"></i>Draft History</h2>
@@ -137,8 +139,6 @@
                     </ul>
                 </div>
             </div>
-            {#<div class="toolkit-right">
-            </div> #}
         </div>
         <div class="main-panel-push"> </div>{# expand this to push the main panel right #}
         <div class="comment-panel-push"></div>
@@ -255,8 +255,11 @@
                               </div>
                         </div>
                     </div>
-                    <div class="btn-set essay-title" spellcheck="false" contenteditable="true">
-                        Untitled
+                    <div class="btn-set essay-title-container">
+                        <div class="essay-title" 
+                            spellcheck="false" contenteditable="true">
+                            Untitled
+                        </div>
                     </div>
                 </div>
             </div>
