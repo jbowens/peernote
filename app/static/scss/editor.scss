@@ -613,7 +613,7 @@ nav {
     height: 100%;
     position: relative;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
     width: auto;
     background-color: whitesmoke;
 
@@ -623,13 +623,15 @@ nav {
         background: whitesmoke;
         overflow: auto;
         width: 100%;
+        height: 100%;
+        margin-top: 42px;
 
         .page {
             background: white;
             width: 660px;
             height: 1000px;
             border: 1px solid #d2d2d2;
-            margin: 80px auto 60px auto;
+            margin: 40px auto 60px auto;
             padding: 80px;
             outline: none;
             font-weight: 500;
