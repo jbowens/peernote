@@ -204,7 +204,7 @@ $.extend(peernoteNS.essays, {
           commentsOpen = togglePane($(".comment-panel-push"), commentsOpen, commentsWidth);
       });
 
-      // Make sure that top toolbar is always centered
+      // Make sure that top toolbar is always centered and wrapper is the right size
       $(window).resize(function () {
           var width = $(document).width();
           if (toolkitOpen && commentsOpen) {
@@ -216,7 +216,20 @@ $.extend(peernoteNS.essays, {
           } else {
               $(".buttons").css("width", width +"px");
           }
+
+          setHeight();
       });
+
+      // JS sets the height of the body and content wrapper
+      function setHeight() {
+          var height = $(window).height();
+          var navBarHeight = $("nav").height();
+          var toolbarHeight = $(".toolbar").height();
+          $('body, .wrapper').css("height", (height -  navBarHeight) + "px"); 
+          $('.page-container').css("height", (height - navBarHeight - toolbarHeight) + "px");
+      }
+
+      setHeight(); // set initial height
 
       // JS to open and close panels
       function togglePane($panel,isOpen, width) {

@@ -50,7 +50,7 @@
             <div class="toolkit-left">
                 <div class="toolkit-region toolkit-region-light draft-num-row">
                     <div class="draft-num-container">
-                        <span class="draft-number">DRAFT: 1</span> 
+                        <span class="draft-number">Draft: 1</span> 
                         <span class="mode edit-mode edit-mode"> Mode: Editor</span>
                     </div>
                 </div>
@@ -265,7 +265,10 @@
             </div>
 
             <div class="page-container">
-              <div class="page content" contenteditable="true" spellcheck="false"></div>
+                {#<div class="page-top-margin"></div>#}
+                <div class="page-wrapper">
+                  <div class="page content" contenteditable="true" spellcheck="false"></div>
+              </div>
             </div>
         </div>
     </div>

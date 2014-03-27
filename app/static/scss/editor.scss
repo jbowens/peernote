@@ -9,6 +9,7 @@ body, html {
 
 nav {
     position: fixed;
+    top:0;
     width: 100%;
     z-index:101;
 }
@@ -22,7 +23,7 @@ nav {
     }
 
     .nav-left {
-        margin-left: 30px;
+        margin-left: 20px;
     }
 }
 
@@ -30,7 +31,8 @@ nav {
  I need this div to be 100% hegiht so its children
  can be 100% height */
 .wrapper {
-    height: 100% !important;
+    //height: 100% !important;
+    margin-top: 50px;
 }
 
 /* invisible panel that pushes the toolkit panel open */
@@ -350,7 +352,6 @@ nav {
 .tools {
     height: 100%;
     overflow: auto;
-    margin-top:50px;
 
     .toolkit { // this is the left column of tools
         background: #373737;
@@ -535,6 +536,8 @@ nav {
 
                 .draft-number {
                    padding: 0;
+                   font-weight: 500;
+                   font-size: 16px;
                    margin-right: 20px;
                }
 
@@ -639,10 +642,15 @@ nav {
         position: relative;
         z-index: 100;
         background: whitesmoke;
-        overflow: auto;
         width: 100%;
         height: 100%;
-        margin-top: 42px;
+
+        .page-wrapper {
+            width: 100%;
+            height: 100%;
+            margin-top: 42px;
+            overflow: auto;
+        }
 
         .page {
             background: white;
@@ -655,7 +663,6 @@ nav {
             outline: none;
             font-weight: 500;
             line-height: 1.5;
-            overflow-y: auto;
             white-space: pre-wrap;
         }
     }
