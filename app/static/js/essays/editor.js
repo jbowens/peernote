@@ -178,7 +178,6 @@ $.extend(peernoteNS.editor, {
 
     // TODO: Do something with the title. Where are we going to put it?
 
-    this.enableAutosaving();
   },
 
   /**
