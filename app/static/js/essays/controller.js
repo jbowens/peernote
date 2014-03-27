@@ -159,17 +159,16 @@ $.extend(peernoteNS.essays, {
           modifiers = JSON.parse(data.modifiers);
         }
 
+        // Inform the editor to load this draft
+        peernoteNS.editor.loadDraftState(data.title, data.text, modifiers);
+
         if (!data.finalized) {
-          // This is the current draft. We should inform the editor that it
-          // should load this draft.
-          peernoteNS.editor.loadDraftState(data.title, data.text, modifiers);
+          // This is the current draft. Enable autosaving
+          peernoteNS.editor.enableAutosaving();
           $('li.next-draft').slideDown();
         } else {
           // This is an old draft. We need to disable autosaving on the editor.
           peernoteNS.editor.disableAutosaving();
-          $('.content').empty();
-          $('.content').append($("<p>"));
-          $('.text-container').text(data.text);
           $('li.next-draft').slideUp();
         }
        $('.status-line').text('');
