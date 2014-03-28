@@ -1,4 +1,4 @@
-@import "shared/_variables.scss";
+@import "../shared/_variables.scss";
 
 .wrapper {
     background: $off-white-bg-color;
@@ -40,7 +40,7 @@
                 width: 460px;
                 font-size: 15px;
                 line-height: 19px;
-                font-weight: 400;
+                font-weight: 300;
                 margin-bottom:19px;
                 clear: both;
             }
@@ -93,7 +93,7 @@
                 p {
                     padding: 0 0 0 20px;
                     font-size: 15px;
-                    font-weight:400;
+                    font-weight:300;
                     line-height: 19px;
                 }
 

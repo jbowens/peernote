@@ -1,24 +1,34 @@
-@import "shared/_form_default.scss";
+@import "../shared/_form_default.scss";
+
+.wrapper {
+    background-color: $off-white-bg-color;
+}
+
+#login {
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-top: 10px;
+}
 
 .table-wrapper {
     padding: 30px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     width: 500px;
+}
+
+#welcome {
+    width: 500px !important;
+    margin:auto;
+    margin-bottom: 30px;
 }
 
 table {
     width:426px;
     margin: auto;
     margin-bottom: 20px !important;
-
+    
     td {
-        width: 150px !important;
-    }
-
-    .button-field {
-        margin-top: 0 !important;
-        position: relative;
-        top: 15px;
+        width: 100px !important;
     }
 }
 
@@ -27,7 +37,7 @@ table {
     margin-top: 0px !important;
     display: block;
     position: absolute;
-    top: 245px;
+    top: 253px;
 
     a {
         display:block;

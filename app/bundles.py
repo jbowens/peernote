@@ -9,13 +9,13 @@ CSS BUNDLES
 assets.register('base_css',
     "include/font-awesome/css/font-awesome.min.css",
     Bundle(
-        "scss/reset.scss",
-        "scss/top-nav.scss",
+        "scss/shared/_reset.scss",
+        "scss/shared/_top-nav.scss",
         "scss/shared/_footer.scss",
         "scss/shared/_base.scss",
         "scss/shared/_fonts.scss",
         "scss/shared/_flashes.scss",
-        "scss/errors.scss",
+        "scss/shared/_errors.scss",
         depends="scss/shared/*.scss",
         filters="scss,cssmin",
         output="gen/base.css",
@@ -32,7 +32,7 @@ assets.register('home_css',
 
 assets.register('meet-the-team_css',
     Bundle(
-        "scss/meet-the-team.scss",
+        "scss/static-pages/meet-the-team.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/home.css",
@@ -42,8 +42,8 @@ assets.register('meet-the-team_css',
 # TODO: essays.scss needs to go eventually
 assets.register('essays_css',
     Bundle(
-        "scss/essays.scss",
-        "scss/essays-print.scss",
+        "scss/to-delete/essays.scss",
+        "scss/to-delete/essays-print.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/essays.css"
@@ -53,7 +53,7 @@ assets.register('essays_css',
 assets.register('essays-index_css',
     Bundle(
         "scss/widgets/essays-list.scss",
-        "scss/essays-index.scss",
+        "scss/essays/essays-index.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/essays_index.css"
@@ -62,7 +62,7 @@ assets.register('essays-index_css',
 
 assets.register('signup_css',
     Bundle(
-        "scss/signup.scss",
+        "scss/users/signup.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/signup.css"
@@ -71,7 +71,7 @@ assets.register('signup_css',
 
 assets.register("forgot-password_css",
     Bundle(
-        "scss/forgot-password.scss",
+        "scss/users/forgot-password.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/forgot-password.css"
@@ -80,7 +80,7 @@ assets.register("forgot-password_css",
 
 assets.register("reset-password_css",
     Bundle(
-        "scss/reset-password.scss",
+        "scss/users/reset-password.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/reset-password.css"
@@ -89,7 +89,7 @@ assets.register("reset-password_css",
 
 assets.register('login_css',
     Bundle(
-        "scss/login.scss",
+        "scss/users/login.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/signup.css"
@@ -98,7 +98,7 @@ assets.register('login_css',
 
 assets.register('uploads_css',
      Bundle(
-         "scss/uploads.scss",
+         "scss/essays/uploads.scss",
          filters="scss,cssmin",
          depends="scss/shared/*.scss",
          output="gen/uploads.css"
@@ -107,10 +107,10 @@ assets.register('uploads_css',
 
 assets.register('editor_css',
     Bundle(
-        "scss/editor-modifiers.scss",
+        "scss/essays/editor-modifiers.scss",
         "scss/widgets/essays-list.scss",
         "scss/widgets/lightbox.scss",
-        "scss/editor.scss",
+        "scss/essays/editor.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss, scss/editor-toolkit.scss",
         output="gen/editor.css"
@@ -119,7 +119,7 @@ assets.register('editor_css',
 
 assets.register('users_css',
     Bundle(
-        "scss/users.scss",
+        "scss/users/users.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/users.css"
@@ -128,7 +128,7 @@ assets.register('users_css',
 
 assets.register('splash_css',
     Bundle(
-        "scss/splash.scss",
+        "scss/static-pages/splash.scss",
         "scss/widgets/lightbox.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
@@ -138,7 +138,7 @@ assets.register('splash_css',
 
 assets.register('terms-and-conditions_css',
     Bundle(
-        "scss/terms-and-conditions.scss",
+        "scss/static-pages/terms-and-conditions.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/terms-and-conditions.css"
@@ -148,7 +148,7 @@ assets.register('terms-and-conditions_css',
 assets.register('settings_css',
     Bundle(
         "scss/widgets/lightbox.scss",
-        "scss/settings.scss",
+        "scss/users/settings.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
         output="gen/settings.css"

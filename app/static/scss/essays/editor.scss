@@ -1,6 +1,21 @@
-@import "bootstrap.scss";
-@import "shared/_variables.scss";
-@import "shared/_mixins.scss";
+@import "../shared/_variables.scss";
+@import "../shared/_mixins.scss";
+
+/******* This moved over from bootstrap shit *****/
+@mixin calc($property, $expression) {
+    #{$property}: -moz-calc(#{$expression});
+    #{$property}: -o-calc(#{$expression});
+    #{$property}: -webkit-calc(#{$expression});
+    #{$property}: calc(#{$expression});
+}
+$border: #d2d2d2;
+$contentwidth: 760px;
+$accent-alt: #a6538d;
+$accent-light: #7ca6b1;
+$theme-color: #a973b4;        
+$theme-color-hover: #b45b99;
+$text: #373737;
+/******************* TODO:  Kill it ************** /
 
 body, html {
     height: 100%;
@@ -27,13 +42,6 @@ nav {
     }
 }
 
-/* This is normally so footer sticks to bottom. but 
- I need this div to be 100% hegiht so its children
- can be 100% height */
-.wrapper {
-    //height: 100% !important;
-    margin-top: 50px;
-}
 
 /* invisible panel that pushes the toolkit panel open */
 .main-panel-push {
@@ -682,7 +690,7 @@ nav {
 }
 
 .editor-background {
-    background-color: $base; 
+    background-color: white; 
     height: 100%;
 
     #review-submit {
