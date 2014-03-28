@@ -3,6 +3,18 @@
  */
 var peernoteNS = peernoteNS || {};
 peernoteNS.essays = peernoteNS.essays || {}
+
+// need this extra extend to define 
+// enums used in subsequent extend
+$.extend(peernoteNS.essays, {
+  // document modes enum
+  MODES: {
+    EDIT:     0,
+    REVIEW:   1,
+    READONLY: 2
+  },
+});
+
 $.extend(peernoteNS.essays, {
   /**
    * Creates a new draft
@@ -165,10 +177,18 @@ $.extend(peernoteNS.essays, {
         if (!data.finalized) {
           // This is the current draft. Enable autosaving
           peernoteNS.editor.enableAutosaving();
+
+          // Move to editor mode
+          peernoteNS.essays.toEditor();
+
           $('li.next-draft').slideDown();
         } else {
           // This is an old draft. We need to disable autosaving on the editor.
           peernoteNS.editor.disableAutosaving();
+
+          // Move to readonly mode
+          peernoteNS.essays.toReadonly();
+
           $('li.next-draft').slideUp();
         }
        $('.status-line').text('');
@@ -182,6 +202,98 @@ $.extend(peernoteNS.essays, {
     });
   },
 
+  // constant widths of left and right panels
+  TOOLKIT_PANE_WIDTH: 250,
+  COMMENTS_PANE_WIDTH: 350,
+
+  // open/close status of left and right panels
+  TOOLKIT_PANE_OPEN:  true,
+  COMMENTS_PANE_OPEN: false,
+
+  // mode the document is currently in
+  currentMode: peernoteNS.essays.MODES.EDIT,
+
+  // initialize mode-switching buttons
+  initModeSwap: function() {
+    var $editModeButton = $("#edit-mode-button");
+    var $reviewModeButton = $("#review-mode-button");
+
+    $editModeButton.click(function() {
+        if ($editModeButton.hasClass("editor-mode-button-selectable")) {
+            peernoteNS.essays.toEditor();
+        }
+    });
+
+    $reviewModeButton.click(function() {
+        if ($reviewModeButton.hasClass("editor-mode-button-selectable")) {
+            peernoteNS.essays.toReviewer();
+        }
+    });
+  },
+
+  // change appearance of mode buttons upon mode change
+  modeButtonsSelect: function($button) {
+    var $readonlyButton = $("#readonly-mode-button");
+    var $buttons = $(".editor-mode-button");
+    $buttons.removeClass("editor-mode-button-active editor-mode-button-disabled");
+    $button.addClass("editor-mode-button-active editor-mode-button-selectable");
+
+    if ($button.selector === $readonlyButton.selector) {
+        $buttons.addClass("editor-mode-button-disabled");
+        $buttons.removeClass("editor-mode-button-selectable");
+        $button.removeClass("editor-mode-button-disabled");
+    } else {
+        $readonlyButton.addClass("editor-mode-button-disabled");
+        $buttons.addClass("editor-mode-button-selectable");
+        $readonlyButton.removeClass("editor-mode-button-selectable");
+    }
+  },
+
+  // convert mode to editor
+  toEditor: function() {
+    peernoteNS.essays.modeButtonsSelect($("#edit-mode-button"));
+    $("#reviewer-tools").slideUp();
+    $("#editor-tools").slideDown();
+    peernoteNS.essays.currentMode = peernoteNS.essays.MODES.EDIT;
+    if (peernoteNS.essays.COMMENTS_PANE_OPEN) {
+        peernoteNS.essays.COMMENTS_PANE_OPEN = peernoteNS.essays.togglePane(
+            $('.comment-panel-push'), 
+            peernoteNS.essays.COMMENTS_PANE_OPEN, 
+            peernoteNS.essays.COMMENTS_PANE_WIDTH);
+    }
+
+    // Enable content editability
+    $(".page").attr("contenteditable","true");
+  },
+
+  // convert mode to reviewer
+  toReviewer: function() {
+    peernoteNS.essays.modeButtonsSelect($("#review-mode-button"));
+    $("#editor-tools").slideUp(); 
+    $("#reviewer-tools").slideDown();
+    if (!peernoteNS.essays.COMMENTS_PANE_OPEN) {
+      peernoteNS.essays.COMMENTS_PANE_OPEN = peernoteNS.essays.togglePane(
+        $('.comment-panel-push'), 
+        peernoteNS.essays.COMMENTS_PANE_OPEN, 
+        peernoteNS.essays.COMMENTS_PANE_WIDTH);
+    }
+    peernoteNS.essays.currentMode = peernoteNS.essays.MODES.REVIEW;
+  },
+
+  // convert mode to readonly
+  toReadonly: function($triggerButton) {
+    // Disable content editability
+    $(".page").attr("contenteditable","false");
+
+    // hide tools-kits for other modes
+    $("#editor-tools").slideUp();
+    $("#reviewer-tools").slideUp();
+
+    peernoteNS.essays.modeButtonsSelect($("#readonly-mode-button"));
+    peernoteNS.essays.currentMode = peernoteNS.essays.MODES.READONLY;
+  },
+
+
   /* Javascript to handle the showing and hiding of the toolkit and comment columns.
    * Also javascript to keep the top toolbar centered when showing and hiding the 
    * toolkit and comment columns 
@@ -189,28 +301,30 @@ $.extend(peernoteNS.essays, {
   toolDisplayer: function() {
       var toolkitOpen = true; // is toolkit open or closed
       var commentsOpen = false;
-      var toolkitWidth = 250;
-      var commentsWidth = 350;
+      var toolkitWidth = peernoteNS.essays.TOOLKIT_PANE_WIDTH;
+      var commentsWidth = peernoteNS.essays.COMMENTS_PANE_WIDTH;
 
       // Set the width of the button panel dynamically so that it can stay centered
       var width = $(document).width();
       $(".buttons").css("width",(width-250) +"px");
       $(".toolkit-open-button").click(function() {
-          toolkitOpen = togglePane($(".main-panel-push"), toolkitOpen, toolkitWidth);
+          peernoteNS.essays.TOOLKIT_PANE_OPEN = peernoteNS.essays.togglePane(
+              $(".main-panel-push"), peernoteNS.essays.TOOLKIT_PANE_OPEN, toolkitWidth);
       });
 
       $(".toolkit-comment-button").click(function() {
-          commentsOpen = togglePane($(".comment-panel-push"), commentsOpen, commentsWidth);
+          peernoteNS.essays.COMMENTS_PANE_OPEN = peernoteNS.essays.togglePane(
+              $(".comment-panel-push"), peernoteNS.essays.COMMENTS_PANE_OPEN, commentsWidth);
       });
 
       // Make sure that top toolbar is always centered and wrapper is the right size
       $(window).resize(function () {
           var width = $(document).width();
-          if (toolkitOpen && commentsOpen) {
+          if (peernoteNS.essays.TOOLKIT_PANE_OPEN && peernoteNS.essays.COMMENTS_PANE_OPEN) {
               $(".buttons").css("width", (width - toolkitWidth - commentsWidth) +"px");
-          } else if (toolkitOpen) {
+          } else if (peernoteNS.essays.TOOLKIT_PANE_OPEN) {
               $(".buttons").css("width", (width-toolkitWidth) +"px");
-          } else if (commentsOpen) {
+          } else if (peernoteNS.essays.COMMENTS_PANE_OPEN) {
               $(".buttons").css("width", (width-commentsWidth) +"px");
           } else {
               $(".buttons").css("width", width +"px");
@@ -229,26 +343,29 @@ $.extend(peernoteNS.essays, {
       }
 
       setHeight(); // set initial height
+  },
 
-      // JS to open and close panels
-      function togglePane($panel,isOpen, width) {
-          var buttonPanelWidthSetting = $(".buttons").css("width");
-          var buttonPanelWidth = parseInt(buttonPanelWidthSetting
-              .substring(0,buttonPanelWidthSetting.length-2));
+  // JS to open and close pannels
+  // $pannel is the target panel (left or right)
+  // isOpen is the status of the target panel
+  // width is the desired width of the target pannel
+  togglePane: function($panel, isOpen, width) {
+      var buttonPanelWidthSetting = $(".buttons").css("width");
+      var buttonPanelWidth = parseInt(buttonPanelWidthSetting
+          .substring(0,buttonPanelWidthSetting.length-2));
 
-          if (isOpen) {
-              $panel.animate({width: "0px"}, {duration: 300 });
-              $(".buttons").animate(
-                      {width: (buttonPanelWidth+width) + "px"}, 
-                      {duration: 300, queue: true});
-          } else {
-              $panel.animate({width: width + "px"}, {duration: 300 });
-              $(".buttons").animate(
-                      {width: (buttonPanelWidth-width) + "px"}, 
-                      {duration: 300, queue: false});
-          }
-          return !isOpen;
+      if (isOpen) {
+          $panel.animate({width: "0px"}, {duration: 300 });
+          $(".buttons").animate(
+                  {width: (buttonPanelWidth+width) + "px"}, 
+                  {duration: 300, queue: true});
+      } else {
+          $panel.animate({width: width + "px"}, {duration: 300 });
+          $(".buttons").animate(
+                  {width: (buttonPanelWidth-width) + "px"}, 
+                  {duration: 300, queue: false});
       }
+      return !isOpen;
   },
 
   /* JS to initialte comment tab functionality */
@@ -400,7 +517,6 @@ $.extend(peernoteNS.essays, {
       });
   },
 
-
   initOpenButton: function() {
 
     var lightbox = peernoteNS.widgets.initLightbox($('.essays-list-container'), {
@@ -436,8 +552,9 @@ peernoteNS.init(function() {
   peernoteNS.essays.initToolkit();
   peernoteNS.essays.initToolbar();
   peernoteNS.essays.initOpenButton();
-
+  peernoteNS.essays.initModeSwap();
   peernoteNS.essays.initDraft();
+
 });
 
 peernoteNS.setGAOptions({

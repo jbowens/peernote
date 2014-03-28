@@ -4,7 +4,7 @@
 
 body, html {
     height: 100%;
-    min-width: 800px;
+    min-width: 1000px;
 }
 
 nav {
@@ -864,7 +864,7 @@ nav {
 
         .essay-title-container { // this allows the essay title to overflow if too long
             width: auto;
-            max-width: 700px;
+            max-width: 500px;
             margin: auto;
             overflow-y: auto;
 
@@ -873,7 +873,7 @@ nav {
                 font-size: 20px;
                 font-weight: 600;
                 width: auto;
-                min-width: 500px;
+                min-width: 200px;
                 white-space: nowrap; // don't let text spill over onto next line
             }
         }
