@@ -96,6 +96,15 @@ assets.register('login_css',
     )
 )
 
+assets.register('uploads_css',
+     Bundle(
+         "scss/uploads.scss",
+         filters="scss,cssmin",
+         depends="scss/shared/*.scss",
+         output="gen/uploads.css"
+     )
+)
+
 assets.register('editor_css',
     Bundle(
         "scss/editor-modifiers.scss",

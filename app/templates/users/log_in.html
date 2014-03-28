@@ -11,51 +11,51 @@
 
 <div class="page-container forms-wrapper top-margin bottom-margin log-in">
     {% if is_logged_in %}
-    <div class="error">
-        You're already logged in!
-        <div class="log-out">
-            <a href="/log-out">log out</a>
+        <div class="error">
+            You're already logged in!
+            <div class="log-out">
+                <a href="/log-out">log out</a>
+            </div>
         </div>
-    </div>
     {% else %}
-    {% include "shared/flashes.html" %}
-    <div class="table-wrapper">
-    <h1 id="welcome">Welcome Back </h2>
-    <table>
-        <form method="post" id="log-in">
-            {% if next_location %}
-            <input type="hidden" name="next_location" value="{{ next_location }}" />
-            {% endif %}
-            <tr class="field">
-                <td>
-                    <label for="login_email">Email</label>
-                </td>
-                <td>
-                    <input class="textfield" type="text" id="login_email" name="email" />
-                </td>
-            </tr>
-            <tr class="field">
-                <td>
-                    <label for="login_password">Password</label>
-                </td>
-                <td>
-                    <input class="textfield" type="password" id="login_password" name="password" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input id="login" class="button-field" type="submit" value="Log In" />
-                </td>
-                <td>
-                    <p class="forgot-password"> 
-                        <a href="{{ url_for('users.signup') }}">Still need to sign up?</a >
-                        <a href="{{ url_for('users.forgot_password') }}">Forgot your password?</a> 
-                    </p>
-                </td>
-            </tr>
-        </form>
-    </table>
-</div>
+        {% include "shared/flashes.html" %}
+        <div class="table-wrapper">
+            <h1 id="welcome">Welcome Back </h2>
+            <table>
+                <form method="post" id="log-in">
+                    {% if next_location %}
+                    <input type="hidden" name="next_location" value="{{ next_location }}" />
+                    {% endif %}
+                    <tr class="field">
+                        <td>
+                            <label for="login_email">Email</label>
+                        </td>
+                        <td>
+                            <input class="textfield" type="text" id="login_email" name="email" />
+                        </td>
+                    </tr>
+                    <tr class="field">
+                        <td>
+                            <label for="login_password">Password</label>
+                        </td>
+                        <td>
+                            <input class="textfield" type="password" id="login_password" name="password" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="login" class="button-field" type="submit" value="Log In" />
+                        </td>
+                        <td>
+                            <p class="forgot-password"> 
+                                <a href="{{ url_for('users.signup') }}">Still need to sign up?</a >
+                                <a href="{{ url_for('users.forgot_password') }}">Forgot your password?</a> 
+                            </p>
+                        </td>
+                    </tr>
+                </form>
+            </table>
+        </div>
     {% endif %}
 </div>
 

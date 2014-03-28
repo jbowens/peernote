@@ -2,30 +2,44 @@
 
 {% block styles %}
     {{ super() }}
-    {% assets "essays_css" %}
+    {% assets "uploads_css" %}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
     {% endassets %}
 {% endblock %}
 
 {% block content %}
-<div class="page-container top-margin bottom-margin">
-    <h1>Upload a paper</h1>
-
-    <form method="post" enctype="multipart/form-data">
-        <div class="field">
-            <label for="upload_title">Title</label>
-            <input type="text" name="title" id="upload_title" value="Untitled" />
-        </div>
-        <div class="field">
-            <label for="upload_file">File</label>
-            <input type="file" name="paper" id="upload_file" />
-            <p class="accepted_extensions">
-            Accepts {{ accepted_extensions }}
-            </p>
-        </div>
-        <div class="button-field">
-            <input type="submit" value="Upload" />
-        </div>
-    </form>
+<div class="page-container forms-wrapper top-margin bottom-margin">
+    <div class="table-wrapper">
+        <h1>Upload a Document</h1>
+        <table>
+            <form method="post" enctype="multipart/form-data">
+                <tr class="field">
+                    <td>
+                        <label for="upload_title">Document Title</label>
+                    </td>
+                    <td>
+                        <input type="text" name="title" class="textfield"
+                            id="upload_title" value="Untitled" />
+                    </td>
+                </tr>
+                <tr class="field">
+                    <td>
+                        <label for="upload_file"></label>
+                    </td>
+                    <td>
+                        <input type="file" name="paper" id="upload_file" />
+                    </td>
+                    <p class="accepted_extensions">
+                    Accepted formats: {{ accepted_extensions }}
+                    </p>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="button-field" type="submit" value="Upload" />
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </div>
 </div>
 {% endblock %}

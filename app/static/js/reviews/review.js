@@ -68,33 +68,6 @@ function bindListeners() {
 // main
 peernoteNS.init(function () {
 
-	$('#strikethrough-button, #comment-button, #help-button, #undo, #redo').qtip({
-		style: {
-			name: 'cream',
-			tip: {
-				size: {
-					x: 6,
-					y: 8
-				},	  
-				corner:'topLeft'
-			}
-		},
-		position: {
-			corner: {
-				target: 'bottomMiddle',
-				tooltip: 'topLeft'
-			},
-			adjust: {
-				y: 10,
-				scroll: true
-			}
-		},
-		show: {
-			delay: 700
-		}
-	});
-
-
     // initialize rangy object and CSS class appliers
     rangy.init();
     range = rangy.createRange();

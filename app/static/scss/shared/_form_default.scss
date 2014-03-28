@@ -4,11 +4,25 @@ body {
     background: whitesmoke;
 }
 
+.wrapper {
+    background-color: $off-white-bg-color;
+}
+
 .page-container {
     width: $page-width;
     margin: auto;
     margin-top: 50px;
     margin-bottom: 60px;
+}
+
+.table-wrapper {
+    padding: 30px;
+    padding-bottom: 10px;
+    border: 1px solid #ddd;
+    margin: auto;
+    background: white;
+    overflow: auto;
+    position: relative;
 }
 
 .forms-wrapper {

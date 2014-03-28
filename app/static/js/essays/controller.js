@@ -338,7 +338,7 @@ $.extend(peernoteNS.essays, {
           var height = $(window).height();
           var navBarHeight = $("nav").height();
           var toolbarHeight = $(".toolbar").height();
-          $('body, .wrapper').css("height", (height -  navBarHeight) + "px"); 
+          $('body, .wrapper, .toolkit').css("height", (height -  navBarHeight) + "px"); 
           $('.page-container').css("height", (height - navBarHeight - toolbarHeight) + "px");
       }
 
