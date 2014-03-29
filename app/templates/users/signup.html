@@ -7,6 +7,13 @@
     {% endassets %}
 {% endblock %}
 
+{% block scripts %}
+    {{ super() }}
+    {% assets "signup_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+{% endblock %}
+
 {% block content %}
 <div class="page-container top-margin bottom-margin">
     {% if is_logged_in %}
@@ -18,26 +25,25 @@
     {% else %}
 
     {% include "shared/form_errors.html" %}
-    {% include "shared/flashes.html" %}
     <div class="signup-wrapper forms-wrapper">
         <h1 class="sign-up">Sign up</h1>
-        <form method="post">
+        <form id="signup-form" method="post">
             {{ form.csrf_token }}
             <table>
                 <tr class="field">
                     <td>
-                        <label for="signup_first_name">First Name</label>
+                        <label for="signup_first_name">Name</label>
                     </td>
                     <td>
-                        <input class="textfield" type="text" id="signup_first_name" name="first_name" />
-                    </td>
-                </tr>
-                <tr class="field">
-                    <td>
-                        <label for="signup_last_name">Last Name</label>
+                        <input class="textfield" type="text" 
+                            id="signup_first_name" name="first_name" 
+                            placeholder="First Name" />
+                            <div class="form-error-message hidden">Required field</div>
                     </td>
                     <td>
-                        <input class="textfield" type="text" id="signup_last_name" name="last_name" />
+                        <input class="textfield" type="text" 
+                            id="signup_last_name" name="last_name" placeholder="Last Name"/>
+                            <div class="form-error-message hidden">Required field</div>
                     </td>
                 </tr>
                 <tr class="field">
@@ -45,7 +51,8 @@
                         <label for="signup_email">Email</label>
                     </td>
                     <td>
-                        <input class="textfield" type="text" id="signup_email" name="email" />
+                        <input class="textfield" type="text" autocomplete="off" id="signup_email" name="email" />
+                        <div class="form-error-message hidden">Invalid email address</div>
                     </td>
                 </tr>
                 <tr class="field">
@@ -53,30 +60,42 @@
                         <label for="signup_password">Password</label>
                     </td>
                     <td>
-                        <input class="textfield" type="password" id="signup_password" name="pw" />
+                        <input class="textfield" type="password" 
+                            id="signup_password" name="pw" />
+                            <div class="form-error-message hidden">6 or more characters</div>
                     </td>
                 </tr>
                 <tr class="field">
                     <td>
-                        <label for="signup_password_confirm">Password Confirmation</label>
+                        <label for="signup_password_confirm">Confirm Password</label>
                     </td>
                     <td>
-                        <input class="textfield" type="password" id="signup_password_confirm" name="pw_again" />
+                        <input class="textfield" type="password" 
+                            id="signup_password_confirm" name="pw_again" />
+                            <div class="form-error-message hidden">Doesn't match password</div>
                     </td>
                 </tr>
             </table>
+            
             <div class="field captcha">
                 <p>Are you human?</p>
                 <img src="/captcha.png" />
-                <input class="textfield you-human-textfield" type="text" name="cover" />
+                {% include "shared/flashes.html" %}
+                <div class="captcha-input-container">
+                    <input autocomplete="off" class="textfield you-human-textfield"
+                        id="you-human-textfield" type="text" name="cover" />
+                    <div class="form-error-message hidden">Required field</div>
+                </div>
                 <div class="explanation">
                     Enter the image text. Case doesn't matter. Separate words by spaces.
                 </div>
             </div>
+            
             <table>
                 <tr>
                     <td>
-                        <input class="button-field" type="submit" value="Sign up" />
+                        <input id="signup-submit" class="button-field" 
+                            type="submit" value="Sign up" />
                     </td>
                 </tr>
             </table>

@@ -183,6 +183,14 @@ assets.register('splash_js',
     )
 )
 
+assets.register('signup_js',
+    Bundle(
+        "js/users/signup.js",
+        filters="rjsmin",
+        output="gen/signup.js"
+    )
+)
+
 assets.register('editor_js',
     Bundle(
         "js/widgets/lightbox.js",
