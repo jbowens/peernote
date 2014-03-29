@@ -39,11 +39,6 @@ $.extend(peernoteNS.signup, {
             isValid: false
         },
 
-        "you-human-textfield": {
-            validator: function(string) { return string.length > 0; },
-            autosaveTimer: null,
-            isValid: false
-        }
     }
 });
 
@@ -53,7 +48,6 @@ $.extend(peernoteNS.signup, {
 
     // checks the validity of a textfield
     errorCheckerHelper: function($textfield) {
-
       var textfieldTimeUtil = peernoteNS.signup.TEXTFIELDS[$textfield.attr("id")];
       clearTimeout(textfieldTimeUtil.autosaveTimer);
       textfieldTimeUtil.autosaveTimer = setTimeout(function() {
@@ -79,16 +73,11 @@ $.extend(peernoteNS.signup, {
         "#signup_last_name, " +
         "#signup_email, " +
         "#signup_password, " +
-        "#signup_password_confirm, " +
-        "#you-human-textfield").keydown(peernoteNS.signup.errorChecker);
+        "#signup_password_confirm").keydown(peernoteNS.signup.errorChecker);
 
       // attach validator to form submit
       $("#signup-form").submit(peernoteNS.signup.submit);
 
-      // special case
-      if ($(".error")[0]) {
-        peernoteNS.signup.errorCheckerHelper($("#you-human-textfield"));
-      }
     },
 
     // checks the validity of a textfield
@@ -96,7 +85,6 @@ $.extend(peernoteNS.signup, {
       var $textfield = $(e.currentTarget);
       peernoteNS.signup.errorCheckerHelper($textfield);
       
-      console.log($textfield.attr("id"));
       if ($textfield.attr("id") === "signup_password") {
         peernoteNS.signup.errorCheckerHelper($("#signup_password_confirm"));
       }

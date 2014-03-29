@@ -31,6 +31,7 @@ def signup():
     form = SignUpForm()
 
     # Check the captcha
+    """
     captcha_passed = False
     if request.method == 'POST':
         lowered_titles = [x.lower() for x in session.get('captcha_title', [])]
@@ -41,8 +42,9 @@ def signup():
         # It's important to only allow one attempt for each session title
         if 'captcha_title' in session:
             session.pop('captcha_title')
+    """
 
-    if request.method == 'POST' and form.validate_on_submit() and captcha_passed:
+    if request.method == 'POST' and form.validate_on_submit(): #and captcha_passed:
         # Create the user in the database
         newuser = User()
         newuser.email = request.form['email'].lower()

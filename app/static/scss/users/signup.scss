@@ -3,7 +3,6 @@
 .signup-wrapper {
     border: 1px $generic-divider-color solid;
     padding-top: 40px;
-    padding-bottom: 30px;
     background: white;
     position: relative;
     bottom: 10px;
@@ -11,28 +10,31 @@
 }
 
 table {
-    width: 480px;
+    width: 250px;
     margin: auto;
     margin-bottom: 10px !important;
 
     td {
         position:relative;
         height: 30px;
+        padding-right: 0px !important;
+
+        input {
+            height: 20px;
+            width: 234px !important;
+        }
     }
 }
 
-input {
-    width: 160px !important;
-}
 
 h1.sign-up {
-    width: 480px;
+    width: 250px;
     margin: auto;
     margin-bottom: 20px;
 }
 
 .page-container {
-    width: 600px;
+    width: 350px;
 }
 
 .captcha {
@@ -59,6 +61,9 @@ h1.sign-up {
 
 .button-field {
     padding: 10px 25px 10px 25px !important;
+    width: 250px !important;
+    height: 50px;
+    margin-top: 10px !important;
 }
 
 .form-error-message {
@@ -103,4 +108,10 @@ h1.sign-up {
     float: right;
     color: #b8211d;
     margin-bottom: 10px;
+}
+
+.already-account {
+    text-align: center;
+    padding-top: 5px !important;
+    color: #373737;
 }
