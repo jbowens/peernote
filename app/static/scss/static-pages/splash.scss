@@ -159,7 +159,7 @@ html, body {
 */
 
 #navbar-inner {
-    width: 1000px;
+    width: 940px;
     margin: auto;
 }
 
@@ -170,10 +170,6 @@ html, body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.4);
     width: 100%;
     overflow: auto;
-
-    a {
-        float: left;
-    }
 
     #logo {
         float: left;
@@ -263,25 +259,14 @@ html, body {
         }
     } 
 
-    #login-button {
-        @include unselectable;
-        height: $button-height - 7px;
-        width: 100px;
-        font-size: 10px;
-        padding-top: 6px;
-        background: rgba(0,0,0,0);
-
-        a {
-            height: 100%;
-            width: 100%;
-            display: block;
-           // background-color: $main-color-2;//rgba(10,10,10,.8);
-            padding-top:9px;
-            padding-bottom: 2px;
-            @include border-radius;
-        }
+    .sign-in-link {
+        font-size: 14px;
+        font-weight: 400;
+        float: right;
+        margin-top:17px;
+        height: 100%;
+        display: block;
     }
-
 
     form {
         padding-top:10px;
@@ -324,7 +309,6 @@ html, body {
         @include border-radius;
         float: right;
         text-align: center;
-        margin-left: 10px;
         font-size: $button-font-size;
         cursor: pointer;
     }

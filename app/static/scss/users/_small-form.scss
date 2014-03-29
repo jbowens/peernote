@@ -1,0 +1,76 @@
+
+.wrapper {
+    background-color: $off-white-bg-color;
+    background-image: url("../images/stocky-stock-dark-cool.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+
+.nav-section {
+    opacity:0;
+    position: fixed;
+}
+
+.page-container {
+    width: 350px;
+}
+
+table {
+    width: 250px;
+    margin: auto;
+    margin-bottom: 20px !important;
+    
+    td {
+        position: relative;
+        height: 30px;
+        padding-right: 0px !important;
+
+        input {
+            height: 20px;
+            width: 234px !important;
+        }
+    }
+}
+
+.button-field {
+    padding: 10px 25px 10px 25px !important;
+    width: 250px !important;
+    height: 50px;
+    margin-top: 10px !important;
+}
+
+.form-error-message {
+    width: 160px;
+    margin: auto;
+    padding: 3px;
+    color: #b8211d;
+    padding-left:5px;
+    font-size: 12px;
+    position:absolute;
+    left: 3px;
+}
+
+.textfield-error {
+    -webkit-box-shadow: 0 0 3px 0 rgba(180,0,0,0.7) !important;
+    -moz-box-shadow: 0 0 3px 0 rgba(180,0,0,0.7) !important;
+    box-shadow: 0 0 3px 0 rgba(180,0,0,0.7) !important;
+    border:1px solid #fed1d1 !important;
+}
+
+.footer {
+    background: rgba(0,0,0,0.4);
+    border-top: 1px solid rgba(201,201,201,0.4);
+
+    .middot {
+        color: rgba(201,201,201,0.4);
+    }
+
+    .copyright {
+        color: #aaa;
+    }
+
+    .footer-inner {
+        border-bottom: 0px solid white;
+    }
+}

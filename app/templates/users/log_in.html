@@ -1,9 +1,15 @@
-
 {% extends 'base/application_main.html' %}
 {% block styles %}
     {{ super() }}
     {% assets "login_css" %}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {% assets "login_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
 {% endblock %}
 
@@ -18,9 +24,9 @@
             </div>
         </div>
     {% else %}
-        {% include "shared/flashes.html" %}
         <div class="table-wrapper">
             <h1 id="welcome">Welcome Back </h2>
+            {% include "shared/flashes.html" %}
             <table>
                 <form method="post" id="log-in">
                     {% if next_location %}
@@ -28,28 +34,34 @@
                     {% endif %}
                     <tr class="field">
                         <td>
-                            <label for="login_email">Email</label>
-                        </td>
-                        <td>
-                            <input class="textfield" type="text" id="login_email" name="email" />
+                            <input class="textfield" type="text" 
+                                placeholder="Email" id="login_email" name="email" />
+                            <div class="form-error-message hidden">Invalid email</div>
                         </td>
                     </tr>
                     <tr class="field">
                         <td>
-                            <label for="login_password">Password</label>
-                        </td>
-                        <td>
-                            <input class="textfield" type="password" id="login_password" name="password" />
+                            <input class="textfield" type="password" 
+                                placeholder="Password" id="login_password" name="password" />
+                            <div class="form-error-message hidden">Required field</div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input id="login" class="button-field" type="submit" value="Log In" />
+                            <input id="login" class="button-field" 
+                                type="submit" value="Log In" />
                         </td>
+                    </tr>
+                    <tr>
                         <td>
                             <p class="forgot-password"> 
-                                <a href="{{ url_for('users.signup') }}">Still need to sign up?</a >
-                                <a href="{{ url_for('users.forgot_password') }}">Forgot your password?</a> 
+                                <a class="sign-up-link" href="{{ url_for('users.signup') }}">
+                                    Still need to sign up?
+                                </a>
+                                <a class="password-forgot-link" 
+                                    href="{{ url_for('users.forgot_password') }}">
+                                    Forgot your password?
+                                </a> 
                             </p>
                         </td>
                     </tr>

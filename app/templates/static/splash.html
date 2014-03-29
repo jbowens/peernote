@@ -47,14 +47,14 @@
                     {#<span id="logo-name"> PEERNOTE </span>#}
                 </a>
                 <ul>
-                    <li class="about-button"><a id="about-id">WRITERS</a> </li>
-                    <li class="services-button"><a id="instructors-id">INSTRUCTORS</a></li>
-                    <li class="team-button"><a href="/meet-the-team">TEAM</a></li>
+                    <li class="about-button"><a id="about-id">Writers</a> </li>
+                    <li class="services-button"><a id="instructors-id">Instructors</a></li>
+                    <li class="team-button"><a href="/meet-the-team">Team</a></li>
                     <li class="faq-button"><a id="faq-id">FAQ</a></li>
-                    <li class="contact-button"><a>CONTACT</a></li>
+                    <li class="contact-button"><a>Contact</a></li>
                 </ul>
                 {% if not is_production %}
-                    <div id="login-button"><a href="/log-in">SIGN IN</a></div>
+                    <a class="sign-in-link" href="/log-in">Sign In</a>
                 {% else %}
                     <form class="email-signup">
                         {% if has_signed_up %}

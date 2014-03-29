@@ -28,6 +28,7 @@ peernoteNS.footer = {
                     && wrapperHeight <= contentSpace) {
                 $footerPush.height(contentSpace);
             }
+            $(".wrapper").height(($footerPush.height() + $footer.height()+ 1) + "px");
         }
 
         $footerPush.height($pageWrapper.height());
