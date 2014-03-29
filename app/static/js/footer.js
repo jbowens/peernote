@@ -10,6 +10,7 @@ peernoteNS.footer = {
         var $nav = $("nav");
         var $navSection = $(".nav-section");
         var $footer = $(".footer");
+
         function reposition() {          
             var wrapperHeight = $pageWrapper.height();
             var footerPushHeight = $footerPush.height();
@@ -17,6 +18,9 @@ peernoteNS.footer = {
             var navbarHeight = $nav.height() + $navSection.height();
             var footerHeight = $footer.height();
             var contentSpace = windowHeight - navbarHeight - footerHeight;
+            if ($(".nav-section").is(":visible")) {
+                contentSpace = contentSpace + $navSection.height();
+            }
             if (footerPushHeight < contentSpace) {
                 $footerPush.height(contentSpace + "px");
             } else if ( footerPushHeight > contentSpace 
@@ -25,6 +29,7 @@ peernoteNS.footer = {
                 $footerPush.height(contentSpace);
             }
         }
+
         $footerPush.height($pageWrapper.height());
         reposition();
         $(window).resize(reposition);

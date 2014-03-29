@@ -2,6 +2,15 @@
 
 .wrapper {
     background-color: $off-white-bg-color;
+    background-image: url("../images/stocky-stock-dark-cool.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+
+.nav-section {
+    opacity:0;
+    position: fixed;
 }
 
 #login {

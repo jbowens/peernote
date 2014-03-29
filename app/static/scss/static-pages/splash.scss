@@ -129,7 +129,7 @@ html, body {
     height:100%;
     min-width: 1150px; // ? i dunno why this works
     min-height: 800px;
-    background: url('../images/peernote-banner.jpg') no-repeat center center;
+    background: url('../images/peernote-banner-cool.jpg') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -166,9 +166,55 @@ html, body {
 #navbar {
     $button-height: 30px;
     min-width:918px;
-    background: rgba(0,0,0,.5);
+    background: $main-dark; //rgba(0,0,0,.5);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
     width: 100%;
     overflow: auto;
+
+    a {
+        float: left;
+    }
+
+    #logo {
+        float: left;
+        position: absolute;
+
+        #eraser{
+            width: 50px;
+            height: 10px;
+            background-color: $main-color-2;
+        }
+
+        #metal {
+            width: 50px;
+            height: 3px;
+            margin-bottom: 1px;
+            background-color: $main-color-2;
+        }
+
+        #pencil {
+            width: 50px;
+            height: 40px;
+            background-color: $main-color-2;
+            line-height: 34px;
+            text-align: center;
+            color: $main-dark;
+            font-size: 24px;
+            font-family: 'Pacifico', cursive;
+        }
+    }
+
+    #logo-name {
+        margin-left: 70px;
+        letter-spacing: 5px;
+        margin-top: 18px;
+        font-weight: 100;
+        display:block;
+        color: $white-color;
+        &:hover {
+            color: white;
+        }
+    }
 
     * {
         color: $white-color;
@@ -176,6 +222,7 @@ html, body {
 
     .about-button {
         width: 110px;
+        margin-left: 50px;
     }
 
     .services-button {
@@ -208,6 +255,7 @@ html, body {
             width:100%;
             text-align: center;
             font-size: 11pt;
+            font-weight: 500;
         }
 
         a:hover {
@@ -217,7 +265,6 @@ html, body {
 
     #login-button {
         @include unselectable;
-        margin: 0px 15px 0px 0px;
         height: $button-height - 7px;
         width: 100px;
         font-size: 10px;
@@ -228,14 +275,10 @@ html, body {
             height: 100%;
             width: 100%;
             display: block;
-            background-color: $main-color-2;//rgba(10,10,10,.8);
+           // background-color: $main-color-2;//rgba(10,10,10,.8);
             padding-top:9px;
             padding-bottom: 2px;
             @include border-radius;
-        }
-
-        a:hover {
-            background-color: $main-color-2-hover;
         }
     }
 
@@ -424,7 +467,7 @@ padding-bottom: 14px;
 /*******************************************************/
 
 #cube-image-1 {
-    background-image: url('../images/typing.jpg');
+    background-image: url('../images/typing-cool.jpg');
     height: 285px;
     width: 285px;
     top: 200px;
@@ -433,7 +476,7 @@ padding-bottom: 14px;
 }
 
 #cube-image-2 {
-    background-image: url('../images/jackjack.png');
+    background-image: url('../images/jackjack-cool.png');
     height: 200px;
     width: 200px;
     top: 440px;
@@ -512,7 +555,7 @@ padding-bottom: 14px;
 }
 
 #cube-image-4 {
-    background-image: url('../images/help.png');
+    background-image: url('../images/help-cool.png');
     height: 285px;
     width: 285px;
     top: 162px;
@@ -521,7 +564,7 @@ padding-bottom: 14px;
 }
 
 #cube-image-5 {
-    background-image: url('../images/open-book.png');
+    background-image: url('../images/open-book-cool.png');
     background-position-x: -20px;
     height:200px;
     width:200px;
@@ -535,7 +578,7 @@ padding-bottom: 14px;
     padding-top:80px;
     padding-bottom:80px;
     width: 100%;
-    background-image: url('../images/stocky-stock-dark.jpg');
+    background-image: url('../images/stocky-stock-dark-cool.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -697,10 +740,8 @@ padding-bottom: 14px;
     background-size: 100% auto;
     width: 100%;
     height: 950px;
-    $gray-color: #888;
 
     * {
-        color: $gray-color;
         line-height: 16pt;
     }
 
@@ -714,7 +755,6 @@ padding-bottom: 14px;
         h2 {
             font-size: $large-font;
             text-align: center;
-            //color: $gray-color;
             color: $theme-color;
             margin-bottom: 15px;
             width: 600px;
@@ -723,7 +763,7 @@ padding-bottom: 14px;
         .title-line {
             width: 200px;
             height: 1px;
-            background-color: $gray-color;
+            background-color: #888;
             margin-top: 10px;
         }
     }
@@ -763,17 +803,17 @@ padding-bottom: 14px;
                     background-position: center center;
                     background-repeat: no-repeat;
                     background-size: 100% 100%;
-                    width: 17px;
-                    height: 18px;
+                    width: 14px;
+                    height: 15px;
                     display: block;
                     float: left;
                     opacity: 0.75;
                     position: relative;
-                    top:2px;
+                    top:4px;
                 }
 
                 .faq-a {
-                    margin-left: 42px;
+                    margin-left: 37px;
                     width: 450px;
                 }
             }
