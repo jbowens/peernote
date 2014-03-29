@@ -38,6 +38,12 @@ $.extend(peernoteNS.login, {
           $(".forms-wrapper").fadeOut(200);
           window.location = "/sign-up";
       });
+
+      $(".password-forgot-link").click(function(e) {
+          e.preventDefault();
+          $(".forms-wrapper").fadeOut(200);
+          window.location = "/forgot-password";
+      });
     }
 });
 

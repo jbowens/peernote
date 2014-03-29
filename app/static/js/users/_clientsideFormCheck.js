@@ -47,13 +47,12 @@ $.extend(peernoteNS.clientsideFormCheck, {
       var doSubmit = true;
       for (var textfield in textfields) {
         var $textfield = $("#"+textfield);
-        peernoteNS.clientsideFormCheck.errorCheckerHelper($textfield);
+        peernoteNS.clientsideFormCheck.errorCheckerHelper($textfield, textfields);
 
         if (!textfields[textfield].isValid) {
             doSubmit = false;
         }
       }
-
       return doSubmit;
     },
 

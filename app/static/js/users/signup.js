@@ -57,7 +57,7 @@ $.extend(peernoteNS.signup, {
 
       // attach validator to form submit
       $("#signup-form").submit(function() {
-          peernoteNS.clientsideFormCheck.submit(peernoteNS.signup.TEXTFIELDS);
+          return peernoteNS.clientsideFormCheck.submit(peernoteNS.signup.TEXTFIELDS);
       });
 
       $(".log-in-link, .nav-sign-in").click(function (e) {

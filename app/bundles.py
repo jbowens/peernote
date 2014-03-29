@@ -192,6 +192,15 @@ assets.register('signup_js',
     )
 )
 
+assets.register('forgot_password_js',
+    Bundle(
+        "js/users/_clientsideFormCheck.js",
+        "js/users/forgot_password.js",
+        filters="rjsmin",
+        output="gen/forgot_password.js"
+    )
+)
+
 assets.register('login_js',
     Bundle(
         "js/users/_clientsideFormCheck.js",
