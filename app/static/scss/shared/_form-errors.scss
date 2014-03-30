@@ -1,0 +1,18 @@
+
+.form-error-message {
+    width: 160px;
+    margin: auto;
+    padding: 3px;
+    color: #b8211d;
+    padding-left:5px;
+    font-size: 12px;
+    position:absolute;
+    left: 3px;
+}
+
+.textfield-error {
+    -webkit-box-shadow: 0 0 3px 0 rgba(180,0,0,0.7) !important;
+    -moz-box-shadow: 0 0 3px 0 rgba(180,0,0,0.7) !important;
+    box-shadow: 0 0 3px 0 rgba(180,0,0,0.7) !important;
+    border:1px solid #fed1d1 !important;
+}

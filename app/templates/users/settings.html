@@ -13,6 +13,9 @@
     {% assets "settings_js" %}
         <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
+    {% assets "settings2_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
 {% endblock %}
 
 {% block lightboxes %}
@@ -34,10 +37,8 @@
 
 <div class="page-container top-margin bottom-margin settings">
     <div class="forms-wrapper">
-    <h1>Basic Info</h1>
-
     {% include "shared/flashes.html" %}
-
+    <h1>Basic Info</h1>
     <form method="post">
         {% include "shared/csrf.html" %}
         <table>
@@ -47,6 +48,7 @@
                 </td>
                 <td>
                     <input class="textfield" type="text" id="first_name" name="first_name" value="{{ user.first_name }}" />
+                    <div class="form-error-message hidden">Required field</div>
                 </td>
             </tr>
             <tr class="field">
@@ -55,6 +57,7 @@
                 </td>
                 <td>
                     <input class="textfield" type="text" id="last_name" name="last_name" value="{{ user.last_name }}" />
+                    <div class="form-error-message hidden">Required field</div>
                 </td>
             </tr>
             <tr class="field">
@@ -63,6 +66,7 @@
                 </td>
                 <td>
                     <input type="text" class="textfield" id="new_email" name="email" value="{{ user.email }}" />
+                    <div class="form-error-message hidden">Invalid email</div>
                 </td>
             </tr>
             <tr>
@@ -83,6 +87,7 @@
                 </td>
                 <td>
                     <input type="password" class="textfield" id="new_password" name="password" />
+                    <div class="form-error-message hidden">Require at least 6 characters</div>
                 </td>
             </tr>
             <tr class="field">
@@ -90,7 +95,9 @@
                     <label for="new_password_again">New Password Again</label>
                 </td>
                 <td>
-                    <input type="password" class="textfield" id="new_password_again" name="password_again" />
+                    <input type="password" class="textfield" 
+                    id="new_password_again" name="password_again" />
+                    <div class="form-error-message hidden">Doesn't match password</div>
                 </td>
             </tr>
             <tr>

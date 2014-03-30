@@ -1,3 +1,5 @@
+@import "_form_default.scss";
+@import "_form-errors.scss";
 
 .wrapper {
     background-color: $off-white-bg-color;
@@ -40,24 +42,6 @@ table {
     margin-top: 10px !important;
 }
 
-.form-error-message {
-    width: 160px;
-    margin: auto;
-    padding: 3px;
-    color: #b8211d;
-    padding-left:5px;
-    font-size: 12px;
-    position:absolute;
-    left: 3px;
-}
-
-.textfield-error {
-    -webkit-box-shadow: 0 0 3px 0 rgba(180,0,0,0.7) !important;
-    -moz-box-shadow: 0 0 3px 0 rgba(180,0,0,0.7) !important;
-    box-shadow: 0 0 3px 0 rgba(180,0,0,0.7) !important;
-    border:1px solid #fed1d1 !important;
-}
-
 .footer {
     background: rgba(0,0,0,0.4);
     border-top: 1px solid rgba(201,201,201,0.4);
@@ -72,5 +56,9 @@ table {
 
     .footer-inner {
         border-bottom: 0px solid white;
+    }
+
+    .footer-legal {
+        height: 37px;
     }
 }

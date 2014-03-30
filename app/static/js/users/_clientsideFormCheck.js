@@ -14,10 +14,12 @@ $.extend(peernoteNS.clientsideFormCheck, {
       var $textfield = $(e.currentTarget);
       peernoteNS.clientsideFormCheck.errorCheckerHelper($textfield, textfields);
       
-      // js for signup page only (yeah this isn't great)
-      if ($textfield.attr("id") === "signup_password") {
-        peernoteNS.clientsideFormCheck.errorCheckerHelper(
-            $("#signup_password_confirm"), textfields);
+      // js for signup and setting page only (yeah this isn't great)
+      // TODO: bryce, fix
+      var id = $textfield.attr("id");
+      if (id === "signup_password" || id === "new_password") {
+          var toCheck = $("#signup_password_confirm, #new_password_again");
+          peernoteNS.clientsideFormCheck.errorCheckerHelper(toCheck, textfields);
       }
     },
 
@@ -43,14 +45,16 @@ $.extend(peernoteNS.clientsideFormCheck, {
     },
 
     // check that all fields are valid before submitting
-    submit: function(textfields) {
+    submit: function(textfields, $form) {
       var doSubmit = true;
       for (var textfield in textfields) {
         var $textfield = $("#"+textfield);
-        peernoteNS.clientsideFormCheck.errorCheckerHelper($textfield, textfields);
-
-        if (!textfields[textfield].isValid) {
-            doSubmit = false;
+        if ($form.has($textfield).length > 0) { // make sure the textfield is in the submitted form
+            peernoteNS.clientsideFormCheck.errorCheckerHelper($textfield, textfields);
+        
+            if (!textfields[textfield].isValid) {
+                doSubmit = false;
+            }
         }
       }
       return doSubmit;

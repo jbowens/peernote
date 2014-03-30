@@ -1,11 +1,11 @@
 @import "../shared/_form_default.scss";
+@import "../shared/_form-errors.scss";
 
 .mail {
     width: 300px !important;
 }
 
 .wrapper {
-
     background-color: $off-white-bg-color;
 
     .forms-wrapper {
@@ -17,3 +17,12 @@
     }
 }
 
+td {
+    position: relative;
+}
+
+.message {
+    display: block;
+    margin-bottom: 10px;
+    color: green;
+}
