@@ -23,7 +23,7 @@ $.extend(peernoteNS.clientsideFormCheck, {
       }
     },
 
-    INPUT_CHECK_PAUSE_MILLIS: 600, // pause this long before validating
+    INPUT_CHECK_PAUSE_MILLIS: 800, // pause this long before validating
 
     // checks the validity of a textfield
     errorCheckerHelper: function($textfield, textfields) {

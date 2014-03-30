@@ -18,9 +18,12 @@ peernoteNS.footer = {
             var navbarHeight = $nav.height() + $navSection.height();
             var footerHeight = $footer.height();
             var contentSpace = windowHeight - navbarHeight - footerHeight;
-            if ($(".nav-section").is(":visible")) {
+
+            if ($navSection.length > 0 && $navSection.css("opacity").length > 0 
+                        && $navSection.css("opacity") == 0) {
                 contentSpace = contentSpace + $navSection.height();
             }
+
             if (footerPushHeight < contentSpace) {
                 $footerPush.height(contentSpace + "px");
             } else if ( footerPushHeight > contentSpace 
@@ -28,7 +31,11 @@ peernoteNS.footer = {
                     && wrapperHeight <= contentSpace) {
                 $footerPush.height(contentSpace);
             }
-            $(".wrapper").height(($footerPush.height() + $footer.height()+ 1) + "px");
+
+            if ($navSection.length > 0 && $navSection.css("opacity").length > 0 
+                        && $navSection.css("opacity") == 0) {
+                $(".wrapper").height(($footerPush.height() + $footer.height() + 1) + "px");
+            }
         }
 
         $footerPush.height($pageWrapper.height());
