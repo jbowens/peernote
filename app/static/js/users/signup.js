@@ -57,7 +57,15 @@ $.extend(peernoteNS.signup, {
 
       // attach validator to form submit
       $("#signup-form").submit(function(e) {
-          return peernoteNS.clientsideFormCheck.submit(peernoteNS.signup.TEXTFIELDS,
+        // It's possible that a browser autocompleter will fill our honeypot.
+        // This allows spam bots that execute all the javascript on the page
+        // to get pass the honeypot, but I think it's more important that we
+        // don't fuck over our users. This will set the value back to the
+        // empty string.
+        $('.winnie-the-pooh input').val('');
+
+        // Perform client-side validation checks.
+        return peernoteNS.clientsideFormCheck.submit(peernoteNS.signup.TEXTFIELDS,
               $(e.target));
       });
 

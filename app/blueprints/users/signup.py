@@ -44,7 +44,22 @@ def signup():
             session.pop('captcha_title')
     """
 
-    if request.method == 'POST' and form.validate_on_submit(): #and captcha_passed:
+    valid_form = True
+
+    # Check for the honey pot.
+    if request.form.get('very_important_field'):
+        # They filled in the honeypot. Most likely, they're a bot.
+        # There can be some weird shit with autocompletes, so just
+        # in case it's an actual user, let's flash a message.
+        flash('Please do not use autocomplete on this form.', 'error')
+        valid_form = False
+
+    valid_form = valid_form and form.validate_on_submit()
+
+    # Disabled captacha logic
+    # valid_Form = valid_form and captcha_passed
+
+    if request.method == 'POST' and valid_form:
         # Create the user in the database
         newuser = User()
         newuser.email = request.form['email'].lower()
