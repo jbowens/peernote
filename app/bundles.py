@@ -258,18 +258,10 @@ assets.register('reviewer_js',
     )
 )
 
-# TODO: Alec, can you combine these. don't understand why output is splash.js
 assets.register('settings_js',
     Bundle(
         "js/widgets/lightbox.js",
         "js/settings.js",
-        filters="rjsmin",
-        output="gen/splash.js"
-    )
-)
-
-assets.register('settings2_js',
-    Bundle(
         "js/users/_clientsideFormCheck.js",
         "js/users/settings.js",
         depends="js/users/settings.js",
