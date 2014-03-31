@@ -45,6 +45,16 @@ $.extend(peernoteNS.settings, {
 $.extend(peernoteNS.settings, {
 
     init: function() {
+
+      // setup delete account lightbox
+      var lightbox = peernoteNS.widgets.initLightbox($('#delete-form'), {
+        closeIcon: true
+      });
+
+      $("#delete-button").click(function() {
+        lightbox.open();
+      });
+
       // attach listeners to each textfield for validation
       $("#first_name, "+
         "#last_name, "+

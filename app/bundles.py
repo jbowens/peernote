@@ -261,7 +261,6 @@ assets.register('reviewer_js',
 assets.register('settings_js',
     Bundle(
         "js/widgets/lightbox.js",
-        "js/settings.js",
         "js/users/_clientsideFormCheck.js",
         "js/users/settings.js",
         depends="js/users/settings.js",
