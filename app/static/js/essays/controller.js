@@ -173,6 +173,7 @@ $.extend(peernoteNS.essays, {
 
         // Inform the editor to load this draft
         peernoteNS.editor.loadDraftState(data.title, data.text, modifiers);
+        $('.status-line').text('Saved');
 
         if (!data.finalized) {
           // This is the current draft. Enable autosaving
@@ -191,7 +192,7 @@ $.extend(peernoteNS.essays, {
 
           $('li.next-draft').slideUp();
         }
-       $('.status-line').text('');
+       $('.status-line').text('Saved');
 
         if (cb) {
           cb();
