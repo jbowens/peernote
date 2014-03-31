@@ -131,7 +131,7 @@ $.extend(peernoteNS.doc, {
       };
       this._modifiers.push(newModifier);
     }
-   
+
     this._removeZeroLengthModifiers();
     this._documentChanged();
   },
@@ -247,7 +247,7 @@ $.extend(peernoteNS.doc, {
   _documentChanged: function() {
     var state = this.getState();
     for (var i = 0; i < this._changeListeners.length; ++i) {
-      this._changeListeners[i](state); 
+      this._changeListeners[i](state);
     }
   },
 
@@ -300,7 +300,7 @@ $.extend(peernoteNS.doc, {
    * includes modifiers that are COMPLETELY contained within the interval.
    * It does not include modifiers that start or end exactly on the bounds
    * of the interval.
-   * 
+   *
    * @param modifierType the type of modifier to lookup
    * @param start the start offset
    * @param end the end offset
@@ -309,7 +309,7 @@ $.extend(peernoteNS.doc, {
   _getModifiersOfTypeWithinRange: function(modifierType, start, end) {
     var mods = [];
     for (var i = 0; i < this._modifiers.length; ++i) {
-      if (this._modifiers[i].start > start && 
+      if (this._modifiers[i].start > start &&
           this._modifiers[i].end < end &&
           this._modifiers[i].type == modifierType) {
         mods.push(this._modifiers[i]);
@@ -333,7 +333,7 @@ $.extend(peernoteNS.doc, {
     }
     return zeroLengthMods;
   },
-  
+
   /* Removes all zero length modifiers in the document.
    */
   _removeZeroLengthModifiers: function() {

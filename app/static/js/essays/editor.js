@@ -39,7 +39,7 @@ $.extend(peernoteNS.editor, {
         peernoteNS.commands.execute(cmd);
       } else {
         // TODO: Maybe turn this into an undo-able command.
-        
+
         var pos = peernoteNS.docutils.getCaretPosition(_this._doc);
 
         // Check for out of date pending modifiers from other locations
@@ -100,7 +100,7 @@ $.extend(peernoteNS.editor, {
                                     pos.start - charDiff,
                                     charDiff);
 
-      if (_this._pendingModifiers.length && 
+      if (_this._pendingModifiers.length &&
           _this._pendingModifiersPos == pos.start - charDiff) {
         if (charDiff > 0) {
           // If they added characters, we should now wrap those characters
@@ -166,7 +166,7 @@ $.extend(peernoteNS.editor, {
   },
 
   /**
-   * Loads the given draft information into the editor. This will 
+   * Loads the given draft information into the editor. This will
    * update the underlying document and render the editor
    * appropriately. This is called on page load as well (from the
    * controller) to load the initial state of the draft)

@@ -4,7 +4,7 @@
 var peernoteNS = peernoteNS || {};
 peernoteNS.essays = peernoteNS.essays || {}
 
-// need this extra extend to define 
+// need this extra extend to define
 // enums used in subsequent extend
 $.extend(peernoteNS.essays, {
   // document modes enum
@@ -142,7 +142,7 @@ $.extend(peernoteNS.essays, {
     if (peernoteNS.essays.did == cur_did) {
       return;
     }
-    
+
     // Load the given draft.
     peernoteNS.essays.loadDraft(cur_did);
   },
@@ -258,8 +258,8 @@ $.extend(peernoteNS.essays, {
     peernoteNS.essays.currentMode = peernoteNS.essays.MODES.EDIT;
     if (peernoteNS.essays.COMMENTS_PANE_OPEN) {
         peernoteNS.essays.COMMENTS_PANE_OPEN = peernoteNS.essays.togglePane(
-            $('.comment-panel-push'), 
-            peernoteNS.essays.COMMENTS_PANE_OPEN, 
+            $('.comment-panel-push'),
+            peernoteNS.essays.COMMENTS_PANE_OPEN,
             peernoteNS.essays.COMMENTS_PANE_WIDTH);
     }
 
@@ -270,12 +270,12 @@ $.extend(peernoteNS.essays, {
   // convert mode to reviewer
   toReviewer: function() {
     peernoteNS.essays.modeButtonsSelect($("#review-mode-button"));
-    $("#editor-tools").slideUp(); 
+    $("#editor-tools").slideUp();
     $("#reviewer-tools").slideDown();
     if (!peernoteNS.essays.COMMENTS_PANE_OPEN) {
       peernoteNS.essays.COMMENTS_PANE_OPEN = peernoteNS.essays.togglePane(
-        $('.comment-panel-push'), 
-        peernoteNS.essays.COMMENTS_PANE_OPEN, 
+        $('.comment-panel-push'),
+        peernoteNS.essays.COMMENTS_PANE_OPEN,
         peernoteNS.essays.COMMENTS_PANE_WIDTH);
     }
     peernoteNS.essays.currentMode = peernoteNS.essays.MODES.REVIEW;
@@ -296,8 +296,8 @@ $.extend(peernoteNS.essays, {
 
 
   /* Javascript to handle the showing and hiding of the toolkit and comment columns.
-   * Also javascript to keep the top toolbar centered when showing and hiding the 
-   * toolkit and comment columns 
+   * Also javascript to keep the top toolbar centered when showing and hiding the
+   * toolkit and comment columns
    */
   toolDisplayer: function() {
       var toolkitOpen = true; // is toolkit open or closed
@@ -339,7 +339,7 @@ $.extend(peernoteNS.essays, {
           var height = $(window).height();
           var navBarHeight = $("nav").height();
           var toolbarHeight = $(".toolbar").height();
-          $('body, .wrapper, .toolkit').css("height", (height -  navBarHeight) + "px"); 
+          $('body, .wrapper, .toolkit').css("height", (height -  navBarHeight) + "px");
           $('.page-container').css("height", (height - navBarHeight - toolbarHeight) + "px");
       }
 
@@ -358,12 +358,12 @@ $.extend(peernoteNS.essays, {
       if (isOpen) {
           $panel.animate({width: "0px"}, {duration: 300 });
           $(".buttons").animate(
-                  {width: (buttonPanelWidth+width) + "px"}, 
+                  {width: (buttonPanelWidth+width) + "px"},
                   {duration: 300, queue: true});
       } else {
           $panel.animate({width: width + "px"}, {duration: 300 });
           $(".buttons").animate(
-                  {width: (buttonPanelWidth-width) + "px"}, 
+                  {width: (buttonPanelWidth-width) + "px"},
                   {duration: 300, queue: false});
       }
       return !isOpen;
@@ -412,7 +412,7 @@ $.extend(peernoteNS.essays, {
         var height = $window.height();
         var navHeight = $("nav").height();
         var tabHeight = $(".tab-top").height();
-        $(".tab-content").css("height",height - navHeight - tabHeight +"px"); 
+        $(".tab-content").css("height",height - navHeight - tabHeight +"px");
       }
       setTabHeight();
       $window.resize(setTabHeight);
@@ -508,7 +508,7 @@ $.extend(peernoteNS.essays, {
       var titleMaxLength = 60;
       $title.keydown(function(e) {
         var title = $title.text();
-        if ((title.trim().length > titleMaxLength 
+        if ((title.trim().length > titleMaxLength
             && e.keyCode !== 46  // del
             && e.keyCode !== 8   // backspace
             && e.keyCode !== 37  // left arrow

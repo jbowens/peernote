@@ -54,7 +54,7 @@ $.extend(peernoteNS.docutils, {
     var endPos = this.getNodeAtOffset(doc, end);
     return {
       nodes: nodes,
-      startOffset: startPos.nodeOffset, 
+      startOffset: startPos.nodeOffset,
       endOffset: endPos.nodeOffset
     };
   },
@@ -188,7 +188,7 @@ $.extend(peernoteNS.docutils, {
         }
       }
     }
-  
+
     return found ? offset + nodeOffset : false;
   },
 
@@ -221,7 +221,7 @@ $.extend(peernoteNS.docutils, {
       // The user just has a caret in a specific location. We should insert
       // into the document and mantain the caret location.
       this._addToNodeAtOffset(node, text, offset);
-      
+
       // As soon as we've fucked with the nodes, we're going to lose our
       // selection. We need to restore the selection.
       s.removeAllRanges();
