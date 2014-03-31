@@ -17,10 +17,22 @@
 
 <div class="page-container forms-wrapper top-margin bottom-margin log-in">
     {% if is_logged_in %}
-        <div class="error">
-            You're already logged in!
+        <div class="table-wrapper">
+            <h1 id="welcome">You're already signed in </h2>
+            <p class="explan">
+            If this is not your account you can sign out and sign back in as yourself.
+            </p>
             <div class="log-out">
-                <a href="/log-out">log out</a>
+                <table>
+                    <tr>
+                        <td>
+                            <a href="/log-out">
+                                <input id="login" class="button-field" 
+                                type="submit" value="Sign Out" />
+                            </a>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     {% else %}
@@ -53,16 +65,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <p class="forgot-password"> 
-                                <a class="sign-up-link" href="{{ url_for('users.signup') }}">
-                                    Still need to sign up?
-                                </a>
+                        <td class="links">
+                            <div class="forgot-password"> 
+                                <p>Don't have an account? 
+                                    <a class="sign-up-link" 
+                                        href="{{ url_for('users.signup') }}">
+                                            Sign up
+                                    </a>
+                                </p>
                                 <a class="password-forgot-link" 
                                     href="{{ url_for('users.forgot_password') }}">
-                                    Forgot your password?
+                                    Forgot password?
                                 </a> 
-                            </p>
+                            </div>
                         </td>
                     </tr>
                 </form>

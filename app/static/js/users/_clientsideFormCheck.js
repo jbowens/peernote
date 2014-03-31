@@ -12,21 +12,15 @@ $.extend(peernoteNS.clientsideFormCheck, {
     // checks the validity of a textfield
     errorChecker: function(e, textfields) {
       var $textfield = $(e.currentTarget);
-      peernoteNS.clientsideFormCheck.errorCheckerHelper($textfield, textfields);
-      
-      // js for signup and setting page only (yeah this isn't great)
-      // TODO: bryce, fix
-      var id = $textfield.attr("id");
-      if (id === "signup_password" || id === "new_password") {
-          var toCheck = $("#signup_password_confirm, #new_password_again");
-          peernoteNS.clientsideFormCheck.errorCheckerHelper(toCheck, textfields);
-      }
+      peernoteNS.clientsideFormCheck.errorCheckerHelper($textfield, 
+          textfields,
+          peernoteNS.clientsideFormCheck.INPUT_CHECK_PAUSE_MILLIS);
     },
 
     INPUT_CHECK_PAUSE_MILLIS: 800, // pause this long before validating
 
     // checks the validity of a textfield
-    errorCheckerHelper: function($textfield, textfields) {
+    errorCheckerHelper: function($textfield, textfields, timeout) {
       var textfieldTimeUtil = textfields[$textfield.attr("id")];
       clearTimeout(textfieldTimeUtil.autosaveTimer);
       textfieldTimeUtil.autosaveTimer = setTimeout(function() {
@@ -41,7 +35,7 @@ $.extend(peernoteNS.clientsideFormCheck, {
             textfieldTimeUtil.isValid = true;
         }
 
-      }, peernoteNS.clientsideFormCheck.INPUT_CHECK_PAUSE_MILLIS);
+      }, timeout);
     },
 
     // check that all fields are valid before submitting
@@ -50,7 +44,7 @@ $.extend(peernoteNS.clientsideFormCheck, {
       for (var textfield in textfields) {
         var $textfield = $("#"+textfield);
         if ($form.has($textfield).length > 0) { // make sure the textfield is in the submitted form
-            peernoteNS.clientsideFormCheck.errorCheckerHelper($textfield, textfields);
+            peernoteNS.clientsideFormCheck.errorCheckerHelper($textfield, textfields,0);
         
             if (!textfields[textfield].isValid) {
                 doSubmit = false;

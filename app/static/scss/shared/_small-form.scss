@@ -35,11 +35,16 @@ table {
     }
 }
 
+.table-wrapper, .signup-wrapper {
+    border-radius: 2px;
+}
+
 .button-field {
     padding: 10px 25px 10px 25px !important;
     width: 250px !important;
     height: 50px;
     margin-top: 10px !important;
+    display: block;
 }
 
 .footer {

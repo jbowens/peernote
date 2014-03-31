@@ -61,6 +61,14 @@ $.extend(peernoteNS.signup, {
               $(e.target));
       });
 
+      $( "#signup_password" ).keydown(function() {
+        $passwordAgain = $("#signup_password_confirm");
+        $passwordAgain.val("");
+        $passwordAgain.siblings().slideUp(300);
+        $passwordAgain.removeClass("textfield-error");
+        peernoteNS.signup.TEXTFIELDS["signup_password_confirm"].isValid = true;
+      });
+
       $(".log-in-link, .nav-sign-in").click(function (e) {
             e.preventDefault();
             $(".forms-wrapper").fadeOut(200);
