@@ -33,7 +33,7 @@ def settings():
         if email and email.lower() != user.email.lower():
             if User.is_email_used(email):
                 flash('That email is already in use on the site.', 'error')
-            elif not validate_email(email):
+            elif not validate_email(email, check_mx=True):
                 flash('That is not a valid email address', 'error')
             else:
                 user.email = email

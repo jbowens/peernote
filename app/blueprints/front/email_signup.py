@@ -12,7 +12,7 @@ def email_signup():
     if not email:
         return jsonify(error='no email', status='error')
 
-    if not validate_email(email):
+    if not validate_email(email, check_mx=True):
         return jsonify(error='not a valid email', status='error')
 
     email_db_obj = Email.query.filter_by(email=email).first()

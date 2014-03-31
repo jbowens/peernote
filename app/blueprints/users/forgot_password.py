@@ -5,7 +5,6 @@ from app.models.password_token import PasswordToken
 from app.mailer.templates.recover_password import RecoverPassword
 from app.mailer import Mailer
 from app import db
-from validate_email import validate_email
 
 @users.route('/forgot-password/<string:token_hash>', methods=['GET', 'POST'])
 def reset_password(token_hash):
