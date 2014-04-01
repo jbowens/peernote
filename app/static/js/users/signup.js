@@ -5,13 +5,13 @@ $.extend(peernoteNS.signup, {
 
     // error check utilities for each textfield
     TEXTFIELDS: {
-        "signup_first_name": { 
+        "signup_first_name": {
             validator: function(string) { return string.length > 0; },
             autosaveTimer: null,
             isValid: false
         },
 
-        "signup_last_name": { 
+        "signup_last_name": {
             validator: function(string) { return string.length > 0; },
             autosaveTimer: null,
             isValid: false
@@ -27,13 +27,13 @@ $.extend(peernoteNS.signup, {
             isValid: false
         },
 
-        "signup_password": { 
+        "signup_password": {
             validator: function(string) { return string.length > 5; },
             autosaveTimer: null,
             isValid: false
         },
 
-        "signup_password_confirm": { 
+        "signup_password_confirm": {
             validator: function(string) { return string === $("#signup_password").val(); },
             autosaveTimer: null,
             isValid: false

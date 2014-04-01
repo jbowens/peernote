@@ -5,7 +5,7 @@
     width: 300px !important;
 }
 
-.wrapper {
+.footer-push {
     background-color: $off-white-bg-color;
 
     .forms-wrapper {
@@ -13,7 +13,7 @@
         border: 1px solid $generic-divider-color;
         padding: 40px;
         position: relative;
-        bottom: 10px;
+        bottom: 20px;
     }
 }
 

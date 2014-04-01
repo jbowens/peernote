@@ -24,7 +24,13 @@ $.extend(peernoteNS.forgotPassword, {
       // attach listeners to each textfield for validation
       $( "#user_to_recover").keydown(function(e) {
           peernoteNS.clientsideFormCheck.errorChecker(e, peernoteNS.forgotPassword.TEXTFIELDS);
-        });
+     });
+
+     $("#forgot-form").submit(function(e) {
+        return peernoteNS.clientsideFormCheck.submit(peernoteNS.forgotPassword.TEXTFIELDS,
+            $(e.target));
+     });
+
 
       // add transition before redirect
       $(".nav-sign-in").click(function(e) {

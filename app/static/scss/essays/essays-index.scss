@@ -1,13 +1,16 @@
 @import "../shared/_variables.scss";
 
 .page {
-    width: $page-width;
+    width: ($page-width - 80px);
     margin: auto;
-
-
+    background: white;
+    margin-top: 30px;
+    padding: 40px;
+    border: 1px solid gainsboro;
+    overflow-y: auto;
 }
 
-#essays-list-container {
-    margin-top: 40px;
+.footer-push {
+    background: $off-white-bg-color;
 }
 

@@ -32,6 +32,10 @@ $.extend(peernoteNS.login, {
           peernoteNS.clientsideFormCheck.errorChecker(e, peernoteNS.login.TEXTFIELDS);
         });
 
+      $("#login_email").blur( function(e) {
+        peernoteNS.clientsideFormCheck.errorChecker(e, peernoteNS.login.TEXTFIELDS);
+      });
+
       // add transition before redirect
       $(".sign-up-link").click(function(e) {
           e.preventDefault();

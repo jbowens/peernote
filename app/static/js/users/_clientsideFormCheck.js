@@ -1,6 +1,6 @@
 /* This script is shared between forms for clientside
  * error checking. Note that all of these forms should
- * have appropriate serverside error checking as well. 
+ * have appropriate serverside error checking as well.
  * This code is purely for aesthetics
  */
 
@@ -8,11 +8,11 @@ var peernoteNS = peernoteNS || {};
 peernoteNS.clientsideFormCheck = peernoteNS.clientsideFormCheck || {};
 
 $.extend(peernoteNS.clientsideFormCheck, {
-    
+
     // checks the validity of a textfield
     errorChecker: function(e, textfields) {
       var $textfield = $(e.currentTarget);
-      peernoteNS.clientsideFormCheck.errorCheckerHelper($textfield, 
+      peernoteNS.clientsideFormCheck.errorCheckerHelper($textfield,
           textfields,
           peernoteNS.clientsideFormCheck.INPUT_CHECK_PAUSE_MILLIS);
     },
@@ -45,7 +45,7 @@ $.extend(peernoteNS.clientsideFormCheck, {
         var $textfield = $("#"+textfield);
         if ($form.has($textfield).length > 0) { // make sure the textfield is in the submitted form
             peernoteNS.clientsideFormCheck.errorCheckerHelper($textfield, textfields,0);
-        
+
             if (!textfields[textfield].isValid) {
                 doSubmit = false;
             }

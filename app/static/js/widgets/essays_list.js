@@ -80,14 +80,7 @@ peernoteNS.widgets.essaysList = {
           $.post('/api/essays/delete', {eid:essays[i].eid, csrf:peernoteNS.csrf}, function(data) {
             if (data.status == "success") {
               // TODO: not very elegant
-              $('.trash-essay-' + i).parent().remove();
-              var table =  $(".essays-table");
-              
-              // This is needed or the table keeps the deleted row in a cache
-              table.trigger("update")
-                .trigger("sorton", table.get(0).config.sortList)
-                .trigger("appendCache")
-                .trigger("applyWidgets");
+              $('.trash-essay-' + i).parent().hide();
             } else {
               console.log(data.error);
             }
