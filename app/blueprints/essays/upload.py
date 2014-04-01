@@ -1,5 +1,5 @@
 import os
-from flask import render_template, g, request, url_for, redirect, current_app
+from flask import render_template, g, request, url_for, redirect, current_app, flash
 from app.blueprints.essays import essays
 from app.decorators import login_required
 from app.models.upload import Upload
@@ -24,8 +24,8 @@ def upload_essay():
         file_extension = file_extension[1::]
         applicable_parsers = filter(lambda p: p.accepts_extension(file_extension), parsers)
         if len(applicable_parsers) == 0:
-            # TODO: Actual error page.
-            return 'That file type is not supported.'
+            flash('Invalid file format provided')
+            return render_upload(parsers)
 
         # Read the entire file into memory.
         contents = f.read()
@@ -70,6 +70,10 @@ def upload_essay():
 
         return redirect(url_for('essays.edit_essay', essayid=new_essay.eid))
 
+    return render_upload(parsers)
+
+
+def render_upload(parsers):
     accepted_extensions = set([])
     for parser in parsers:
         for ext in parser.get_file_extensions():
