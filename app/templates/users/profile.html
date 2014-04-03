@@ -19,7 +19,7 @@
     <div class="left-col">
         <div class="top-push"></div>
         <div id="user-profile">
-            <img src="{{ viewed_user.email | gravatar }}" />
+            <img src="{{ user.email | gravatar }}" />
             <div class="item-count item-count-first">
                 <a>8</a>
                 Documents
@@ -29,7 +29,7 @@
                 Drafts
             </div>
             <div id="user-info">
-                <h1>{{ viewed_user.first_name }} {{ viewed_user.last_name }}</h1>
+                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
                 <div>Student</div>
             </div>
             <div class="button-panel">

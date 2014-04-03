@@ -10,4 +10,4 @@ def index():
     if g.user == None:
         return splash()
     else:
-        return show_user_profile(g.user.url_keyword)
+        return show_user_profile()

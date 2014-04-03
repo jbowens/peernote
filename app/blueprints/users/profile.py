@@ -1,20 +1,18 @@
-from flask import render_template, redirect, current_app, abort
+from flask import render_template, redirect, current_app, abort, g
 from app.models.user import User
 from app.models.essay import Essay
 from app.blueprints.users import users
 from app.decorators import login_required
 
-@users.route('/users/<keyword>', methods=['GET','POST'])
-def show_user_profile(keyword):
-    user = User.query.filter_by(url_keyword=keyword).first()
-
-    if not user:
-        abort(404)
-
-    essays = Essay.query.filter_by(uid=user.uid).order_by(Essay.modified_date.desc())[:7]
+"""
+For now, the only profile you can view is your own when logged in.
+"""
+@users.route('/users/profile', methods=['GET','POST'])
+@login_required
+def show_user_profile():
+    essays = Essay.query.filter_by(uid=g.user.uid).order_by(Essay.modified_date.desc())[:7]
 
     return render_template('users/profile.html',
-        viewed_user=user,
         recent_essays=essays,
         page_title="Dashboard",
         nav_extra="dashboard"
