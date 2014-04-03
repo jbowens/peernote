@@ -188,16 +188,20 @@
             border-left: 1px solid $generic-divider-color;
             border-top: 1px solid $generic-divider-color;
             border-right: 1px solid $generic-divider-color;
+            border-bottom: 1px solid rgba(0,0,0,0);
             border-radius: 2px;
         }
 
         .tab-unselected {
             border-bottom: 1px solid $generic-divider-color;
+            border-top: 1px solid rgba(0,0,0,0);
+            border-left: 1px solid rgba(0,0,0,0);
+            border-right: 1px solid rgba(0,0,0,0);
             color: #888;
         }
 
         .tab-fill {
-           width: 272px;
+           width: 270px;
            height: 41px;
            float: left;
            border-bottom: 1px solid $generic-divider-color;
@@ -207,12 +211,15 @@
             width: 100%;
             float: left;
             display: none;
+
+            .past-assignments {
+                float: right;
+            }
         }
 
         .notifications, .assignments {
             overflow: auto;
             padding-top: 20px;
-            padding-bottom: 20px;
             clear: both;
 
             .notification, .assignment {
