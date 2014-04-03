@@ -3,6 +3,12 @@ peernoteNS.profile = peernoteNS.profile || {};
 
 $.extend(peernoteNS.profile, {
     init: function() {
+        peernoteNS.profile.tabFunctionality();
+        peernoteNS.profile.pageHeight();
+   },
+
+   /* Make tabs work */
+   tabFunctionality: function() {
         $assignmentsPanel = $(".assigned-reviews");
         $notificationsPanel = $(".notifications");
         $assignmentsTab = $("#assignments");
@@ -31,7 +37,26 @@ $.extend(peernoteNS.profile, {
                 notificationsVisible = true;
             }
         });
-    }
+   },
+
+   /* Set min height of page */
+   pageHeight: function() {
+        $footer = $(".footer");
+        $nav = $("nav");
+        $dashboard = $(".dashboard");
+        $window = $(window);
+        var footerHeight = $footer.height();
+        var navHeight = $nav.height();
+
+        function resize() {
+            if ($dashboard.height() < $window.height() - footerHeight - navHeight) {
+                $dashboard.height($window.height() - footerHeight - navHeight);
+            }
+        }
+
+        $(window).resize(resize);
+        resize();
+   }
 });
 
 peernoteNS.init(peernoteNS.profile.init);
