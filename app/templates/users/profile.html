@@ -21,11 +21,11 @@
         <div id="user-profile">
             <img src="{{ viewed_user.email | gravatar }}" />
             <div class="item-count item-count-first">
-                <a>8</a>
+                <a href="/essays">8</a>
                 Documents
             </div>
             <div class="item-count item-count-last">
-                <a>16</a>
+                <a href="#">16</a>
                 Drafts
             </div>
             <div id="user-info">
@@ -111,7 +111,7 @@
                         <div class="notification-date">Today</div>
                     </div>
                     <div class="notification-text">
-                        Jackson requested a review. 
+                        Jackson requested a review.
                         <a href="{{ url_for('reviews.review_draft', reviewhash=review.urlhash) }}">
                             {{ review.get_draft().title }}
                         </a>
@@ -120,6 +120,10 @@
                 </li>
                 {% endfor %}
             </ul>
+            <div class="past-assignments">
+                <a href="#" class="see-all-recent">Past Assignments</a>
+                <i class="fa fa-caret-right"></i>
+            </div>
         </div>
         {% endif %}
 
