@@ -21,7 +21,7 @@
         <div id="user-profile">
             <img src="{{ user.email | gravatar }}" />
             <div class="item-count item-count-first">
-                <a href="/essays">8</a>
+                <a href="/essays">{{ user.essay_count() }}</a>
                 Documents
             </div>
             <div class="item-count item-count-last">
