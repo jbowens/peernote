@@ -81,6 +81,10 @@ if app.config.get('IS_PRODUCTION'):
     def catchall(path):
         return redirect(url_for('front.index'))
 
+# start the cron-ish scheduler
+from cron.cron import start_scheduled_jobs
+start_scheduled_jobs()
+
 # Be careful about connections that might have gone stale.
 @event.listens_for(Pool, "checkout")
 def ping_connection(dbapi_connection, connection_record, connection_proxy):
