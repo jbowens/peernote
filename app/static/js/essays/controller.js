@@ -101,9 +101,7 @@ $.extend(peernoteNS.essays, {
         peernoteNS.displayErrorFlash('Error sending review');
       });
 
-      // hide the send review popup
-      $("#send-review-shadow").fadeOut(100, "linear");
-      $("html, body").css({"overflow": "visible"});
+      lb.close();
     });
   },
 

@@ -32,7 +32,7 @@ peernoteNS.widgets.lightbox = {
     _this.isOpen = true;
   },
 
-  _close: function() {
+  close: function() {
     var _this = this;
     _this.container.fadeOut(100, "linear");
     $("html, body").css({"overflow": "visible"}); // enable scrolling
@@ -62,14 +62,14 @@ peernoteNS.widgets.lightbox = {
       var targetClass = $(event.target).attr('class');
       // check for fa-times as well if the inner html has a close button
       if (targetClass === "lightbox-center-align" || targetClass === "fa fa-times") {
-        _this._close();
+        _this.close();
       }
     });
 
     $(document).keyup(function(e) {
       if (e.keyCode == 27) {//esc
         if (_this.isOpen) {
-          _this._close();
+          _this.close();
         }
       }
     });

@@ -55,7 +55,7 @@
                 <li>
                     <a href="{{ url_for('essays.edit_essay', essayid=essay.eid) }}">
                         <div class="recent-doc">{{ essay.get_current_draft().title }}</div>
-                        <div class="date">Feb 12</div>
+                        <div class="date">{{ essay.pretty_modified_date() }} </div>
                     </a>
                 </li>
             {% endfor %}
@@ -107,11 +107,12 @@
                 <div class="notification-thumbnail"></div>
                 <div class="notification-content">
                     <div class="author-date">
-                        <div class="notification-author">Jackson O.</div>
-                        <div class="notification-date">Today</div>
+                        <div class="notification-author"> {{ review.get_requesting_user().first_name }} {{ user.last_initial() }}.
+                        </div>
+                        <div class="notification-date">{{ review.pretty_request_date() }}</div>
                     </div>
                     <div class="notification-text">
-                        Jackson requested a review.
+                        {{ review.get_requesting_user().first_name }} requested a review.
                         <a href="{{ url_for('reviews.review_draft', reviewhash=review.urlhash) }}">
                             {{ review.get_draft().title }}
                         </a>

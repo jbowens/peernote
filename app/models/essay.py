@@ -36,10 +36,16 @@ class Essay(db.Model):
         return drafts
 
     def pretty_created_date(self):
-        return self.created_date.strftime('%m/%d/%Y - %I:%M %p')
+        return self._pretty_datetime(self.created_date)
 
     def pretty_modified_date(self):
-        return self.modified_date.strftime('%m/%d/%Y - %I:%M %p')
+        return self._pretty_datetime(self.modified_date)
+
+    def _pretty_datetime(self, dt):
+        if dt.date() ==  datetime.today().date():
+            return dt.strftime('%I:%M %p')
+        else:
+            return dt.strftime('%b %d')
 
     def to_dict(self):
         return {
