@@ -107,11 +107,12 @@
                 <div class="notification-thumbnail"></div>
                 <div class="notification-content">
                     <div class="author-date">
-                        <div class="notification-author">Jackson O.</div>
+                        <div class="notification-author"> {{ review.get_requesting_user().first_name }} {{ user.last_initial() }}.
+                        </div>
                         <div class="notification-date">Today</div>
                     </div>
                     <div class="notification-text">
-                        Jackson requested a review. 
+                        {{ review.get_requesting_user().first_name }} requested a review.
                         <a href="{{ url_for('reviews.review_draft', reviewhash=review.urlhash) }}">
                             {{ review.get_draft().title }}
                         </a>
