@@ -1,33 +1,295 @@
 @import "../shared/_variables.scss";
 
-.dashboard {
-    width: 100%;
-    padding: 35px 0;
-    z-index: -1;
-    background-color: whitesmoke;
-    border-bottom: 1px solid #d2d2d2;
-    margin-bottom: 20px;
+.footer-push {
+    background: whitesmoke;
+}
 
-    #user-profile {
-        img {
-            height: 150px;
-            display: inline-block;
+.nav-section {
+    display: none;
+    position: fixed;
+    opacity: 0;
+}
+
+.dashboard {
+    width: $page-width - 70px;
+    height: 800px;
+    background: white;
+    padding: 0 35px;
+    z-index: -1;
+    margin:auto;
+    border: 1px solid  $generic-divider-color;
+    border-top: 0px solid red;
+
+    .top-push {
+        width: 100%;
+        height: 35px;
+    }
+
+    $left-col-width: 250px;
+
+    .left-col {
+        height: 100%;
+        border-right: $generic-divider-color 1px solid;
+        float: left;
+        width: $left-col-width;
+        padding-right: 35px;
+
+        #user-profile {
+            overflow:auto;
+            padding-bottom: 20px;
+            border-bottom: 1px dotted $generic-divider-color;
+            margin-bottom: 20px;
+
+            .item-count {
+                float: right;
+                width: 65px;
+                font-size: 12px;
+                font-weight: 500;
+                //border-bottom: $generic-divider-color 1px solid;
+                padding-bottom: 15px;
+                clear: right;
+                margin-bottom: 15px;
+
+                a {
+                    font-size: 20px;
+                    display:block;
+                    width: 100%;
+                    margin-bottom: 2px;
+                }
+            }
+
+            .item-count-first {
+                margin-top: 55px;
+            }
+
+            .item-count-last {
+                border-bottom: 0px 1px red;
+            }
+
+            img {
+                float: left;
+                height: 160px;
+                display: inline-block;
+                padding: 6px;
+                border: 1px $generic-divider-color solid;
+                margin-bottom: 15px;
+            }
+
+            #user-info {
+                height: 60px;
+                display: inline-block;
+                vertical-align: top;
+                margin-bottom: 5px;
+
+                h1 {
+                    font-size:24px;
+                    margin-bottom: 5px;
+                }
+            }
+
+            .button-panel {
+                float: left;
+                overflow: auto;
+                margin-bottom: 10px;
+            }
         }
-    
-        #user-info {
-            height: 150px;
-            display: inline-block;
-            vertical-align: top;
-            margin-left: 20px;
+
+        .recent-essays {
+            width: 100%;
+            float: left;
+            clear: both;
+
+            .recent-essays-header {
+                overflow: auto;
+                margin-bottom: 10px;
+
+                h2 {
+                    float: left;
+                    margin-top:8px;
+                    font-size: 14px;
+                }
+            }
+
+            .no-documents {
+                margin-top: 15px;
+            }
+
+            .see-all-recent-wrapper {
+                float:right;
+                margin-top: 8px;
+
+                i {
+                    float: right;
+                    margin-left: 4px;
+                    position: relative;
+                    top: 1px;
+                    cursor: pointer;
+                }
+
+                .see-all-recent {
+                    float: right;
+                    display: block;
+                    color: #888;
+                    font-size: 11px;
+                }
+            }
+
+            ul {
+                clear: both;
+                border-top: 1px solid $generic-divider-color;
+
+                li {
+                    padding: 0 0px 0px 0px;
+                    border-bottom: 1px solid $generic-divider-color;
+
+                    a {
+                        color: #888;
+                        color: $main-color-2;
+                        font-weight: 500;
+                        font-size: 12px;
+                        display:block;
+                        width: 100%;
+                        overflow: auto;
+                        padding-bottom: 7px;
+                        padding-top: 7px;
+
+                        .recent-doc {
+                            float: left;
+                        }
+
+                        .date {
+                            float: right;
+                            color: #888;
+                        }
+                    }
+
+                    a:hover {
+                        background: #f6f6f6;
+                    }
+                }
+            }
         }
     }
-}
 
-.page {
-    width: $page-width;
-    margin: auto;
-}
+    .right-col {
+        float:left;
+        padding: 0 0 0 35px;
+        width: 542px;
 
-.recent-essays, .assigned-reviews {
-    margin-top: 20px;
+
+        h1 {
+            float: left;
+            padding: 8px 18px 7px 18px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .tab-selected {
+            border-left: 1px solid $generic-divider-color;
+            border-top: 1px solid $generic-divider-color;
+            border-right: 1px solid $generic-divider-color;
+            border-radius: 2px;
+        }
+
+        .tab-unselected {
+            border-bottom: 1px solid $generic-divider-color;
+            color: #888;
+        }
+
+        .tab-fill {
+           width: 272px;
+           height: 41px;
+           float: left;
+           border-bottom: 1px solid $generic-divider-color;
+        }
+
+        .assigned-reviews {
+            width: 100%;
+            float: left;
+            display: none;
+        }
+
+        .notifications, .assignments {
+            overflow: auto;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            clear: both;
+
+            .notification, .assignment {
+                overflow: auto;
+                padding-bottom:25px;
+                margin-bottom: 25px;
+                border-bottom: 1px dotted $generic-divider-color;
+
+                .notification-thumbnail {
+                    height: 40px;
+                    width: 40px;
+                    background: #ccc;
+                    float: left;
+                }
+
+                .notification-content {
+                    float: left;
+                    width: 485px;
+                    margin-left: 15px;
+
+                    .author-date {
+                        margin-bottom: 25px;
+                        .notification-author {
+                            float: left;
+                            font-weight: 600;
+                        }
+
+                        .notification-date {
+                            float: right;
+                            font-weight: 500;
+                            color: #888;
+                            font-size: 11px;
+                        }
+                    }
+
+                    .notification-text {
+                        line-height: 18px;
+                    }
+                }
+            }
+        }
+    }
+
+    .button {
+        display: inline-block;
+        height: 24px;
+        padding: 0 7px 0 7px;
+        margin: 0 7px 0 0;
+        font-size: 11px;
+        font-weight: bold;
+        line-height: 24px;
+        color: #333;
+        text-align: center;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+        border: solid 1px #aaa;
+        float: left;
+        cursor: pointer;
+        text-decoration: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        box-shadow: 0 1px 0 0 rgba(0,0,0,0.05),inset 0 1px 0 0 #fff;
+        border-radius: 3px;
+        background-color: #f5f5f5;
+        background-image: -moz-linear-gradient(top, #fafafa, #ededed);
+        background-image: -ms-linear-gradient(top, #fafafa, #ededed);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#ededed));
+        background-image: -webkit-linear-gradient(top, #fafafa, #ededed);
+        background-image: linear-gradient(top, #fafafa, #ededed);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#fffafafa',
+        endColorstr='#ffededed', GradientType=0);
+        -webkit-transition: all .05s linear;
+        -moz-transition: all .05s linear;
+        -ms-transition: all .05s linear;
+        transition: all .05s linear;
+    }
 }

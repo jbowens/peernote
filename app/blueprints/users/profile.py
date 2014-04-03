@@ -11,7 +11,7 @@ def show_user_profile(keyword):
     if not user:
         abort(404)
 
-    essays = Essay.query.filter_by(uid=user.uid).order_by(Essay.modified_date.desc())[:5]
+    essays = Essay.query.filter_by(uid=user.uid).order_by(Essay.modified_date.desc())[:7]
 
     return render_template('users/profile.html',
         viewed_user=user,

@@ -7,56 +7,124 @@
     {% endassets %}
 {% endblock %}
 
+{% block scripts %}
+    {{ super() }}
+    {% assets "profile_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+{% endblock %}
+
 {% block content %}
 <div class="dashboard">
-    <div class="page">
+    <div class="left-col">
+        <div class="top-push"></div>
         <div id="user-profile">
             <img src="{{ viewed_user.email | gravatar }}" />
+            <div class="item-count item-count-first">
+                <a>8</a>
+                Documents
+            </div>
+            <div class="item-count item-count-last">
+                <a>16</a>
+                Drafts
+            </div>
             <div id="user-info">
-                <h1>{{ viewed_user.first_name }} {{ viewed_user.last_initial() }}.</h1>
-                <div>Member!</div>
+                <h1>{{ viewed_user.first_name }} {{ viewed_user.last_name }}</h1>
+                <div>Student</div>
+            </div>
+            <div class="button-panel">
+                <a class="button" href="{{ url_for('essays.create_essay') }}">
+                    Write Paper
+                </a>
+                <a class="button" href="{{ url_for('essays.upload_essay') }}">
+                    Upload Paper
+                </a>
             </div>
         </div>
-    </div>
-</div>
-
-{% if user and viewed_user.uid == user.uid %}
-    <div class="page bottom-margin">
-        <a class="btn btn-primary" href="{{ url_for('essays.create_essay') }}"> Write Paper </a>
-        <a class="btn btn-primary" href="{{ url_for('essays.upload_essay') }}"> Upload Paper </a>
-
         <div class="recent-essays">
-            Recent Documents:
+            <div class="recent-essays-header">
+                <h2>Recent Documents</h2>
+                <div class="see-all-recent-wrapper">
+                    <i class="fa fa-caret-right"></i>
+                    <a href="/essays" class="see-all-recent">See All</a>
+                </div>
+            </div>
             <ul>
             {% if recent_essays %}
             {% for essay in recent_essays %}
                 <li>
                     <a href="{{ url_for('essays.edit_essay', essayid=essay.eid) }}">
-                        {{ essay.get_current_draft().title }}
+                        <div class="recent-doc">{{ essay.get_current_draft().title }}</div>
+                        <div class="date">Feb 12</div>
                     </a>
                 </li>
             {% endfor %}
+            {% else %}
+            <div class="no-documents">
+                No documents. Create one <a href="/essays/create">here</a>!
+            </div>
             {% endif %}
-            
-            <li> <a href="{{ url_for('essays.essays_index') }}"> All documents </a></li>
             </ul>
         </div>
-
-
+    </div>
+    <div class="right-col">
+        <div class="top-push"></div>
+        <h1 class="tab-selected" id="notifications">Notifications</h1>
+        <h1 class="tab-unselected" id="assignments">Assignments</h1>
+        <div class="tab-fill"></div>
+        <ul class="notifications">
+            <li class="notification">
+                <div class="notification-thumbnail"></div>
+                <div class="notification-content">
+                    <div class="author-date">
+                        <div class="notification-author">Peernote</div>
+                        <div class="notification-date">Today</div>
+                    </div>
+                    <div class="notification-text">
+                        Hello and welcome to Peernote! This is your notifications center, where you will receive updates and announcements.
+                    </div>
+                </div>
+            </li>
+            <li class="notification">
+                <div class="notification-thumbnail"></div>
+                <div class="notification-content">
+                    <div class="author-date">
+                        <div class="notification-author">Bryce A.</div>
+                        <div class="notification-date">Yesterday</div>
+                    </div>
+                    <div class="notification-text">
+                        Your essay is bad and you should feel bad about it.
+                    </div>
+                </div>
+            </li>
+        </ul>
         {% set reviews = user.get_assigned_reviews(5) %}
         {% if reviews %}
         <div class="assigned-reviews">
-            Assigned Reviews:
-            <ul>
+            <ul class="assignments">
                 {% for review in reviews %}
-                <li>
-                    <a href="{{ url_for('reviews.review_draft', reviewhash=review.urlhash) }}"> {{ review.get_draft().title }} </a>
+                <li class="assignment">
+                <div class="notification-thumbnail"></div>
+                <div class="notification-content">
+                    <div class="author-date">
+                        <div class="notification-author">Jackson O.</div>
+                        <div class="notification-date">Today</div>
+                    </div>
+                    <div class="notification-text">
+                        Jackson requested a review. 
+                        <a href="{{ url_for('reviews.review_draft', reviewhash=review.urlhash) }}">
+                            {{ review.get_draft().title }}
+                        </a>
+                    </div>
+                </div>
                 </li>
                 {% endfor %}
             </ul>
         </div>
         {% endif %}
+
     </div>
-{% endif %}
+</div>
+
 
 {% endblock %}

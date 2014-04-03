@@ -183,6 +183,14 @@ assets.register('splash_js',
     )
 )
 
+assets.register('profile_js',
+    Bundle(
+        "js/users/profile.js",
+        filters="rjsmin",
+        output="gen/profile.js"
+    )
+)
+
 assets.register('signup_js',
     Bundle(
         "js/users/_clientsideFormCheck.js",
