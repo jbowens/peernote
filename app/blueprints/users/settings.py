@@ -13,9 +13,9 @@ def settings():
         # They submitted the form. Let's update some shit!
         user = g.user
 
-        first_name = request.form.get('first_name')
-        last_name = request.form.get('last_name')
-        email = request.form.get('email')
+        first_name = request.form.get('first_name')[:30]
+        last_name = request.form.get('last_name')[:30]
+        email = request.form.get('email')[:80]
         password = request.form.get('password')
         password_confirm = request.form.get('password_again')
 
