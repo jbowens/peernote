@@ -261,8 +261,15 @@ $.extend(peernoteNS.essays, {
             peernoteNS.essays.COMMENTS_PANE_WIDTH);
     }
 
+    // hide readonly stripe
+    $(".readonly-stripe").fadeOut();
+
     // Enable content editability
     $(".page").attr("contenteditable","true");
+
+    $(".edit-mode").show();
+    $(".readonly-mode").hide();
+    $(".review-mode").hide();
   },
 
   // convert mode to reviewer
@@ -270,6 +277,14 @@ $.extend(peernoteNS.essays, {
     peernoteNS.essays.modeButtonsSelect($("#review-mode-button"));
     $("#editor-tools").slideUp();
     $("#reviewer-tools").slideDown();
+
+    // hide readonly stripe
+    $(".readonly-stripe").fadeOut();
+
+    $(".edit-mode").hide();
+    $(".readonly-mode").hide();
+    $(".review-mode").show();
+
     if (!peernoteNS.essays.COMMENTS_PANE_OPEN) {
       peernoteNS.essays.COMMENTS_PANE_OPEN = peernoteNS.essays.togglePane(
         $('.comment-panel-push'),
@@ -287,6 +302,13 @@ $.extend(peernoteNS.essays, {
     // hide tools-kits for other modes
     $("#editor-tools").slideUp();
     $("#reviewer-tools").slideUp();
+
+    // show readonly stripe
+    $(".readonly-stripe").fadeIn();
+
+    $(".edit-mode").hide();
+    $(".readonly-mode").show();
+    $(".review-mode").hide();
 
     peernoteNS.essays.modeButtonsSelect($("#readonly-mode-button"));
     peernoteNS.essays.currentMode = peernoteNS.essays.MODES.READONLY;
@@ -367,7 +389,7 @@ $.extend(peernoteNS.essays, {
       return !isOpen;
   },
 
-  /* JS to initialte comment tab functionality */
+  /* JS to initialize comment tab functionality */
   initCommentTabs: function () {
       /* JS to switch between tabs on the comments panel */
       var currentTabIsComments = true;

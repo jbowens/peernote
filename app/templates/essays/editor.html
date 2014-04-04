@@ -50,8 +50,10 @@
             <div class="toolkit-left">
                 <div class="toolkit-region toolkit-region-light draft-num-row">
                     <div class="draft-num-container">
-                        <span class="draft-number">Draft: 1</span> 
+                        <span class="draft-number">Draft: 1</span>
                         <span class="mode edit-mode edit-mode"> Mode: Editor</span>
+                        <span class="mode edit-mode readonly-mode"> Mode: Read Only</span>
+                        <span class="mode edit-mode review-mode"> Mode: Review</span>
                     </div>
                 </div>
                 <div class="toolkit-region toolkit-region-dark">
@@ -59,7 +61,7 @@
                     <ul>
                         <li class="new">
                         <a href="{{ url_for('essays.create_essay') }}" target="_blank" >
-                            <i class="fa fa-plus"></i> 
+                            <i class="fa fa-plus"></i>
                             New Document
                         </a>
                         </li>
@@ -83,7 +85,7 @@
                 <div class="toolkit-region toolkit-region-dark">
                     <h2>Document Mode</h2>
                     <div class="editor-mode-button-container">
-                        <div id="edit-mode-button" 
+                        <div id="edit-mode-button"
                             class="editor-mode-button editor-mode-button-active">
                             <div class="icon-container">
                                 <i class="fa fa-pencil"></i>
@@ -288,9 +290,15 @@
             </div>
 
             <div class="page-container">
-                {#<div class="page-top-margin"></div>#}
                 <div class="page-wrapper">
-                  <div class="page content" contenteditable="true" spellcheck="false"></div>
+                <div class="readonly-stripe">
+                    <div class="top-stripe"></div>
+                    <div class="stripe-message">READ ONLY</div>
+                    <div class="bottom-stripe"></div>
+                </div>
+                    <div class="page content" contenteditable="true" spellcheck="false">
+                    
+                    </div>
               </div>
             </div>
         </div>
