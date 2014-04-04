@@ -12,27 +12,15 @@ $border: #d2d2d2;
 $contentwidth: 760px;
 $accent-alt: #a6538d;
 $accent-light: #7ca6b1;
-$theme-color: #a973b4;        
+$theme-color: #a973b4;
 $theme-color-hover: #b45b99;
 $text: #373737;
 /******************* TODO:  Kill it ************** /
 
-body, html {
-    height: 100%;
-    min-width: 1000px;
-}
-
-nav {
-    position: fixed;
-    top:0;
-    width: 100%;
-    z-index:101;
-}
-
 /* override navbar css */
 .header-container {
     width: 100% !important;
-    
+
     .nav-right {
         margin-right: 40px;
     }
@@ -71,10 +59,10 @@ nav {
     position: fixed;
     z-index: 19; //2000; <-- changed this value for testing
     right:0;
-    
+
     .tab-container-selected {
         z-index: 100;
-    }   
+    }
 
     .comments-panel-tab {
         height: 100%;
@@ -228,7 +216,7 @@ nav {
 
                 .comment-details {
                     clear:both;
-                    
+
                     * {
                         float: left;
                     }
@@ -247,7 +235,7 @@ nav {
                     }
                 }
             }
-            
+
             // panel that holds new comment form
             .comment-post {
                 width: 322px;
@@ -343,10 +331,10 @@ nav {
                 line-height: 27px;
                 outline: none;
                 height:100%;
-                background-image:  
-                -webkit-linear-gradient(left, rgba(255,85,91, 0), rgba(255,85,91, 0)), 
-                -webkit-linear-gradient(left, rgba(255,85,91, 0), rgba(255,85,91, 0)), 
-                -webkit-linear-gradient(top, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 69px, rgba(255,255,255,0) 70px), 
+                background-image:
+                -webkit-linear-gradient(left, rgba(255,85,91, 0), rgba(255,85,91, 0)),
+                -webkit-linear-gradient(left, rgba(255,85,91, 0), rgba(255,85,91, 0)),
+                -webkit-linear-gradient(top, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 69px, rgba(255,255,255,0) 70px),
                 -webkit-repeating-linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 18px, #d1d1d1 19px, white 20px);
                 background-size: 1px, 1px, auto, auto 27px;
                 background-repeat: repeat-y, repeat-y, no-repeat, repeat;
@@ -476,7 +464,7 @@ nav {
                 i {
                     color: #404040;
                 }
-            }   
+            }
 
 
             .editor-tool-container {
@@ -504,15 +492,16 @@ nav {
                 }
 
                 button:hover {
-                    background: #404040; 
+                    background: #404040;
                 }
             }
         }
 
+
         .toolkit-region-light {
             background-color: #373737;
             color: $white-color;
-            
+
             .fa-arrow-right {
                 margin-left: 15px;
             }
@@ -559,6 +548,7 @@ nav {
 
                .edit-mode {
                    color: #39BD41;
+                   font-weight: 400;
                }
 
                .review-mode {
@@ -571,32 +561,6 @@ nav {
             }
         }
 
-        // the draft history toolkit row
-        .toolkit-region-history {
-            padding: 12px 0;
-
-            .history-container {
-                color: $white-color;
-                margin-left: 20px;
-                position: relative;
-                cursor: pointer;
-
-                i {
-                    margin-right: 10px;
-                }
-
-                .fa-angle-right {
-                    position: absolute;
-                    font-size:20pt;
-                    right: 20px;
-                    top: -5px;
-                }
-            }
-        }
-
-        .reviewer-button {
-            cursor: pointer;
-        }
 
         ul {
 
@@ -630,15 +594,70 @@ nav {
 
             li:hover {
                 background-color: black;
-                * {
-                    color: white;
-                }
             }
 
-            li.active-draft {
-                * {
-                    color: $main-color-2;
+        }
+
+        .timeline {
+            padding-bottom: 0px;
+
+            h2 {
+                margin-bottom: 15px;
+            }
+
+            ul {
+                height: 300px;
+                overflow: auto;
+                -moz-box-shadow:    inset 0 0 8px #000000;
+                -webkit-box-shadow: inset 0 0 8px #000000;
+                box-shadow:         inset 0 0 8px #000000;
+
+                li {
+                    overflow: auto;
+                    border-bottom:#1e1e1e 1px solid;
+                    border-top: #444 1px solid;
+
+                    a {
+                        * {
+                            color: #999;
+                            font-weight: 400;
+                            font-size: 14px;
+                        }
+
+                        i {
+                            float: left;
+                            opacity: 0;
+                        }
+
+                        .draft-number {
+                            float: left;
+                        }
+
+                        .draft-date {
+                            float: right;
+                            margin-right: 20px;
+                        }
+                    }
                 }
+
+                li:hover {
+                    background-color: #1e1e1e;
+                }
+
+                li.active-draft {
+
+
+                    * {
+                        color: $white-color;
+                        font-weight: 700;
+                    }
+
+                    i {
+                        opacity: 1;
+                        color: #39bd41;
+                    }
+                }
+
             }
         }
     }
@@ -690,7 +709,7 @@ nav {
 }
 
 .editor-background {
-    background-color: white; 
+    background-color: white;
     height: 100%;
 
     #review-submit {
@@ -737,7 +756,7 @@ nav {
                 left: -5px;
 
                 .comment {
-                    width: 155px; 
+                    width: 155px;
                     margin: 10px 10px 5px 10px;
                     white-space: pre-wrap;
                     white-space: -moz-pre-wrap;

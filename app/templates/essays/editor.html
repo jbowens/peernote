@@ -147,7 +147,17 @@
                     <h2><i class="fa fa-clock-o"></i>Draft History</h2>
                     <ul>
                         {% for draft in current_essay.get_all_drafts() %}
-                        <li><a> Draft {{ draft.version }} </a></li>
+                        <li>
+                        <a>
+                            <i class="fa fa-check"></i>
+                            <span class="draft-number">
+                                Draft {{ draft.version }}
+                             </span>
+                             <span class="draft-date">
+                                Feb 12
+                            </span>
+                        </a>
+                        </li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -184,7 +194,7 @@
                     <div class="comment-thread">
                         <h3>This is the highlighted text for this comment thread</h3>
                         <ul>
-                            <li>Comments in the thread here</li> 
+                            <li>Comments in the thread here</li>
                         </ul>
                     </div>
                     <div class="comments-index">
@@ -221,7 +231,7 @@
                     <div class="toolbar-left">
                         <div class="toolkit-open-button">
                             <i class="fa fa-bars"></i>
-                        </div>                
+                        </div>
                         <div class="btn-set btn-set-status right-border" title="Save status">
                             <i class="status-line btn-editor">Saved</i>
                         </div>
@@ -237,7 +247,7 @@
                     <div class="toolbar-right">
                         <div class="toolkit-comment-button">
                             <i class="fa fa-comment"></i>
-                        </div>                
+                        </div>
                         <div class="btn-set left-border">
                             <div class="line-height-dropdown line-height-click" title="Line spacing">
                                 <div class="line-height-btn line-height-click" data-tag="line-height">
@@ -269,7 +279,7 @@
                         </div>
                     </div>
                     <div class="btn-set essay-title-container">
-                        <div class="essay-title" 
+                        <div class="essay-title"
                             spellcheck="false" contenteditable="true">
                             Untitled
                         </div>
