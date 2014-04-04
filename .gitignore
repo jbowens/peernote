@@ -50,3 +50,5 @@ app/static/.webassets-cache/*
 # etc
 *.swp
 .DS_Store
+
+!sql/backups/.gitignore

@@ -14,3 +14,4 @@ validate-email==1.1
 Pillow==2.3.0
 Flask-Migrate==1.2.0
 pyDNS==2.3.6
+APScheduler=2.1.2
