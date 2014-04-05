@@ -512,7 +512,7 @@ $.extend(peernoteNS.essays, {
       $('.zoom-size').click(function() {
           $('.zoom').hide();
           var percent = $(this).html();
-          $('.page-container').css('zoom', percent);
+          $('.page-wrapper').css('zoom', percent);
           $('.curr-zoom').html(percent + " <i class='fa fa-caret-down zoom-click'></i>");
       });
 
