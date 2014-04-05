@@ -364,6 +364,16 @@ $.extend(peernoteNS.essays, {
       }
 
       setHeight(); // set initial height
+
+      var draftsOpen = false;
+      $(".timeline h2").click(function() {
+          if (draftsOpen) {
+              $(".drafts-list").slideUp();
+          } else {
+              $(".drafts-list").slideDown();
+          }
+          draftsOpen = !draftsOpen;
+      });
   },
 
   // JS to open and close pannels

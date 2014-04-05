@@ -146,8 +146,11 @@
                     </div>
                 </div>
                 <div class="toolkit-region toolkit-region-light timeline">
-                    <h2><i class="fa fa-clock-o"></i>Draft History</h2>
-                    <ul>
+                    <h2>
+                        <i class="fa fa-clock-o"></i>Draft History
+                        <i class="fa fa-caret-down"></i>
+                    </h2>
+                    <ul class="drafts-list">
                         {% for draft in current_essay.get_all_drafts() %}
                         <li>
                         <a>
@@ -163,6 +166,7 @@
                         {% endfor %}
                     </ul>
                 </div>
+                <div class="timeline-bottom-border"></div>
             </div>
         </div>
         <div class="main-panel-push"> </div>{# expand this to push the main panel right #}
