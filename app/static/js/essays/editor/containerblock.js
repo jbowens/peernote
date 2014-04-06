@@ -44,6 +44,17 @@ $.extend(peernoteNS.containerBlock, {
       div.appendChild(renderings[i]);
     }
     return div;
+  },
+
+  /* Returns a plain-text representation of this element and all its children.
+   */
+  getText: function() {
+    var text = '';
+    for (var i = 0; i < this._children.length; ++i) {
+      text = text + this._children[i].getText();
+    }
+    // TODO: Maybe add newlines between children.
+    return text;
   }
 
 });
