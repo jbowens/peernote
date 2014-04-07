@@ -60,6 +60,41 @@ $.extend(peernoteNS.doc, {
       selectionObj: s,
       isSelection: s.anchorNode != s.focusNode || s.anchorOffset != s.focusOffset
     };
-  }
+    pos.anchorBlock = this._getContainingBlock(s.anchorNode, s.anchorOffset);
+    pos.anchorOffset = s.anchorOffset;
+    pos.focusBlock = this._getContainingBlock(s.focusNode, s.focusOffset);
+    pos.focusOffset = s.focusOffset;
+    return pos;
+  },
+
+  _getContainingBlock: function(node, nodeOffset) {
+    if (!node) {
+      return null;
+    }
+
+    var isPage = $(node).hasClass('page');
+    if (isPage) {
+      // This is a top level document node. Return the first block contained within it.
+      var blocks = $('.page > .pn-block');
+      if (blocks.length) {
+        return blocks[0].block;
+      } else {
+        return null;
+      }
+    } else {
+      /* Find the containing block for the anchor. */
+      var elmt = $(node).closest('.pn-block');
+      /* It could be that the content-editable put the focus outside of a block
+       * chilling in a top-level text node, in which case we should move to the next sibling. */
+      if (elmt.length) {
+        elmt = elmt[0];
+      } else if (node.nextSibling) {
+        elmt = node.nextSibling;
+      } else {
+        elmt = node.previousSibling;
+      }
+      return elmt.block;
+    }
+ },
 
 });

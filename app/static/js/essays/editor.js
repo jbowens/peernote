@@ -82,15 +82,13 @@ $.extend(peernoteNS.editor, {
 
   keydown: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.editor;
-
-    var pos = peernoteNS.docutils.getCaretPosition(_this._doc);
-
-    if (pos.selectionObj.anchorNode
+    var pos = peernoteNS.doc.getCaret();
+    console.log(pos);
   }),
 
   keyup: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.editor;
-
+    //var pos = peernoteNS.doc.getCaret();
     /*
      * Move this shit to the relevant spot.
      *

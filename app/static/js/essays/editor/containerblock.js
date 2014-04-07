@@ -10,6 +10,8 @@ $.extend(peernoteNS.containerBlock, {
    */
   _children: [],
 
+  _elmt: null,
+
   /* Creates a new object that is a container block.
    */
   construct: function() {
@@ -42,6 +44,8 @@ $.extend(peernoteNS.containerBlock, {
     var div = document.createElement('div');
     $(div).addClass('pn-cont-block');
     $(div).addClass('pn-block');
+    div.block = this;
+    this._elmt = div;
     var renderings = this.renderChildren();
     for (var i = 0; i < renderings.length; ++i) {
       div.appendChild(renderings[i]);

@@ -7,11 +7,11 @@ peernoteNS.textBlock = peernoteNS.textBlock || {};
 
 $.extend(peernoteNS.textBlock, {
 
-  _text: '',
+  _text: 'Some text',
 
   _modifiers: [],
 
-  _renderedElmt: null,
+  _elmt: null,
 
   /* Creates a new object that is a container block.
    */
@@ -223,7 +223,8 @@ $.extend(peernoteNS.textBlock, {
     root.appendChild(span);
     $(root).addClass('pn-text-block');
     $(root).addClass('pn-block');
-    this._renderedElmt = root;
+    root.block = this;
+    this._elmt = root;
 
     return root;
   },
