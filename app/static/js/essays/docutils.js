@@ -72,7 +72,8 @@ $.extend(peernoteNS.docutils, {
     var pos = {
       isSelection: s.anchorNode != s.focusNode || s.anchorOffset != s.focusOffset,
       start: this.getOffset(doc, s.anchorNode, s.anchorOffset),
-      end: this.getOffset(doc, s.focusNode, s.focusOffset)
+      end: this.getOffset(doc, s.focusNode, s.focusOffset),
+      selectionObj: s
     };
 
     if (pos.start === false && pos.end === false) {

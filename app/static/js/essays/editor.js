@@ -80,17 +80,20 @@ $.extend(peernoteNS.editor, {
 
   _doc: null,
 
-  _getSel: function() {
-    var sel = peernoteNS.docutils.getCaretPosition(peernoteNS.editor._doc);
-    return sel;
-  },
+  keydown: peernoteNS.errors.wrap(function(e) {
+    var _this = peernoteNS.editor;
 
-  /* Keyup handler for the editor. This function handles everything that
-   * should happen on key press in the editor.
-   */
+    var pos = peernoteNS.docutils.getCaretPosition(_this._doc);
+
+    if (pos.selectionObj.anchorNode
+  }),
+
   keyup: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.editor;
 
+    /*
+     * Move this shit to the relevant spot.
+     *
     // Did the document change?
     if (peernoteNS.doc.getText() != _this._doc.innerText) {
       var charDiff = _this._doc.innerText.length - peernoteNS.doc._text.length;
@@ -116,17 +119,7 @@ $.extend(peernoteNS.editor, {
         _this._pendingModifiers = [];
       }
     }
-  }),
-
-  /* Keydown handler for the editor.
-   */
-  keydown: peernoteNS.errors.wrap(function(e) {
-    // We want tabs to be treated as a literal tab characters,
-    // not for navigation.
-    if (e.keyCode == 9) {
-      e.preventDefault();
-      peernoteNS.docutils.insertRawTextAtCursor('\t');
-    }
+    */
   }),
 
   /* Togglers for simple modifiers. These are installed as listeners for
@@ -198,11 +191,14 @@ $.extend(peernoteNS.editor, {
     $status_line = $('.status-line');
     $status_line.text('Saving…');
     $status_line.css('opacity', '1.0');
+    /*
+     * TODO: Handle saving drafts.
     $.post('/api/save_draft', params, function(data) {
       if (data.status == "success") {
         $status_line.text('Saved');
       }
     });
+    */
   },
 
   /* Event listener for handling autosaving.

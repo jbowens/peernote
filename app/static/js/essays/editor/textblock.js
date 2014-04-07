@@ -11,6 +11,8 @@ $.extend(peernoteNS.textBlock, {
 
   _modifiers: [],
 
+  _renderedElmt: null,
+
   /* Creates a new object that is a container block.
    */
   construct: function() {
@@ -177,6 +179,9 @@ $.extend(peernoteNS.textBlock, {
     this._removeZeroLengthModifiers();
   },
 
+  /* Completely re-render this block, returning the DOM element
+   * that will display this block within the page.
+   */
   render: function() {
     // Covert the modifiers into a more digestible format.
     var breaks = [];
@@ -217,6 +222,8 @@ $.extend(peernoteNS.textBlock, {
     var span = this._makeNode(activeModifiers, lastIndex, this._text.length);
     root.appendChild(span);
     $(root).addClass('pn-text-block');
+    $(root).addClass('pn-block');
+    this._renderedElmt = root;
 
     return root;
   },

@@ -41,6 +41,7 @@ $.extend(peernoteNS.containerBlock, {
   render: function() {
     var div = document.createElement('div');
     $(div).addClass('pn-cont-block');
+    $(div).addClass('pn-block');
     var renderings = this.renderChildren();
     for (var i = 0; i < renderings.length; ++i) {
       div.appendChild(renderings[i]);

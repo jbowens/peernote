@@ -51,4 +51,15 @@ $.extend(peernoteNS.doc, {
     return renderedRoot;
   },
 
+  /* Retrieves the caret position / selection in terms of
+   * logical block elements.
+   */
+  getCaret: function() {
+    var s = document.getSelection();
+    var pos = {
+      selectionObj: s,
+      isSelection: s.anchorNode != s.focusNode || s.anchorOffset != s.focusOffset
+    };
+  }
+
 });
