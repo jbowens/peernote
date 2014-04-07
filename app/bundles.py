@@ -232,6 +232,8 @@ assets.register('editor_js',
     Bundle(
         "js/widgets/lightbox.js",
         "js/widgets/essays_list.js",
+        "js/essays/editor/containerblock.js",
+        "js/essays/editor/textblock.js",
         "js/essays/document.js",
         "js/essays/commands.js",
         "js/essays/docutils.js",

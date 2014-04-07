@@ -14,7 +14,9 @@ $.extend(peernoteNS.containerBlock, {
    */
   construct: function() {
     // Clone container block object and return new one
-    return $.extend({}, peernoteNS.containerBlock).init();
+    var obj = $.extend({}, peernoteNS.containerBlock);
+    obj.init();
+    return obj;
   },
 
   init: function() {

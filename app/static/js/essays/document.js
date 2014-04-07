@@ -39,6 +39,16 @@ $.extend(peernoteNS.doc, {
     for (var i = 0; i < this._changeListeners.length; ++i) {
       this._changeListeners[i](state);
     }
-  }
+  },
+
+  /* Re-renders the entire document.
+   */
+  render: function() {
+    var renderedRoot = this._root.render();
+    var content = $('.page-container .page')[0];
+    $(content).empty();
+    content.appendChild(renderedRoot);
+    return renderedRoot;
+  },
 
 });

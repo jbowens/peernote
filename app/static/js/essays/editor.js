@@ -171,13 +171,11 @@ $.extend(peernoteNS.editor, {
    * appropriately. This is called on page load as well (from the
    * controller) to load the initial state of the draft)
    */
-  loadDraftState: function (title, text, modifiers) {
+  loadDraftState: function (title) {
+    // TODO: Update with actual new draft state
     // If we're loading something into the editor, it must be
     // the finalized draft.
-    peernoteNS.doc.loadInitialState(text, modifiers);
-
-    // TODO: Do something with the title. Where are we going to put it?
-
+    peernoteNS.doc.init();
   },
 
   /**
@@ -232,7 +230,7 @@ $.extend(peernoteNS.editor, {
   initDocument: function() {
     var docContainer = $('.page-container .page')[0];
     this._doc = docContainer;
-    peernoteNS.doc._text = docContainer.innerText;
+    peernoteNS.doc.init();
     peernoteNS.doc.render();
     $(docContainer).keyup(peernoteNS.editor.keyup);
     $(docContainer).keydown(peernoteNS.editor.keydown);

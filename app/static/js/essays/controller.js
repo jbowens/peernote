@@ -170,7 +170,8 @@ $.extend(peernoteNS.essays, {
         }
 
         // Inform the editor to load this draft
-        peernoteNS.editor.loadDraftState(data.title, data.text, modifiers);
+        // TODO: Update
+        peernoteNS.editor.loadDraftState(data.title);
         $('.status-line').text('Saved');
 
         if (!data.finalized) {
