@@ -13,7 +13,20 @@ $.extend(peernoteNS.doc, {
   _root: null,
 
   init: function() {
+    var _this = this;
     this._root = peernoteNS.textBlock.construct();
+    $('.page-container .page').keyup(function(e) {
+      _this.checkForChanges(e);
+    });
+    this.render();
+  },
+
+  checkForChanges: function(e) {
+    var pos = this.getCaret();
+    var changesMade = pos.anchorBlock.checkForChanges(pos);
+    if (changesMade) {
+      this._documentChanged();
+    }
   },
 
   addChangeListener: function(f) {

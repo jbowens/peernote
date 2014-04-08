@@ -80,44 +80,9 @@ $.extend(peernoteNS.editor, {
 
   _doc: null,
 
-  keydown: peernoteNS.errors.wrap(function(e) {
-    var _this = peernoteNS.editor;
-    var pos = peernoteNS.doc.getCaret();
-    console.log(pos);
-  }),
-
   keyup: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.editor;
-    //var pos = peernoteNS.doc.getCaret();
-    /*
-     * Move this shit to the relevant spot.
-     *
-    // Did the document change?
-    if (peernoteNS.doc.getText() != _this._doc.innerText) {
-      var charDiff = _this._doc.innerText.length - peernoteNS.doc._text.length;
-      var pos = peernoteNS.docutils.getCaretPosition(_this._doc);
-      // Update the stored representation of the document.
-      peernoteNS.doc.updateDocument(_this._doc.innerText,
-                                    pos.start - charDiff,
-                                    charDiff);
-
-      if (_this._pendingModifiers.length &&
-          _this._pendingModifiersPos == pos.start - charDiff) {
-        if (charDiff > 0) {
-          // If they added characters, we should now wrap those characters
-          // in the pending modifiers.
-          for (var i = 0; i < _this._pendingModifiers.length; ++i) {
-            var type = _this._pendingModifiers[i];
-            peernoteNS.doc.applyModifier(type, pos.start-charDiff, pos.start);
-          }
-          // Re-render the document to reflect the new modifier.
-          peernoteNS.doc.render();
-        }
-        // Clear pending modifiers
-        _this._pendingModifiers = [];
-      }
-    }
-    */
+    var pos = peernoteNS.doc.getCaret();
   }),
 
   /* Togglers for simple modifiers. These are installed as listeners for

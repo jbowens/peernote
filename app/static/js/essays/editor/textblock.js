@@ -40,6 +40,33 @@ $.extend(peernoteNS.textBlock, {
     };
   },
 
+  checkForChanges: function(pos) {
+    if (this._text != this._elmt.innerText) {
+      var charDiff = this._elmt.innerText.length - this._text.length;
+      // Update the stored representation of the document.
+      this.updateText(this._elmt.innerText,
+                      pos.start - charDiff,
+                      charDiff);
+      /*
+      if (_this._pendingModifiers.length &&
+          _this._pendingModifiersPos == pos.start - charDiff) {
+        if (charDiff > 0) {
+          // If they added characters, we should now wrap those characters
+          // in the pending modifiers.
+          for (var i = 0; i < _this._pendingModifiers.length; ++i) {
+            var type = _this._pendingModifiers[i];
+            peernoteNS.doc.applyModifier(type, pos.start-charDiff, pos.start);
+          }
+          // Re-render the document to reflect the new modifier.
+          peernoteNS.doc.render();
+        }
+        // Clear pending modifiers
+        _this._pendingModifiers = [];
+      }
+      */
+    }
+  },
+
   updateText: function(newText, position, charsDiff) {
     /* Update the raw plain text of the document. */
     this._text = newText;
@@ -221,6 +248,8 @@ $.extend(peernoteNS.textBlock, {
     // Add the last node
     var span = this._makeNode(activeModifiers, lastIndex, this._text.length);
     root.appendChild(span);
+
+    // Setup the text block container
     $(root).addClass('pn-text-block');
     $(root).addClass('pn-block');
     root.block = this;
