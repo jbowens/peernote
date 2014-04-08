@@ -64,7 +64,9 @@ $.extend(peernoteNS.textBlock, {
         _this._pendingModifiers = [];
       }
       */
+      return true;
     }
+    return false;
   },
 
   updateText: function(newText, position, charsDiff) {

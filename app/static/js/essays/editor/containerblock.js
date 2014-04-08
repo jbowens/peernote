@@ -25,6 +25,11 @@ $.extend(peernoteNS.containerBlock, {
     // TODO: Any additional initialization.
   },
 
+  getState: function() {
+    // TODO: Implement
+    return {};
+  },
+
   /* Renders all the children of this container block and
    * returns the resulting DOM elements in an array.
    */

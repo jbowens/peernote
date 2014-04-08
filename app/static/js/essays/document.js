@@ -14,7 +14,8 @@ $.extend(peernoteNS.doc, {
 
   init: function() {
     var _this = this;
-    this._root = peernoteNS.textBlock.construct();
+    this._root = peernoteNS.containerBlock.construct();
+    this._root._children.push(peernoteNS.textBlock.construct());
     $('.page-container .page').keyup(function(e) {
       _this.checkForChanges(e);
     });

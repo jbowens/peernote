@@ -19,7 +19,7 @@ $.extend(peernoteNS.editor, {
   _simpleModifierToggler: function(modifierType, commandType) {
     return peernoteNS.errors.wrap(function(e) {
       var _this = peernoteNS.editor;
-      var sel = _this._getSel();
+      var sel = peernoteNS.doc.getCaret();
       if (sel.isSelection) {
         var modifiers = peernoteNS.doc.getModifiers(sel.start);
         var isApply = $.inArray(modifierType, modifiers) == -1;
@@ -39,8 +39,6 @@ $.extend(peernoteNS.editor, {
         peernoteNS.commands.execute(cmd);
       } else {
         // TODO: Maybe turn this into an undo-able command.
-
-        var pos = peernoteNS.docutils.getCaretPosition(_this._doc);
 
         // Check for out of date pending modifiers from other locations
         if (_this._pendingModifiers.length &&
@@ -131,7 +129,6 @@ $.extend(peernoteNS.editor, {
     // TODO: Update with actual new draft state
     // If we're loading something into the editor, it must be
     // the finalized draft.
-    peernoteNS.doc.init();
   },
 
   /**
