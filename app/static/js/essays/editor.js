@@ -21,14 +21,14 @@ $.extend(peernoteNS.editor, {
       var _this = peernoteNS.editor;
       var sel = peernoteNS.doc.getCaret();
       if (sel.isSelection) {
-        var modifiers = peernoteNS.doc.getModifiers(sel.start);
+        var modifiers = sel.anchorBlock.getModifiers(sel.start);
         var isApply = $.inArray(modifierType, modifiers) == -1;
         var apply = function() {
-          peernoteNS.doc.applyModifier(modifierType, sel.start, sel.end);
+          peernoteNS.doc.applyModifier(modifierType, sel);
           peernoteNS.doc.render();
         };
         var unapply = function() {
-          peernoteNS.doc.removeModifier(modifierType, sel.start, sel.end);
+          peernoteNS.doc.removeModifier(modifierType, sel);
           peernoteNS.doc.render();
         };
         var cmd = {

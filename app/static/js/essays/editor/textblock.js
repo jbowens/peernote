@@ -126,6 +126,7 @@ $.extend(peernoteNS.textBlock, {
    * @param end the end text offset
    */
   applyModifier: function(modifierType, start, end) {
+    console.log(modifierType, start, end);
     var startMod = this._getModifierOfTypeAt(modifierType, start);
     var endMod = this._getModifierOfTypeAt(modifierType, end);
 

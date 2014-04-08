@@ -45,6 +45,28 @@ $.extend(peernoteNS.doc, {
     return this._root.getState();
   },
 
+  /* Applies the given modifier over the given selection.
+   */
+  applyModifier: function(modifierType, selection) {
+    if (selection.startBlock == selection.endBlock) {
+      // This selection only spans a single block. Apply the
+      // modifier to the range within the block.
+      selection.anchorBlock.applyModifier(modifierType,
+                                          selection.startOffset,
+                                          selection.endOffset);
+    } else {
+      // TODO: Implement
+      console.log("NOT YET IMPLEMENTED: Apply Modifier across blocks");
+    }
+  },
+
+  /* Removes the given modifier over the given selection.
+   */
+  removeModifier: function(modifierType, selection) {
+    // TODO: Implement
+    console.log("NOT YET IMPLEMENTED: removeModifier");
+  },
+
   /* This function should be called whenever the document changes to
    * notify and listeners that the document has been modified.
    */
@@ -78,6 +100,28 @@ $.extend(peernoteNS.doc, {
     pos.anchorOffset = s.anchorOffset;
     pos.focusBlock = this._getContainingBlock(s.focusNode, s.focusOffset);
     pos.focusOffset = s.focusOffset;
+    pos.anchorChar = peernoteNS.docutils.getOffset(this._root._elmt,
+                                                   s.anchorNode,
+                                                   s.anchorOffset);
+    pos.focusChar = peernoteNS.docutils.getOffset(this._root._elmt,
+                                                   s.focusNode,
+                                                   s.focusOffset);
+    if (pos.anchorChar <= pos.focusChar) {
+      pos.startChar = pos.anchorChar;
+      pos.endChar = pos.focusChar;
+      pos.startBlock = pos.anchorBlock;
+      pos.startOffset = pos.anchorOffset;
+      pos.endBlock = pos.focusBlock;
+      pos.endOffset = pos.focusOffset;
+    } else {
+      pos.startChar = pos.focusChar;
+      pos.endChar = pos.anchorChar;
+      pos.startBlock = pos.focusBlock;
+      pos.startOffset = pos.focusOffset;
+      pos.endBlock = pos.anchorBlock;
+      pos.endOffset = pos.anchorOffset;
+    }
+
     return pos;
   },
 
