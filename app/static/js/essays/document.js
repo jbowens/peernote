@@ -56,15 +56,23 @@ $.extend(peernoteNS.doc, {
                                           selection.endOffset);
     } else {
       // TODO: Implement
-      console.log("NOT YET IMPLEMENTED: Apply Modifier across blocks");
+      console.log("NOT YET IMPLEMENTED: applyModifier across blocks");
     }
   },
 
   /* Removes the given modifier over the given selection.
    */
   removeModifier: function(modifierType, selection) {
-    // TODO: Implement
-    console.log("NOT YET IMPLEMENTED: removeModifier");
+    if (selection.startBlock == selection.endBlock) {
+      // This selection only spans a single block. Remove the
+      // modifier from the range within the block.
+      selection.startBlock.removeModifier(modifierType,
+                                          selection.startOffset,
+                                          selection.endOffset);
+    } else {
+      // TODO: Implement
+      console.log("NOT YET IMPLEMENTED: removeModifier across blocks");
+    }
   },
 
   /* This function should be called whenever the document changes to
