@@ -16,9 +16,9 @@ $.extend(peernoteNS.doc, {
     var _this = this;
     this._root = peernoteNS.containerBlock.construct();
     this._root._children.push(peernoteNS.textBlock.construct());
-    $('.page-container .page').keyup(function(e) {
+    $('.page-container .page').keyup(peernoteNS.errors.wrap(function(e) {
       _this.checkForChanges(e);
-    });
+    }));
     this.render();
   },
 

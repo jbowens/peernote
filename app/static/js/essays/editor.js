@@ -78,9 +78,12 @@ $.extend(peernoteNS.editor, {
 
   _doc: null,
 
-  keyup: peernoteNS.errors.wrap(function(e) {
+  keypress: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.editor;
-    var pos = peernoteNS.doc.getCaret();
+    if (e.keyCode == 13) {
+      // They hit enter. We should create a new block.
+      e.preventDefault();
+    }
   }),
 
   /* Togglers for simple modifiers. These are installed as listeners for
@@ -188,8 +191,7 @@ $.extend(peernoteNS.editor, {
     this._doc = docContainer;
     peernoteNS.doc.init();
     peernoteNS.doc.render();
-    $(docContainer).keyup(peernoteNS.editor.keyup);
-    $(docContainer).keydown(peernoteNS.editor.keydown);
+    $(docContainer).keypress(peernoteNS.editor.keypress);
     // Subscribe to changes in the document so that we can
     // autosave appropriately.
     peernoteNS.doc.addChangeListener(this.onDocumentChange);
