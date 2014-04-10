@@ -97,9 +97,13 @@ $.extend(peernoteNS.doc, {
       isSelection: s.anchorNode != s.focusNode || s.anchorOffset != s.focusOffset
     };
     pos.anchorBlock = this._getContainingBlock(s.anchorNode, s.anchorOffset);
-    pos.anchorOffset = s.anchorOffset;
+    pos.anchorOffset = peernoteNS.docutils.getOffset(pos.anchorBlock._elmt,
+                                                     s.anchorNode,
+                                                     s.anchorOffset);
     pos.focusBlock = this._getContainingBlock(s.focusNode, s.focusOffset);
-    pos.focusOffset = s.focusOffset;
+    pos.focusOffset = peernoteNS.docutils.getOffset(pos.focusBlock._elmt,
+                                                    s.focusNode,
+                                                    s.focusOffset);
     pos.anchorChar = peernoteNS.docutils.getOffset(this._root._elmt,
                                                    s.anchorNode,
                                                    s.anchorOffset);
