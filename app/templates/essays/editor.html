@@ -21,6 +21,11 @@
         {% for draft in current_essay.get_all_drafts() %}
             peernoteNS.essays.drafts.push({{draft.did}});
         {% endfor %}
+
+        {% if reviewhash %}
+            peernoteNS.essays.review_only = true;
+            peernoteNS.essays.reviewhash = "{{ reviewhash }}";
+        {% endif %}
     </script>
 {% endblock %}
 
@@ -56,7 +61,7 @@
                         <span class="mode edit-mode review-mode"> Mode: Review</span>
                     </div>
                 </div>
-                <div class="toolkit-region toolkit-region-dark">
+                <div class="toolkit-region toolkit-region-dark" id="doc-manager">
                     {#<h2>DOC MANAGER</h2>#}
                     <ul>
                         <li class="new">

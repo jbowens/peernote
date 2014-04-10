@@ -171,26 +171,31 @@ $.extend(peernoteNS.essays, {
 
         // Inform the editor to load this draft
         peernoteNS.editor.loadDraftState(data.title, data.text, modifiers);
-        $('.status-line').text('Saved');
 
-        if (!data.finalized) {
-          // This is the current draft. Enable autosaving
-          peernoteNS.editor.enableAutosaving();
-
-          // Move to editor mode
-          peernoteNS.essays.toEditor();
-
-          $('li.next-draft').slideDown();
+        if (peernoteNS.essays.review_only) {
+          peernoteNS.essays.toReviewer();
+          $('.status-line').text('');
         } else {
-          // This is an old draft. We need to disable autosaving on the editor.
-          peernoteNS.editor.disableAutosaving();
+          if (!data.finalized) {
+            // This is the current draft. Enable autosaving
+            peernoteNS.editor.enableAutosaving();
 
-          // Move to readonly mode
-          peernoteNS.essays.toReadonly();
+            // Move to editor mode
+            peernoteNS.essays.toEditor();
 
-          $('li.next-draft').slideUp();
+            $('li.next-draft').slideDown();
+          } else {
+            // This is an old draft. We need to disable autosaving on the editor.
+            peernoteNS.editor.disableAutosaving();
+
+            // Move to readonly mode
+            peernoteNS.essays.toReadonly();
+
+            $('li.next-draft').slideUp();
+          }
+
+          $('.status-line').text('Saved');
         }
-       $('.status-line').text('Saved');
 
         if (cb) {
           cb();
@@ -274,7 +279,10 @@ $.extend(peernoteNS.essays, {
 
   // convert mode to reviewer
   toReviewer: function() {
-    peernoteNS.essays.modeButtonsSelect($("#review-mode-button"));
+    if (!peernoteNS.essays.review_only) {
+      // If review only context, let initReviewOnly handle mode buttons
+      peernoteNS.essays.modeButtonsSelect($("#review-mode-button"));
+    }
     $("#editor-tools").slideUp();
     $("#reviewer-tools").slideDown();
 
@@ -291,6 +299,12 @@ $.extend(peernoteNS.essays, {
         peernoteNS.essays.COMMENTS_PANE_OPEN,
         peernoteNS.essays.COMMENTS_PANE_WIDTH);
     }
+
+    // For now, disable autosaving/editing in review mode until reviewing
+    // even has things to be saved.
+    peernoteNS.editor.disableAutosaving();
+    $(".page").attr("contenteditable","false");
+
     peernoteNS.essays.currentMode = peernoteNS.essays.MODES.REVIEW;
   },
 
@@ -567,6 +581,22 @@ $.extend(peernoteNS.essays, {
    */
   initDraft: function() {
     this.loadDraft(peernoteNS.essays.did);
+  },
+
+  /*
+   * Setup review only mode. Hide functionality that should only be present
+   * to the original writer.
+   */
+  initReviewOnly: function() {
+    var $modeButtons = $(".editor-mode-button");
+    $modeButtons.removeClass("editor-mode-button-active editor-mode-button-selectable");
+    $modeButtons.addClass("editor-mode-button-disabled");
+    $('#review-mode-button').addClass('editor-mode-button-active editor-mode-button-selectable');
+
+    $('#doc-manager').hide();
+    $('.timeline').hide();
+    $('#editor-tools').hide();
+    $('#reviewer-tools').show();
   }
 
 });
@@ -585,6 +615,10 @@ peernoteNS.init(function() {
   peernoteNS.essays.initOpenButton();
   peernoteNS.essays.initModeSwap();
   peernoteNS.essays.initDraft();
+
+  if (peernoteNS.essays.review_only) {
+    peernoteNS.essays.initReviewOnly();
+  }
 
 });
 

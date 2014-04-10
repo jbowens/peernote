@@ -113,7 +113,7 @@
                     </div>
                     <div class="notification-text">
                         {{ review.get_requesting_user().first_name }} requested a review.
-                        <a href="{{ url_for('reviews.review_draft', reviewhash=review.urlhash) }}">
+                        <a href="{{ url_for('essays.review_draft', reviewhash=review.urlhash) }}">
                             {{ review.get_draft().title }}
                         </a>
                     </div>
