@@ -88,10 +88,15 @@ $.extend(peernoteNS.doc, {
   /* Re-renders the entire document.
    */
   render: function() {
+    var caretPos = this.getCaret();
     var renderedRoot = this._root.render();
     var content = $('.page-container .page')[0];
     $(content).empty();
     content.appendChild(renderedRoot);
+    // Restore the caret position, if a previous caret position exists.
+    if (caretPos) {
+      this.setCaret(caretPos);
+    }
     return renderedRoot;
   },
 
@@ -105,10 +110,18 @@ $.extend(peernoteNS.doc, {
       isSelection: s.anchorNode != s.focusNode || s.anchorOffset != s.focusOffset
     };
     pos.anchorBlock = this._getContainingBlock(s.anchorNode, s.anchorOffset);
+    if (pos.anchorBlock == null) {
+      // The selection is outside of the editor.
+      return null;
+    }
     pos.anchorOffset = peernoteNS.docutils.getOffset(pos.anchorBlock._elmt,
                                                      s.anchorNode,
                                                      s.anchorOffset);
     pos.focusBlock = this._getContainingBlock(s.focusNode, s.focusOffset);
+    if (pos.focusBlock == null) {
+      // The selection is outside of the editor.
+      return null;
+    }
     pos.focusOffset = peernoteNS.docutils.getOffset(pos.focusBlock._elmt,
                                                     s.focusNode,
                                                     s.focusOffset);
@@ -135,6 +148,36 @@ $.extend(peernoteNS.doc, {
     }
 
     return pos;
+  },
+
+  /* Sets the caret position/selection to be the given position.
+   *
+   * The given pos object must have the following properties:
+   *  - startBlock  the block at which to begin the selection
+   *  - startOffset the plain text offset within the block to start
+   *  - endBlock  the block at which to end the selection
+   *  - endOffset the plain text offset within the block to end
+   */
+  setCaret: function(pos) {
+    var s = document.getSelection();
+    s.removeAllRanges();
+    var newRange = document.createRange();
+
+    // Translate the plain text offset to the actual text node and
+    // corresponding offset.
+    var loc = peernoteNS.docutils.getNodeAtOffset(pos.startBlock._elmt,
+                                                  pos.startOffset);
+    newRange.setStart(loc.node, loc.nodeOffset);
+
+    if (pos.endBlock) {
+      // Translate the plain text offset to the actual text node and
+      // corresponding offset.
+      var endLoc = peernoteNS.docutils.getNodeAtOffset(pos.endBlock._elmt,
+                                                       pos.endOffset);
+      newRange.setEnd(endLoc.node, endLoc.nodeOffset);
+    }
+
+    s.addRange(newRange);
   },
 
   _getContainingBlock: function(node, nodeOffset) {
