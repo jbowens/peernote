@@ -21,7 +21,7 @@ $.extend(peernoteNS.editor, {
       var _this = peernoteNS.editor;
       var sel = peernoteNS.doc.getCaret();
       if (sel.isSelection) {
-        var modifiers = sel.anchorBlock.getModifiers(sel.start);
+        var modifiers = sel.startBlock.getModifiers(sel.startOffset);
         var isApply = $.inArray(modifierType, modifiers) == -1;
         var apply = function() {
           peernoteNS.doc.applyModifier(modifierType, sel);
