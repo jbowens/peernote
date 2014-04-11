@@ -150,7 +150,7 @@ $.extend(peernoteNS.essays, {
    * called once the draft is loaded.
    *
    * @param did the draft id of the draft to load
-   * @timestamp (optional) timestamp to use for fetch_draft
+   * @param timestamp (optional) timestamp to use for fetch_draft
    * @param cb (optional) a callback to call upon completion
    */
   loadDraft: function(did, timestamp, cb) {
