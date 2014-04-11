@@ -145,23 +145,27 @@ $.extend(peernoteNS.essays, {
     peernoteNS.essays.loadDraft(cur_did);
   },
 
-  // Date of when essay was last modified as string
-  lastModifiedDate: "",
 
   /* Loads the given draft. If the callback is provided, it will be
    * called once the draft is loaded.
    *
    * @param did the draft id of the draft to load
+   * @timestamp (optional) timestamp to use for fetch_draft
    * @param cb (optional) a callback to call upon completion
    */
-  loadDraft: function(did, cb) {
+  loadDraft: function(did, timestamp, cb) {
     var params = {
       did: did,
-      uid: peernoteNS.essays.uid,
-      timestamp: peernoteNS.essays.lastModifiedDate
+      uid: peernoteNS.essays.uid
     };
 
-    $('.status-line').text('Loading…');
+    if (timestamp) {
+      params.timestamp = timestamp;
+      // also dont bother setting status-line's text to loading since
+      // the chance is quite high that the server returns a 204
+    } else {
+      $('.status-line').text('Loading…');
+    }
 
     $.get('/api/fetch_draft', params, function(data) {
       if (!data) {
@@ -610,11 +614,14 @@ $.extend(peernoteNS.essays, {
     $('#reviewer-tools').show();
   },
 
+  // Date of when essay was last modified as string
+  lastModifiedDate: "",
+
   initAutoloadTimer: function() {
     var _this = this;
     setInterval(function() {
       if (_this.lastModifiedDate) {
-        _this.loadDraft(peernoteNS.essays.did);
+        _this.loadDraft(peernoteNS.essays.did, peernoteNS.essays.lastModifiedDate);
       }
     }, 3000);
   }
