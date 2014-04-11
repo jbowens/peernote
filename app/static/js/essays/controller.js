@@ -145,6 +145,9 @@ $.extend(peernoteNS.essays, {
     peernoteNS.essays.loadDraft(cur_did);
   },
 
+  // Date of when essay was last modified as string
+  lastModifiedDate: "",
+
   /* Loads the given draft. If the callback is provided, it will be
    * called once the draft is loaded.
    *
@@ -154,14 +157,22 @@ $.extend(peernoteNS.essays, {
   loadDraft: function(did, cb) {
     var params = {
       did: did,
-      uid: peernoteNS.essays.uid
+      uid: peernoteNS.essays.uid,
+      timestamp: peernoteNS.essays.lastModifiedDate
     };
 
     $('.status-line').text('Loading…');
 
     $.get('/api/fetch_draft', params, function(data) {
+      if (!data) {
+        // server 204, probably because provided timestamp is most recent
+        return;
+      }
+
       if (data.status == "success") {
         peernoteNS.essays.did = did;
+
+        peernoteNS.essays.lastModifiedDate = data.timestamp;
 
         // We need to deserialize the modifiers.
         var modifiers = [];
@@ -201,7 +212,7 @@ $.extend(peernoteNS.essays, {
           cb();
         }
       } else {
-        // TODO: Display an error message/flash?
+        // TODO:
       }
     });
   },
@@ -597,6 +608,15 @@ $.extend(peernoteNS.essays, {
     $('.timeline').hide();
     $('#editor-tools').hide();
     $('#reviewer-tools').show();
+  },
+
+  initAutoloadTimer: function() {
+    var _this = this;
+    setInterval(function() {
+      if (_this.lastModifiedDate) {
+        _this.loadDraft(peernoteNS.essays.did);
+      }
+    }, 3000);
   }
 
 });
@@ -615,6 +635,8 @@ peernoteNS.init(function() {
   peernoteNS.essays.initOpenButton();
   peernoteNS.essays.initModeSwap();
   peernoteNS.essays.initDraft();
+
+  peernoteNS.essays.initAutoloadTimer();
 
   if (peernoteNS.essays.review_only) {
     peernoteNS.essays.initReviewOnly();
