@@ -2,6 +2,8 @@
  * A text block element. It cannot contain other blocks, only plain
  * text with modifiers.
  */
+var ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
+
 var peernoteNS = peernoteNS || {};
 peernoteNS.textBlock = peernoteNS.textBlock || {};
 
@@ -305,7 +307,7 @@ $.extend(peernoteNS.textBlock, {
   _makeNode: function(activeModifiers, start, end) {
     var span = document.createElement('span');
     var txt = this._text.substr(start, end - start);
-    var txtNode = document.createTextNode(txt);
+    var txtNode = document.createTextNode(txt + ZERO_WIDTH_SPACE);
     span.appendChild(txtNode);
     for (var j = 0; j < activeModifiers.length; ++j) {
       $(span).addClass('mod-' + activeModifiers[j]);
