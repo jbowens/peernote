@@ -3,6 +3,7 @@
  */
 var peernoteNS = peernoteNS || {};
 peernoteNS.doc = peernoteNS.doc || {};
+
 $.extend(peernoteNS.doc, {
 
   /* Listeners that should be notified when the document
@@ -185,6 +186,7 @@ $.extend(peernoteNS.doc, {
    *  - endOffset the plain text offset within the block to end
    */
   setCaret: function(pos) {
+    var ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
     var s = document.getSelection();
     s.removeAllRanges();
     var newRange = document.createRange();
@@ -193,6 +195,19 @@ $.extend(peernoteNS.doc, {
     // corresponding offset.
     var loc = peernoteNS.docutils.getNodeAtOffset(pos.startBlock._elmt,
                                                   pos.startOffset);
+    if (loc.node.nodeValue == '') {
+      // There's a bug in WebKit and IE that makes it impossible to put
+      // a caret at the beginning of an empty text node.
+      //
+      // See:
+      // https://bugs.webkit.org/show_bug.cgi?id=23189
+      // http://stackoverflow.com/questions/5488809/how-to-place-caret-inside-an-empty-dom-element-node
+      // To work around for now, we add a zero-width space to all empty text nodes.
+      // It's important that as soon as text is inserted again, we removed the
+      // space to ensure things like arrow keys and backspaces work as expected.
+      loc.node.nodeValue = ZERO_WIDTH_SPACE;
+    }
+
     newRange.setStart(loc.node, loc.nodeOffset);
 
     if (pos.endBlock) {

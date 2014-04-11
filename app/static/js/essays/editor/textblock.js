@@ -2,8 +2,6 @@
  * A text block element. It cannot contain other blocks, only plain
  * text with modifiers.
  */
-var ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
-
 var peernoteNS = peernoteNS || {};
 peernoteNS.textBlock = peernoteNS.textBlock || {};
 
@@ -83,11 +81,23 @@ $.extend(peernoteNS.textBlock, {
     return newBlock;
   },
 
+  getElementText: function() {
+    // We don't want any zero width spaces.
+    var ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
+    var txt = this._elmt.innerText;
+    var idx = txt.indexOf(ZERO_WIDTH_SPACE);
+    if (idx != -1) {
+      txt = txt.slice(0, idx) + txt.slice(idx + 1, txt.length);
+    }
+    return txt;
+  },
+
   checkForChanges: function(pos) {
-    if (this._text != this._elmt.innerText) {
-      var charDiff = this._elmt.innerText.length - this._text.length;
+    var elmtText = this.getElementText();
+    if (this._text != elmtText) {
+      var charDiff = elmtText.length - this._text.length;
       // Update the stored representation of the document.
-      this.updateText(this._elmt.innerText,
+      this.updateText(elmtText,
                       pos.start - charDiff,
                       charDiff);
       // TODO: Handle these pending modifiers.
@@ -304,10 +314,27 @@ $.extend(peernoteNS.textBlock, {
     return root;
   },
 
+  /* Re-renders the block, replacing the old rendering with the new.
+   * This function fails and returns false if this block isn't currently
+   * rendered on the screen.
+   */
+  rerenderInPlace: function() {
+    var oldElmt = this._elmt;
+    if (!oldElmt || !oldElmt.parentNode) {
+      // This block doesn't exist in the DOM, so we can't rerender it!
+      return false;
+    }
+    var newElmt = this.render();
+    oldElmt.parentNode.insertBefore(newElmt, oldElmt);
+    oldElmt.parentNode.removeChild(oldElmt);
+    // TODO: Handle caret position.
+    return true;
+  },
+
   _makeNode: function(activeModifiers, start, end) {
     var span = document.createElement('span');
     var txt = this._text.substr(start, end - start);
-    var txtNode = document.createTextNode(txt + ZERO_WIDTH_SPACE);
+    var txtNode = document.createTextNode(txt);
     span.appendChild(txtNode);
     for (var j = 0; j < activeModifiers.length; ++j) {
       $(span).addClass('mod-' + activeModifiers[j]);
