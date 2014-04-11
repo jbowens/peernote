@@ -7,6 +7,8 @@ peernoteNS.textBlock = peernoteNS.textBlock || {};
 
 $.extend(peernoteNS.textBlock, {
 
+  _parent: null,
+
   _text: 'Some text',
 
   _modifiers: [],
@@ -14,11 +16,14 @@ $.extend(peernoteNS.textBlock, {
   _elmt: null,
 
   /* Creates a new object that is a container block.
+   *
+   * @param parentBlock (optional) the parent of this block
    */
-  construct: function() {
+  construct: function(parentBlock) {
     // Clone text block object and return new one
     var obj = $.extend({}, peernoteNS.textBlock)
     obj.init();
+    obj._parent = parentBlock;
     return obj;
   },
 
@@ -40,6 +45,42 @@ $.extend(peernoteNS.textBlock, {
     };
   },
 
+  /* Splits the block at the given plain-text offset within the block,
+   * returning the newly created second-half block.
+   */
+  splitAt: function(offset) {
+    var newBlock = peernoteNS.textBlock.construct();
+    newBlock._text = this._text.substr(offset);
+    this._text = this._text.substr(0, offset);
+    var i = this._modifiers.length;
+    while (i--) {
+      var mod = this._modifiers[i];
+      if (mod.start >= offset) {
+        /* This modifier belongs only in the new block. */
+        this._modifiers.splice(i, 1);
+        newBlock._modifiers.push({
+          type: mod.type,
+          start: mod.start - offset,
+          end: mod.end - offset
+        });
+      } else if (mod.end <= offset) {
+        /* This modifier belongs only in the original block. */
+        /* We don't actually have to do anything here. :D */
+      } else {
+        /* This modifier spans the split point, so we need to break it
+         * into two modifiers, one for each block. */
+        newBlock._modifiers.push({
+          type: mod.type,
+          start: 0,
+          end: mod.end - offset
+        });
+        mod.end = this._text.length;
+      }
+    }
+    this._parent.insertChildAfter(this, newBlock);
+    return newBlock;
+  },
+
   checkForChanges: function(pos) {
     if (this._text != this._elmt.innerText) {
       var charDiff = this._elmt.innerText.length - this._text.length;
@@ -47,6 +88,7 @@ $.extend(peernoteNS.textBlock, {
       this.updateText(this._elmt.innerText,
                       pos.start - charDiff,
                       charDiff);
+      // TODO: Handle these pending modifiers.
       /*
       if (_this._pendingModifiers.length &&
           _this._pendingModifiersPos == pos.start - charDiff) {

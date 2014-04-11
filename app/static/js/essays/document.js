@@ -15,7 +15,7 @@ $.extend(peernoteNS.doc, {
   init: function() {
     var _this = this;
     this._root = peernoteNS.containerBlock.construct();
-    this._root._children.push(peernoteNS.textBlock.construct());
+    this._root.addChild(peernoteNS.textBlock.construct());
     $('.page-container .page').keyup(peernoteNS.errors.wrap(function(e) {
       _this.checkForChanges(e);
     }));
@@ -98,6 +98,32 @@ $.extend(peernoteNS.doc, {
       this.setCaret(caretPos);
     }
     return renderedRoot;
+  },
+
+  /* Creates a new text block at the caret (or replacing the current
+   * selection if there is a selection). It returns the created text
+   * block.
+   */
+  createNewBlock: function() {
+    // Create the new text block.
+    var pos = this.getCaret();
+    if (pos.isSelection) {
+      // We're replacing text with a new block.
+      // TODO: Implement
+      console.log("Not Yet Implemented: New block replacing selection");
+      return null;
+    } else {
+      // We're just inserting a new block at the current caret position.
+      // We must split the current block into two blocks, splitting the
+      // text and modifiers across the block.
+      var newBlock = pos.startBlock.splitAt(pos.startOffset);
+      this.render();
+      // Shift focus to the new block
+      this.setCaret({
+        startBlock: newBlock,
+        startOffset: 0
+      });
+    }
   },
 
   /* Retrieves the caret position / selection in terms of

@@ -42,14 +42,16 @@ $.extend(peernoteNS.editor, {
 
         // Check for out of date pending modifiers from other locations
         if (_this._pendingModifiers.length &&
-            pos.start != _this._pendingModifiersPos) {
+            (sel.startBlock != _this._pendingModifiersBlock ||
+             sel.startOffset != _this._pendingModifiersOffset)) {
           _this._pendingModifiers = [];
         }
 
         var pendingIndex = $.inArray(modifierType, _this._pendingModifiers);
         if (pendingIndex == -1) {
           _this._pendingModifiers.push(modifierType);
-          _this._pendingModifiersPos = pos.start;
+          _this._pendingModifiersBlock = sel.startBlock;
+          _this._pendingModifiersOffset = sel.startOffset;
         } else {
           _this._pendingModifiers.splice(pendingIndex, 1);
         }
@@ -73,7 +75,8 @@ $.extend(peernoteNS.editor, {
    */
   autosave_timer: null,
 
-  _pendingModifiersPos: null,
+  _pendingModifiersBlock: null,
+  _pendingModifiersOffset: null,
   _pendingModifiers: [],
 
   _doc: null,
@@ -83,6 +86,7 @@ $.extend(peernoteNS.editor, {
     if (e.keyCode == 13) {
       // They hit enter. We should create a new block.
       e.preventDefault();
+      peernoteNS.doc.createNewBlock();
     }
   }),
 

@@ -6,18 +6,23 @@ peernoteNS.containerBlock = peernoteNS.containerBlock || {};
 
 $.extend(peernoteNS.containerBlock, {
 
-  /* Child block elements
-   */
+  /* The parent of this block. */
+  _parent: null,
+
+  /* Child block elements */
   _children: [],
 
   _elmt: null,
 
   /* Creates a new object that is a container block.
+   *
+   * @param parentBlock (optional) the parent of this block
    */
-  construct: function() {
+  construct: function(parentBlock) {
     // Clone container block object and return new one
     var obj = $.extend({}, peernoteNS.containerBlock);
     obj.init();
+    obj._parent = parentBlock;
     return obj;
   },
 
@@ -28,6 +33,32 @@ $.extend(peernoteNS.containerBlock, {
   getState: function() {
     // TODO: Implement
     return {};
+  },
+
+  /* Adds a child block at the end of the containers.
+   *
+   * @param childBlock  the child block to add
+   */
+  addChild: function(childBlock) {
+    childBlock._parent = this;
+    this._children.push(childBlock);
+  },
+
+  /* Inserts the given block element after the given reference block.
+   * It returns false if the reference block was not found (and thus
+   * the child was not inserted.)
+   *
+   * @param referenceChild  an existing child block to insert after
+   * @param newChildBlock   the new child block to insert
+   */
+  insertChildAfter: function(referenceChild, newChildBlock) {
+    var referenceIndex = $.inArray(referenceChild, this._children);
+    if (referenceIndex == -1) {
+      return false;
+    }
+    newChildBlock._parent = this;
+    this._children.splice(referenceIndex+1, 0, newChildBlock);
+    return true;
   },
 
   /* Renders all the children of this container block and
