@@ -28,7 +28,7 @@ $.extend(peernoteNS.textBlock, {
   },
 
   init: function() {
-    // TODO: Any additional initialization
+    this._modifiers = [];
   },
 
   getText: function() {
@@ -334,6 +334,8 @@ $.extend(peernoteNS.textBlock, {
   _makeNode: function(activeModifiers, start, end) {
     var span = document.createElement('span');
     var txt = this._text.substr(start, end - start);
+    var ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
+    txt = txt + ZERO_WIDTH_SPACE;
     var txtNode = document.createTextNode(txt);
     span.appendChild(txtNode);
     for (var j = 0; j < activeModifiers.length; ++j) {

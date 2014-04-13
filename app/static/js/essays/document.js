@@ -52,6 +52,7 @@ $.extend(peernoteNS.doc, {
     if (selection.startBlock == selection.endBlock) {
       // This selection only spans a single block. Apply the
       // modifier to the range within the block.
+      debugger;
       selection.anchorBlock.applyModifier(modifierType,
                                           selection.startOffset,
                                           selection.endOffset);
