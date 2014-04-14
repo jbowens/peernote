@@ -95,7 +95,6 @@ $.extend(peernoteNS.doc, {
         // The caret is at the beginning of a block that isn't the first block,
         // so we should delete a 'newline', coalescing this block with the block
         // preceding it.
-        // TODO: Coalesce that shit
         var parentBlock = pos.startBlock.getParent();
         var childIndex = parentBlock.getChildIndex(pos.startBlock);
         var predecessor = parentBlock.getChildAt(childIndex - 1);
