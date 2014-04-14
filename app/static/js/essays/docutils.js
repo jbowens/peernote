@@ -12,28 +12,6 @@ $.extend(peernoteNS.docutils, {
 
   ZERO_WIDTH_SPACE: String.fromCharCode(parseInt('200B', 16)),
 
-  /* Sets the selection to be from the given start character to the
-   * given end character. If end is omitted, the caret will be moved
-   * to the start character.
-   *
-   * @param doc the parent document
-   * @param start the start text offset
-   * @param end the end text offset
-   */
-  setSelection: function(doc, start, end) {
-    var s = document.getSelection();
-    s.removeAllRanges();
-    var newRange = document.createRange();
-    var loc = this.getNodeAtOffset(doc, start);
-    newRange.setStart(loc.node, loc.nodeOffset);
-    if (end) {
-      var endLoc = this.getNodeAtOffset(doc, end);
-      newRange.setEnd(endLoc.node, endLoc.nodeOffset);
-    }
-
-    s.addRange(newRange);
-  },
-
   /* Traverses the document, finding the node at the given plain
    * text offset. This function is the inverse of docutils.getOffset().
    * It will return resulting node and nodeOffset in an object, or
