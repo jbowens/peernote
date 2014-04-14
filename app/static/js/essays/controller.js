@@ -617,6 +617,10 @@ $.extend(peernoteNS.essays, {
   // Date of when essay was last modified as string
   lastModifiedDate: "",
 
+  /**
+   * Setup timer to periodically check if the essay has been updated
+   * outside of this instance of the editor
+   */
   initAutoloadTimer: function() {
     var _this = this;
     setInterval(function() {
@@ -643,10 +647,11 @@ peernoteNS.init(function() {
   peernoteNS.essays.initModeSwap();
   peernoteNS.essays.initDraft();
 
-  peernoteNS.essays.initAutoloadTimer();
 
   if (peernoteNS.essays.review_only) {
     peernoteNS.essays.initReviewOnly();
+  } else {
+    peernoteNS.essays.initAutoloadTimer();
   }
 
 });
