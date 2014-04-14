@@ -35,6 +35,14 @@ $.extend(peernoteNS.textBlock, {
     return this._text;
   },
 
+  getTextLength: function() {
+    return this._text.length;
+  },
+
+  getParent: function() {
+    return this._parent;
+  },
+
   /* Returns an object encapsulating the entire state of the
    * document.
    */
@@ -43,6 +51,14 @@ $.extend(peernoteNS.textBlock, {
       text: this._text,
       modifiers: this._modifiers
     };
+  },
+
+  /* Deletes the character at the given position and then
+   * re-renders the block in place.
+   */
+  deleteCharacter: function(pos) {
+    this._text = this._text.substr(0, pos - 1) + this._text.substr(pos);
+    this.rerenderInPlace();
   },
 
   /* Splits the block at the given plain-text offset within the block,
@@ -327,7 +343,6 @@ $.extend(peernoteNS.textBlock, {
     var newElmt = this.render();
     oldElmt.parentNode.insertBefore(newElmt, oldElmt);
     oldElmt.parentNode.removeChild(oldElmt);
-    // TODO: Handle caret position.
     return true;
   },
 

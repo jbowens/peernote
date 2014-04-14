@@ -76,6 +76,31 @@ $.extend(peernoteNS.doc, {
     }
   },
 
+  /* Deletes a character at the caret, or if there is currently a text
+   * selection, deletes the selection.
+   */
+  deleteAtCaret: function() {
+    var pos = this.getCaret();
+    if (pos.isSelection) {
+      // TODO: Implement
+      console.log("NOT YET IMPLEMENTED: delete selection");
+    } else {
+      if (pos.startOffset) {
+        pos.startBlock.deleteCharacter(pos.startOffset);
+        this.setCaret({
+          startBlock: pos.startBlock,
+          startOffset: pos.startOffset - 1
+        });
+      } else if (pos.startBlock.getParent().getChildIndex(pos.startBlock)) {
+        // The caret is at the beginning of a block that isn't the first block,
+        // so we should delete a 'newline', coalescing this block with the block
+        // preceding it.
+        // TODO: Coalesce that shit
+        console.log("Coalesce that shit");
+      }
+    }
+  },
+
   /* This function should be called whenever the document changes to
    * notify and listeners that the document has been modified.
    */

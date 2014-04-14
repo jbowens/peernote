@@ -27,12 +27,23 @@ $.extend(peernoteNS.containerBlock, {
   },
 
   init: function() {
-    // TODO: Any additional initialization.
+    this._children = [];
   },
 
   getState: function() {
     // TODO: Implement
     return {};
+  },
+
+  getParent: function() {
+    return this._parent;
+  },
+
+  /* Gets the index of the given child block. It returns -1 if the given
+   * block is not a child of this container.
+   */
+  getChildIndex: function(child) {
+    return $.inArray(child, this._children);
   },
 
   /* Adds a child block at the end of the containers.
