@@ -42,7 +42,17 @@ $.extend(peernoteNS.essays, {
    */
   addNewDraftAndOpen: function(did, version) {
     this.drafts.push(did);
-    var $newLi = $('<li> <a> Draft ' + version + '</a> </li>');
+    var $newLi = $('' +
+      '<li>' +
+        '<a>' +
+          '<i class="fa fa-check"></i>' +
+          '<span class="draft-number">' +
+            'Draft ' +  version +
+          '</span>' +
+        '</a>' +
+      '</li>'
+    );
+
     $newLi.hide();
     $('.timeline ul').append($newLi);
     $newLi.slideDown();
