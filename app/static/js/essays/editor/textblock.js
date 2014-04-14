@@ -104,10 +104,10 @@ $.extend(peernoteNS.textBlock, {
   coalesce: function(successorBlock) {
     /* Remove the succssor block. */
     this._parent.removeChild(successorBlock);
-    var offset = this._text + length;
+    var offset = this._text.length;
     this._text = this._text + successorBlock._text;
     /* Copy over the modifiers */
-    for (var i = 0; i < successorBlock._modifiers; ++i) {
+    for (var i = 0; i < successorBlock._modifiers.length; ++i) {
       var mod = successorBlock._modifiers[i];
       this._modifiers.push({
         type: mod.type,
