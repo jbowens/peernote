@@ -1,3 +1,12 @@
+
+/* for table sorting to work properly, please include in order:
+ *
+ * js/include/jquery.tablesorter.js
+ * js/include/sugar.min.js
+ * js/include/parser-date.js
+ *
+ */
+
 var peernoteNS = peernoteNS || {};
 peernoteNS.widgets = peernoteNS.widgets || {};
 
@@ -10,19 +19,19 @@ peernoteNS.widgets.essaysList = {
   html: function() {
     return '' +
       '<table class="essays-table">' +
-      '<thead class="essays-header">' + 
-        '<tr>' + 
-        '<th class="essay-name">' +  
+      '<thead class="essays-header">' +
+        '<tr>' +
+        '<th class="essay-name">' +
         'Name' +
         '<i class="fa fa-caret-down"></i>' +
         '<i class="fa fa-caret-up"></i>' +
         '</th>' +
-        '<th class="essay-created">' +
+        '<th class="essay-created sorter-sugar">' +
         'Created At' +
         '<i class="fa fa-caret-down"></i>' +
         '<i class="fa fa-caret-up"></i>' +
         '</th>' +
-        '<th class="essay-modified">' +
+        '<th class="essay-modified sorter-sugar">' +
         'Last Modified' +
         '<i class="fa fa-caret-down"></i>' +
         '<i class="fa fa-caret-up"></i>' +
@@ -33,7 +42,7 @@ peernoteNS.widgets.essaysList = {
         '<i class="fa fa-caret-up"></i>' +
         '</th>' +
         '</tr>'+
-      '</thead>' + 
+      '</thead>' +
       '</table>';
   },
 
@@ -58,11 +67,11 @@ peernoteNS.widgets.essaysList = {
         '<td class="essay-name">' +
         aHtmlStart + essay.title + '</a>' +
         '</td>' +
-        '<td class="essay-created">' + 
+        '<td class="essay-created">' +
         aHtmlStart + essay.created_date + '</a></td>' +
-        '<td class="essay-modified">' + 
+        '<td class="essay-modified">' +
         aHtmlStart + essay.modified_date + '</a></td>' +
-        '<td class="draft-number">' + 
+        '<td class="draft-number">' +
         aHtmlStart + essay.version + '</a></td>' +
         deletableHtml +
       '</tr>';
@@ -125,7 +134,14 @@ peernoteNS.widgets.essaysList = {
           }
 
           _this.initTrashButtons(data.essays);
-          $(".essays-table").tablesorter({cssAsc: "show-up", cssDesc: "show-down" });
+
+          $(".essays-table").tablesorter({cssAsc: "show-up", cssDesc: "show-down",
+              headers: { // sort these columns using the sugar.js date sorter lib
+                  1: { sorter:'sugar' },
+                  2: { sorter:'sugar' }
+              }
+          });
+
           $(".essay-name").trigger("click");
         }
       });

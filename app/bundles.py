@@ -227,10 +227,12 @@ assets.register('login_js',
     )
 )
 
-
 assets.register('editor_js',
     Bundle(
         "js/widgets/lightbox.js",
+        "js/include/jquery.tablesorter.js",
+        "js/include/sugar.min.js",
+        "js/include/parser-date.js",
         "js/widgets/essays_list.js",
         "js/essays/editor/containerblock.js",
         "js/essays/editor/textblock.js",
@@ -238,7 +240,6 @@ assets.register('editor_js',
         "js/essays/commands.js",
         "js/essays/docutils.js",
         "js/essays/editor.js",
-        "js/include/jquery.tablesorter.js",
         "js/essays/controller.js",
         filters="rjsmin",
         output="gen/editor.js"
@@ -250,6 +251,8 @@ assets.register('essays_index_js',
         "js/widgets/essays_list.js",
         "js/essays/index.js",
         "js/include/jquery.tablesorter.js",
+        "js/include/sugar.min.js",
+        "js/include/parser-date.js",
         filters="rjsmin",
         output="gen/essays_index.js"
     )
