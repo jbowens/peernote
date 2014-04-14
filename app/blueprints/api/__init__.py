@@ -9,6 +9,7 @@ api = Blueprint('api', __name__)
 from save_draft import *
 from email_a_review import *
 from fetch_draft import *
+from draft_delete import *
 from users_essays_get import *
 from next_draft import *
 from essays_delete import *
