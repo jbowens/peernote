@@ -227,6 +227,11 @@ $.extend(peernoteNS.doc, {
     // corresponding offset.
     var loc = peernoteNS.docutils.getNodeAtOffset(pos.startBlock._elmt,
                                                   pos.startOffset);
+    if (loc == false) {
+      // This isn't a valid caret position.
+      return false;
+    }
+
     if (loc.node.nodeValue == '') {
       // There's a bug in WebKit and IE that makes it impossible to put
       // a caret at the beginning of an empty text node.
