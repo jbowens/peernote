@@ -9,7 +9,7 @@ $.extend(peernoteNS.textBlock, {
 
   _parent: null,
 
-  _text: 'Some text',
+  _text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae massa enim.',
 
   _modifiers: [],
 
