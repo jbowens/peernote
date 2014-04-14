@@ -12,40 +12,6 @@ $.extend(peernoteNS.docutils, {
 
   ZERO_WIDTH_SPACE: String.fromCharCode(parseInt('200B', 16)),
 
-  /* Retrieves the current position of the caret (or selection)
-   * in terms of plain text offset. Returns an object with information
-   * including whether it's a selection or not, and offsets.
-   *
-   * @param doc  the document to find the selection position within.
-   * @return an object with start and end positions, or false if the
-   *         focus is not currently on the document.
-   */
-  getCaretPosition: function(doc) {
-    var s = document.getSelection();
-    var pos = {
-      isSelection: s.anchorNode != s.focusNode || s.anchorOffset != s.focusOffset,
-      start: this.getOffset(doc, s.anchorNode, s.anchorOffset),
-      end: this.getOffset(doc, s.focusNode, s.focusOffset),
-      selectionObj: s
-    };
-
-    if (pos.start === false && pos.end === false) {
-      // The selection is not even within the document.
-      return false;
-    }
-
-    // Reverse start and end if they're backwards.
-    if (pos.start > pos.end) {
-      var tmp = pos.end;
-      pos.end = pos.start;
-      pos.start = tmp;
-    }
-
-    pos.text = pos.isSelection ? s.toString() : '';
-
-    return pos;
-  },
-
   /* Sets the selection to be from the given start character to the
    * given end character. If end is omitted, the caret will be moved
    * to the start character.
