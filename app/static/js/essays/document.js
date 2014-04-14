@@ -96,7 +96,15 @@ $.extend(peernoteNS.doc, {
         // so we should delete a 'newline', coalescing this block with the block
         // preceding it.
         // TODO: Coalesce that shit
-        console.log("Coalesce that shit");
+        var parentBlock = pos.startBlock.getParent();
+        var childIndex = parentBlock.getChildIndex(pos.startBlock);
+        var predecessor = parentBlock.getChildAt(childIndex - 1);
+        var predecessorLength = predecessor.getTextLength();
+        predecessor.coalesce(pos.startBlock);
+        this.setCaret({
+          startBlock: predecessor,
+          startOffset: predecessorLength
+        });
       }
     }
   },

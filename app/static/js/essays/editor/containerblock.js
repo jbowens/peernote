@@ -46,6 +46,16 @@ $.extend(peernoteNS.containerBlock, {
     return $.inArray(child, this._children);
   },
 
+  /* Retrieves the child with the given index.
+   */
+  getChildAt: function(idx) {
+    if (idx < 0 || idx >= this._children.length) {
+      return null;
+    } else {
+      return this._children[idx];
+    }
+  },
+
   /* Adds a child block at the end of the containers.
    *
    * @param childBlock  the child block to add
@@ -69,6 +79,23 @@ $.extend(peernoteNS.containerBlock, {
     }
     newChildBlock._parent = this;
     this._children.splice(referenceIndex+1, 0, newChildBlock);
+    return true;
+  },
+
+  /* Removes the given child, both from the block and the
+   * DOM.
+   */
+  removeChild: function(child) {
+    var idx = this.getChildIndex(child);
+    if (idx == -1) {
+      // This isn't a child.
+      return false;
+    }
+    this._children.splice(idx, 1);
+    if (child._elmt && child._elmt.parentNode) {
+      // This child is rendered on the DOM. Remove it from the DOM.
+      child._elmt.parentNode.removeChild(child._elmt);
+    }
     return true;
   },
 

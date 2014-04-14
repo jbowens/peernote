@@ -97,6 +97,28 @@ $.extend(peernoteNS.textBlock, {
     return newBlock;
   },
 
+  /* Coalesces this block with its successor. This function does not
+   * touch the caret. The caller is responsible for restoring the caret
+   * location if desired.
+   */
+  coalesce: function(successorBlock) {
+    /* Remove the succssor block. */
+    this._parent.removeChild(successorBlock);
+    var offset = this._text + length;
+    this._text = this._text + successorBlock._text;
+    /* Copy over the modifiers */
+    for (var i = 0; i < successorBlock._modifiers; ++i) {
+      var mod = successorBlock._modifiers[i];
+      this._modifiers.push({
+        type: mod.type,
+        start: mod.start + offset,
+        end: mod.end + offset
+      });
+    }
+    /* Re-render the new, coalesced node. */
+    this.rerenderInPlace();
+  },
+
   getElementText: function() {
     // We don't want any zero width spaces.
     var ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
