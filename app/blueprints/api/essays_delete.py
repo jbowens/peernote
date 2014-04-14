@@ -8,13 +8,16 @@ from app import db
 @json_login_required
 @csrf_post_protected
 def delete_essay():
-    # Find the essay to delete and verify that the request is valid. 
-    essay = Essay.query.filter_by(eid=request.form.get('eid')).first()
-    if not essay:
-        return jsonify(status='error', error='Invalid essay'), 404
-    if essay.uid != g.user.uid:
-        return jsonify(status='error', error='Unauthorized.'), 403
+    if 'eid' in request.form:
+        # Find the essay to delete and verify that the request is valid.
+        essay = Essay.query.filter_by(eid=request.form.get('eid')).first()
+        if not essay:
+            return jsonify(status='error', error='Invalid essay'), 404
+        if essay.uid != g.user.uid:
+            return jsonify(status='error', error='Unauthorized.'), 403
 
-    db.session.delete(essay)
-    db.session.commit()
-    return jsonify(status='success')
+        db.session.delete(essay)
+        db.session.commit()
+        return jsonify(status='success')
+    else:
+        return jsonify(error="Bad params"), 400

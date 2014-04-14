@@ -42,7 +42,19 @@ $.extend(peernoteNS.essays, {
    */
   addNewDraftAndOpen: function(did, version) {
     this.drafts.push(did);
-    var $newLi = $('<li> <a> Draft ' + version + '</a> </li>');
+    var $newLi = $('' +
+      '<li>' +
+        '<a>' +
+          '<i class="fa fa-check"></i>' +
+          '<span class="draft-number">' +
+            'Draft ' +  version +
+          '</span>' +
+          '<i class="fa fa-trash-o"> </i>' +
+          '<span class="draft-date"> Feb 12 </span>' +
+        '</a>' +
+      '</li>'
+    );
+
     $newLi.hide();
     $('.timeline ul').append($newLi);
     $newLi.slideDown();
@@ -123,6 +135,7 @@ $.extend(peernoteNS.essays, {
       // TODO: probably should debounce...
       $(this).click({i: i, clicked: $(this)}, _this.selectDraft);
     });
+
   },
 
   /*
@@ -130,13 +143,31 @@ $.extend(peernoteNS.essays, {
    * the draft and replaces draft on screen with it.
    */
   selectDraft: function(event) {
-
     var i = event.data.i;
     var clicked = event.data.clicked;
+    var cur_did = peernoteNS.essays.drafts[i];
+
+    if ($(event.target).attr('class') == 'fa fa-trash-o') {
+      // User actually clicked to remove this draft.
+
+      $.post('/api/drafts/delete', {did: cur_did, csrf: peernoteNS.csrf}, function(data) {
+        if (data.status =="success") {
+          clicked.slideUp();
+          if (peernoteNS.essays.did == cur_did) {
+            // deleting currently selected draft, switch to current draft
+            $('.timeline ul li').last().click();
+          }
+        } else {
+          peernoteNS.displayErrorFlash('Error archiving draft');
+        }
+      });
+
+      return;
+    }
+
     $('li.active-draft').removeClass('active-draft');
     clicked.addClass('active-draft');
 
-    var cur_did = peernoteNS.essays.drafts[i];
     if (peernoteNS.essays.did == cur_did) {
       return;
     }

@@ -654,12 +654,16 @@ $readonly-color: rgba(221, 123, 57, 1);
                             font-size: 14px;
                         }
 
-                        i {
+                        i.fa-check {
                             float: left;
                             opacity: 0;
                         }
 
-                        .draft-number {
+                        i.fa-trash-o {
+                            float: right;
+                        }
+
+                         draft-number {
                             float: left;
                         }
 
@@ -682,9 +686,16 @@ $readonly-color: rgba(221, 123, 57, 1);
                         font-weight: 700;
                     }
 
-                    i {
+                    i.fa-check {
                         opacity: 1;
                         color: #39bd41;
+                    }
+
+                }
+
+                li:last-child {
+                    i.fa-trash-o {
+                      opacity: 0;
                     }
                 }
             }
