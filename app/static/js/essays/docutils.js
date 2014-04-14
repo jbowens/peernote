@@ -7,7 +7,10 @@
  */
 var peernoteNS = peernoteNS || {};
 peernoteNS.docutils = peernoteNS.docutils || {};
+
 $.extend(peernoteNS.docutils, {
+
+  ZERO_WIDTH_SPACE: String.fromCharCode(parseInt('200B', 16)),
 
   /* Retrieves the current position of the caret (or selection)
    * in terms of plain text offset. Returns an object with information
@@ -82,6 +85,9 @@ $.extend(peernoteNS.docutils, {
       var curr = toVisit.pop();
       if (curr.nodeType == 3) {
         var len = curr.nodeValue.length;
+        if (curr.nodeValue.indexOf(this.ZERO_WIDTH_SPACE)) {
+          len--;
+        }
         if (textOffset > len) {
           // The node we're looking for is later than this.
           textOffset -= len;
