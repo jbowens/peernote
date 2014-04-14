@@ -97,6 +97,17 @@ $.extend(peernoteNS.docutils, {
     return found ? offset + nodeOffset : false;
   },
 
+  /* If the given node contains a zero-width space, this function
+   * returns nodeOffset - 1. Otherwise, it returns nodeOffset.
+   */
+  actualOffset: function(node, nodeOffset) {
+    if (node && node.nodeValue && node.nodeValue.indexOf(this.ZERO_WIDTH_SPACE)) {
+      return nodeOffset - 1;
+    } else {
+      return nodeOffset;
+    }
+  },
+
   /* Splits the textnode at the firstOffset. If the second offset is provided,
    * the node will also be split on the second offset.
    */
