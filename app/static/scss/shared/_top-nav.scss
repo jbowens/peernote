@@ -1,5 +1,5 @@
 @import "../shared/_variables.scss";
- 
+
 nav {
     background-color: $main-dark;
     height: 50px;
@@ -21,13 +21,6 @@ nav {
                 #eraser{
                     width: 50px;
                     height: 10px;
-                    background-color: $main-color-2;
-                }
-
-                #metal {
-                    width: 50px;
-                    height: 3px;
-                    margin-bottom: 1px;
                     background-color: $main-color-2;
                 }
 
@@ -66,50 +59,51 @@ nav {
                     color: white;
                 }
             }
-    
+
             li {
                 display: inline-block;
                 margin-left: 20px;
-    
+
                 &.username {
                     display: -ms-flexbox;
                     -ms-flex-pack: center;
                     -ms-flex-align: center;
-    
+
                     display: -moz-box;
                     -moz-box-pack: center;
                     -moz-box-align: center;
-    
+
                     display: -webkit-box;
                     -webkit-box-pack: center;
                     -webkit-box-align: center;
-    
+
                     display: box;
                     box-pack: center;
                     box-align: center;
-    
+
                     font-weight: 100;
-    
+
                     .avatar-thumb {
                         display: -webkit-box;
                         margin-right: 10px
                     }
-    
+
                     .fa-caret-down {
                         margin-left: 5px;
                     }
                 }
             }
         }
-       
+
         .dropdown {
+            border-radius: 2px;
             background-color: $background;
             border: 1px solid $generic-divider-color;
             position: absolute;
             z-index: 1001;
             line-height: 20px;
             right: 0;
-            
+
             li {
                 display: block;
                 padding: 10px 20px;
@@ -151,7 +145,6 @@ nav {
         i{
             color: #5C294D;
             margin-right: 5px;
-
         }
     }
 }
