@@ -135,7 +135,11 @@ $.extend(peernoteNS.docutils, {
 
       if (curr.nodeType == 3) {
         // This is a text node. Just add its characters.
-        offset += curr.nodeValue.length;
+        if (curr.nodeValue.indexOf(this.ZERO_WIDTH_SPACE)) {
+          offset += curr.nodeValue.length - 1;
+        } else {
+          offset += curr.nodeValue.length;
+        }
       } else {
         // This is an element. We should descend into its children.
         // Push them in the opposite order so that the first child is
