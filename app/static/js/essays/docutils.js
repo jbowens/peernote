@@ -79,7 +79,7 @@ $.extend(peernoteNS.docutils, {
 
       if (curr.nodeType == 3) {
         // This is a text node. Just add its characters.
-        if (curr.nodeValue.indexOf(this.ZERO_WIDTH_SPACE)) {
+        if (curr.nodeValue.indexOf(this.ZERO_WIDTH_SPACE) != -1) {
           offset += curr.nodeValue.length - 1;
         } else {
           offset += curr.nodeValue.length;
