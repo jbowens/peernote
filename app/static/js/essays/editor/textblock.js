@@ -58,6 +58,16 @@ $.extend(peernoteNS.textBlock, {
    */
   deleteCharacter: function(pos) {
     this._text = this._text.substr(0, pos - 1) + this._text.substr(pos);
+    /* Update modifiers' offsets. */
+    for (var i = 0; i < this._modifiers.length; ++i) {
+      var mod = this._modifiers[i];
+      if (mod.start >= pos) {
+        mod.start = mod.start - 1;
+      }
+      if (mod.end >= pos) {
+        mod.end = mod.end - 1;
+      }
+    }
     this.rerenderInPlace();
   },
 
@@ -124,8 +134,11 @@ $.extend(peernoteNS.textBlock, {
     var ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
     var txt = this._elmt.innerText;
     var idx = txt.indexOf(ZERO_WIDTH_SPACE);
-    if (idx != -1) {
-      txt = txt.slice(0, idx) + txt.slice(idx + 1, txt.length);
+    while (idx != -1) {
+      if (idx != -1) {
+        txt = txt.slice(0, idx) + txt.slice(idx + 1, txt.length);
+      }
+      idx = txt.indexOf(ZERO_WIDTH_SPACE);
     }
     return txt;
   },
