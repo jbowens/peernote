@@ -44,9 +44,10 @@ def save_draft():
             new_did = new_draft.did
 
         # Update the last modified time.
-        Essay.query.filter_by(eid=draft.eid).update({'modified_date': datetime.now()})
+        new_date = datetime.now()
+        Essay.query.filter_by(eid=draft.eid).update({'modified_date': new_date})
         db.session.commit()
 
-        return jsonify(status='success', did=new_did)
+        return jsonify(status='success', did=new_did, timestamp=str(new_date))
     else:
         return jsonify(error='Invalid params'), 400

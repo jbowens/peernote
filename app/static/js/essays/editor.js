@@ -172,6 +172,7 @@ $.extend(peernoteNS.editor, {
     $.post('/api/save_draft', params, function(data) {
       if (data.status == "success") {
         $status_line.text('Saved');
+        peernoteNS.essays.lastModifiedDate = data.timestamp;
       }
     });
     */

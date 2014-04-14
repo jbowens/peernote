@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 from review import Review
 from essay import Essay
+from draft import Draft
 
 class User(db.Model):
     uid = db.Column(db.Integer, primary_key=True)
@@ -49,6 +50,9 @@ class User(db.Model):
 
     def essay_count(self):
         return Essay.query.filter_by(uid=self.uid).count()
+
+    def draft_count(self):
+        return Draft.query.filter_by(uid=self.uid).count()
 
 
     @staticmethod

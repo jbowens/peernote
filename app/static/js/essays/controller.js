@@ -145,23 +145,38 @@ $.extend(peernoteNS.essays, {
     peernoteNS.essays.loadDraft(cur_did);
   },
 
+
   /* Loads the given draft. If the callback is provided, it will be
    * called once the draft is loaded.
    *
    * @param did the draft id of the draft to load
+   * @param timestamp (optional) timestamp to use for fetch_draft
    * @param cb (optional) a callback to call upon completion
    */
-  loadDraft: function(did, cb) {
+  loadDraft: function(did, timestamp, cb) {
     var params = {
       did: did,
       uid: peernoteNS.essays.uid
     };
 
-    $('.status-line').text('Loading…');
+    if (timestamp) {
+      params.timestamp = timestamp;
+      // also dont bother setting status-line's text to loading since
+      // the chance is quite high that the server returns a 204
+    } else {
+      $('.status-line').text('Loading…');
+    }
 
     $.get('/api/fetch_draft', params, function(data) {
+      if (!data) {
+        // server 204, probably because provided timestamp is most recent
+        return;
+      }
+
       if (data.status == "success") {
         peernoteNS.essays.did = did;
+
+        peernoteNS.essays.lastModifiedDate = data.timestamp;
 
         // We need to deserialize the modifiers.
         var modifiers = [];
@@ -174,30 +189,36 @@ $.extend(peernoteNS.essays, {
         peernoteNS.editor.loadDraftState(data.title);
         $('.status-line').text('Saved');
 
-        if (!data.finalized) {
-          // This is the current draft. Enable autosaving
-          peernoteNS.editor.enableAutosaving();
-
-          // Move to editor mode
-          peernoteNS.essays.toEditor();
-
-          $('li.next-draft').slideDown();
+        if (peernoteNS.essays.review_only) {
+          peernoteNS.essays.toReviewer();
+          $('.status-line').text('');
         } else {
-          // This is an old draft. We need to disable autosaving on the editor.
-          peernoteNS.editor.disableAutosaving();
+          if (!data.finalized) {
+            // This is the current draft. Enable autosaving
+            peernoteNS.editor.enableAutosaving();
 
-          // Move to readonly mode
-          peernoteNS.essays.toReadonly();
+            // Move to editor mode
+            peernoteNS.essays.toEditor();
 
-          $('li.next-draft').slideUp();
+            $('li.next-draft').slideDown();
+          } else {
+            // This is an old draft. We need to disable autosaving on the editor.
+            peernoteNS.editor.disableAutosaving();
+
+            // Move to readonly mode
+            peernoteNS.essays.toReadonly();
+
+            $('li.next-draft').slideUp();
+          }
+
+          $('.status-line').text('Saved');
         }
-       $('.status-line').text('Saved');
 
         if (cb) {
           cb();
         }
       } else {
-        // TODO: Display an error message/flash?
+        // TODO:
       }
     });
   },
@@ -275,7 +296,10 @@ $.extend(peernoteNS.essays, {
 
   // convert mode to reviewer
   toReviewer: function() {
-    peernoteNS.essays.modeButtonsSelect($("#review-mode-button"));
+    if (!peernoteNS.essays.review_only) {
+      // If review only context, let initReviewOnly handle mode buttons
+      peernoteNS.essays.modeButtonsSelect($("#review-mode-button"));
+    }
     $("#editor-tools").slideUp();
     $("#reviewer-tools").slideDown();
 
@@ -292,6 +316,12 @@ $.extend(peernoteNS.essays, {
         peernoteNS.essays.COMMENTS_PANE_OPEN,
         peernoteNS.essays.COMMENTS_PANE_WIDTH);
     }
+
+    // For now, disable autosaving/editing in review mode until reviewing
+    // even has things to be saved.
+    peernoteNS.editor.disableAutosaving();
+    $(".page").attr("contenteditable","false");
+
     peernoteNS.essays.currentMode = peernoteNS.essays.MODES.REVIEW;
   },
 
@@ -568,6 +598,38 @@ $.extend(peernoteNS.essays, {
    */
   initDraft: function() {
     this.loadDraft(peernoteNS.essays.did);
+  },
+
+  /*
+   * Setup review only mode. Hide functionality that should only be present
+   * to the original writer.
+   */
+  initReviewOnly: function() {
+    var $modeButtons = $(".editor-mode-button");
+    $modeButtons.removeClass("editor-mode-button-active editor-mode-button-selectable");
+    $modeButtons.addClass("editor-mode-button-disabled");
+    $('#review-mode-button').addClass('editor-mode-button-active editor-mode-button-selectable');
+
+    $('#doc-manager').hide();
+    $('.timeline').hide();
+    $('#editor-tools').hide();
+    $('#reviewer-tools').show();
+  },
+
+  // Date of when essay was last modified as string
+  lastModifiedDate: "",
+
+  /**
+   * Setup timer to periodically check if the essay has been updated
+   * outside of this instance of the editor
+   */
+  initAutoloadTimer: function() {
+    var _this = this;
+    setInterval(function() {
+      if (_this.lastModifiedDate) {
+        _this.loadDraft(peernoteNS.essays.did, peernoteNS.essays.lastModifiedDate);
+      }
+    }, 3000);
   }
 
 });
@@ -586,6 +648,13 @@ peernoteNS.init(function() {
   peernoteNS.essays.initOpenButton();
   peernoteNS.essays.initModeSwap();
   peernoteNS.essays.initDraft();
+
+
+  if (peernoteNS.essays.review_only) {
+    peernoteNS.essays.initReviewOnly();
+  } else {
+    peernoteNS.essays.initAutoloadTimer();
+  }
 
 });
 

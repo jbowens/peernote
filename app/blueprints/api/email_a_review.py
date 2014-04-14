@@ -78,7 +78,7 @@ def email_a_review():
         # send emailz
         params = {
             'sender': g.user.first_name + ' ' + g.user.last_name,
-            'review_url': 'http://' + app.config.get('SERVER_HOST') + '/reviews/' + review.urlhash
+            'review_url': 'http://' + app.config.get('SERVER_HOST') + '/essays/review/' + review.urlhash
         }
         mailer = Mailer()
         mailer.send(ReviewADraft(), params, email)
