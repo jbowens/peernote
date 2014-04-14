@@ -29,7 +29,7 @@ $.extend(peernoteNS.docutils, {
       var curr = toVisit.pop();
       if (curr.nodeType == 3) {
         var len = curr.nodeValue.length;
-        if (curr.nodeValue.indexOf(this.ZERO_WIDTH_SPACE)) {
+        if (curr.nodeValue.indexOf(this.ZERO_WIDTH_SPACE) != -1) {
           len--;
         }
         if (textOffset > len) {
