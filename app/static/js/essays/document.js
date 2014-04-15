@@ -281,11 +281,17 @@ $.extend(peernoteNS.doc, {
     var pos = this.getCaret();
     if (!pos) return;
     if (pos.startOffset > 0) {
-      this.setCaret({startBlock: pos.startBlock, startOffset: pos.startOffset - 1});
+      this.setCaret({
+        startBlock: pos.startBlock,
+        startOffset: pos.startOffset - 1
+      });
     } else {
       var precedingBlock = pos.startBlock.getPrecedingBlock();
       if (precedingBlock) {
-        this.setCaret({startBlock: precedingBlock, startOffset: precedingBlock.getTextLength()});
+        this.setCaret({
+          startBlock: precedingBlock,
+          startOffset: precedingBlock.getTextLength()
+        });
       }
     }
   },
@@ -294,7 +300,10 @@ $.extend(peernoteNS.doc, {
     var pos = this.getCaret();
     if (!pos) return;
     if (pos.startOffset < pos.startBlock.getTextLength()) {
-      this.setCaret({startBlock: pos.startBlock, startOffset: pos.startOffset + 1});
+      this.setCaret({
+        startBlock: pos.startBlock,
+        startOffset: pos.startOffset + 1
+      });
     } else {
       var succeedingBlock = pos.endBlock.getSucceedingBlock();
       if (succeedingBlock) {
