@@ -176,7 +176,7 @@ $.extend(peernoteNS.textBlock, {
       var charDiff = elmtText.length - this._text.length;
       // Update the stored representation of the document.
       this.updateText(elmtText,
-                      pos.start - charDiff,
+                      pos.startOffset - charDiff,
                       charDiff);
       // TODO: Handle these pending modifiers.
       /*
@@ -204,7 +204,6 @@ $.extend(peernoteNS.textBlock, {
   updateText: function(newText, position, charsDiff) {
     /* Update the raw plain text of the document. */
     this._text = newText;
-
     var len = this._text.length;
     var l = len;
 
