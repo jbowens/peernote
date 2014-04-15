@@ -5,7 +5,7 @@
                 {% if is_logged_in %}
                     <li>
                         <a title="Notifications">
-                            <i class="fa fa-globe fa-lg"></i>
+                            <i class="fa fa-globe fa-lg show-notifications"></i>
                         </a>
                     </li>
                     <li>
@@ -36,19 +36,96 @@
         </div> <!-- nav-left -->
 
         {% if is_logged_in %}
-            <div class="hidden dropdown">
+            <div class="hidden dropdown options-dropdown">
+                <div class="caret">
+                    <div class="caret__border"></div>
+                </div>
+                <div class="caret-shadow">
+                    <div class="caret__border"></div>
+                </div>
                 <ul>
                     <li>
-                        <a href="{{ url_for('users.settings') }}">Settings</a>
+                    <a href="{{ url_for('users.settings') }}">
+                        <i class="fa fa-gear"></i>
+                        Settings</a>
                     </li>
                     <li>
-                        <a href="{{ url_for('users.log_out') }}">Sign Out</a>
+                        <a href="{{ url_for('users.log_out') }}">
+                            <i class="fa fa-sign-out"></i>
+                            Sign Out
+                        </a>
                     </li>
                 </ul>
             </div>
 
-            <div class="hidden dropdown">
-
+            <div class="hidden dropdown notifications-dropdown">
+                <div class="caret">
+                    <div class="caret__border"></div>
+                </div>
+                <div class="caret-shadow">
+                    <div class="caret__border"></div>
+                </div>
+                <div class="notifications-dropdown-title">
+                    <div class="notif-title">Notifications</div>
+                    <div class="mark-as-read">Mark as read</div>
+                </div>
+                <ul>
+                    <li class="notification">
+                        <div class="notification-thumbnail"></div>
+                        <div class="notification-content">
+                            <span class="notification-text">
+                                <span class="notification-author">Bryce A.</span>
+                                left a comment on your essay.
+                            </span>
+                            <div class="notification-date">Yesterday</div>
+                        </div>
+                    </li>
+                    <li class="notification">
+                        <div class="notification-thumbnail"></div>
+                        <div class="notification-content">
+                            <span class="notification-text">
+                                <span class="notification-author">Bryce A.</span>
+                                left a comment on your essay.
+                            </span>
+                            <div class="notification-date">Yesterday</div>
+                        </div>
+                    </li>
+                    <li class="notification unread-notification">
+                        <div class="notification-thumbnail"></div>
+                        <div class="notification-content">
+                            <span class="notification-text">
+                                <span class="notification-author">Peernote</span>
+                                says, "Hello and welcome!..."
+                            </span>
+                            <div class="notification-date">Yesterday</div>
+                        </div>
+                    </li>
+                    <li class="notification">
+                        <div class="notification-thumbnail"></div>
+                        <div class="notification-content">
+                            <span class="notification-text">
+                                <span class="notification-author">Peernote</span>
+                                says, "Hello and welcome!..."
+                            </span>
+                            <div class="notification-date">Yesterday</div>
+                        </div>
+                    </li>
+                    <li class="notification">
+                        <div class="notification-thumbnail"></div>
+                        <div class="notification-content">
+                            <span class="notification-text">
+                                <span class="notification-author">Peernote</span>
+                                says, "Hello and welcome!..."
+                            </span>
+                            <div class="notification-date">Yesterday</div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="notifications-dropdown-see-all">
+                    <a class="notifications-dropdown-see-all-link">
+                        See All
+                    </a>
+                </div>
             </div>
 
         {% endif %}
