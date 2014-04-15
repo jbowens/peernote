@@ -1,3 +1,4 @@
+import json
 from flask import render_template, redirect, url_for, g
 from app import db
 from app.blueprints.essays import essays
@@ -20,7 +21,7 @@ def create_essay():
     draft.eid = essay.eid
     draft.uid = g.user.uid
 
-    draft.text = "Once upon a time..."
+    draft.body = Draft.default_body()
     draft.title = "Title Here"
     db.session.add(draft)
     db.session.commit()

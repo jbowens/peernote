@@ -154,28 +154,23 @@ $.extend(peernoteNS.editor, {
   save: function() {
     var _this = this;
 
-    // TODO: Handle the title.
     var state = peernoteNS.doc.getState();
 
     var params = {
-      text: state.text,
       uid: peernoteNS.essays.uid,
       did: peernoteNS.essays.did,
-      modifiers: JSON.stringify(state.modifiers)
+      body: JSON.stringify(state)
     };
 
     $status_line = $('.status-line');
     $status_line.text('Saving…');
     $status_line.css('opacity', '1.0');
-    /*
-     * TODO: Handle saving drafts.
     $.post('/api/save_draft', params, function(data) {
       if (data.status == "success") {
         $status_line.text('Saved');
         peernoteNS.essays.lastModifiedDate = data.timestamp;
       }
     });
-    */
   },
 
   /* Event listener for handling autosaving.

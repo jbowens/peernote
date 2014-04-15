@@ -47,9 +47,20 @@ $.extend(peernoteNS.textBlock, {
    * document.
    */
   getState: function() {
+    // Copy the modifiers
+    var modifiers = [];
+    for (var i = 0; i < this._modifiers.length; ++i) {
+      modifiers.push({
+        type: this._modifiers[i].type,
+        start: this._modifiers[i].start,
+        end: this._modifiers[i].end
+      });
+    }
+
     return {
+      type: 'text',
       text: this._text,
-      modifiers: this._modifiers
+      modifiers: modifiers
     };
   },
 

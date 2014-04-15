@@ -31,8 +31,14 @@ $.extend(peernoteNS.containerBlock, {
   },
 
   getState: function() {
-    // TODO: Implement
-    return {};
+    var children = [];
+    for (var i = 0; i < this._children.length; ++i) {
+      children.push(this._children[i].getState());
+    }
+    return {
+      type: 'container',
+      children: children
+    };
   },
 
   getParent: function() {

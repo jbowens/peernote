@@ -8,8 +8,7 @@ class Draft(db.Model):
     uid = db.Column(db.Integer, db.ForeignKey('user.uid', ondelete='cascade'), nullable=False)
     version = db.Column(db.Integer, nullable=False, default=1)
     title = db.Column(db.String(80))
-    text = db.Column(db.UnicodeText)
-    modifiers = db.Column(db.UnicodeText, default=None)
+    body = db.Column(db.UnicodeText)
     finalized = db.Column(db.Boolean, default=False)
 
     def get_paragraphs(self):
@@ -27,19 +26,21 @@ class Draft(db.Model):
         title = self.title if self.title else 'Untitled'
         return ''.join(ch for ch in title if ch.isalnum())
 
-    def get_modifiers(self):
+    @classmethod
+    def default_body(cls, text = None):
         """
-        Retrieves all the modifiers contained in the essay.
+        Returns a json string that is the default body for new essays/drafts.
         """
-        if not self.modifiers:
-          return []
-
-        try:
-          return json.dumps(self.modifiers)
-        except ValueError:
-          # The modifiers column wasn't valid JSON.
-          current_app.logger.warning("Draft modifiers not valid JSON: %s", self.modifiers)
-          return []
+        text = text if text else 'Once upon a time...'
+        body = {
+          'type': 'container',
+          'children': [{
+              'type': 'text',
+              'text': text,
+              'modifiers': []
+            }]
+        }
+        return json.dumps(body)
 
     @classmethod
     def next_draft(cls, draft):
