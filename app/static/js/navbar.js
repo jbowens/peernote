@@ -1,4 +1,4 @@
-$(document).ready(function() {
+peernoteNS.init(function() {
     var optionsVisible = false;
     var notificationsVisible = false;
     var fadeInTime = 60;

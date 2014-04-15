@@ -44,4 +44,6 @@ peernoteNS.footer = {
     }
 }
 
-$(document).ready(peernoteNS.footer.position);
+peernoteNS.init(function() {
+    peernoteNS.footer.position();
+}
