@@ -75,8 +75,20 @@ $.extend(peernoteNS.doc, {
                                           selection.startOffset,
                                           selection.endOffset);
     } else {
-      // TODO: Implement
-      console.log("NOT YET IMPLEMENTED: applyModifier across blocks");
+      // Apply the modifier to the start and end blocks.
+      selection.startBlock.applyModifier(modifierType,
+                                         selection.startOffset,
+                                         selection.startBlock.getTextLength());
+      selection.endBlock.applyModifier(modifierType,
+                                       0,
+                                       selection.endOffset);
+      // TODO: Handle cases where we might have blocks nested within blocks.
+      // Apply to blocks in between.
+      var curr = selection.startBlock.getSucceedingBlock();
+      while (curr != selection.endBlock) {
+        curr.applyModifier(modifierType, 0, curr.getTextLength());
+        curr = curr.getSucceedingBlock();
+      }
     }
   },
 
@@ -90,8 +102,20 @@ $.extend(peernoteNS.doc, {
                                           selection.startOffset,
                                           selection.endOffset);
     } else {
-      // TODO: Implement
-      console.log("NOT YET IMPLEMENTED: removeModifier across blocks");
+      // Remove the modifier from start and end blocks
+      selection.startBlock.removeModifier(modifierType,
+                                          selection.startOffset,
+                                          selection.startBlock.getTextLength());
+      selection.endBlock.removeModifier(modifierType,
+                                        0,
+                                        selection.endOffset);
+      // TODO: Handle cases where we might have blocks nested within blocks.
+      // Remove from blocks in between.
+      var curr = selection.startBlock.getSucceedingBlock();
+      while (curr != selection.endBlock) {
+        curr.removeModifier(modifierType, 0, curr.getTextLength());
+        curr = curr.getSucceedingBlock();
+      }
     }
   },
 

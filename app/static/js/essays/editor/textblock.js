@@ -248,7 +248,6 @@ $.extend(peernoteNS.textBlock, {
         // decrement the index so we don't skip an index.
         i--;
       }
-
     }
 
     this._removeZeroLengthModifiers();
