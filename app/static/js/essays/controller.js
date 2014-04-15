@@ -680,7 +680,6 @@ peernoteNS.init(function() {
   peernoteNS.essays.initModeSwap();
   peernoteNS.essays.initDraft();
 
-
   if (peernoteNS.essays.review_only) {
     peernoteNS.essays.initReviewOnly();
   } else {

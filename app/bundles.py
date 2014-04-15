@@ -241,6 +241,7 @@ assets.register('editor_js',
         "js/essays/docutils.js",
         "js/essays/editor.js",
         "js/essays/controller.js",
+        "js/essays/keys.js",
         filters="rjsmin",
         output="gen/editor.js"
     )
