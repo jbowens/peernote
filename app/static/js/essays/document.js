@@ -90,6 +90,7 @@ $.extend(peernoteNS.doc, {
         curr = curr.getSucceedingBlock();
       }
     }
+    this._documentChanged();
   },
 
   /* Removes the given modifier over the given selection.
@@ -117,6 +118,7 @@ $.extend(peernoteNS.doc, {
         curr = curr.getSucceedingBlock();
       }
     }
+    this._documentChanged();
   },
 
   /* Deletes a character at the caret, or if there is currently a text
