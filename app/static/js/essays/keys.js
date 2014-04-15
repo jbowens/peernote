@@ -11,9 +11,9 @@ $.extend(peernoteNS.essays.keys, {
 
   setupKeys: function() {
     this.registerDownHandler(37, this.leftArrow);
-    this.registerDownHandler(38, this.upArrow);
+    //this.registerDownHandler(38, this.upArrow);
     this.registerDownHandler(39, this.rightArrow);
-    this.registerDownHandler(40, this.downArrow);
+    //this.registerDownHandler(40, this.downArrow);
   },
 
   processKeyDown: peernoteNS.errors.wrap(function(evt) {
@@ -34,19 +34,13 @@ $.extend(peernoteNS.essays.keys, {
   },
 
   leftArrow: function(e) {
-    console.log('left');
+    e.preventDefault();
+    peernoteNS.doc.moveCaretLeft();
   },
 
   rightArrow: function(e) {
-    console.log('right');
-  },
-
-  upArrow: function(e) {
-    console.log('up');
-  },
-
-  downArrow: function(e) {
-    console.log('down');
+    e.preventDefault();
+    peernoteNS.doc.moveCaretRight();
   },
 
   init: function() {

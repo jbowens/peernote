@@ -63,6 +63,10 @@ $.extend(peernoteNS.containerBlock, {
     return this.BLOCK_TYPE;
   },
 
+  getChildCount: function() {
+    return this._children.length;
+  },
+
   /* Gets the index of the given child block. It returns -1 if the given
    * block is not a child of this container.
    */

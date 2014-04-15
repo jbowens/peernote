@@ -45,6 +45,24 @@ $.extend(peernoteNS.textBlock, {
     return this._parent;
   },
 
+  getPrecedingBlock: function() {
+    var idx = this._parent.getChildIndex(this);
+    if (idx == 0) {
+      return null;
+    } else {
+      return this._parent.getChildAt(idx - 1);
+    }
+  },
+
+  getSucceedingBlock: function() {
+    var idx = this._parent.getChildIndex(this);
+    if (idx == this._parent.getChildCount() - 1) {
+      return null;
+    } else {
+      return this._parent.getChildAt(idx + 1);
+    }
+  },
+
   getBlockType: function() {
     return this.BLOCK_TYPE;
   },

@@ -277,6 +277,32 @@ $.extend(peernoteNS.doc, {
     s.addRange(newRange);
   },
 
+  moveCaretLeft: function() {
+    var pos = this.getCaret();
+    if (!pos) return;
+    if (pos.startOffset > 0) {
+      this.setCaret({startBlock: pos.startBlock, startOffset: pos.startOffset - 1});
+    } else {
+      var precedingBlock = pos.startBlock.getPrecedingBlock();
+      if (precedingBlock) {
+        this.setCaret({startBlock: precedingBlock, startOffset: precedingBlock.getTextLength()});
+      }
+    }
+  },
+
+  moveCaretRight: function() {
+    var pos = this.getCaret();
+    if (!pos) return;
+    if (pos.startOffset < pos.startBlock.getTextLength()) {
+      this.setCaret({startBlock: pos.startBlock, startOffset: pos.startOffset + 1});
+    } else {
+      var succeedingBlock = pos.endBlock.getSucceedingBlock();
+      if (succeedingBlock) {
+        this.setCaret({startBlock: succeedingBlock, startOffset: 0});
+      }
+    }
+  },
+
   _getContainingBlock: function(node, nodeOffset) {
     if (!node) {
       return null;
