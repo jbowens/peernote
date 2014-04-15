@@ -253,14 +253,9 @@ $.extend(peernoteNS.textBlock, {
 
     this._removeZeroLengthModifiers();
 
-    if (this._text.length == 0 || oldLength == 0) {
-      // The text block is now zero length or was zero length before, so
-      // we should re-render it so that the ZWSP is removed or added
-      // appropriately.
-      var p = peernoteNS.doc.getCaret();
-      this.rerenderInPlace();
-      peernoteNS.doc.setCaret(p);
-    }
+    var p = peernoteNS.doc.getCaret();
+    this.rerenderInPlace();
+    peernoteNS.doc.setCaret(p);
   },
 
   /* Finds all modifiers in effect at the given position.
