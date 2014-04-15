@@ -121,6 +121,36 @@ $.extend(peernoteNS.doc, {
     this._documentChanged();
   },
 
+  /* Applies the given block modifier to the given selection.
+   */
+  applyBlockModifier: function(modifierType, pos) {
+    pos.startBlock.applyBlockModifier(modifierType);
+    var curr = pos.startBlock.getSucceedingBlock();
+    if (pos.endBlock != pos.startBlock) {
+      pos.endBlock.applyBlockModifier(modifierType);
+    }
+    while (curr != null && curr != pos.endBlock) {
+      curr.applyBlockModifier(modifierType);
+      curr = curr.getSucceedingBlock();
+    }
+    this._documentChanged();
+  },
+
+  /* Removes the given block modifier to the given selection.
+   */
+  removeBlockModifier: function(modifierType, pos) {
+    pos.startBlock.removeBlockModifier(modifierType);
+    var curr = pos.startBlock.getSucceedingBlock();
+    if (pos.endBlock != pos.startBlock) {
+      pos.endBlock.removeBlockModifier(modifierType);
+    }
+    while (curr != null && curr != pos.endBlock) {
+      curr.removeBlockModifier(modifierType);
+      curr = curr.getSucceedingBlock();
+    }
+    this._documentChanged();
+  },
+
   /* Deletes a character at the caret, or if there is currently a text
    * selection, deletes the selection.
    */
@@ -337,6 +367,19 @@ $.extend(peernoteNS.doc, {
         this.setCaret({startBlock: succeedingBlock, startOffset: 0});
       }
     }
+  },
+
+  getBlocksInCaretPos: function(pos) {
+    var blocks = [];
+    blocks.push(pos.startBlock);
+    var curr = pos.startBlock.getSucceedingBlock();
+    while (curr != null && curr != pos.endBlock) {
+      blocks.push(curr);
+      curr = curr.getSucceedingBlock();
+    }
+    if (pos.startBlock != pos.endBlock)
+      blocks.push(pos.endBlock);
+    return blocks;
   },
 
   _getContainingBlock: function(node, nodeOffset) {

@@ -17,11 +17,14 @@ $.extend(peernoteNS.commands, {
 
   // command types enum
   TYPES: {
-    UNDEFINED:  0,
-    TEXT:       1,
-    BOLD:       2,
-    ITALIC:     3,
-    UNDERLINE:  4
+    UNDEFINED:    0,
+    TEXT:         1,
+    BOLD:         2,
+    ITALIC:       3,
+    UNDERLINE:    4,
+    LEFT_ALIGN:   5,
+    CENTER_ALIGN: 6,
+    RIGHT_ALIGN:  7
   },
 
   /*

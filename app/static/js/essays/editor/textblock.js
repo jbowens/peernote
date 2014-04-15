@@ -11,6 +11,8 @@ $.extend(peernoteNS.textBlock, {
 
   _parent: null,
 
+  _blockModifiers: [],
+
   _text: '',
 
   _modifiers: [],
@@ -31,6 +33,7 @@ $.extend(peernoteNS.textBlock, {
 
   init: function() {
     this._modifiers = [];
+    this._blockModifiers = [];
   },
 
   getText: function() {
@@ -81,10 +84,16 @@ $.extend(peernoteNS.textBlock, {
       });
     }
 
+    var blockModifiers = [];
+    for (var i = 0; i < this._blockModifiers.length; ++i) {
+      blockModifiers.push(this._blockModifiers[i]);
+    }
+
     return {
       type: 'text',
       text: this._text,
-      modifiers: modifiers
+      modifiers: modifiers,
+      blockModifiers: blockModifiers
     };
   },
 
@@ -94,8 +103,40 @@ $.extend(peernoteNS.textBlock, {
   deserialize: function(state) {
     var newBlock = this.construct();
     newBlock._text = state.text;
-    newBlock._modifiers = state.modifiers;
+    newBlock._modifiers = state.modifiers ? state.modifiers : [];
+    newBlock._blockModifiers = state.blockModifiers ? state.blockModifiers : [];
     return newBlock;
+  },
+
+  /* Returns whether or not this block has the given block modifier
+   * applied to it.
+   *
+   * @param modifier  the block modifier to check
+   * @return true or false
+   */
+  hasBlockModifier: function(modifier) {
+    var idx = $.inArray(modifier, this._blockModifiers);
+    return idx != -1;
+  },
+
+  applyBlockModifier: function(modifier) {
+    this._blockModifiers.push(modifier);
+    if (this._elmt) {
+      $(this._elmt).addClass('blk-mod-' + modifier);
+    }
+    return true;
+  },
+
+  removeBlockModifier: function(modifier) {
+    var idx = $.inArray(modifier, this._blockModifiers);
+    if (idx == -1) {
+      return false;
+    }
+    this._blockModifiers.splice(idx, 1);
+    if (this._elmt) {
+      $(this._elmt).removeClass('blk-mod-' + modifier);
+    }
+    return true;
   },
 
   /* Deletes the character at the given position and then
@@ -148,6 +189,12 @@ $.extend(peernoteNS.textBlock, {
         mod.end = this._text.length;
       }
     }
+
+    // Copy the block modifiers too
+    for (var j = 0; j < this._blockModifiers.length; ++j) {
+      newBlock.applyBlockModifier(this._blockModifiers[j]);
+    }
+
     this._parent.insertChildAfter(this, newBlock);
     return newBlock;
   },
@@ -412,6 +459,12 @@ $.extend(peernoteNS.textBlock, {
     // Setup the text block container
     $(root).addClass('pn-text-block');
     $(root).addClass('pn-block');
+
+    // Apply all block modifiers
+    for (var i = 0; i < this._blockModifiers.length; ++i) {
+      $(root).addClass('blk-mod-' + this._blockModifiers[i]);
+    }
+
     root.block = this;
     this._elmt = root;
 

@@ -8,6 +8,23 @@ peernoteNS.editor = peernoteNS.editor || {};
  * initializing other peernoteNS.editor properties.
  */
 $.extend(peernoteNS.editor, {
+  /* Returns a function that can be used to set a given block
+   * modifier.
+   */
+  _blockModifier: function(modifierType, commandType) {
+    return peernoteNS.errors.wrap(function(e) {
+      var _this = peernoteNS.editor;
+      var pos = peernoteNS.doc.getCaret();
+      if (!pos) {
+        // The focus is not in the editor.
+        return;
+      }
+
+      _this.removeAllAligns(pos);
+      peernoteNS.doc.applyBlockModifier(modifierType, pos);
+    });
+  },
+
   /* Takes the name of a modifier type and returns a function that
    * can be used to toggle the given modifier. It should be installed
    * as a listener on the appropriate button that toggles the modifier.
@@ -118,6 +135,29 @@ $.extend(peernoteNS.editor, {
   underline: peernoteNS.editor._simpleModifierToggler('underline',
       peernoteNS.commands.TYPES.UNDERLINE),
 
+  /* Controls for block modifiers. */
+  leftAlign: peernoteNS.editor._blockModifier('left-align',
+      peernoteNS.commands.TYPES.LEFT_ALIGN),
+
+  centerAlign: peernoteNS.editor._blockModifier('center-align',
+      peernoteNS.commands.TYPES.CENTER_ALIGN),
+
+  rightAlign: peernoteNS.editor._blockModifier('right-align',
+      peernoteNS.commands.TYPES.RIGHT_ALIGN),
+
+  removeAllAligns: function(pos) {
+    var blocks = peernoteNS.doc.getBlocksInCaretPos(pos);
+    for (var i = 0; i < blocks.length; ++i) {
+      var b = blocks[i];
+      if (b.hasBlockModifier('left-align'))
+        b.removeBlockModifier('left-align');
+      if (b.hasBlockModifier('center-align'))
+        b.removeBlockModifier('center-align');
+      if (b.hasBlockModifier('right-align'))
+        b.removeBlockModifier('right-align');
+    }
+  },
+
   /* Event listener for when the undo button is clicked.
    */
   undo: peernoteNS.errors.wrap(function(e) {
@@ -225,6 +265,9 @@ $.extend(peernoteNS.editor, {
     toolkitLeft.find('button.bold').click(peernoteNS.editor.bold);
     toolkitLeft.find('button.italic').click(peernoteNS.editor.italic);
     toolkitLeft.find('button.underline').click(peernoteNS.editor.underline);
+    toolkitLeft.find('button.left-align').click(peernoteNS.editor.leftAlign);
+    toolkitLeft.find('button.right-align').click(peernoteNS.editor.rightAlign);
+    toolkitLeft.find('button.center-align').click(peernoteNS.editor.centerAlign);
     toolbar.find('button#undo').click(peernoteNS.editor.undo);
     toolbar.find('button#redo').click(peernoteNS.editor.redo);
   }
