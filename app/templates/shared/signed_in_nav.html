@@ -70,56 +70,22 @@
                     <div class="mark-as-read">Mark as read</div>
                 </div>
                 <ul>
-                    <li class="notification">
-                        <div class="notification-thumbnail"></div>
-                        <div class="notification-content">
-                            <span class="notification-text">
-                                <span class="notification-author">Bryce A.</span>
-                                left a comment on your essay.
-                            </span>
-                            <div class="notification-date">Yesterday</div>
-                        </div>
-                    </li>
-                    <li class="notification">
-                        <div class="notification-thumbnail"></div>
-                        <div class="notification-content">
-                            <span class="notification-text">
-                                <span class="notification-author">Bryce A.</span>
-                                left a comment on your essay.
-                            </span>
-                            <div class="notification-date">Yesterday</div>
-                        </div>
-                    </li>
+                    {% for notification in user.notifications(5) %}
+                    {% if not notification.seen %}
                     <li class="notification unread-notification">
-                        <div class="notification-thumbnail"></div>
-                        <div class="notification-content">
-                            <span class="notification-text">
-                                <span class="notification-author">Peernote</span>
-                                says, "Hello and welcome!..."
-                            </span>
-                            <div class="notification-date">Yesterday</div>
-                        </div>
-                    </li>
+                    {% else %}
                     <li class="notification">
+                    {% endif %}
                         <div class="notification-thumbnail"></div>
                         <div class="notification-content">
                             <span class="notification-text">
-                                <span class="notification-author">Peernote</span>
-                                says, "Hello and welcome!..."
+                                <span class="notification-author">{{notification.sender()}}</span>
+                                {{notification.rendered_short()}}
                             </span>
-                            <div class="notification-date">Yesterday</div>
+                            <div class="notification-date">{{notification.pretty_created_date()}}</div>
                         </div>
                     </li>
-                    <li class="notification">
-                        <div class="notification-thumbnail"></div>
-                        <div class="notification-content">
-                            <span class="notification-text">
-                                <span class="notification-author">Peernote</span>
-                                says, "Hello and welcome!..."
-                            </span>
-                            <div class="notification-date">Yesterday</div>
-                        </div>
-                    </li>
+                    {% endfor %}
                 </ul>
                 <div class="notifications-dropdown-see-all">
                     <a class="notifications-dropdown-see-all-link">

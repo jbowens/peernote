@@ -2,6 +2,8 @@ from flask import request, current_app, jsonify, g
 from app.blueprints.api import api
 from app.models.draft import Draft
 from app.models.review import Review
+from app.models.user import User
+from app.models.notification import Notification
 from app import app
 from app import db
 import uuid
@@ -69,19 +71,35 @@ def email_a_review():
             # make a new draft for the writer
             new_draft = Draft.next_draft(draft)
             db.session.add(new_draft)
-            db.session.commit()
             new_did = new_draft.did
             new_version = new_draft.version
-        else:
-            db.session.commit()
+
+        db.session.flush()
+
+        review_url = 'http://' + app.config.get('SERVER_HOST') + '/essays/review/' + review.urlhash
 
         # send emailz
         params = {
             'sender': g.user.first_name + ' ' + g.user.last_name,
-            'review_url': 'http://' + app.config.get('SERVER_HOST') + '/essays/review/' + review.urlhash
+            'review_url': review_url
         }
         mailer = Mailer()
         mailer.send(ReviewADraft(), params, email)
+
+
+        # create notification for user receiving review if necessary
+        receiving_user = User.query.filter_by(email=email).first()
+        if receiving_user:
+            notification = Notification()
+            notification.uid = receiving_user.uid
+            notification.from_uid = uid
+            notification.short_template = 'requested a review.'
+            notification.url = review_url
+            notification.long_template = '{{ sender }} wrote an essay and wants you to <a href="' + review_url +'"> review </a> it.'
+            db.session.add(notification)
+
+        db.session.commit()
+
 
         return jsonify(status='success', new_did=new_did, new_version=new_version)
     else:
