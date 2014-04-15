@@ -6,6 +6,8 @@ peernoteNS.containerBlock = peernoteNS.containerBlock || {};
 
 $.extend(peernoteNS.containerBlock, {
 
+  BLOCK_TYPE: 'container',
+
   /* The parent of this block. */
   _parent: null,
 
@@ -41,8 +43,24 @@ $.extend(peernoteNS.containerBlock, {
     };
   },
 
+  /* Takes a serialized state of a block of this type and returns a new block
+   * object representing the given block state.
+   */
+  deserialize: function(state) {
+    var newBlock = this.construct();
+    for (var i = 0; i < state.children.length; ++i) {
+      var child = peernoteNS.doc.deserializeBlock(state.children[i]);
+      newBlock.addChild(child);
+    }
+    return newBlock;
+  },
+
   getParent: function() {
     return this._parent;
+  },
+
+  getBlockType: function() {
+    return this.BLOCK_TYPE;
   },
 
   /* Gets the index of the given child block. It returns -1 if the given

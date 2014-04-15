@@ -79,6 +79,10 @@ $.extend(peernoteNS.editor, {
   _pendingModifiersOffset: null,
   _pendingModifiers: [],
 
+  /* A list of all valid block types.
+   */
+  BLOCK_TYPES: [],
+
   _doc: null,
 
   keypress: peernoteNS.errors.wrap(function(e) {
@@ -141,10 +145,10 @@ $.extend(peernoteNS.editor, {
    * appropriately. This is called on page load as well (from the
    * controller) to load the initial state of the draft)
    */
-  loadDraftState: function (title) {
-    // TODO: Update with actual new draft state
-    // If we're loading something into the editor, it must be
-    // the finalized draft.
+  loadDraftState: function (title, body) {
+    // TODO: Do something with the title
+    peernoteNS.doc.setState(body);
+    peernoteNS.doc.render();
   },
 
   /**
@@ -195,6 +199,11 @@ $.extend(peernoteNS.editor, {
     }, _this.AUTOSAVE_PAUSE_MILLIS);
   }),
 
+  setupBlockTypes: function() {
+    this.BLOCK_TYPES.push(peernoteNS.containerBlock);
+    this.BLOCK_TYPES.push(peernoteNS.textBlock);
+  },
+
   initDocument: function() {
     var docContainer = $('.page-container .page')[0];
     this._doc = docContainer;
@@ -220,6 +229,7 @@ $.extend(peernoteNS.editor, {
 });
 
 peernoteNS.init(function() {
+  peernoteNS.editor.setupBlockTypes();
   peernoteNS.editor.initDocument();
   peernoteNS.editor.initToolbar();
 });

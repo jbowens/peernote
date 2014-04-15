@@ -7,9 +7,11 @@ peernoteNS.textBlock = peernoteNS.textBlock || {};
 
 $.extend(peernoteNS.textBlock, {
 
+  BLOCK_TYPE: 'text',
+
   _parent: null,
 
-  _text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae massa enim.',
+  _text: '',
 
   _modifiers: [],
 
@@ -43,6 +45,10 @@ $.extend(peernoteNS.textBlock, {
     return this._parent;
   },
 
+  getBlockType: function() {
+    return this.BLOCK_TYPE;
+  },
+
   /* Returns an object encapsulating the entire state of the
    * document.
    */
@@ -62,6 +68,16 @@ $.extend(peernoteNS.textBlock, {
       text: this._text,
       modifiers: modifiers
     };
+  },
+
+  /* Takes a serialized state of a block of this type and returns a new block
+   * object representing the given block state.
+   */
+  deserialize: function(state) {
+    var newBlock = this.construct();
+    newBlock._text = state.text;
+    newBlock._modifiers = state.modifiers;
+    return newBlock;
   },
 
   /* Deletes the character at the given position and then

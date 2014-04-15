@@ -46,6 +46,25 @@ $.extend(peernoteNS.doc, {
     return this._root.getState();
   },
 
+  /* Sets the state of the document to be the given
+   * serialized document state.
+   */
+  setState: function(body) {
+    this._root = this.deserializeBlock(body);
+  },
+
+  deserializeBlock: function(state) {
+    // Iterate through supported block types and find the
+    // appropriate block to deserialize it.
+    var blockTypes = peernoteNS.editor.BLOCK_TYPES;
+    for (var i = 0; i < blockTypes.length; ++i) {
+      if (blockTypes[i].getBlockType() == state.type) {
+        return blockTypes[i].deserialize(state);
+      }
+    }
+    return null;
+  },
+
   /* Applies the given modifier over the given selection.
    */
   applyModifier: function(modifierType, selection) {

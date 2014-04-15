@@ -216,8 +216,8 @@ $.extend(peernoteNS.essays, {
         }
 
         // Inform the editor to load this draft
-        // TODO: Update
-        peernoteNS.editor.loadDraftState(data.title);
+        var draftBody = JSON.parse(data.body)
+        peernoteNS.editor.loadDraftState(data.title, draftBody);
         $('.status-line').text('Saved');
 
         if (peernoteNS.essays.review_only) {
