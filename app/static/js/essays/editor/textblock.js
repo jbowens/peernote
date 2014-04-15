@@ -188,7 +188,7 @@ $.extend(peernoteNS.textBlock, {
     return txt;
   },
 
-  checkForChanges: function(pos) {
+  checkForChanges: function(pos, modifiers) {
     var elmtText = this.getElementText();
     if (this._text != elmtText) {
       var charDiff = elmtText.length - this._text.length;
@@ -196,24 +196,28 @@ $.extend(peernoteNS.textBlock, {
       this.updateText(elmtText,
                       pos.startOffset - charDiff,
                       charDiff);
-      // TODO: Handle these pending modifiers.
-      /*
-      if (_this._pendingModifiers.length &&
-          _this._pendingModifiersPos == pos.start - charDiff) {
+      // Handle pending modifiers
+      if (peernoteNS.editor._pendingModifiers.length &&
+          peernoteNS.editor._pendingModifiersOffset == pos.startOffset - charDiff &&
+          peernoteNS.editor._pendingModifiersBlock == pos.startBlock) {
         if (charDiff > 0) {
           // If they added characters, we should now wrap those characters
           // in the pending modifiers.
-          for (var i = 0; i < _this._pendingModifiers.length; ++i) {
-            var type = _this._pendingModifiers[i];
-            peernoteNS.doc.applyModifier(type, pos.start-charDiff, pos.start);
+          for (var i = 0; i < peernoteNS.editor._pendingModifiers.length; ++i) {
+            var type = peernoteNS.editor._pendingModifiers[i];
+            peernoteNS.doc.applyModifier(type, {
+              startBlock: this,
+              startOffset: pos.startOffset-charDiff,
+              endBlock: this,
+              endOffset: pos.startOffset
+            });
           }
           // Re-render the document to reflect the new modifier.
           peernoteNS.doc.render();
         }
         // Clear pending modifiers
-        _this._pendingModifiers = [];
+        peernoteNS.editor._pendingModifiers = [];
       }
-      */
       return true;
     }
     return false;

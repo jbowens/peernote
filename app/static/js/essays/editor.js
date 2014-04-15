@@ -20,6 +20,10 @@ $.extend(peernoteNS.editor, {
     return peernoteNS.errors.wrap(function(e) {
       var _this = peernoteNS.editor;
       var sel = peernoteNS.doc.getCaret();
+      if (!sel) {
+        // The focus is not in the editor.
+        return;
+      }
       if (sel.isSelection) {
         var modifiers = sel.startBlock.getModifiers(sel.startOffset);
         var isApply = $.inArray(modifierType, modifiers) == -1;
@@ -39,7 +43,6 @@ $.extend(peernoteNS.editor, {
         peernoteNS.commands.execute(cmd);
       } else {
         // TODO: Maybe turn this into an undo-able command.
-
         // Check for out of date pending modifiers from other locations
         if (_this._pendingModifiers.length &&
             (sel.startBlock != _this._pendingModifiersBlock ||

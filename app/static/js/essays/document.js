@@ -71,9 +71,9 @@ $.extend(peernoteNS.doc, {
     if (selection.startBlock == selection.endBlock) {
       // This selection only spans a single block. Apply the
       // modifier to the range within the block.
-      selection.anchorBlock.applyModifier(modifierType,
-                                          selection.startOffset,
-                                          selection.endOffset);
+      selection.startBlock.applyModifier(modifierType,
+                                         selection.startOffset,
+                                         selection.endOffset);
     } else {
       // Apply the modifier to the start and end blocks.
       selection.startBlock.applyModifier(modifierType,
@@ -201,6 +201,7 @@ $.extend(peernoteNS.doc, {
         startBlock: newBlock,
         startOffset: 0
       });
+      this._documentChanged();
     }
   },
 
