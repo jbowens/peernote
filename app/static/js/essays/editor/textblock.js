@@ -220,6 +220,7 @@ $.extend(peernoteNS.textBlock, {
   },
 
   updateText: function(newText, position, charsDiff) {
+    var oldLength = this._text.length;
     /* Update the raw plain text of the document. */
     this._text = newText;
     var len = this._text.length;
@@ -247,9 +248,19 @@ $.extend(peernoteNS.textBlock, {
         // decrement the index so we don't skip an index.
         i--;
       }
+
     }
 
     this._removeZeroLengthModifiers();
+
+    if (this._text.length == 0 || oldLength == 0) {
+      // The text block is now zero length or was zero length before, so
+      // we should re-render it so that the ZWSP is removed or added
+      // appropriately.
+      var p = peernoteNS.doc.getCaret();
+      this.rerenderInPlace();
+      peernoteNS.doc.setCaret(p);
+    }
   },
 
   /* Finds all modifiers in effect at the given position.
@@ -428,8 +439,10 @@ $.extend(peernoteNS.textBlock, {
   _makeNode: function(activeModifiers, start, end) {
     var span = document.createElement('span');
     var txt = this._text.substr(start, end - start);
-    var ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
-    txt = txt + ZERO_WIDTH_SPACE;
+    if (txt.length == 0) {
+      var ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
+      txt = txt + ZERO_WIDTH_SPACE;
+    }
     var txtNode = document.createTextNode(txt);
     span.appendChild(txtNode);
     for (var j = 0; j < activeModifiers.length; ++j) {
