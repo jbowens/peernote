@@ -181,6 +181,7 @@ $.extend(peernoteNS.doc, {
         });
       }
     }
+    this._documentChanged();
   },
 
   /* This function should be called whenever the document changes to

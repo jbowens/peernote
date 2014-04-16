@@ -114,14 +114,14 @@ $.extend(peernoteNS.editor, {
     }
   }),
 
-  keydown: peernoteNS.errors.wrap(function(e) {
+  backspaceHandler: function(e) {
     var _this = peernoteNS.editor;
-    if (e.keyCode == 8) {
+    if (peernoteNS.essays.currentMode == peernoteNS.essays.MODES.EDIT) {
       // They hit backspace. We should delete a character.
       e.preventDefault();
       peernoteNS.doc.deleteAtCaret();
     }
-  }),
+  },
 
   /* Togglers for simple modifiers. These are installed as listeners for
    * their corrsesponding UI elements.
@@ -253,7 +253,7 @@ $.extend(peernoteNS.editor, {
     peernoteNS.doc.init();
     peernoteNS.doc.render();
     $(docContainer).keypress(peernoteNS.editor.keypress);
-    $(docContainer).keydown(peernoteNS.editor.keydown);
+    peernoteNS.essays.keys.registerDownHandler(8, peernoteNS.editor.backspaceHandler);
     // Subscribe to changes in the document so that we can
     // autosave appropriately.
     peernoteNS.doc.addChangeListener(this.onDocumentChange);
