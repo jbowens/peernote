@@ -32,6 +32,24 @@ $readonly-color: rgba(221, 123, 57, 1);
     .nav-left {
         margin-left: 20px;
     }
+
+    .notifications-dropdown {
+        .caret {
+            left: 136px !important;
+        }
+        .caret-shadow {
+            left: 136px !important;
+        }
+    }
+
+    .options-dropdown {
+        .caret {
+            left: 49px !important;
+        }
+        .caret-shadow {
+            left: 49px !important;
+        }
+    }
 }
 
 

@@ -97,18 +97,220 @@ nav {
 
         .dropdown {
             border-radius: 2px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
             background-color: $background;
-            border: 1px solid $generic-divider-color;
+            border: 1px solid rgba(197,197,197,1);
             position: absolute;
             z-index: 1001;
             line-height: 20px;
-            right: 0;
+
+            .caret {
+                border-style: solid;
+                border-width: 0px 8px 8px 8px;
+                border-top-color: transparent;
+                border-left-color: transparent;
+                border-bottom-color: white;
+                border-bottom-color: rgb(245, 245, 245);
+                border-right-color: transparent;
+                width: 0px;
+                height: 0px;
+                display: block;
+                position: absolute;
+                z-index: 1003;
+           }
+
+           .caret-shadow {
+                border-style: solid;
+                border-width: 0px 8px 8px 8px;
+                border-top-color: transparent;
+                border-left-color: transparent;
+                border-bottom-color: $generic-divider-color;
+                border-bottom-color: rgba(177,177,177,1);
+                border-right-color: transparent;
+                width: 0px;
+                height: 0px;
+                display: block;
+                position: absolute;
+                z-index: 1002;
+           }
+        }
+
+        .options-dropdown {
+            right: 2px;
+            top: 51px;
+
+            .caret {
+                top: -7px;
+                left: 86px;
+
+            }
+
+            .caret-shadow {
+                top: -8px;
+                left: 86px;
+            }
 
             li {
+                z-index: 1004;
                 display: block;
-                padding: 10px 20px;
+
+                * {
+                    color: #888;
+                }
+
+                a {
+                    width: 80px;
+                    padding: 6px 20px;
+                    display: block;
+                    text-align: center;
+
+                    i {
+                        height: 20px;
+                        width: 16px;
+                        margin-right: 1px;
+                    }
+                }
+            }
+
+            li:first-child{
+                margin-top: 7px;
+            }
+
+            li:last-child{
+                margin-bottom: 7px;
+            }
+
+            a:hover {
+                background: $main-color-2;
+                    background-color: rgba(169, 115, 180, 0.87);
+                color: white;
+                * {
+                    color: white;
+                }
             }
         }
+
+        .notifications-dropdown {
+            right: 2px;
+            top: 51px;
+            width: 300px;
+            height: 350px;
+            background-color: rgb(245, 245, 245);
+
+            .caret {
+                top: -7px;
+                left: 176px;
+            }
+
+            .caret-shadow {
+                top: -8px;
+                left: 176px;
+            }
+
+            ul {
+                overflow-y: auto;
+                height: 280px;
+
+
+
+                li {
+                    padding: 15px 10px 13px 10px;
+                    clear: both;
+                    border-bottom: dotted 1px $generic-divider-color;
+                    overflow: auto;
+                    cursor: pointer;
+
+                    .notification-thumbnail {
+                        background: #ccc;
+                        width: 40px;
+                        height: 40px;
+                        float: left;
+                    }
+
+                    .notification-content {
+                        float: left;
+                        overflow: auto;
+                        //border: 1px red dashed;
+                        width: 231px;
+                        margin-left: 8px;
+                        height: 45px;
+                        position:relative;
+                        bottom: 2px;
+
+                        * {
+                            font-size: 12px;
+                            line-height: 12px;
+                        }
+
+                        .notification-author {
+                            font-weight: bold;
+                            display: inline-block;
+                        }
+
+                        .notification-text {
+                            display: inline-block;
+                        }
+
+                        .notification-date {
+                            color: #888;
+                            position: absolute;
+                            bottom: 8px;
+                        }
+                    }
+                }
+
+                li:hover {
+                    background: #f1f1f1;
+                }
+
+                .unread-notification {
+                    background-color: rgba(169, 115, 180, 0.17);
+                }
+
+                .unread-notification:hover {
+                    background-color: rgba(169, 115, 180, 0.22)
+                }
+            }
+
+            .notifications-dropdown-see-all {
+                width: 100%;
+                position: absolute;
+                bottom: 0;
+                text-align: center;
+                padding: 8px 0;
+                background: white;
+                border-top: $generic-divider-color 1px solid;
+                font-size: 12px;
+            }
+
+            .notifications-dropdown-see-all a:hover {
+                text-decoration: underline;
+            }
+
+            .notifications-dropdown-title {
+                background: white;
+                padding: 6px 20px;
+                border-bottom: $generic-divider-color 1px solid;
+                overflow: auto;
+
+                .notif-title {
+                    float: left;
+                    font-weight: bold;
+                }
+
+                .mark-as-read {
+                    color: #888;
+                    font-size: 12px;
+                    float: right;
+                    cursor: pointer;
+                }
+
+                .mark-as-read:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
     }
 }
 
