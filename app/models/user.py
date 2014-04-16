@@ -5,7 +5,6 @@ from app import db
 from review import Review
 from essay import Essay
 from draft import Draft
-from notification import Notification
 
 class User(db.Model):
     uid = db.Column(db.Integer, primary_key=True)
@@ -54,12 +53,6 @@ class User(db.Model):
 
     def draft_count(self):
         return Draft.query.filter_by(uid=self.uid).count()
-
-    def notifications(self, count):
-        """
-        Returns count number of most recent notifications for user
-        """
-        return Notification.query.filter_by(uid=self.uid).order_by(Notification.created_date.desc())[:count]
 
 
     @staticmethod
