@@ -22,6 +22,6 @@ def review_draft(reviewhash):
 
     return render_template('essays/editor.html',
         current_essay=essay,
-        current_draft=essay.get_current_draft(),
+        current_draft=current_draft,
         reviewhash=reviewhash
     )

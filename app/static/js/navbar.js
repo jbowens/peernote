@@ -48,24 +48,38 @@ peernoteNS.init(function() {
     // subscribe for notifications
     peernoteNS.notifications.subscribe(function(notifications) {
         for (var i = 0; i < notifications.length; i++) {
+            var notification = notifications[i];
+
             // TODO: not every notification will be unread
-            new_notification = "" +
-                '<li class="notification unread-notification">' +
+            notification_html = "" +
+                '<li class="notification">' +
                     '<div class="notification-thumbnail"></div>' +
                     '<div class="notification-content">' +
                         '<span class="notification-text">' +
                             '<span class="notification-author">' +
-                                notifications[i].sender +
+                                notification.sender +
                             '</span>' +
-                            ' ' + notifications[i].short_text +
+                            ' ' + notification.short_text +
                         '</span>' +
                         '<div class="notification-date">' +
-                        notifications[i].created_date +
+                        notification.created_date +
                         '</div>' +
                     '</div>' +
                 '</li>';
 
-            $('#notifications-list').prepend(new_notification);
+            var $notification = $(notification_html);
+            if (!notification.seen) {
+                $notification.addClass("unread-notificaiton");
+            }
+
+            (function(notification) {
+                $notification.click(function() {
+                    window.location = notification.url;
+                });
+            })(notification);
+
+
+            $('#notifications-list').prepend($notification);
         }
 
         $('#notifications-list').slice(0,10);

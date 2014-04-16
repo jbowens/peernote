@@ -71,10 +71,12 @@ def email_a_review():
             # make a new draft for the writer
             new_draft = Draft.next_draft(draft)
             db.session.add(new_draft)
+            db.session.flush()
+
             new_did = new_draft.did
             new_version = new_draft.version
-
-        db.session.flush()
+        else:
+            db.session.flush()
 
         review_url = 'http://' + app.config.get('SERVER_HOST') + '/essays/review/' + review.urlhash
 
