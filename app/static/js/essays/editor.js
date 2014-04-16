@@ -255,7 +255,8 @@ $.extend(peernoteNS.editor, {
     peernoteNS.doc.init();
     peernoteNS.doc.render();
     $(docContainer).keypress(peernoteNS.editor.keypress);
-    peernoteNS.essays.keys.registerDownHandler(8, peernoteNS.editor.backspaceHandler);
+    peernoteNS.essays.keys.registerDownHandler(peernoteNS.essays.keys.BACKSPACE,
+                                               peernoteNS.editor.backspaceHandler);
     // Subscribe to changes in the document so that we can
     // autosave appropriately.
     peernoteNS.doc.addChangeListener(this.onDocumentChange);

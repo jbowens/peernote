@@ -7,13 +7,19 @@ peernoteNS.essays.keys = peernoteNS.essays.keys || {};
 
 $.extend(peernoteNS.essays.keys, {
 
+  KEY_CODES: {
+    BACKSPACE: 8,
+    LEFT_ARROW: 37,
+    DOWN_ARROW: 38,
+    RIGHT_ARROW: 39,
+    DOWN_ARROW: 40
+  },
+
   KEY_DOWN_HANDLERS: {},
 
   setupKeys: function() {
-    this.registerDownHandler(37, this.leftArrow);
-    //this.registerDownHandler(38, this.upArrow);
-    this.registerDownHandler(39, this.rightArrow);
-    //this.registerDownHandler(40, this.downArrow);
+    this.registerDownHandler(this.KEY_CODES.LEFT_ARROW, this.leftArrow);
+    this.registerDownHandler(this.KEY_CODES.RIGHT_ARROW, this.rightArrow);
   },
 
   processKeyDown: peernoteNS.errors.wrap(function(evt) {
