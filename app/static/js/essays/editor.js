@@ -13,6 +13,7 @@ $.extend(peernoteNS.editor, {
    */
   _blockModifier: function(modifierType, commandType) {
     return peernoteNS.errors.wrap(function(e) {
+      e.preventDefault();
       var _this = peernoteNS.editor;
       var pos = peernoteNS.doc.getCaret();
       if (!pos) {
@@ -22,6 +23,7 @@ $.extend(peernoteNS.editor, {
 
       _this.removeAllAligns(pos);
       peernoteNS.doc.applyBlockModifier(modifierType, pos);
+      peernoteNS.doc.setCaret(pos);
     });
   },
 

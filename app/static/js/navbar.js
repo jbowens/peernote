@@ -37,7 +37,6 @@ peernoteNS.init(function() {
             && !$target.hasClass("notifications-dropdown")
             && !$target.hasClass("show-dropdown")
             && !$target.hasClass("show-notifications")) {
-            console.log("here");
             optionsVisible = false;
             notificationsVisible = false;
             $('.options-dropdown').fadeOut(fadeOutTime);
