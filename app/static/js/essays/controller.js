@@ -198,7 +198,7 @@ $.extend(peernoteNS.essays, {
       $('.status-line').text('Loading…');
     }
 
-    $.get('/api/fetch_draft', params, function(data) {
+    $.get('/api/fetch_draft', params, peernoteNS.errors.wrap(function(data) {
       if (!data) {
         // server 204, probably because provided timestamp is most recent
         return;
@@ -251,7 +251,7 @@ $.extend(peernoteNS.essays, {
       } else {
         // TODO:
       }
-    });
+    }));
   },
 
   // constant widths of left and right panels
