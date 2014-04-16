@@ -50,7 +50,6 @@ peernoteNS.init(function() {
         for (var i = 0; i < notifications.length; i++) {
             var notification = notifications[i];
 
-            // TODO: not every notification will be unread
             notification_html = "" +
                 '<li class="notification">' +
                     '<div class="notification-thumbnail"></div>' +
@@ -69,11 +68,13 @@ peernoteNS.init(function() {
 
             var $notification = $(notification_html);
             if (!notification.seen) {
-                $notification.addClass("unread-notificaiton");
+                $notification.addClass("unread-notification");
             }
 
+            // L O L JAVASCRIPT SCOPING!
             (function(notification) {
                 $notification.click(function() {
+                    $.post('/api/notifications/seen', {ids: [notification.nid]});
                     window.location = notification.url;
                 });
             })(notification);
@@ -82,7 +83,19 @@ peernoteNS.init(function() {
             $('#notifications-list').prepend($notification);
         }
 
-        $('#notifications-list').slice(0,10);
+        $('#notifications-list').slice(0,8);
+    });
+
+
+    $('.mark-as-read').click(function() {
+        //TODO: this is incredibly lazy and probably bad.
+        var ids = peernoteNS.notifications.notifications.map(function(cv) {
+            return cv.nid;
+        });
+        $.post('/api/notifications/seen', {ids: ids});
+
+        $('#notifications-list li').removeClass('unread-notification');
+
     });
 });
 
