@@ -125,6 +125,15 @@ $.extend(peernoteNS.editor, {
     }
   },
 
+  tabHandler: function(e) {
+    var _this = peernoteNS.editor;
+    if (peernoteNS.essays.currentMode == peernoteNS.essays.MODES.EDIT) {
+      // They hit tab. We should insert a character.
+      e.preventDefault();
+      peernoteNS.doc.insertAtCaret('\t');
+    }
+  },
+
   /* Togglers for simple modifiers. These are installed as listeners for
    * their corrsesponding UI elements.
    */
@@ -255,8 +264,10 @@ $.extend(peernoteNS.editor, {
     peernoteNS.doc.init();
     peernoteNS.doc.render();
     $(docContainer).keypress(peernoteNS.editor.keypress);
-    peernoteNS.essays.keys.registerDownHandler(peernoteNS.essays.keys.BACKSPACE,
+    peernoteNS.essays.keys.registerDownHandler(peernoteNS.essays.keys.KEY_CODES.BACKSPACE,
                                                peernoteNS.editor.backspaceHandler);
+    peernoteNS.essays.keys.registerDownHandler(peernoteNS.essays.keys.KEY_CODES.TAB,
+                                               peernoteNS.editor.tabHandler);
     // Subscribe to changes in the document so that we can
     // autosave appropriately.
     peernoteNS.doc.addChangeListener(this.onDocumentChange);

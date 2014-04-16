@@ -184,6 +184,14 @@ $.extend(peernoteNS.doc, {
     this._documentChanged();
   },
 
+  /* Inserts the given text at the caret position.
+   *
+   * @param text  the plain text to insert at the caret position.
+   */
+  insertAtCaret: function(text) {
+    console.log("NOT YET IMPLEMENTED: document.insertAtCaret");
+  },
+
   /* This function should be called whenever the document changes to
    * notify and listeners that the document has been modified.
    */
