@@ -125,10 +125,10 @@ $.extend(peernoteNS.doc, {
    */
   applyBlockModifier: function(modifierType, pos) {
     pos.startBlock.applyBlockModifier(modifierType);
-    var curr = pos.startBlock.getSucceedingBlock();
     if (pos.endBlock != pos.startBlock) {
       pos.endBlock.applyBlockModifier(modifierType);
     }
+    var curr = pos.startBlock;
     while (curr != null && curr != pos.endBlock) {
       curr.applyBlockModifier(modifierType);
       curr = curr.getSucceedingBlock();
