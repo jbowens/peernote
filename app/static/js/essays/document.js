@@ -409,7 +409,12 @@ $.extend(peernoteNS.doc, {
       } else {
         elmt = node.previousSibling;
       }
-      return elmt.block;
+
+      if (!elmt) {
+        return null;
+      }
+
+      return elmt.block ? elmt.block : null;
     }
  },
 
