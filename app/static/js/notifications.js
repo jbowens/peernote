@@ -21,7 +21,7 @@ peernoteNS.notifications = {
   _getNotifications: function() {
     var _this = this;
     var params = {
-      count: 10,
+      count: 8,
     }
 
     if (_this.lastTimestamp) {
