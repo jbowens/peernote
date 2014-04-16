@@ -3,6 +3,7 @@
  */
 var peernoteNS = peernoteNS || {};
 peernoteNS.doc = peernoteNS.doc || {};
+
 $.extend(peernoteNS.doc, {
 
   /* Listeners that should be notified when the document
@@ -10,235 +11,177 @@ $.extend(peernoteNS.doc, {
    */
   _changeListeners: [],
 
-  _text: '',
+  _root: null,
 
-  _modifiers: [],
+  init: function() {
+    var _this = this;
+    this._root = peernoteNS.containerBlock.construct();
+    this._root.addChild(peernoteNS.textBlock.construct());
+    $('.page-container .page').keyup(peernoteNS.errors.wrap(function(e) {
+      _this.checkForChanges(e);
+    }));
+    this.render();
+  },
+
+  checkForChanges: function(e) {
+    var pos = this.getCaret();
+    var changesMade = pos.startBlock.checkForChanges(pos);
+    if (changesMade) {
+      this._documentChanged();
+    }
+  },
 
   addChangeListener: function(f) {
     this._changeListeners.push(f);
   },
 
   getText: function() {
-    return this._text;
+    return this._root.getText();
   },
 
   /* Returns an object encapsulating the entire state of the
    * document.
    */
   getState: function() {
-    return {
-      text: this._text,
-      modifiers: this._modifiers
-    };
-  },
-
-  updateDocument: function(newText, position, charsDiff) {
-    /* Update the raw plain text of the document. */
-    this._text = newText;
-
-    var len = this._text.length;
-    var l = len;
-
-    /* Update all modifiers with the new offsets. */
-    for (var i = 0; i < this._modifiers.length; ++i) {
-      if (this._modifiers[i].start >= position) {
-        this._modifiers[i].start += charsDiff;
-      }
-      if (this._modifiers[i].end >= position) {
-        this._modifiers[i].end += charsDiff;
-      }
-
-      // If this modifier extends past the end of the document,
-      // shorten it.
-      if (this._modifiers[i].end > len) {
-        this._modifiers[i].end = len;
-      }
-
-      // If this modifier starts past the end of the document, remove it.
-      if (this._modifiers[i].start >= len) {
-        this._modifiers.splice(i, 1);
-        // Since we spliced, the array got re-indexed and we need to
-        // decrement the index so we don't skip an index.
-        i--;
-      }
-    }
-
-    this._removeZeroLengthModifiers();
-    this._documentChanged();
+    return this._root.getState();
   },
 
   /* Sets the state of the document to be the given
-   * information.
+   * serialized document state.
    */
-  loadInitialState: function(text, modifiers) {
-    this._text = text;
-    this._modifiers = modifiers;
-    this.render();
+  setState: function(body) {
+    this._root = this.deserializeBlock(body);
   },
 
-  /* Finds all modifiers in effect at the given position.
-   *
-   * @param position the position to find modifiers for
-   * @return a list of all the modifiers in effect
-   */
-  getModifiers: function(position) {
-    var mods = [];
-    for (var i = 0; i < this._modifiers.length; ++i) {
-      if (this._modifiers[i].start <= position &&
-          this._modifiers[i].end >= position) {
-        mods.push(this._modifiers[i].type);
+  deserializeBlock: function(state) {
+    // Iterate through supported block types and find the
+    // appropriate block to deserialize it.
+    var blockTypes = peernoteNS.editor.BLOCK_TYPES;
+    for (var i = 0; i < blockTypes.length; ++i) {
+      if (blockTypes[i].getBlockType() == state.type) {
+        return blockTypes[i].deserialize(state);
       }
     }
-    return mods;
+    return null;
   },
 
-  /* Applies the given modifier for the given range.
-   *
-   * @param modifierType the type of modifier to apply
-   * @param start the start text offset
-   * @param end the end text offset
+  /* Applies the given modifier over the given selection.
    */
-  applyModifier: function(modifierType, start, end) {
-    var startMod = this._getModifierOfTypeAt(modifierType, start);
-    var endMod = this._getModifierOfTypeAt(modifierType, end);
-
-    // Delete modifiers completely contained within the interval.
-    var defuntModifiers = this._getModifiersOfTypeWithinRange(modifierType, start, end);
-    for (var i = 0; i < defuntModifiers.length; ++i) {
-      this._modifiers.splice($.inArray(defuntModifiers[i], this._modifiers), 1);
-    }
-
-    if (startMod && endMod) {
-      if (startMod == endMod) {
-        /* This region already has the given modifier type applied by a
-         * single modifier. There's no need to do anything. */
-        return;
-      }
-      /* This modifier is already applied on both the start and end times.
-       * We should just coalesce them into one modifier. */
-      startMod.end = endMod.end;
-      // Remove the end modifier
-      this._modifiers.splice($.inArray(endMod, this._modifiers), 1);
-    } else if (startMod) {
-      startMod.end = end;
-    } else if (endMod) {
-      endMod.start = start;
+  applyModifier: function(modifierType, selection) {
+    if (selection.startBlock == selection.endBlock) {
+      // This selection only spans a single block. Apply the
+      // modifier to the range within the block.
+      selection.startBlock.applyModifier(modifierType,
+                                         selection.startOffset,
+                                         selection.endOffset);
     } else {
-      var newModifier = {
-        type: modifierType,
-        start: start,
-        end: end
-      };
-      this._modifiers.push(newModifier);
+      // Apply the modifier to the start and end blocks.
+      selection.startBlock.applyModifier(modifierType,
+                                         selection.startOffset,
+                                         selection.startBlock.getTextLength());
+      selection.endBlock.applyModifier(modifierType,
+                                       0,
+                                       selection.endOffset);
+      // TODO: Handle cases where we might have blocks nested within blocks.
+      // Apply to blocks in between.
+      var curr = selection.startBlock.getSucceedingBlock();
+      while (curr != selection.endBlock) {
+        curr.applyModifier(modifierType, 0, curr.getTextLength());
+        curr = curr.getSucceedingBlock();
+      }
     }
-
-    this._removeZeroLengthModifiers();
     this._documentChanged();
   },
 
-  /* Removes the all modifiers of the given type over the given range.
-   *
-   * @param modiferType the type of modifier to remvoe
-   * @param start the start text offset
-   * @param end the ending text offset
+  /* Removes the given modifier over the given selection.
    */
-  removeModifier: function(modifierType, start, end) {
-    var startMod = this._getModifierOfTypeAt(modifierType, start);
-    var endMod = this._getModifierOfTypeAt(modifierType, end);
-
-    // Delete modifiers completely contained within the interval.
-    var defuntModifiers = this._getModifiersOfTypeWithinRange(modifierType, start, end);
-    for (var i = 0; i < defuntModifiers.length; ++i) {
-      this._modifiers.splice($.inArray(defuntModifiers[i], this._modifiers), 1);
-    }
-
-    if (startMod && endMod && startMod == endMod) {
-      // There's one big modifier that extends over this interval. We need to split it
-      // into two modifiers.
-      if (endMod.end > end) {
-        var newModifier = {
-          type: modifierType,
-          start: end,
-          end: endMod.end
-        };
-        this._modifiers.push(newModifier);
-      }
-      startMod.end = start;
-      if (startMod.end == startMod.start) {
-        // This is a zero-length modifier. Just remove it.
-        this._modifiers.splice($.inArray(startMod, this._modifiers), 1);
-      }
+  removeModifier: function(modifierType, selection) {
+    if (selection.startBlock == selection.endBlock) {
+      // This selection only spans a single block. Remove the
+      // modifier from the range within the block.
+      selection.startBlock.removeModifier(modifierType,
+                                          selection.startOffset,
+                                          selection.endOffset);
     } else {
-      if (startMod) {
-        // Make the modifier at the beginning end earlier.
-        startMod.end = start;
-      }
-      if (endMod) {
-        // Make the modifier on the end start later.
-        endMod.start = end;
+      // Remove the modifier from start and end blocks
+      selection.startBlock.removeModifier(modifierType,
+                                          selection.startOffset,
+                                          selection.startBlock.getTextLength());
+      selection.endBlock.removeModifier(modifierType,
+                                        0,
+                                        selection.endOffset);
+      // TODO: Handle cases where we might have blocks nested within blocks.
+      // Remove from blocks in between.
+      var curr = selection.startBlock.getSucceedingBlock();
+      while (curr != selection.endBlock) {
+        curr.removeModifier(modifierType, 0, curr.getTextLength());
+        curr = curr.getSucceedingBlock();
       }
     }
-
-    this._removeZeroLengthModifiers();
     this._documentChanged();
   },
 
-  render: function() {
-    // Covert the modifiers into a more digestible format.
-    var breaks = [];
-    for (var i = 0; i < this._modifiers.length; ++i) {
-      breaks.push({
-        type: this._modifiers[i].type,
-        isStart: true,
-        pos: this._modifiers[i].start,
-        modifier: this._modifiers[i]
-      });
-      breaks.push({
-        type: this._modifiers[i].type,
-        isStart: false,
-        pos: this._modifiers[i].end,
-        modifier: this._modifiers[i]
-      });
+  /* Applies the given block modifier to the given selection.
+   */
+  applyBlockModifier: function(modifierType, pos) {
+    pos.startBlock.applyBlockModifier(modifierType);
+    var curr = pos.startBlock.getSucceedingBlock();
+    if (pos.endBlock != pos.startBlock) {
+      pos.endBlock.applyBlockModifier(modifierType);
     }
-    // Sort the breaks by position, ascending
-    breaks.sort(function(a, b) { return a.pos - b.pos; });
-
-    var lastIndex = 0;
-    var activeModifiers = [];
-    var root = document.createElement('div');
-    for (var i = 0; i < breaks.length; ++i) {
-      var b = breaks[i];
-      var span = this._makeNode(activeModifiers, lastIndex, b.pos);
-      root.appendChild(span);
-
-      if (b.isStart) {
-        activeModifiers.push(b.type);
-      } else {
-        activeModifiers.splice($.inArray(b.type, activeModifiers), 1);
-      }
-      lastIndex = b.pos;
+    while (curr != null && curr != pos.endBlock) {
+      curr.applyBlockModifier(modifierType);
+      curr = curr.getSucceedingBlock();
     }
+    this._documentChanged();
+  },
 
-    // Add the last node
-    var span = this._makeNode(activeModifiers, lastIndex, this._text.length);
-    root.appendChild(span);
+  /* Removes the given block modifier to the given selection.
+   */
+  removeBlockModifier: function(modifierType, pos) {
+    pos.startBlock.removeBlockModifier(modifierType);
+    var curr = pos.startBlock.getSucceedingBlock();
+    if (pos.endBlock != pos.startBlock) {
+      pos.endBlock.removeBlockModifier(modifierType);
+    }
+    while (curr != null && curr != pos.endBlock) {
+      curr.removeBlockModifier(modifierType);
+      curr = curr.getSucceedingBlock();
+    }
+    this._documentChanged();
+  },
 
-    var content = $('.page-container .page')[0];
-    // Save the selection for after we rerender.
-    var selection = peernoteNS.docutils.getCaretPosition(content);
-
-    $(content).empty();
-    content.appendChild(root);
-
-    // Re-rendering the document will have cleared the selection.
-    // We should restore it.
-    if (selection.isSelection) {
-      peernoteNS.docutils.setSelection(content, selection.start, selection.end);
+  /* Deletes a character at the caret, or if there is currently a text
+   * selection, deletes the selection.
+   */
+  deleteAtCaret: function() {
+    var pos = this.getCaret();
+    if (pos.isSelection) {
+      // TODO: Implement
+      console.log("NOT YET IMPLEMENTED: delete selection");
     } else {
-      peernoteNS.docutils.setSelection(content, selection.start);
+      if (pos.startOffset) {
+        pos.startBlock.deleteCharacter(pos.startOffset);
+        this.setCaret({
+          startBlock: pos.startBlock,
+          startOffset: pos.startOffset - 1
+        });
+      } else if (pos.startBlock.getParent().getChildIndex(pos.startBlock)) {
+        // The caret is at the beginning of a block that isn't the first block,
+        // so we should delete a 'newline', coalescing this block with the block
+        // preceding it.
+        var parentBlock = pos.startBlock.getParent();
+        var childIndex = parentBlock.getChildIndex(pos.startBlock);
+        var predecessor = parentBlock.getChildAt(childIndex - 1);
+        var predecessorLength = predecessor.getTextLength();
+        predecessor.coalesce(pos.startBlock);
+        this.setCaret({
+          startBlock: predecessor,
+          startOffset: predecessorLength
+        });
+      }
     }
-
-    return root;
+    this._documentChanged();
   },
 
   /* This function should be called whenever the document changes to
@@ -251,98 +194,223 @@ $.extend(peernoteNS.doc, {
     }
   },
 
-  _makeNode: function(activeModifiers, start, end) {
-    var span = document.createElement('span');
-    var txt = this._text.substr(start, end - start);
-    var txtNode = document.createTextNode(txt);
-    span.appendChild(txtNode);
-    for (var j = 0; j < activeModifiers.length; ++j) {
-      $(span).addClass('mod-' + activeModifiers[j]);
+  /* Re-renders the entire document.
+   */
+  render: function() {
+    var caretPos = this.getCaret();
+    var renderedRoot = this._root.render();
+    var content = $('.page-container .page')[0];
+    $(content).empty();
+    content.appendChild(renderedRoot);
+    // Restore the caret position, if a previous caret position exists.
+    if (caretPos) {
+      this.setCaret(caretPos);
     }
-    return span;
+    return renderedRoot;
   },
 
-  /* Retrieves all modifiers in effect at the given text position.
+  /* Creates a new text block at the caret (or replacing the current
+   * selection if there is a selection). It returns the created text
+   * block.
+   */
+  createNewBlock: function() {
+    // Create the new text block.
+    var pos = this.getCaret();
+    if (pos.isSelection) {
+      // We're replacing text with a new block.
+      // TODO: Implement
+      console.log("Not Yet Implemented: New block replacing selection");
+      return null;
+    } else {
+      // We're just inserting a new block at the current caret position.
+      // We must split the current block into two blocks, splitting the
+      // text and modifiers across the block.
+      var newBlock = pos.startBlock.splitAt(pos.startOffset);
+      this.render();
+      // Shift focus to the new block
+      this.setCaret({
+        startBlock: newBlock,
+        startOffset: 0
+      });
+      this._documentChanged();
+    }
+  },
+
+  /* Retrieves the caret position / selection in terms of
+   * logical block elements.
+   */
+  getCaret: function() {
+    var s = document.getSelection();
+    var pos = {
+      selectionObj: s,
+      isSelection: s.anchorNode != s.focusNode || s.anchorOffset != s.focusOffset
+    };
+    pos.anchorBlock = this._getContainingBlock(s.anchorNode, s.anchorOffset);
+    if (pos.anchorBlock == null) {
+      // The selection is outside of the editor.
+      return null;
+    }
+    pos.anchorOffset = peernoteNS.docutils.getOffset(pos.anchorBlock._elmt,
+                                                     s.anchorNode,
+                                                     s.anchorOffset);
+    pos.focusBlock = this._getContainingBlock(s.focusNode, s.focusOffset);
+    if (pos.focusBlock == null) {
+      // The selection is outside of the editor.
+      return null;
+    }
+    pos.focusOffset = peernoteNS.docutils.getOffset(pos.focusBlock._elmt,
+                                                    s.focusNode,
+                                                    s.focusOffset);
+    pos.anchorChar = peernoteNS.docutils.getOffset(this._root._elmt,
+                                                   s.anchorNode,
+                                                   s.anchorOffset);
+    pos.focusChar = peernoteNS.docutils.getOffset(this._root._elmt,
+                                                   s.focusNode,
+                                                   s.focusOffset);
+    if (pos.anchorChar <= pos.focusChar) {
+      pos.startChar = pos.anchorChar;
+      pos.endChar = pos.focusChar;
+      pos.startBlock = pos.anchorBlock;
+      pos.startOffset = pos.anchorOffset;
+      pos.endBlock = pos.focusBlock;
+      pos.endOffset = pos.focusOffset;
+    } else {
+      pos.startChar = pos.focusChar;
+      pos.endChar = pos.anchorChar;
+      pos.startBlock = pos.focusBlock;
+      pos.startOffset = pos.focusOffset;
+      pos.endBlock = pos.anchorBlock;
+      pos.endOffset = pos.anchorOffset;
+    }
+
+    return pos;
+  },
+
+  /* Sets the caret position/selection to be the given position.
    *
-   * @param position the text offset we're looking up
-   * @return an array of modifier objects
+   * The given pos object must have the following properties:
+   *  - startBlock  the block at which to begin the selection
+   *  - startOffset the plain text offset within the block to start
+   *  - endBlock  the block at which to end the selection
+   *  - endOffset the plain text offset within the block to end
    */
-  _getModifiersAt: function(position) {
-    var modifiers = [];
-    for (var i = 0; i < this._modifiers.length; ++i) {
-      if (this._modifiers[i].start <= position &&
-          this._modifiers[i].end >= position) {
-        modifiers.push(this._modifiers[i]);
-      }
+  setCaret: function(pos) {
+    var ZERO_WIDTH_SPACE = String.fromCharCode(parseInt('200B', 16));
+    var s = document.getSelection();
+    s.removeAllRanges();
+    var newRange = document.createRange();
+
+    // Translate the plain text offset to the actual text node and
+    // corresponding offset.
+    var loc = peernoteNS.docutils.getNodeAtOffset(pos.startBlock._elmt,
+                                                  pos.startOffset);
+    if (loc == false) {
+      // This isn't a valid caret position.
+      return false;
     }
-    return modifiers;
+
+    if (loc.node.nodeValue == '') {
+      // There's a bug in WebKit and IE that makes it impossible to put
+      // a caret at the beginning of an empty text node.
+      //
+      // See:
+      // https://bugs.webkit.org/show_bug.cgi?id=23189
+      // http://stackoverflow.com/questions/5488809/how-to-place-caret-inside-an-empty-dom-element-node
+      // To work around for now, we add a zero-width space to all empty text nodes.
+      // It's important that as soon as text is inserted again, we removed the
+      // space to ensure things like arrow keys and backspaces work as expected.
+      loc.node.nodeValue = ZERO_WIDTH_SPACE;
+    }
+
+    newRange.setStart(loc.node, loc.nodeOffset);
+
+    if (pos.endBlock) {
+      // Translate the plain text offset to the actual text node and
+      // corresponding offset.
+      var endLoc = peernoteNS.docutils.getNodeAtOffset(pos.endBlock._elmt,
+                                                       pos.endOffset);
+      newRange.setEnd(endLoc.node, endLoc.nodeOffset);
+    }
+
+    s.addRange(newRange);
   },
 
-  /* Get modifier of a specific type at the given text position if it
-   * exists.
-   *
-   * @param modifierType the type of modifier to lookup
-   * @param position the text offset we're looking up
-   * @return the modifier objects
-   */
-  _getModifierOfTypeAt: function(modifierType, position) {
-    for (var i = 0; i < this._modifiers.length; ++i) {
-      if (this._modifiers[i].start <= position &&
-          this._modifiers[i].end >= position &&
-          this._modifiers[i].type == modifierType) {
-        return this._modifiers[i];
+  moveCaretLeft: function() {
+    var pos = this.getCaret();
+    if (!pos) return;
+    if (pos.startOffset > 0) {
+      this.setCaret({
+        startBlock: pos.startBlock,
+        startOffset: pos.startOffset - 1
+      });
+    } else {
+      var precedingBlock = pos.startBlock.getPrecedingBlock();
+      if (precedingBlock) {
+        this.setCaret({
+          startBlock: precedingBlock,
+          startOffset: precedingBlock.getTextLength()
+        });
       }
     }
-    return null;
   },
 
-  /* Retrieves modifiers within the given range of the given type. It only
-   * includes modifiers that are COMPLETELY contained within the interval.
-   * It does not include modifiers that start or end exactly on the bounds
-   * of the interval.
-   *
-   * @param modifierType the type of modifier to lookup
-   * @param start the start offset
-   * @param end the end offset
-   * @return a list of modifiers
-   */
-  _getModifiersOfTypeWithinRange: function(modifierType, start, end) {
-    var mods = [];
-    for (var i = 0; i < this._modifiers.length; ++i) {
-      if (this._modifiers[i].start > start &&
-          this._modifiers[i].end < end &&
-          this._modifiers[i].type == modifierType) {
-        mods.push(this._modifiers[i]);
+  moveCaretRight: function() {
+    var pos = this.getCaret();
+    if (!pos) return;
+    if (pos.startOffset < pos.startBlock.getTextLength()) {
+      this.setCaret({
+        startBlock: pos.startBlock,
+        startOffset: pos.startOffset + 1
+      });
+    } else {
+      var succeedingBlock = pos.endBlock.getSucceedingBlock();
+      if (succeedingBlock) {
+        this.setCaret({startBlock: succeedingBlock, startOffset: 0});
       }
     }
-    return mods;
   },
 
-  /* Retrieves all zero-length modifiers at the given position.
-   *
-   * @param pos the position to lookup
-   * @return a list of all zero-length modifiers at the given position
-   */
-  _getZeroLengthModifiersAt: function(pos) {
-    var zeroLengthMods = [];
-    var mods = this._getModifiersAt(pos);
-    for (var i = 0; i < mods.length; ++i) {
-      if (mods[i].start == mods[i].end) {
-        zeroLengthMods.push(mods[i]);
-      }
+  getBlocksInCaretPos: function(pos) {
+    var blocks = [];
+    blocks.push(pos.startBlock);
+    var curr = pos.startBlock.getSucceedingBlock();
+    while (curr != null && curr != pos.endBlock) {
+      blocks.push(curr);
+      curr = curr.getSucceedingBlock();
     }
-    return zeroLengthMods;
+    if (pos.startBlock != pos.endBlock)
+      blocks.push(pos.endBlock);
+    return blocks;
   },
 
-  /* Removes all zero length modifiers in the document.
-   */
-  _removeZeroLengthModifiers: function() {
-    for (var i = 0; i < this._modifiers.length; i++) {
-      if (this._modifiers[i].start == this._modifiers[i].end) {
-        this._modifiers.splice(i, 1);
-        i--;
-      }
+  _getContainingBlock: function(node, nodeOffset) {
+    if (!node) {
+      return null;
     }
-  }
+
+    var isPage = $(node).hasClass('page');
+    if (isPage) {
+      // This is a top level document node. Return the first block contained within it.
+      var blocks = $('.page > .pn-block');
+      if (blocks.length) {
+        return blocks[0].block;
+      } else {
+        return null;
+      }
+    } else {
+      /* Find the containing block for the anchor. */
+      var elmt = $(node).closest('.pn-block');
+      /* It could be that the content-editable put the focus outside of a block
+       * chilling in a top-level text node, in which case we should move to the next sibling. */
+      if (elmt.length) {
+        elmt = elmt[0];
+      } else if (node.nextSibling) {
+        elmt = node.nextSibling;
+      } else {
+        elmt = node.previousSibling;
+      }
+      return elmt.block;
+    }
+ },
 
 });

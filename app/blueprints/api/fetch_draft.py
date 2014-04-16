@@ -15,7 +15,7 @@ timestamp: (optional) only return if essay has timestamp later than this. Must c
 
 Returns:
 title: title of the draft
-text: text of the draft
+body: body of the draft
 timestamp: timestamp of modified date
 """
 
@@ -43,10 +43,9 @@ def fetch_draft():
 
 
         return jsonify(status='success',
-            text=draft.text,
+            body=draft.body,
             title=draft.title,
             finalized=draft.finalized,
-            modifiers=draft.modifiers,
             timestamp=str(essay.modified_date)
         )
     else:

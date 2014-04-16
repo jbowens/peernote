@@ -8,6 +8,23 @@ peernoteNS.editor = peernoteNS.editor || {};
  * initializing other peernoteNS.editor properties.
  */
 $.extend(peernoteNS.editor, {
+  /* Returns a function that can be used to set a given block
+   * modifier.
+   */
+  _blockModifier: function(modifierType, commandType) {
+    return peernoteNS.errors.wrap(function(e) {
+      var _this = peernoteNS.editor;
+      var pos = peernoteNS.doc.getCaret();
+      if (!pos) {
+        // The focus is not in the editor.
+        return;
+      }
+
+      _this.removeAllAligns(pos);
+      peernoteNS.doc.applyBlockModifier(modifierType, pos);
+    });
+  },
+
   /* Takes the name of a modifier type and returns a function that
    * can be used to toggle the given modifier. It should be installed
    * as a listener on the appropriate button that toggles the modifier.
@@ -19,16 +36,20 @@ $.extend(peernoteNS.editor, {
   _simpleModifierToggler: function(modifierType, commandType) {
     return peernoteNS.errors.wrap(function(e) {
       var _this = peernoteNS.editor;
-      var sel = _this._getSel();
+      var sel = peernoteNS.doc.getCaret();
+      if (!sel) {
+        // The focus is not in the editor.
+        return;
+      }
       if (sel.isSelection) {
-        var modifiers = peernoteNS.doc.getModifiers(sel.start);
+        var modifiers = sel.startBlock.getModifiers(sel.startOffset);
         var isApply = $.inArray(modifierType, modifiers) == -1;
         var apply = function() {
-          peernoteNS.doc.applyModifier(modifierType, sel.start, sel.end);
+          peernoteNS.doc.applyModifier(modifierType, sel);
           peernoteNS.doc.render();
         };
         var unapply = function() {
-          peernoteNS.doc.removeModifier(modifierType, sel.start, sel.end);
+          peernoteNS.doc.removeModifier(modifierType, sel);
           peernoteNS.doc.render();
         };
         var cmd = {
@@ -39,19 +60,18 @@ $.extend(peernoteNS.editor, {
         peernoteNS.commands.execute(cmd);
       } else {
         // TODO: Maybe turn this into an undo-able command.
-
-        var pos = peernoteNS.docutils.getCaretPosition(_this._doc);
-
         // Check for out of date pending modifiers from other locations
         if (_this._pendingModifiers.length &&
-            pos.start != _this._pendingModifiersPos) {
+            (sel.startBlock != _this._pendingModifiersBlock ||
+             sel.startOffset != _this._pendingModifiersOffset)) {
           _this._pendingModifiers = [];
         }
 
         var pendingIndex = $.inArray(modifierType, _this._pendingModifiers);
         if (pendingIndex == -1) {
           _this._pendingModifiers.push(modifierType);
-          _this._pendingModifiersPos = pos.start;
+          _this._pendingModifiersBlock = sel.startBlock;
+          _this._pendingModifiersOffset = sel.startOffset;
         } else {
           _this._pendingModifiers.splice(pendingIndex, 1);
         }
@@ -75,59 +95,33 @@ $.extend(peernoteNS.editor, {
    */
   autosave_timer: null,
 
-  _pendingModifiersPos: null,
+  _pendingModifiersBlock: null,
+  _pendingModifiersOffset: null,
   _pendingModifiers: [],
+
+  /* A list of all valid block types.
+   */
+  BLOCK_TYPES: [],
 
   _doc: null,
 
-  _getSel: function() {
-    var sel = peernoteNS.docutils.getCaretPosition(peernoteNS.editor._doc);
-    return sel;
-  },
-
-  /* Keyup handler for the editor. This function handles everything that
-   * should happen on key press in the editor.
-   */
-  keyup: peernoteNS.errors.wrap(function(e) {
+  keypress: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.editor;
-
-    // Did the document change?
-    if (peernoteNS.doc.getText() != _this._doc.innerText) {
-      var charDiff = _this._doc.innerText.length - peernoteNS.doc._text.length;
-      var pos = peernoteNS.docutils.getCaretPosition(_this._doc);
-      // Update the stored representation of the document.
-      peernoteNS.doc.updateDocument(_this._doc.innerText,
-                                    pos.start - charDiff,
-                                    charDiff);
-
-      if (_this._pendingModifiers.length &&
-          _this._pendingModifiersPos == pos.start - charDiff) {
-        if (charDiff > 0) {
-          // If they added characters, we should now wrap those characters
-          // in the pending modifiers.
-          for (var i = 0; i < _this._pendingModifiers.length; ++i) {
-            var type = _this._pendingModifiers[i];
-            peernoteNS.doc.applyModifier(type, pos.start-charDiff, pos.start);
-          }
-          // Re-render the document to reflect the new modifier.
-          peernoteNS.doc.render();
-        }
-        // Clear pending modifiers
-        _this._pendingModifiers = [];
-      }
-    }
-  }),
-
-  /* Keydown handler for the editor.
-   */
-  keydown: peernoteNS.errors.wrap(function(e) {
-    // We want tabs to be treated as a literal tab characters,
-    // not for navigation.
-    if (e.keyCode == 9) {
+    if (e.keyCode == 13) {
+      // They hit enter. We should create a new block.
       e.preventDefault();
-      peernoteNS.docutils.insertRawTextAtCursor('\t');
+      peernoteNS.doc.createNewBlock();
     }
   }),
+
+  backspaceHandler: function(e) {
+    var _this = peernoteNS.editor;
+    if (peernoteNS.essays.currentMode == peernoteNS.essays.MODES.EDIT) {
+      // They hit backspace. We should delete a character.
+      e.preventDefault();
+      peernoteNS.doc.deleteAtCaret();
+    }
+  },
 
   /* Togglers for simple modifiers. These are installed as listeners for
    * their corrsesponding UI elements.
@@ -140,6 +134,29 @@ $.extend(peernoteNS.editor, {
 
   underline: peernoteNS.editor._simpleModifierToggler('underline',
       peernoteNS.commands.TYPES.UNDERLINE),
+
+  /* Controls for block modifiers. */
+  leftAlign: peernoteNS.editor._blockModifier('left-align',
+      peernoteNS.commands.TYPES.LEFT_ALIGN),
+
+  centerAlign: peernoteNS.editor._blockModifier('center-align',
+      peernoteNS.commands.TYPES.CENTER_ALIGN),
+
+  rightAlign: peernoteNS.editor._blockModifier('right-align',
+      peernoteNS.commands.TYPES.RIGHT_ALIGN),
+
+  removeAllAligns: function(pos) {
+    var blocks = peernoteNS.doc.getBlocksInCaretPos(pos);
+    for (var i = 0; i < blocks.length; ++i) {
+      var b = blocks[i];
+      if (b.hasBlockModifier('left-align'))
+        b.removeBlockModifier('left-align');
+      if (b.hasBlockModifier('center-align'))
+        b.removeBlockModifier('center-align');
+      if (b.hasBlockModifier('right-align'))
+        b.removeBlockModifier('right-align');
+    }
+  },
 
   /* Event listener for when the undo button is clicked.
    */
@@ -171,13 +188,10 @@ $.extend(peernoteNS.editor, {
    * appropriately. This is called on page load as well (from the
    * controller) to load the initial state of the draft)
    */
-  loadDraftState: function (title, text, modifiers) {
-    // If we're loading something into the editor, it must be
-    // the finalized draft.
-    peernoteNS.doc.loadInitialState(text, modifiers);
-
-    // TODO: Do something with the title. Where are we going to put it?
-
+  loadDraftState: function (title, body) {
+    // TODO: Do something with the title
+    peernoteNS.doc.setState(body);
+    peernoteNS.doc.render();
   },
 
   /**
@@ -187,14 +201,12 @@ $.extend(peernoteNS.editor, {
   save: function() {
     var _this = this;
 
-    // TODO: Handle the title.
     var state = peernoteNS.doc.getState();
 
     var params = {
-      text: state.text,
       uid: peernoteNS.essays.uid,
       did: peernoteNS.essays.did,
-      modifiers: JSON.stringify(state.modifiers)
+      body: JSON.stringify(state)
     };
 
     $status_line = $('.status-line');
@@ -230,13 +242,18 @@ $.extend(peernoteNS.editor, {
     }, _this.AUTOSAVE_PAUSE_MILLIS);
   }),
 
+  setupBlockTypes: function() {
+    this.BLOCK_TYPES.push(peernoteNS.containerBlock);
+    this.BLOCK_TYPES.push(peernoteNS.textBlock);
+  },
+
   initDocument: function() {
     var docContainer = $('.page-container .page')[0];
     this._doc = docContainer;
-    peernoteNS.doc._text = docContainer.innerText;
+    peernoteNS.doc.init();
     peernoteNS.doc.render();
-    $(docContainer).keyup(peernoteNS.editor.keyup);
-    $(docContainer).keydown(peernoteNS.editor.keydown);
+    $(docContainer).keypress(peernoteNS.editor.keypress);
+    peernoteNS.essays.keys.registerDownHandler(8, peernoteNS.editor.backspaceHandler);
     // Subscribe to changes in the document so that we can
     // autosave appropriately.
     peernoteNS.doc.addChangeListener(this.onDocumentChange);
@@ -248,6 +265,9 @@ $.extend(peernoteNS.editor, {
     toolkitLeft.find('button.bold').click(peernoteNS.editor.bold);
     toolkitLeft.find('button.italic').click(peernoteNS.editor.italic);
     toolkitLeft.find('button.underline').click(peernoteNS.editor.underline);
+    toolkitLeft.find('button.left-align').click(peernoteNS.editor.leftAlign);
+    toolkitLeft.find('button.right-align').click(peernoteNS.editor.rightAlign);
+    toolkitLeft.find('button.center-align').click(peernoteNS.editor.centerAlign);
     toolbar.find('button#undo').click(peernoteNS.editor.undo);
     toolbar.find('button#redo').click(peernoteNS.editor.redo);
   }
@@ -255,6 +275,7 @@ $.extend(peernoteNS.editor, {
 });
 
 peernoteNS.init(function() {
+  peernoteNS.editor.setupBlockTypes();
   peernoteNS.editor.initDocument();
   peernoteNS.editor.initToolbar();
 });

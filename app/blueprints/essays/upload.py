@@ -1,4 +1,4 @@
-import os
+import os, json
 from flask import render_template, g, request, url_for, redirect, current_app, flash
 from app.blueprints.essays import essays
 from app.decorators import login_required
@@ -31,7 +31,7 @@ def upload_essay():
         contents = f.read()
         f.seek(0)
 
-        # Parse the document with the appropriate parser 
+        # Parse the document with the appropriate parser
         doc_parser = applicable_parsers[0]
         parsed_contents = doc_parser.parse_file(f.stream)
 
@@ -63,8 +63,12 @@ def upload_essay():
         draft = Draft()
         draft.eid = new_essay.eid
         draft.uid = g.user.uid
-        draft.title = parsed_contents.title if title in parsed_contents  else title
-        draft.text = parsed_contents['text']
+        draft.title = parsed_contents.title if title in parsed_contents else title
+        paragraphs = parsed_contents['text'].split('\n')
+        body = {'type': 'container', 'children': []}
+        for p in paragraphs:
+          body['children'].append({'type': 'text', 'text': p, 'modifiers': []})
+        draft.body = json.dumps(body)
         db.session.add(draft)
         db.session.commit()
 
