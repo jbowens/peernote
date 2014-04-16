@@ -216,7 +216,9 @@ $.extend(peernoteNS.essays, {
         }
 
         // Inform the editor to load this draft
-        peernoteNS.editor.loadDraftState(data.title, data.text, modifiers);
+        var draftBody = JSON.parse(data.body)
+        peernoteNS.editor.loadDraftState(data.title, draftBody);
+        $('.status-line').text('Saved');
 
         if (peernoteNS.essays.review_only) {
           peernoteNS.essays.toReviewer();
@@ -677,7 +679,6 @@ peernoteNS.init(function() {
   peernoteNS.essays.initOpenButton();
   peernoteNS.essays.initModeSwap();
   peernoteNS.essays.initDraft();
-
 
   if (peernoteNS.essays.review_only) {
     peernoteNS.essays.initReviewOnly();

@@ -12,17 +12,16 @@ Given a draft, saves it to the db.
 Expects:
 did: id of draft to save
 uid: id of user who owns draft
-text: new text for draft
+body: new json blob for the body of the draft
 """
 @api.route('/save_draft', methods=['POST'])
 @json_login_required
 def save_draft():
-    if 'text' in request.form and 'did' in request.form and 'uid' in request.form:
+    if 'body' in request.form and 'did' in request.form and 'uid' in request.form:
 
-        text = request.form['text']
+        body = request.form['body']
         did = request.form['did']
         uid = request.form['uid']
-        modifiers = request.form.get('modifiers', None)
 
         draft = Draft.query.filter_by(did=did).first()
 
@@ -31,14 +30,12 @@ def save_draft():
 
         new_did = None
         if not draft.finalized:
-            draft.text = text
-            draft.modifiers = modifiers
+            draft.body = body
             db.session.add(draft)
             db.session.commit()
         else:
             new_draft = Draft.next_draft(draft)
-            new_draft.text = text
-            new_draft.modifiers = modifiers
+            new_draft.body = body
             db.session.add(new_draft)
             db.session.commit()
             new_did = new_draft.did
