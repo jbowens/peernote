@@ -35,3 +35,13 @@ class Notification(db.Model):
             return 'Yesterday'
         else:
             return self.created_date.strftime('%b %d')
+
+    def to_dict(self):
+        return {
+            'nid': self.nid,
+            'created_date': self.pretty_created_date(),
+            'short_text': self.rendered_short(),
+            'url': self.url,
+            'long_text': self.rendered_long(),
+            'seen': self.seen
+        }

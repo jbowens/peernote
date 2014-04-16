@@ -5,11 +5,8 @@ from app.models.essay import Essay
 from app import db
 
 """
-Given a user id, responds with all of the users drafts, sorted by
+Responds with all of the logged in users drafts, sorted by
 last modified date.
-
-Expects:
-uid: id of user
 
 Returns:
 essays: prettified json representation of essay

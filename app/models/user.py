@@ -47,7 +47,7 @@ class User(db.Model):
         Returns count number of most recently assigned reviews to user's
         email address.
         """
-        return Review.query.filter_by(email=self.email).order_by(Review.created_date.desc())[:count]
+        return Review.query.filter_by(email=self.email).order_by(Review.created_date.desc()).limit(count)
 
     def essay_count(self):
         return Essay.query.filter_by(uid=self.uid).count()
