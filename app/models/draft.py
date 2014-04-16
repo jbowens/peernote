@@ -52,6 +52,6 @@ class Draft(db.Model):
         new_draft.uid = draft.uid
         new_draft.version = draft.version + 1
         new_draft.title = draft.title
-        new_draft.text = draft.text
+        new_draft.body = draft.body
 
         return new_draft

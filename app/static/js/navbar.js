@@ -44,5 +44,32 @@ peernoteNS.init(function() {
             $('.notifications-dropdown').fadeOut(fadeOutTime);
         }
     });
+
+
+    // subscribe for notifications
+    peernoteNS.notifications.subscribe(function(notifications) {
+        for (var i = 0; i < notifications.length; i++) {
+            // TODO: not every notification will be unread
+            new_notification = "" +
+                '<li class="notification unread-notification">' +
+                    '<div class="notification-thumbnail"></div>' +
+                    '<div class="notification-content">' +
+                        '<span class="notification-text">' +
+                            '<span class="notification-author">' +
+                                notifications[i].sender +
+                            '</span>' +
+                            ' ' + notifications[i].short_text +
+                        '</span>' +
+                        '<div class="notification-date">' +
+                        notifications[i].created_date +
+                        '</div>' +
+                    '</div>' +
+                '</li>';
+
+            $('#notifications-list').prepend(new_notification);
+        }
+
+        $('#notifications-list').slice(0,10);
+    });
 });
 

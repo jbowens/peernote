@@ -73,30 +73,6 @@
         <h1 class="tab-unselected" id="assignments">Assignments</h1>
         <div class="tab-fill"></div>
         <ul class="notifications">
-            <li class="notification">
-                <div class="notification-thumbnail"></div>
-                <div class="notification-content">
-                    <div class="author-date">
-                        <div class="notification-author">Peernote</div>
-                        <div class="notification-date">Today</div>
-                    </div>
-                    <div class="notification-text">
-                        Hello and welcome to Peernote! This is your notifications center, where you will receive updates and announcements.
-                    </div>
-                </div>
-            </li>
-            <li class="notification">
-                <div class="notification-thumbnail"></div>
-                <div class="notification-content">
-                    <div class="author-date">
-                        <div class="notification-author">Bryce A.</div>
-                        <div class="notification-date">Yesterday</div>
-                    </div>
-                    <div class="notification-text">
-                        Your essay is good and you should feel good about it.
-                    </div>
-                </div>
-            </li>
         </ul>
         {% set reviews = user.get_assigned_reviews(5) %}
         {% if reviews %}

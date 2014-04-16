@@ -13,7 +13,12 @@
 
         {% block scripts %}
             {# I love templated javascript. :D #}
-            <script type="text/javascript">var peernoteNS = peernoteNS || {};peernoteNS.csrf = '{{ csrf_token }}';</script>
+            <script type="text/javascript">
+                var peernoteNS = peernoteNS || {};
+                peernoteNS.csrf = '{{ csrf_token }}';
+                {% if is_logged_in %} peernoteNS.is_logged_in = true; {% else %} peernoteNS.is_logged_in = false; {% endif %}
+            </script>
+
             {% assets "base_js" %}
                 <script type="text/javascript" src="{{ ASSET_URL }}"></script>
             {% endassets %}

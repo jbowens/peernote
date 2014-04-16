@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from jinja2 import Template
 from app import db
 import user
@@ -18,7 +18,7 @@ class Notification(db.Model):
         if self.from_uid:
             sender = user.User.query.filter_by(uid=self.from_uid).first()
             if sender:
-                return sender.first_name + " " + sender.last_initial()
+                return sender.first_name + " " + sender.last_initial() + "."
 
         return "Peernote"
 
@@ -40,6 +40,7 @@ class Notification(db.Model):
         return {
             'nid': self.nid,
             'created_date': self.pretty_created_date(),
+            'sender': self.sender(),
             'short_text': self.rendered_short(),
             'url': self.url,
             'long_text': self.rendered_long(),

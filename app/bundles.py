@@ -164,6 +164,7 @@ assets.register('base_js',
     Bundle(
         "js/errors.js",
         "js/init.js",
+        "js/notifications.js",
         "js/navbar.js",
         "js/footer.js",
         filters="rjsmin",

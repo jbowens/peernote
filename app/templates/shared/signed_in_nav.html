@@ -69,24 +69,7 @@
                     <div class="notif-title">Notifications</div>
                     <div class="mark-as-read">Mark as read</div>
                 </div>
-                <ul>
-                    {% for notification in user.notifications(5) %}
-                    {% if not notification.seen %}
-                    <li class="notification unread-notification">
-                    {% else %}
-                    <li class="notification">
-                    {% endif %}
-                        <div class="notification-thumbnail"></div>
-                        <div class="notification-content">
-                            <span class="notification-text">
-                                <span class="notification-author">{{notification.sender()}}</span>
-                                {{notification.rendered_short()}}
-                            </span>
-                            <div class="notification-date">{{notification.pretty_created_date()}}</div>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
+                <ul id="notifications-list"> </ul>
                 <div class="notifications-dropdown-see-all">
                     <a class="notifications-dropdown-see-all-link">
                         See All

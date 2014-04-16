@@ -3,12 +3,13 @@ peernoteNS.profile = peernoteNS.profile || {};
 
 $.extend(peernoteNS.profile, {
     init: function() {
-        peernoteNS.profile.tabFunctionality();
-        peernoteNS.profile.pageHeight();
-   },
+        this.tabFunctionality();
+        this.pageHeight();
+        this.subscribeNotifications();
+    },
 
-   /* Make tabs work */
-   tabFunctionality: function() {
+    /* Make tabs work */
+    tabFunctionality: function() {
         $assignmentsPanel = $(".assigned-reviews");
         $notificationsPanel = $(".notifications");
         $assignmentsTab = $("#assignments");
@@ -37,10 +38,10 @@ $.extend(peernoteNS.profile, {
                 notificationsVisible = true;
             }
         });
-   },
+    },
 
-   /* Set min height of page */
-   pageHeight: function() {
+    /* Set min height of page */
+    pageHeight: function() {
         $footer = $(".footer");
         $nav = $("nav");
         $dashboard = $(".dashboard");
@@ -56,7 +57,36 @@ $.extend(peernoteNS.profile, {
 
         $(window).resize(resize);
         resize();
-   }
+    },
+
+    /* listen for new notifications */
+    subscribeNotifications: function() {
+        peernoteNS.notifications.subscribe(function(notifications) {
+            for (var i = 0; i < notifications.length; i++) {
+                new_notification = "" +
+                    '<li class="notification">' +
+                        '<div class="notification-thumbnail"></div>' +
+                        '<div class="notification-content">' +
+                            '<div class="author-date">' +
+                                '<div class="notification-author">' +
+                                    notifications[i].sender +
+                                '</div>' +
+                                '<div class="notification-date">' +
+                                    notifications[i].created_date +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="notification-text">' +
+                                notifications[i].long_text +
+                            '</div>' +
+                        '</div>' +
+                    '</li>';
+
+                $('ul.notifications').prepend(new_notification);
+            }
+        })
+    }
 });
 
-peernoteNS.init(peernoteNS.profile.init);
+peernoteNS.init(function() {
+    peernoteNS.profile.init();
+});
