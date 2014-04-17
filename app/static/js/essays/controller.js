@@ -68,7 +68,12 @@ $.extend(peernoteNS.essays, {
     $toolkit = $('.toolkit');
     $toolkit.find('.next-draft').click(function(e) {
       e.preventDefault();
-      _this.createNextDraft();
+      if (peernoteNS.essays.drafts.indexOf(peernoteNS.essays.did) != peernoteNS.essays.drafts.length - 1) {
+        // Currently on older draft, just open the draft following it
+        $('.timeline ul li.active-draft').next().click();
+      } else {
+        _this.createNextDraft();
+      }
     });
   },
 
@@ -230,16 +235,12 @@ $.extend(peernoteNS.essays, {
 
             // Move to editor mode
             peernoteNS.essays.toEditor();
-
-            $('li.next-draft').slideDown();
           } else {
             // This is an old draft. We need to disable autosaving on the editor.
             peernoteNS.editor.disableAutosaving();
 
             // Move to readonly mode
             peernoteNS.essays.toReadonly();
-
-            $('li.next-draft').slideUp();
           }
 
           $('.status-line').text('Saved');
