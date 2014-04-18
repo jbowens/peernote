@@ -157,8 +157,25 @@ $.extend(peernoteNS.doc, {
   deleteAtCaret: function() {
     var pos = this.getCaret();
     if (pos.isSelection) {
-      // TODO: Implement
-      console.log("NOT YET IMPLEMENTED: delete selection");
+      if (pos.startBlock != pos.endBlock) {
+        pos.startBlock.deleteRange(pos.startOffset);
+        pos.endBlock.deleteRange(0, pos.endOffset);
+      } else {
+        pos.startBlock.deleteRange(pos.startOffset, pos.endOffset);
+      }
+      var curr = pos.startBlock.getSucceedingBlock();
+      while (curr != pos.endBlock && curr != null) {
+        var next = curr.getSucceedingBlock();
+        curr.getParent().removeChild(curr);
+        curr = next;
+      }
+      if (pos.startBlock != pos.endBlock) {
+        pos.startBlock.coalesce(pos.endBlock);
+      }
+      this.setCaret({
+        startBlock: pos.startBlock,
+        startOffset: pos.startOffset
+      });
     } else {
       if (pos.startOffset) {
         pos.startBlock.deleteCharacter(pos.startOffset);
@@ -189,6 +206,11 @@ $.extend(peernoteNS.doc, {
    * @param text  the plain text to insert at the caret position.
    */
   insertAtCaret: function(text) {
+    var pos = this.getCaret();
+    if (pos.isSelection) {
+      this.deleteAtCaret();
+      pos = this.getCaret();
+    }
     console.log("NOT YET IMPLEMENTED: document.insertAtCaret");
   },
 

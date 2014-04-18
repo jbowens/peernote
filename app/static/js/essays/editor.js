@@ -121,6 +121,7 @@ $.extend(peernoteNS.editor, {
     if (peernoteNS.essays.currentMode == peernoteNS.essays.MODES.EDIT) {
       // They hit backspace. We should delete a character.
       e.preventDefault();
+      debugger;
       peernoteNS.doc.deleteAtCaret();
     }
   },

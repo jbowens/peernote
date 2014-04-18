@@ -157,6 +157,53 @@ $.extend(peernoteNS.textBlock, {
     this.rerenderInPlace();
   },
 
+  /* Deletes the given text range.
+   *
+   * If end is not provided, end extends to the end of the text block.
+   */
+  deleteRange: function(start, end) {
+    if (!end) {
+      end = this._text.length + 1;
+    }
+
+    this._text = this._text.substr(0, start) + this._text.substr(end);
+    var deletedChars = end - start;
+    /* Update modifiers. */
+    var i = this._modifiers.length - 1;
+    while (i >= 0) {
+      var mod = this._modifiers[i];
+      if (mod.start >= start && mod.end < end) {
+        // This modifier is completely contained within the deleted range,
+        // so we should just delete it altogether.
+        this._modifiers.splice(i, 1);
+      }
+      else if (mod.start >= start && mod.start < end ||
+               mod.end >= start && mod.end < end) {
+        // This modifier is partially contained within the range. We should
+        // trim its ends.
+        if (mod.start >= start && mod.start < end) {
+          // The start is in the range.
+          mod.start = start;
+          mod.end = mod.end - deletedChars;
+        } else {
+          // Only the end is in the range.
+          mod.end = start;
+        }
+      } else if (mod.start > end) {
+        // This modifier begins after the range. We should update its
+        // bounds.
+        mod.start = mod.start - deletedChars;
+        mod.end = mod.end - deletedChars;
+      }
+
+      --i;
+    }
+
+    if (this._elmt) {
+      this.rerenderInPlace();
+    }
+  },
+
   /* Splits the block at the given plain-text offset within the block,
    * returning the newly created second-half block.
    */
