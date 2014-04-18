@@ -211,7 +211,20 @@ $.extend(peernoteNS.doc, {
       this.deleteAtCaret();
       pos = this.getCaret();
     }
-    console.log("NOT YET IMPLEMENTED: document.insertAtCaret");
+    var lines = text.split('\n');
+    var curr = pos.startBlock;
+    var off = pos.startOffset;
+    for (var i = 0; i < lines.length; ++i) {
+      curr.insertTextAt(lines[i], off);
+      if (i != lines.length - 1) {
+        curr = curr.splitAt(off + lines[i].length);
+      } else {
+        this.setCaret({
+          startBlock: curr,
+          startOffset: off + lines[i].length
+        });
+      }
+    }
   },
 
   /* This function should be called whenever the document changes to

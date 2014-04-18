@@ -317,6 +317,23 @@ $.extend(peernoteNS.textBlock, {
     return false;
   },
 
+  insertTextAt: function(text, off) {
+    var charsInserted = text.length;
+    this._text = this._text.substr(0, off) + text + this._text.substr(off);
+
+    /* Update all modifiers with the new offsets. */
+    for (var i = 0; i < this._modifiers.length; ++i) {
+      if (this._modifiers[i].start >= off) {
+        this._modifiers[i].start += charsInserted;
+      }
+      if (this._modifiers[i].end >= off) {
+        this._modifiers[i].end += charsInserted;
+      }
+    }
+
+    this.rerenderInPlace();
+  },
+
   updateText: function(newText, position, charsDiff) {
     var oldLength = this._text.length;
     /* Update the raw plain text of the document. */
