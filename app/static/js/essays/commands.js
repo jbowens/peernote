@@ -42,6 +42,7 @@ $.extend(peernoteNS.commands, {
 
     cmd.beforeState = peernoteNS.doc.getState();
     cmd.execute();
+    cmd.afterState = peernoteNS.doc.getState();
     this._undo_stack.push(cmd);
   },
 
@@ -69,7 +70,7 @@ $.extend(peernoteNS.commands, {
     if (!cmd) {
       return false;
     } else {
-      cmd.execute();
+      peernoteNS.doc.setState(cmd.afterState);
       this._undo_stack.push(cmd);
       return true;
     }
