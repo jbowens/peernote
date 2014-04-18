@@ -51,6 +51,7 @@ $.extend(peernoteNS.doc, {
    */
   setState: function(body) {
     this._root = this.deserializeBlock(body);
+    peernoteNS.doc.render();
   },
 
   deserializeBlock: function(state) {
@@ -303,12 +304,14 @@ $.extend(peernoteNS.doc, {
     pos.focusOffset = peernoteNS.docutils.getOffset(pos.focusBlock._elmt,
                                                     s.focusNode,
                                                     s.focusOffset);
-    pos.anchorChar = peernoteNS.docutils.getOffset(this._root._elmt,
-                                                   s.anchorNode,
-                                                   s.anchorOffset);
-    pos.focusChar = peernoteNS.docutils.getOffset(this._root._elmt,
-                                                   s.focusNode,
-                                                   s.focusOffset);
+    if (this._root._elmt) {
+      pos.anchorChar = peernoteNS.docutils.getOffset(this._root._elmt,
+                                                     s.anchorNode,
+                                                     s.anchorOffset);
+      pos.focusChar = peernoteNS.docutils.getOffset(this._root._elmt,
+                                                     s.focusNode,
+                                                     s.focusOffset);
+    }
     if (pos.anchorChar <= pos.focusChar) {
       pos.startChar = pos.anchorChar;
       pos.endChar = pos.focusChar;

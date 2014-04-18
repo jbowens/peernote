@@ -24,7 +24,8 @@ $.extend(peernoteNS.commands, {
     UNDERLINE:    4,
     LEFT_ALIGN:   5,
     CENTER_ALIGN: 6,
-    RIGHT_ALIGN:  7
+    RIGHT_ALIGN:  7,
+    TYPING:       8
   },
 
   /*
@@ -34,11 +35,12 @@ $.extend(peernoteNS.commands, {
    */
   execute: function(cmd) {
     // Verify that the command object is valid.
-    if (!cmd.execute || !cmd.revert || !cmd.type) {
+    if (!cmd.execute) {
       peernoteNS.errors.record({'msg': 'Attempted to execute a non command object: ' + cmd});
       return false;
     }
 
+    cmd.beforeState = peernoteNS.doc.getState();
     cmd.execute();
     this._undo_stack.push(cmd);
   },
@@ -52,7 +54,7 @@ $.extend(peernoteNS.commands, {
     if (!cmd) {
       return false;
     } else {
-      cmd.revert();
+      peernoteNS.doc.setState(cmd.beforeState);
       this._redo_stack.push(cmd);
       return true;
     }

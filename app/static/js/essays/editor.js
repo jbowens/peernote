@@ -21,9 +21,14 @@ $.extend(peernoteNS.editor, {
         return;
       }
 
-      _this.removeAllAligns(pos);
-      peernoteNS.doc.applyBlockModifier(modifierType, pos);
-      peernoteNS.doc.setCaret(pos);
+      peernoteNS.commands.execute({
+        type: commandType,
+        execute: function() {
+          _this.removeAllAligns(pos);
+          peernoteNS.doc.applyBlockModifier(modifierType, pos);
+          peernoteNS.doc.setCaret(pos);
+        }
+      });
     });
   },
 
@@ -57,7 +62,6 @@ $.extend(peernoteNS.editor, {
         var cmd = {
           type: commandType,
           execute: isApply ? apply : unapply,
-          revert: isApply ? unapply : apply
         };
         peernoteNS.commands.execute(cmd);
       } else {
@@ -112,7 +116,14 @@ $.extend(peernoteNS.editor, {
     if (e.keyCode == 13) {
       // They hit enter. We should create a new block.
       e.preventDefault();
-      peernoteNS.doc.createNewBlock();
+      peernoteNS.commands.execute({
+        type: peernoteNS.commands.TYPES.TYPING,
+        execute: function() {
+          // TODO: (undoredo) Move position detection here and pass position as
+          // an argument to createNewBlock
+          peernoteNS.doc.createNewBlock();
+        }
+      });
     }
   }),
 
@@ -121,7 +132,14 @@ $.extend(peernoteNS.editor, {
     if (peernoteNS.essays.currentMode == peernoteNS.essays.MODES.EDIT) {
       // They hit backspace. We should delete a character.
       e.preventDefault();
-      peernoteNS.doc.deleteAtCaret();
+      peernoteNS.commands.execute({
+        type: peernoteNS.commands.TYPES.DELETE,
+        execute: function() {
+          // TODO: (undoredo) Move position detection here and pass position as
+          // an argument to deleteAtCaret
+          peernoteNS.doc.deleteAtCaret();
+        }
+      });
     }
   },
 
@@ -130,7 +148,14 @@ $.extend(peernoteNS.editor, {
     if (peernoteNS.essays.currentMode == peernoteNS.essays.MODES.EDIT) {
       // They hit tab. We should insert a character.
       e.preventDefault();
-      peernoteNS.doc.insertAtCaret('\t');
+      peernoteNS.commands.execute({
+        type: peernoteNS.commands.TYPES.TYPING,
+        execute: function() {
+          // TODO: (undoredo) Move position detection here and pass position as
+          // an argument to insertAtCaret
+          peernoteNS.doc.insertAtCaret('\t');
+        }
+      });
     }
   },
 
@@ -202,7 +227,7 @@ $.extend(peernoteNS.editor, {
   loadDraftState: function (title, body) {
     // TODO: Do something with the title
     peernoteNS.doc.setState(body);
-    peernoteNS.doc.render();
+    peernoteNS.commands.clear();
   },
 
   /**
