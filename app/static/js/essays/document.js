@@ -261,22 +261,21 @@ $.extend(peernoteNS.doc, {
     var pos = this.getCaret();
     if (pos.isSelection) {
       // We're replacing text with a new block.
-      // TODO: Implement
-      console.log("Not Yet Implemented: New block replacing selection");
-      return null;
-    } else {
-      // We're just inserting a new block at the current caret position.
-      // We must split the current block into two blocks, splitting the
-      // text and modifiers across the block.
-      var newBlock = pos.startBlock.splitAt(pos.startOffset);
-      this.render();
-      // Shift focus to the new block
-      this.setCaret({
-        startBlock: newBlock,
-        startOffset: 0
-      });
-      this._documentChanged();
+      this.deleteAtCaret();
+      pos = this.getCaret();
     }
+
+    // We're just inserting a new block at the current caret position.
+    // We must split the current block into two blocks, splitting the
+    // text and modifiers across the block.
+    var newBlock = pos.startBlock.splitAt(pos.startOffset);
+    this.render();
+    // Shift focus to the new block
+    this.setCaret({
+      startBlock: newBlock,
+      startOffset: 0
+    });
+    this._documentChanged();
   },
 
   /* Retrieves the caret position / selection in terms of
