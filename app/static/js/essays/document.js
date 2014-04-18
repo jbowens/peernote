@@ -25,9 +25,11 @@ $.extend(peernoteNS.doc, {
 
   checkForChanges: function(e) {
     var pos = this.getCaret();
-    var changesMade = pos.startBlock.checkForChanges(pos);
-    if (changesMade) {
-      this._documentChanged();
+    if (pos) {
+      var changesMade = pos.startBlock.checkForChanges(pos);
+      if (changesMade) {
+        this._documentChanged();
+      }
     }
   },
 
