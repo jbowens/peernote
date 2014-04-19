@@ -32,7 +32,10 @@ class Essay(db.Model):
         return draft
 
     def get_all_drafts(self):
-        drafts = Draft.query.filter_by(eid=self.eid).order_by(Draft.version.asc())
+        """
+        Returns all drafts for this essay, newest first
+        """
+        drafts = Draft.query.filter_by(eid=self.eid).order_by(Draft.version.desc())
         return drafts
 
     def pretty_created_date(self):

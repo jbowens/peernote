@@ -37,11 +37,11 @@ $.extend(peernoteNS.essays, {
   },
 
   /*
-   * Given a dreft id and a version number, appends a draft to the timeline
+   * Given a draft id and a version number, prepends a draft to the timeline
    * and emulates a click on the new draft to open it.
    */
   addNewDraftAndOpen: function(did, version) {
-    this.drafts.push(did);
+    this.drafts.unshift(did);
     var $newLi = $('' +
       '<li>' +
         '<a>' +
@@ -56,9 +56,9 @@ $.extend(peernoteNS.essays, {
     );
 
     $newLi.hide();
-    $('.timeline ul').append($newLi);
+    $('.timeline ul').prepend($newLi);
     $newLi.slideDown();
-    $newLi.click({i: this.drafts.length - 1, clicked: $newLi}, this.selectDraft);
+    $newLi.click({clicked: $newLi}, this.selectDraft);
 
     $newLi.click();
   },
@@ -68,9 +68,9 @@ $.extend(peernoteNS.essays, {
     $toolkit = $('.toolkit');
     $toolkit.find('.next-draft').click(function(e) {
       e.preventDefault();
-      if (peernoteNS.essays.drafts.indexOf(peernoteNS.essays.did) != peernoteNS.essays.drafts.length - 1) {
+      if (peernoteNS.essays.drafts[0] != peernoteNS.essays.did) {
         // Currently on older draft, just open the draft following it
-        $('.timeline ul li.active-draft').next().click();
+        $('.timeline ul li.active-draft').prev().click();
       } else {
         _this.createNextDraft();
       }
@@ -134,11 +134,11 @@ $.extend(peernoteNS.essays, {
     var _this = this;
     var $draftList = $('.timeline ul li');
 
-    $draftList.last().addClass('active-draft');
+    $draftList.first().addClass('active-draft');
 
     $draftList.each(function(i) {
       // TODO: probably should debounce...
-      $(this).click({i: i, clicked: $(this)}, _this.selectDraft);
+      $(this).click({clicked: $(this)}, _this.selectDraft);
     });
 
   },
@@ -148,8 +148,8 @@ $.extend(peernoteNS.essays, {
    * the draft and replaces draft on screen with it.
    */
   selectDraft: function(event) {
-    var i = event.data.i;
     var clicked = event.data.clicked;
+    var i = clicked.index();
     var cur_did = peernoteNS.essays.drafts[i];
 
     if ($(event.target).attr('class') == 'fa fa-trash-o') {
@@ -160,7 +160,7 @@ $.extend(peernoteNS.essays, {
           clicked.slideUp();
           if (peernoteNS.essays.did == cur_did) {
             // deleting currently selected draft, switch to current draft
-            $('.timeline ul li').last().click();
+            $('.timeline ul li').first().click();
           }
         } else {
           peernoteNS.displayErrorFlash('Error archiving draft');
