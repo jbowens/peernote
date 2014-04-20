@@ -157,8 +157,25 @@ $.extend(peernoteNS.doc, {
   deleteAtCaret: function() {
     var pos = this.getCaret();
     if (pos.isSelection) {
-      // TODO: Implement
-      console.log("NOT YET IMPLEMENTED: delete selection");
+      if (pos.startBlock != pos.endBlock) {
+        pos.startBlock.deleteRange(pos.startOffset);
+        pos.endBlock.deleteRange(0, pos.endOffset);
+      } else {
+        pos.startBlock.deleteRange(pos.startOffset, pos.endOffset);
+      }
+      var curr = pos.startBlock.getSucceedingBlock();
+      while (curr != pos.endBlock && curr != null) {
+        var next = curr.getSucceedingBlock();
+        curr.getParent().removeChild(curr);
+        curr = next;
+      }
+      if (pos.startBlock != pos.endBlock) {
+        pos.startBlock.coalesce(pos.endBlock);
+      }
+      this.setCaret({
+        startBlock: pos.startBlock,
+        startOffset: pos.startOffset
+      });
     } else {
       if (pos.startOffset) {
         pos.startBlock.deleteCharacter(pos.startOffset);
@@ -189,7 +206,25 @@ $.extend(peernoteNS.doc, {
    * @param text  the plain text to insert at the caret position.
    */
   insertAtCaret: function(text) {
-    console.log("NOT YET IMPLEMENTED: document.insertAtCaret");
+    var pos = this.getCaret();
+    if (pos.isSelection) {
+      this.deleteAtCaret();
+      pos = this.getCaret();
+    }
+    var lines = text.split('\n');
+    var curr = pos.startBlock;
+    var off = pos.startOffset;
+    for (var i = 0; i < lines.length; ++i) {
+      curr.insertTextAt(lines[i], off);
+      if (i != lines.length - 1) {
+        curr = curr.splitAt(off + lines[i].length);
+      } else {
+        this.setCaret({
+          startBlock: curr,
+          startOffset: off + lines[i].length
+        });
+      }
+    }
   },
 
   /* This function should be called whenever the document changes to
@@ -226,22 +261,21 @@ $.extend(peernoteNS.doc, {
     var pos = this.getCaret();
     if (pos.isSelection) {
       // We're replacing text with a new block.
-      // TODO: Implement
-      console.log("Not Yet Implemented: New block replacing selection");
-      return null;
-    } else {
-      // We're just inserting a new block at the current caret position.
-      // We must split the current block into two blocks, splitting the
-      // text and modifiers across the block.
-      var newBlock = pos.startBlock.splitAt(pos.startOffset);
-      this.render();
-      // Shift focus to the new block
-      this.setCaret({
-        startBlock: newBlock,
-        startOffset: 0
-      });
-      this._documentChanged();
+      this.deleteAtCaret();
+      pos = this.getCaret();
     }
+
+    // We're just inserting a new block at the current caret position.
+    // We must split the current block into two blocks, splitting the
+    // text and modifiers across the block.
+    var newBlock = pos.startBlock.splitAt(pos.startOffset);
+    this.render();
+    // Shift focus to the new block
+    this.setCaret({
+      startBlock: newBlock,
+      startOffset: 0
+    });
+    this._documentChanged();
   },
 
   /* Retrieves the caret position / selection in terms of

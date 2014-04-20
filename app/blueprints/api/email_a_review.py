@@ -63,6 +63,7 @@ def email_a_review():
         # if the draft was not finalized, finalize it and create a new one
         new_did = None
         new_version = None
+        new_timestamp = None
         if not draft.finalized:
             draft.finalized = True
             db.session.add(draft)
@@ -75,6 +76,7 @@ def email_a_review():
 
             new_did = new_draft.did
             new_version = new_draft.version
+            new_timestamp = new_draft.pretty_modified_date()
         else:
             db.session.flush()
 
@@ -102,7 +104,10 @@ def email_a_review():
 
         db.session.commit()
 
-
-        return jsonify(status='success', new_did=new_did, new_version=new_version)
+        return jsonify(status='success',
+            new_did=new_did,
+            new_version=new_version,
+            new_timestamp=new_timestamp
+        )
     else:
         return jsonify(error="Bad params"), 400

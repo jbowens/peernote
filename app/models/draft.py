@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import current_app
 from app import db
 import json
@@ -10,6 +11,8 @@ class Draft(db.Model):
     title = db.Column(db.String(80))
     body = db.Column(db.UnicodeText)
     finalized = db.Column(db.Boolean, default=False)
+    created_date = db.Column(db.DateTime, default=datetime.now)
+    modified_date = db.Column(db.DateTime, default=datetime.now)
 
     def get_paragraphs(self):
         """
@@ -25,6 +28,15 @@ class Draft(db.Model):
         """
         title = self.title if self.title else 'Untitled'
         return ''.join(ch for ch in title if ch.isalnum())
+
+    def pretty_modified_date(self):
+        if not self.modified_date:
+            return ""
+
+        if self.modified_date.date() == datetime.today().date():
+            return self.modified_date.strftime('%I:%M %p')
+        else:
+            return self.modified_date.strftime('%b %d')
 
     @classmethod
     def default_body(cls, text = None):
