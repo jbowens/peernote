@@ -16,7 +16,7 @@ timestamp: (optional) only return if essay has timestamp later than this. Must c
 Returns:
 title: title of the draft
 body: body of the draft
-timestamp: timestamp of modified date
+timestamp: timestamp of modified date of draft
 """
 
 @api.route('/fetch_draft', methods=['GET'])
@@ -46,7 +46,8 @@ def fetch_draft():
             body=draft.body,
             title=draft.title,
             finalized=draft.finalized,
-            timestamp=str(essay.modified_date)
+            timestamp=str(draft.modified_date),
+            pretty_timestamp=draft.pretty_modified_date()
         )
     else:
         return jsonify(error='Invalid params'), 400

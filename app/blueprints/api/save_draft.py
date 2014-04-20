@@ -29,22 +29,20 @@ def save_draft():
             return jsonify(error='Invalid params'), 400
 
         new_did = None
-        if not draft.finalized:
-            draft.body = body
-            db.session.add(draft)
-            db.session.commit()
-        else:
-            new_draft = Draft.next_draft(draft)
-            new_draft.body = body
-            db.session.add(new_draft)
-            db.session.commit()
-            new_did = new_draft.did
-
-        # Update the last modified time.
         new_date = datetime.now()
+
+        draft.body = body
+        draft.modified_date = new_date
+        db.session.add(draft)
+        db.session.flush()
+
         Essay.query.filter_by(eid=draft.eid).update({'modified_date': new_date})
         db.session.commit()
 
-        return jsonify(status='success', did=new_did, timestamp=str(new_date))
+        return jsonify(status='success',
+            did=new_did,
+            timestamp=str(new_date),
+            pretty_timestamp=draft.pretty_modified_date()
+        )
     else:
         return jsonify(error='Invalid params'), 400

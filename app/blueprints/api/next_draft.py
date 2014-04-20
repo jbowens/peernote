@@ -16,6 +16,7 @@ uid: id of user who owns draft
 Returns:
 did: id of new draft
 version: version of new draft
+timestamp: timestamp of new draft
 """
 @api.route('/next_draft', methods=['POST'])
 @json_login_required
@@ -42,6 +43,10 @@ def next_draft():
         db.session.add(new_draft)
         db.session.commit()
 
-        return jsonify(status='success', did=new_draft.did, version=new_draft.version)
+        return jsonify(status='success',
+            did=new_draft.did,
+            version=new_draft.version,
+            timestamp=new_draft.pretty_modified_date()
+        )
     else:
         return jsonify(error="Bad params"), 400

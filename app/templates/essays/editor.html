@@ -19,7 +19,10 @@
         peernoteNS.essays.did = {{ current_draft.did }};
         peernoteNS.essays.drafts = [];
         {% for draft in current_essay.get_all_drafts() %}
-            peernoteNS.essays.drafts.push({{draft.did}});
+            peernoteNS.essays.drafts.push({
+                did: {{draft.did}},
+                ts: "{{draft.pretty_modified_date()}}"
+            });
         {% endfor %}
 
         {% if reviewhash %}
@@ -164,9 +167,9 @@
                                 Draft {{ draft.version }}
                              </span>
 
-                            <i class="fa fa-trash-o"> </i>
+                            <i class="fa fa-trash-o"></i>
                              <span class="draft-date">
-                                Feb 12
+                                {{draft.pretty_modified_date()}}
                             </span>
                         </a>
                         </li>
