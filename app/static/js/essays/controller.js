@@ -112,7 +112,7 @@ $.extend(peernoteNS.essays, {
         if (data.status == "success") {
           if (data.new_did != null && data.new_version != null) {
             // If emailing the review finalized a draft, add to draft timeline
-            _this.addNewDraftAndOpen(data.new_did, data.new_version, "");
+            _this.addNewDraftAndOpen(data.new_did, data.new_version, data.new_timestamp);
           }
           peernoteNS.displayFlash('Review sent');
         }
