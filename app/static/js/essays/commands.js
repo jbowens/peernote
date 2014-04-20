@@ -43,6 +43,7 @@ $.extend(peernoteNS.commands, {
     cmd.beforeState = peernoteNS.doc.getState();
     cmd.execute();
     cmd.afterState = peernoteNS.doc.getState();
+    this._redo_stack = [];
     this._undo_stack.push(cmd);
   },
 
