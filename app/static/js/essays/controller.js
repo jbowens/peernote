@@ -28,7 +28,7 @@ $.extend(peernoteNS.essays, {
 
     $.post('/api/next_draft', params, function(data) {
       if (data.status == "success") {
-        _this.addNewDraftAndOpen(data.did, data.version);
+        _this.addNewDraftAndOpen(data.did, data.version, data.timestamp);
       } else {
         console.log("Error creating new draft: " + data['error']);
         peernoteNS.displayErrorFlash('Error creating new draft');
@@ -40,8 +40,11 @@ $.extend(peernoteNS.essays, {
    * Given a draft id and a version number, prepends a draft to the timeline
    * and emulates a click on the new draft to open it.
    */
-  addNewDraftAndOpen: function(did, version) {
-    this.drafts.unshift(did);
+  addNewDraftAndOpen: function(did, version, ts) {
+    this.drafts.unshift({
+        did: did,
+        ts: ts
+    });
     var $newLi = $('' +
       '<li>' +
         '<a>' +
@@ -50,7 +53,7 @@ $.extend(peernoteNS.essays, {
             'Draft ' +  version +
           '</span>' +
           '<i class="fa fa-trash-o"> </i>' +
-          '<span class="draft-date"> Feb 12 </span>' +
+          '<span class="draft-date">' + ts + '</span>' +
         '</a>' +
       '</li>'
     );
@@ -68,7 +71,7 @@ $.extend(peernoteNS.essays, {
     $toolkit = $('.toolkit');
     $toolkit.find('.next-draft').click(function(e) {
       e.preventDefault();
-      if (peernoteNS.essays.drafts[0] != peernoteNS.essays.did) {
+      if (peernoteNS.essays.drafts[0].did != peernoteNS.essays.did) {
         // Currently on older draft, just open the draft following it
         $('.timeline ul li.active-draft').prev().click();
       } else {
@@ -109,7 +112,7 @@ $.extend(peernoteNS.essays, {
         if (data.status == "success") {
           if (data.new_did != null && data.new_version != null) {
             // If emailing the review finalized a draft, add to draft timeline
-            _this.addNewDraftAndOpen(data.new_did, data.new_version);
+            _this.addNewDraftAndOpen(data.new_did, data.new_version, "");
           }
           peernoteNS.displayFlash('Review sent');
         }
@@ -150,7 +153,7 @@ $.extend(peernoteNS.essays, {
   selectDraft: function(event) {
     var clicked = event.data.clicked;
     var i = clicked.index();
-    var cur_did = peernoteNS.essays.drafts[i];
+    var cur_did = peernoteNS.essays.drafts[i].did;
 
     if ($(event.target).attr('class') == 'fa fa-trash-o') {
       // User actually clicked to remove this draft.
@@ -212,7 +215,10 @@ $.extend(peernoteNS.essays, {
       if (data.status == "success") {
         peernoteNS.essays.did = did;
 
-        peernoteNS.essays.lastModifiedDate = data.timestamp;
+        if (peernoteNS.essays.drafts[0].did == peernoteNS.essays.did) {
+          // update last modified date if this is newest draft
+          peernoteNS.essays.updateLastModifiedDate(data.timestamp, data.pretty_timestamp);
+        }
 
         // We need to deserialize the modifiers.
         var modifiers = [];
@@ -658,10 +664,15 @@ $.extend(peernoteNS.essays, {
   initAutoloadTimer: function() {
     var _this = this;
     setInterval(function() {
-      if (_this.lastModifiedDate) {
+      if (_this.lastModifiedDate && peernoteNS.essays.drafts[0].did == peernoteNS.essays.did) {
         _this.loadDraft(peernoteNS.essays.did, peernoteNS.essays.lastModifiedDate);
       }
     }, 3000);
+  },
+
+  updateLastModifiedDate: function(timestamp, pretty_timestamp) {
+      peernoteNS.essays.lastModifiedDate = timestamp;
+      $('.timeline ul li a .draft-date').first().text(pretty_timestamp);
   }
 
 });
