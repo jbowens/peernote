@@ -161,18 +161,17 @@ $.extend(peernoteNS.doc, {
       if (pos.startBlock != pos.endBlock) {
         pos.startBlock.deleteRange(pos.startOffset);
         pos.endBlock.deleteRange(0, pos.endOffset);
+        var curr = pos.startBlock.getSucceedingBlock();
+        while (curr != pos.endBlock && curr != null) {
+          var next = curr.getSucceedingBlock();
+          curr.getParent().removeChild(curr);
+          curr = next;
+        }
+        pos.startBlock.coalesce(pos.endBlock);
       } else {
         pos.startBlock.deleteRange(pos.startOffset, pos.endOffset);
       }
-      var curr = pos.startBlock.getSucceedingBlock();
-      while (curr != pos.endBlock && curr != null) {
-        var next = curr.getSucceedingBlock();
-        curr.getParent().removeChild(curr);
-        curr = next;
-      }
-      if (pos.startBlock != pos.endBlock) {
-        pos.startBlock.coalesce(pos.endBlock);
-      }
+
       this.setCaret({
         startBlock: pos.startBlock,
         startOffset: pos.startOffset
