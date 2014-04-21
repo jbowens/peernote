@@ -113,17 +113,45 @@ $.extend(peernoteNS.editor, {
 
   /* The current undo/redo command for typing. This is used to coalesce
    * the typing of multiple characters into a single undo/redo command. */
-  _typingCommmand: null,
+  _typingCommand: null,
 
   typingListener: peernoteNS.errors.wrap(function(e) {
+    var _this = peernoteNS.editor;
     if (peernoteNS.essays.currentMode == peernoteNS.essays.MODES.EDIT) {
       var state = peernoteNS.doc.getState();
       var changesMade = peernoteNS.doc.checkForChanges(e);
       if (changesMade) {
         // Record this typing event in an undo/redo command.
-        if (this._typingCommmand) {
-            // TODO: Compare location and time
+        var pos = peernoteNS.doc.getCaret();
+        if (_this._typingCommand) {
+          var cmd = _this._typingCommand;
+          if (pos.startBlock == _this._typingCommand.block) {
+            _this._typingCommand.afterState = peernoteNS.doc.getState();
+            if (_this._typingCommand.timer) {
+              clearTimeout(_this._typingCommand.timer);
+              _this._typingCommand.timer = null;
+            }
+            _this._typingCommand.timer = setTimeout(function() {
+              if (_this._typingCommand == cmd) {
+                _this._typingCommand = null;
+              }
+            }, 5000);
+            return;
+          }
         }
+        var cmd = {
+          beforeState: state,
+          afterState: peernoteNS.doc.getState(),
+          block: pos.startBlock,
+          timer: null
+        };
+        cmd.timer = setTimeout(function() {
+          if (_this._typingCommand == cmd) {
+            _this._typingCommand = null;
+          }
+        }, 5000);
+        _this._typingCommand = cmd;
+        peernoteNS.commands.alreadyExecuted(cmd);
       }
     }
   }),
