@@ -9,6 +9,9 @@ peernoteNS.commands = peernoteNS.commands || {};
 
 $.extend(peernoteNS.commands, {
 
+  // Listeners waiting to hear when a command happens.
+  _listeners: [],
+
   // The undo stack of commands
   _undo_stack: [],
 
@@ -30,6 +33,10 @@ $.extend(peernoteNS.commands, {
     TYPING:      10
   },
 
+  addListener: function(f) {
+    this._listeners.push(f);
+  },
+
   /*
    * Performs the given command and adds it to the undo stack.
    *
@@ -47,6 +54,7 @@ $.extend(peernoteNS.commands, {
     cmd.afterState = peernoteNS.doc.getState();
     this._redo_stack = [];
     this._undo_stack.push(cmd);
+    this._changed();
   },
 
   /* Adds the custom command to the undo stack. This is used for undo/redo
@@ -56,6 +64,7 @@ $.extend(peernoteNS.commands, {
   alreadyExecuted: function(cmd) {
     this._redo_stack = [];
     this._undo_stack.push(cmd);
+    this._changed();
   },
 
   /*
@@ -69,6 +78,7 @@ $.extend(peernoteNS.commands, {
     } else {
       peernoteNS.doc.setState(cmd.beforeState);
       this._redo_stack.push(cmd);
+      this._changed();
       return true;
     }
   },
@@ -84,6 +94,7 @@ $.extend(peernoteNS.commands, {
     } else {
       peernoteNS.doc.setState(cmd.afterState);
       this._undo_stack.push(cmd);
+    this._changed();
       return true;
     }
   },
@@ -94,6 +105,7 @@ $.extend(peernoteNS.commands, {
   clear: function() {
     this._undo_stack = [];
     this._redo_stack = [];
+    this._changed();
   },
 
   /* Key down event listener that handles undo and
@@ -118,7 +130,13 @@ $.extend(peernoteNS.commands, {
    */
   initShortcuts: function() {
     $(document).keydown(peernoteNS.commands.shortcutKeydownListener);
-  }
+  },
+
+  _changed: function() {
+    for (var i = 0; i < this._listeners.length; ++i) {
+      this._listeners[i](this._undo_stack.length, this._redo_stack.length);
+    }
+  },
 
 });
 

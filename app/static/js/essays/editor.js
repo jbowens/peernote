@@ -124,6 +124,7 @@ $.extend(peernoteNS.editor, {
         // Record this typing event in an undo/redo command.
         var pos = peernoteNS.doc.getCaret();
         if (_this._typingCommand) {
+          // TODO: Clear typing command on undo/redo stack changes.
           var cmd = _this._typingCommand;
           if (pos.startBlock == _this._typingCommand.block) {
             _this._typingCommand.afterState = peernoteNS.doc.getState();
@@ -135,7 +136,7 @@ $.extend(peernoteNS.editor, {
               if (_this._typingCommand == cmd) {
                 _this._typingCommand = null;
               }
-            }, 5000);
+            }, 3000);
             return;
           }
         }
@@ -147,13 +148,24 @@ $.extend(peernoteNS.editor, {
         };
         cmd.timer = setTimeout(function() {
           if (_this._typingCommand == cmd) {
+            console.log('undo timeout');
             _this._typingCommand = null;
           }
-        }, 5000);
-        _this._typingCommand = cmd;
+        }, 3000);
         peernoteNS.commands.alreadyExecuted(cmd);
+        _this._typingCommand = cmd;
       }
     }
+  }),
+
+  /* Listener called whenever the undo/redo stacks change size.
+   */
+  _undoRedoChange: peernoteNS.errors.wrap(function(undoSize, redoSize) {
+    var _this = peernoteNS.editor;
+    _this._typingCommand = null;
+    _this.save();
+    // TODO: We may want to update the UI to reflect whether there
+    // are actions that my be undone.
   }),
 
   keypress: peernoteNS.errors.wrap(function(e) {
@@ -242,16 +254,12 @@ $.extend(peernoteNS.editor, {
   /* Event listener for when the undo button is clicked.
    */
   undo: peernoteNS.errors.wrap(function(e) {
-    // TODO: We may want to update the UI to reflect whether there
-    // are actions that my be undone.
     peernoteNS.commands.undo();
   }),
 
   /* Event listener for when the redo button is clicked.
    */
   redo: peernoteNS.errors.wrap(function(e) {
-    // TODO: We may want to update the UI to reflect whether there
-    // are actions that my be redone.
     peernoteNS.commands.redo();
   }),
 
@@ -342,6 +350,7 @@ $.extend(peernoteNS.editor, {
     // Subscribe to changes in the document so that we can
     // autosave appropriately.
     peernoteNS.doc.addChangeListener(this.onDocumentChange);
+    peernoteNS.commands.addListener(peernoteNS.editor._undoRedoChange);
   },
 
   initToolbar: function() {
