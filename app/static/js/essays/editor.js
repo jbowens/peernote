@@ -21,9 +21,14 @@ $.extend(peernoteNS.editor, {
         return;
       }
 
-      _this.removeAllAligns(pos);
-      peernoteNS.doc.applyBlockModifier(modifierType, pos);
-      peernoteNS.doc.setCaret(pos);
+      peernoteNS.commands.execute({
+        type: commandType,
+        execute: function() {
+          _this.removeAllAligns(pos);
+          peernoteNS.doc.applyBlockModifier(modifierType, pos);
+          peernoteNS.doc.setCaret(pos);
+        }
+      });
     });
   },
 
@@ -57,7 +62,6 @@ $.extend(peernoteNS.editor, {
         var cmd = {
           type: commandType,
           execute: isApply ? apply : unapply,
-          revert: isApply ? unapply : apply
         };
         peernoteNS.commands.execute(cmd);
       } else {
@@ -107,12 +111,76 @@ $.extend(peernoteNS.editor, {
 
   _doc: null,
 
+  /* The current undo/redo command for typing. This is used to coalesce
+   * the typing of multiple characters into a single undo/redo command. */
+  _typingCommand: null,
+
+  typingListener: peernoteNS.errors.wrap(function(e) {
+    var _this = peernoteNS.editor;
+    if (peernoteNS.essays.currentMode == peernoteNS.essays.MODES.EDIT) {
+      var state = peernoteNS.doc.getState();
+      var changesMade = peernoteNS.doc.checkForChanges(e);
+      if (changesMade) {
+        // Record this typing event in an undo/redo command.
+        var pos = peernoteNS.doc.getCaret();
+        if (_this._typingCommand) {
+          // TODO: Clear typing command on undo/redo stack changes.
+          var cmd = _this._typingCommand;
+          if (pos.startBlock == _this._typingCommand.block) {
+            _this._typingCommand.afterState = peernoteNS.doc.getState();
+            if (_this._typingCommand.timer) {
+              clearTimeout(_this._typingCommand.timer);
+              _this._typingCommand.timer = null;
+            }
+            _this._typingCommand.timer = setTimeout(function() {
+              if (_this._typingCommand == cmd) {
+                _this._typingCommand = null;
+              }
+            }, 3000);
+            return;
+          }
+        }
+        var cmd = {
+          beforeState: state,
+          afterState: peernoteNS.doc.getState(),
+          block: pos.startBlock,
+          timer: null
+        };
+        cmd.timer = setTimeout(function() {
+          if (_this._typingCommand == cmd) {
+            console.log('undo timeout');
+            _this._typingCommand = null;
+          }
+        }, 3000);
+        peernoteNS.commands.alreadyExecuted(cmd);
+        _this._typingCommand = cmd;
+      }
+    }
+  }),
+
+  /* Listener called whenever the undo/redo stacks change size.
+   */
+  _undoRedoChange: peernoteNS.errors.wrap(function(undoSize, redoSize) {
+    var _this = peernoteNS.editor;
+    _this._typingCommand = null;
+    _this.save();
+    // TODO: We may want to update the UI to reflect whether there
+    // are actions that my be undone.
+  }),
+
   keypress: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.editor;
     if (e.keyCode == 13) {
       // They hit enter. We should create a new block.
       e.preventDefault();
-      peernoteNS.doc.createNewBlock();
+      peernoteNS.commands.execute({
+        type: peernoteNS.commands.TYPES.NEWLINE,
+        execute: function() {
+          // TODO: (undoredo) Move position detection here and pass position as
+          // an argument to createNewBlock
+          peernoteNS.doc.createNewBlock();
+        }
+      });
     }
   }),
 
@@ -121,7 +189,14 @@ $.extend(peernoteNS.editor, {
     if (peernoteNS.essays.currentMode == peernoteNS.essays.MODES.EDIT) {
       // They hit backspace. We should delete a character.
       e.preventDefault();
-      peernoteNS.doc.deleteAtCaret();
+      peernoteNS.commands.execute({
+        type: peernoteNS.commands.TYPES.DELETE,
+        execute: function() {
+          // TODO: (undoredo) Move position detection here and pass position as
+          // an argument to deleteAtCaret
+          peernoteNS.doc.deleteAtCaret();
+        }
+      });
     }
   },
 
@@ -130,7 +205,14 @@ $.extend(peernoteNS.editor, {
     if (peernoteNS.essays.currentMode == peernoteNS.essays.MODES.EDIT) {
       // They hit tab. We should insert a character.
       e.preventDefault();
-      peernoteNS.doc.insertAtCaret('\t');
+      peernoteNS.commands.execute({
+        type: peernoteNS.commands.TYPES.TAB,
+        execute: function() {
+          // TODO: (undoredo) Move position detection here and pass position as
+          // an argument to insertAtCaret
+          peernoteNS.doc.insertAtCaret('\t');
+        }
+      });
     }
   },
 
@@ -172,16 +254,12 @@ $.extend(peernoteNS.editor, {
   /* Event listener for when the undo button is clicked.
    */
   undo: peernoteNS.errors.wrap(function(e) {
-    // TODO: We may want to update the UI to reflect whether there
-    // are actions that my be undone.
     peernoteNS.commands.undo();
   }),
 
   /* Event listener for when the redo button is clicked.
    */
   redo: peernoteNS.errors.wrap(function(e) {
-    // TODO: We may want to update the UI to reflect whether there
-    // are actions that my be redone.
     peernoteNS.commands.redo();
   }),
 
@@ -202,7 +280,7 @@ $.extend(peernoteNS.editor, {
   loadDraftState: function (title, body) {
     // TODO: Do something with the title
     peernoteNS.doc.setState(body);
-    peernoteNS.doc.render();
+    peernoteNS.commands.clear();
   },
 
   /**
@@ -264,6 +342,7 @@ $.extend(peernoteNS.editor, {
     peernoteNS.doc.init();
     peernoteNS.doc.render();
     $(docContainer).keypress(peernoteNS.editor.keypress);
+    $(docContainer).keyup(peernoteNS.editor.typingListener);
     peernoteNS.essays.keys.registerDownHandler(peernoteNS.essays.keys.KEY_CODES.BACKSPACE,
                                                peernoteNS.editor.backspaceHandler);
     peernoteNS.essays.keys.registerDownHandler(peernoteNS.essays.keys.KEY_CODES.TAB,
@@ -271,6 +350,7 @@ $.extend(peernoteNS.editor, {
     // Subscribe to changes in the document so that we can
     // autosave appropriately.
     peernoteNS.doc.addChangeListener(this.onDocumentChange);
+    peernoteNS.commands.addListener(peernoteNS.editor._undoRedoChange);
   },
 
   initToolbar: function() {

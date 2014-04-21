@@ -17,18 +17,18 @@ $.extend(peernoteNS.doc, {
     var _this = this;
     this._root = peernoteNS.containerBlock.construct();
     this._root.addChild(peernoteNS.textBlock.construct());
-    $('.page-container .page').keyup(peernoteNS.errors.wrap(function(e) {
-      _this.checkForChanges(e);
-    }));
     this.render();
   },
 
   checkForChanges: function(e) {
     var pos = this.getCaret();
-    var changesMade = pos.startBlock.checkForChanges(pos);
-    if (changesMade) {
-      this._documentChanged();
+    if (pos) {
+      var changesMade = pos.startBlock.checkForChanges(pos);
+      if (changesMade) {
+        this._documentChanged();
+      }
     }
+    return changesMade;
   },
 
   addChangeListener: function(f) {
@@ -51,6 +51,7 @@ $.extend(peernoteNS.doc, {
    */
   setState: function(body) {
     this._root = this.deserializeBlock(body);
+    peernoteNS.doc.render();
   },
 
   deserializeBlock: function(state) {
@@ -302,12 +303,14 @@ $.extend(peernoteNS.doc, {
     pos.focusOffset = peernoteNS.docutils.getOffset(pos.focusBlock._elmt,
                                                     s.focusNode,
                                                     s.focusOffset);
-    pos.anchorChar = peernoteNS.docutils.getOffset(this._root._elmt,
-                                                   s.anchorNode,
-                                                   s.anchorOffset);
-    pos.focusChar = peernoteNS.docutils.getOffset(this._root._elmt,
-                                                   s.focusNode,
-                                                   s.focusOffset);
+    if (this._root._elmt) {
+      pos.anchorChar = peernoteNS.docutils.getOffset(this._root._elmt,
+                                                     s.anchorNode,
+                                                     s.anchorOffset);
+      pos.focusChar = peernoteNS.docutils.getOffset(this._root._elmt,
+                                                     s.focusNode,
+                                                     s.focusOffset);
+    }
     if (pos.anchorChar <= pos.focusChar) {
       pos.startChar = pos.anchorChar;
       pos.endChar = pos.focusChar;
