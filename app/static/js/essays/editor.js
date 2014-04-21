@@ -111,13 +111,30 @@ $.extend(peernoteNS.editor, {
 
   _doc: null,
 
+  /* The current undo/redo command for typing. This is used to coalesce
+   * the typing of multiple characters into a single undo/redo command. */
+  _typingCommmand: null,
+
+  typingListener: peernoteNS.errors.wrap(function(e) {
+    if (peernoteNS.essays.currentMode == peernoteNS.essays.MODES.EDIT) {
+      var state = peernoteNS.doc.getState();
+      var changesMade = peernoteNS.doc.checkForChanges(e);
+      if (changesMade) {
+        // Record this typing event in an undo/redo command.
+        if (this._typingCommmand) {
+            // TODO: Compare location and time
+        }
+      }
+    }
+  }),
+
   keypress: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.editor;
     if (e.keyCode == 13) {
       // They hit enter. We should create a new block.
       e.preventDefault();
       peernoteNS.commands.execute({
-        type: peernoteNS.commands.TYPES.TYPING,
+        type: peernoteNS.commands.TYPES.NEWLINE,
         execute: function() {
           // TODO: (undoredo) Move position detection here and pass position as
           // an argument to createNewBlock
@@ -149,7 +166,7 @@ $.extend(peernoteNS.editor, {
       // They hit tab. We should insert a character.
       e.preventDefault();
       peernoteNS.commands.execute({
-        type: peernoteNS.commands.TYPES.TYPING,
+        type: peernoteNS.commands.TYPES.TAB,
         execute: function() {
           // TODO: (undoredo) Move position detection here and pass position as
           // an argument to insertAtCaret
@@ -289,6 +306,7 @@ $.extend(peernoteNS.editor, {
     peernoteNS.doc.init();
     peernoteNS.doc.render();
     $(docContainer).keypress(peernoteNS.editor.keypress);
+    $(docContainer).keyup(peernoteNS.editor.typingListener);
     peernoteNS.essays.keys.registerDownHandler(peernoteNS.essays.keys.KEY_CODES.BACKSPACE,
                                                peernoteNS.editor.backspaceHandler);
     peernoteNS.essays.keys.registerDownHandler(peernoteNS.essays.keys.KEY_CODES.TAB,

@@ -17,9 +17,6 @@ $.extend(peernoteNS.doc, {
     var _this = this;
     this._root = peernoteNS.containerBlock.construct();
     this._root.addChild(peernoteNS.textBlock.construct());
-    $('.page-container .page').keyup(peernoteNS.errors.wrap(function(e) {
-      _this.checkForChanges(e);
-    }));
     this.render();
   },
 
@@ -31,6 +28,7 @@ $.extend(peernoteNS.doc, {
         this._documentChanged();
       }
     }
+    return changesMade;
   },
 
   addChangeListener: function(f) {

@@ -25,7 +25,9 @@ $.extend(peernoteNS.commands, {
     LEFT_ALIGN:   5,
     CENTER_ALIGN: 6,
     RIGHT_ALIGN:  7,
-    TYPING:       8
+    NEWLINE:      8,
+    TAB:          9,
+    TYPING:      10
   },
 
   /*
@@ -43,6 +45,15 @@ $.extend(peernoteNS.commands, {
     cmd.beforeState = peernoteNS.doc.getState();
     cmd.execute();
     cmd.afterState = peernoteNS.doc.getState();
+    this._redo_stack = [];
+    this._undo_stack.push(cmd);
+  },
+
+  /* Adds the custom command to the undo stack. This is used for undo/redo
+   * commands whose before and after states are manually mantained by the
+   * caller.
+   */
+  alreadyExecuted: function(cmd) {
     this._redo_stack = [];
     this._undo_stack.push(cmd);
   },
