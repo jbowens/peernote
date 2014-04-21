@@ -148,7 +148,6 @@ $.extend(peernoteNS.editor, {
         };
         cmd.timer = setTimeout(function() {
           if (_this._typingCommand == cmd) {
-            console.log('undo timeout');
             _this._typingCommand = null;
           }
         }, 3000);
