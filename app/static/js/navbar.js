@@ -74,7 +74,10 @@ peernoteNS.init(function() {
             // L O L JAVASCRIPT SCOPING!
             (function(notification) {
                 $notification.click(function() {
-                    $.post('/api/notifications/seen', {ids: [notification.nid]});
+                    $.post('/api/notifications/seen', {
+                        ids: [notification.nid],
+                        csrf: peernoteNS.csrf
+                    });
                     window.location = notification.url;
                 });
             })(notification);
@@ -92,7 +95,7 @@ peernoteNS.init(function() {
         var ids = peernoteNS.notifications.notifications.map(function(cv) {
             return cv.nid;
         });
-        $.post('/api/notifications/seen', {ids: ids});
+        $.post('/api/notifications/seen', {ids: ids, csrf: peernoteNS.csrf});
 
         $('#notifications-list li').removeClass('unread-notification');
 

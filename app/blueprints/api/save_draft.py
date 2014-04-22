@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import request, render_template, current_app, jsonify, g
-from app.decorators import json_login_required
+from app.decorators import json_login_required, csrf_post_protected
 from app.blueprints.api import api
 from app.models.draft import Draft
 from app.models.essay import Essay
@@ -16,6 +16,7 @@ body: new json blob for the body of the draft
 """
 @api.route('/save_draft', methods=['POST'])
 @json_login_required
+@csrf_post_protected
 def save_draft():
     if 'body' in request.form and 'did' in request.form and 'uid' in request.form:
 

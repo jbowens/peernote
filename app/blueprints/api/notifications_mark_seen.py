@@ -1,5 +1,5 @@
 from flask import request, current_app, jsonify, g
-from app.decorators import json_login_required
+from app.decorators import json_login_required, csrf_post_protected
 from app.blueprints.api import api
 from app.models.notification import Notification
 from app import db
@@ -10,6 +10,7 @@ ids: List of ids of logged in user's notifications to mark as seen.
 """
 @api.route('/notifications/seen', methods=['POST'])
 @json_login_required
+@csrf_post_protected
 def mark_seen_notifications():
     current_app.logger.debug('marking notifications as seen')
 

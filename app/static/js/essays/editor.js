@@ -306,7 +306,8 @@ $.extend(peernoteNS.editor, {
     var params = {
       uid: peernoteNS.essays.uid,
       did: peernoteNS.essays.did,
-      body: JSON.stringify(state)
+      body: JSON.stringify(state),
+      csrf: peernoteNS.csrf
     };
 
     $status_line = $('.status-line');
