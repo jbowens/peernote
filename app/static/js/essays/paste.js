@@ -21,7 +21,7 @@ $.extend(peernoteNS.paste, {
 
   shortcutListener: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.paste;
-    if (e.keyCode == 86 && e.metaKey) {
+    if (e.keyCode == peernoteNS.essays.keys.KEY_CODES.V && e.metaKey) {
       // This is a paste event. Move focus to the paste catcher.
       _this._pastePosition = peernoteNS.doc.getCaret();
       _this._pasteCatcher.value = '';
