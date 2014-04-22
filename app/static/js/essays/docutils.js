@@ -27,6 +27,11 @@ $.extend(peernoteNS.docutils, {
     var toVisit = [doc];
     while (toVisit.length > 0) {
       var curr = toVisit.pop();
+
+      if (!curr) {
+        debugger;
+      }
+
       if (curr.nodeType == 3) {
         var len = curr.nodeValue.length;
         if (curr.nodeValue.indexOf(this.ZERO_WIDTH_SPACE) != -1) {

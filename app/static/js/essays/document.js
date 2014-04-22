@@ -172,7 +172,7 @@ $.extend(peernoteNS.doc, {
       } else {
         pos.startBlock.deleteRange(pos.startOffset, pos.endOffset);
       }
-
+      peernoteNS.doc.render();
       this.setCaret({
         startBlock: pos.startBlock,
         startOffset: pos.startOffset
@@ -193,6 +193,7 @@ $.extend(peernoteNS.doc, {
         var predecessor = parentBlock.getChildAt(childIndex - 1);
         var predecessorLength = predecessor.getTextLength();
         predecessor.coalesce(pos.startBlock);
+        peernoteNS.doc.render();
         this.setCaret({
           startBlock: predecessor,
           startOffset: predecessorLength
@@ -220,6 +221,7 @@ $.extend(peernoteNS.doc, {
       if (i != lines.length - 1) {
         curr = curr.splitAt(off + lines[i].length);
       } else {
+        this.render();
         this.setCaret({
           startBlock: curr,
           startOffset: off + lines[i].length
