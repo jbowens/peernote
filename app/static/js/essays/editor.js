@@ -321,6 +321,13 @@ $.extend(peernoteNS.editor, {
     });
   },
 
+  dragover: peernoteNS.errors.wrap(function(e) {
+    var _this = peernoteNS.editor;
+    _this._doc.effectAllowed = 'none';
+    e.preventDefault();
+    return false;
+  }),
+
   /* Event listener for handling autosaving.
    */
   onDocumentChange: peernoteNS.errors.wrap(function(e) {
@@ -356,6 +363,8 @@ $.extend(peernoteNS.editor, {
     $(docContainer).keypress(peernoteNS.editor.keypress);
     $(docContainer).keyup(peernoteNS.editor.typingListener);
     $(docContainer).bind('paste', peernoteNS.editor.pasteListener);
+    $(docContainer).bind('dragover', peernoteNS.editor.dragover);
+    $(docContainer).bind('dragstart', peernoteNS.editor.dragover);
     peernoteNS.essays.keys.registerDownHandler(peernoteNS.essays.keys.KEY_CODES.BACKSPACE,
                                                peernoteNS.editor.backspaceHandler);
     peernoteNS.essays.keys.registerDownHandler(peernoteNS.essays.keys.KEY_CODES.TAB,
