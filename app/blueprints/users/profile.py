@@ -7,7 +7,7 @@ from app.decorators import login_required
 """
 For now, the only profile you can view is your own when logged in.
 """
-@users.route('/users/profile', methods=['GET','POST'])
+@users.route('/users/profile', methods=['GET'])
 @login_required
 def show_user_profile():
     essays = Essay.query.filter_by(uid=g.user.uid).order_by(Essay.modified_date.desc())[:7]

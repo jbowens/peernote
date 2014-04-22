@@ -41,6 +41,7 @@
             {% include "shared/flashes.html" %}
             <table>
                 <form method="post" id="log-in">
+                    {% include "shared/csrf.html" %}
                     {% if next_location %}
                     <input type="hidden" name="next_location" value="{{ next_location }}" />
                     {% endif %}

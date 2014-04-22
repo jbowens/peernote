@@ -1,7 +1,7 @@
 import os, json
 from flask import render_template, g, request, url_for, redirect, current_app, flash
 from app.blueprints.essays import essays
-from app.decorators import login_required
+from app.decorators import login_required, csrf_post_protected
 from app.models.upload import Upload
 from app.models.essay import Essay
 from app.models.draft import Draft
@@ -12,6 +12,7 @@ from app.parsers import parsers
 
 @essays.route('/upload', methods=['GET','POST'])
 @login_required
+@csrf_post_protected
 def upload_essay():
 
     if request.method == 'POST' and 'paper' in request.files:

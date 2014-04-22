@@ -1,9 +1,11 @@
 from flask import render_template, request, redirect, url_for, session, flash
 from app.models.user import User
 from app.blueprints.users import users
+from app.decorators import csrf_post_protected
 from app import db
 
 @users.route('/log-in', methods=['GET','POST'])
+@csrf_post_protected
 def log_in():
     if request.method == 'POST':
         # They submitted the form and we should process it.
