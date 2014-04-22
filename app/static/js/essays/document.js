@@ -436,7 +436,7 @@ $.extend(peernoteNS.doc, {
     var isPage = $(node).hasClass('page');
     if (isPage) {
       // This is a top level document node. Return the first block contained within it.
-      var blocks = $('.page > .pn-block');
+      var blocks = $('.page > .pn-text-block');
       if (blocks.length) {
         return blocks[0].block;
       } else {
@@ -444,7 +444,7 @@ $.extend(peernoteNS.doc, {
       }
     } else {
       /* Find the containing block for the anchor. */
-      var elmt = $(node).closest('.pn-block');
+      var elmt = $(node).closest('.pn-text-block');
       /* It could be that the content-editable put the focus outside of a block
        * chilling in a top-level text node, in which case we should move to the next sibling. */
       if (elmt.length) {

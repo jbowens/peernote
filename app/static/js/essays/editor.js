@@ -215,6 +215,18 @@ $.extend(peernoteNS.editor, {
     }
   },
 
+  /* Listens pastes. By the time a paste event happens, the DOM has already
+   * been updated to contain the pasted text, which sux. For now, we just
+   * ignore the paste and rerender the document.
+   */
+  pasteListener: peernoteNS.errors.wrap(function(e) {
+    var _this = peernoteNS.editor;
+    if (peernoteNS.essays.currentMode == peernoteNS.essays.MODES.EDIT) {
+      e.preventDefault();
+      peernoteNS.doc.render();
+    }
+  }),
+
   /* Togglers for simple modifiers. These are installed as listeners for
    * their corrsesponding UI elements.
    */
@@ -342,6 +354,7 @@ $.extend(peernoteNS.editor, {
     peernoteNS.doc.render();
     $(docContainer).keypress(peernoteNS.editor.keypress);
     $(docContainer).keyup(peernoteNS.editor.typingListener);
+    $(docContainer).bind('paste', peernoteNS.editor.pasteListener);
     peernoteNS.essays.keys.registerDownHandler(peernoteNS.essays.keys.KEY_CODES.BACKSPACE,
                                                peernoteNS.editor.backspaceHandler);
     peernoteNS.essays.keys.registerDownHandler(peernoteNS.essays.keys.KEY_CODES.TAB,
