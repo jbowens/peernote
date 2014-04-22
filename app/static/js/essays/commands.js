@@ -114,11 +114,12 @@ $.extend(peernoteNS.commands, {
   shortcutKeydownListener: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.commands;
     if (e.metaKey) {
-      if (e.keyCode == 90) {
+      if (e.keyCode == peernoteNS.essays.keys.KEY_CODES.Z) {
         // They hit ctrl+z or cmd+z. We should undo.
         e.preventDefault();
         _this.undo();
-      } else if (e.keyCode == 89 || (e.keyCode == 90 && e.shiftKey)) {
+      } else if (e.keyCode == peernoteNS.essays.keys.KEY_CODES.Y ||
+          (e.keyCode == peernoteNS.essays.leys.KEY_CODES.Z && e.shiftKey)) {
         // They hit ctrl+y/ctrl+shift+z. We should undo.
         e.preventDefault();
         _this.redo();
