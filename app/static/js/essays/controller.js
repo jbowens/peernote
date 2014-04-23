@@ -439,9 +439,20 @@ $.extend(peernoteNS.essays, {
       var draftsOpen = false;
       $(".timeline h2").click(function() {
           if (draftsOpen) {
-              $(".drafts-list").slideUp();
+              $(".drafts-list").slideUp(
+                  {
+                      duration: 300,
+                      queue: false,
+                  });
           } else {
-              $(".drafts-list").slideDown();
+              $(".drafts-list").slideDown(
+                  {
+                      duration: 300,
+                      queue: false,
+                      complete: function() {
+                          $(".drafts-list").css("height","230px");
+                      }
+                  });
           }
           draftsOpen = !draftsOpen;
       });
@@ -562,6 +573,11 @@ $.extend(peernoteNS.essays, {
         $(".cancel-comment").hide();
         $(".new-comment").show();
         $(".comment-post-v2-closed").show();
+      });
+
+      $(".reply-thread-button").click(function() {
+        $(".comment-post-v2-closed").hide();
+        $(".comment-post-v2-open").show();
       });
   },
 

@@ -1,0 +1,475 @@
+
+// IMPORTANT: this file is imported to editor.scss
+
+@import "./editor-variables.scss";
+
+/* invisible panel that pushes the comments panel open */
+.comment-panel-push {
+    width: 0px;
+    float: right;
+    height: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+.comment-panel {
+    width: 250px;
+    background: #373737;
+    width: 350px;
+    float: right;
+    height: 100%;
+    position: fixed;
+    z-index: 19; //2000; <-- changed this value for testing
+    right:0;
+
+    .tab-container-selected {
+        z-index: 100;
+    }
+
+    .comments-panel-tab {
+        height: 100%;
+        position: absolute;
+        width: 350px;
+        left: 0px;
+        top: 50px;
+
+        .tab-content, .tab-top {
+            float: left;
+            clear: both;
+            position: relative;
+            top: -50px;
+        }
+
+        $tab-width: 100px;
+
+        .tab-top {
+            width: $tab-width;
+            height: 35px;
+            padding-top: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .tab-selected {
+            background-color: white;
+            color: black;
+            border-top: 3px solid $white-color;
+            border-right: 3px solid $white-color;
+            border-left: 3px solid $white-color;
+            z-index: 1;
+        }
+
+        .tab-unselected {
+            border-top: 3px solid #373737;
+            border-right: 3px solid #373737;
+            border-left: 3px solid #373737;
+            background-color: #373737;
+            color: $white-color;
+            z-index: 0;
+        }
+
+        .tab-top-notes {
+            position: relative;
+            left: $tab-width + 10px;
+        }
+
+        .tab-content {
+            background: white;
+            height: 900px;
+            width: 350px;
+            border-left: 3px solid $white-color;
+
+            @mixin comments-button {
+                .comments-button {
+                    float: left;
+                    background-color: $white-color;
+                    color: #373737;
+                    border-radius: 2px;
+                    padding: 6px 11px;
+                    margin-left: 5px;
+                    cursor: pointer;
+
+                    i {
+                        height: 10px;
+                        width: 10px;
+                    }
+
+                    .caret-right {
+                        padding-left:5px;
+                        width: 7px;
+                    }
+                }
+
+                .comments-button:hover {
+                    background: gray;
+                    color: $white-color;
+                }
+            }
+
+            // location of comment-box after first post
+            .comment-post-v2-closed {
+                position: absolute;
+                bottom: 0px;
+                width: 100%;
+                background-color: #373737;
+                height: 90px;
+                display: none;
+
+                .thread-buttons {
+                    width: 300px;
+                    margin: auto;
+                    margin-top: 20px;
+
+                    .reply-thread-button {
+                        -moz-box-shadow:inset 0px 1px 0px 0px #d197fe;
+                        -webkit-box-shadow:inset 0px 1px 0px 0px #d197fe;
+                        box-shadow:inset 0px 1px 0px 0px #d197fe;
+                        background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a973b4), color-stop(1, #a874b4) );
+                        background:-moz-linear-gradient( center top, #a973b4 5%, #a874b4 100% );
+                        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a973b4', endColorstr='#a874b4');
+                        background-color:#a973b4;
+                        text-indent:0;
+                        border:1px solid #9e76bf;
+                        color:#ffffff;
+                        font-weight:bold;
+                        line-height:39px;
+                        text-shadow:1px 0px 0px #7d15cd;
+                    }
+
+                    .reply-thread-button:hover {
+                        background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a874b4), color-stop(1, #a973b4) );
+                        background:-moz-linear-gradient( center top, #a874b4 5%, #a973b4 100% );
+                        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a874b4', endColorstr='#a973b4');
+                        background-color:$theme-color-hover;
+                    }
+
+                    .reply-thread-button:active {
+                        position:relative;
+                        top:1px;
+                    }
+
+                    .thread-button {
+                        width: 125px;
+                        height: 40px;
+                        background-color: $white-color;;
+                        cursor: pointer;
+                        text-align: center;
+                        border-radius: 2px;
+                    }
+
+                    .reply-thread-button {
+                        float: right;
+                    }
+
+                    .delete-thread-button {
+                        float: left;
+                        font-weight: bold;
+                        color: #bbb;
+                        cursor: pointer;
+                        margin: 12px 0 0 25px;
+                    }
+
+                    .delete-thread-button:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .comment-post-v2-open {
+                position: absolute;
+                bottom: 0px;
+                width: 100%;
+                background-color: #373737;
+                height: 200px;
+                display: none;
+
+                textarea {
+                    resize: none;
+                    display: block;
+                    font-size: 14px;
+                    width: 302px;
+                    border-radius: 2px;
+                    margin:auto;
+                    margin-top: 20px;
+                    padding: 10px;
+                    border: 1px solid $generic-divider-color;
+                }
+
+                .thread-buttons-v2 {
+                    overflow: auto;
+                    border: red 1px dashed;
+                    width: 322px;
+
+                    .thread-button {
+                        width: 125px;
+                        height: 40px;
+                        background-color: $white-color;;
+                        cursor: pointer;
+                        text-align: center;
+                        border-radius: 2px;
+                    }
+
+                    .reply-thread-button-v2 {
+                        float: right;
+                    }
+
+                    .cancel-thread-button-v2 {
+                        border: red 1px dashed;
+                        float: right;
+                    }
+                }
+            }
+
+            .comment-thread {
+                display: none;
+                width: 322px;
+                margin:auto;
+                padding-top: 20px;
+
+                .comment-thread-highlight-wrapper {
+                    overflow: auto;
+                    border-bottom: 1px solid $generic-divider-color;
+                    padding-bottom: 20px;
+                }
+
+                .thread-comment {
+                    overflow: auto;
+                    padding-bottom: 20px;
+                    padding-top: 20px;
+                    border-bottom: 1px dotted $generic-divider-color;
+
+                    .thread-thumbnail {
+                        height: 25px;
+                        width: 25px;
+                        background-color: gray;
+                        float: left;
+                    }
+
+                    .thread-comment-content {
+                        margin-left: 10px;
+                        width: 287px;
+                        float: left;
+
+                        .thread-comment-header {
+                            width: 100%;
+                            overflow: auto;
+                            margin-bottom: 12px;
+
+                            .thread-comment-author {
+                                font-weight: bold;
+                                float: left;
+                            }
+
+                            .thread-comment-date {
+                                float: right;
+                                font-style: italic;
+                                color: #888;
+                            }
+                        }
+
+                        .thread-comment-text {
+                            clear: both;
+                        }
+                    }
+                }
+
+            }
+
+            h3 {
+                font-weight: 600;
+                font-style: italic;
+                font-size: 14px;
+                background-color: rgba(169,115,180,.4);
+                float:left;
+                line-height: 24px;
+                cursor: pointer;
+                border-radius: 2px;
+                padding: 0 3px;
+            }
+
+            // list of opened comments
+            .comments-index {
+                display: block;
+                overflow: auto;
+                width:100%;
+                margin: auto;
+                @include comments-button;
+
+                .comments-button {
+                    padding: 4px 9px;
+                }
+
+                li {
+                    background-color: white;
+                    cursor: pointer;
+                    overflow: auto;
+                    width: 322px;
+                    margin: auto;
+                    padding-bottom: 20px;
+                    padding-top: 20px;
+                    border-bottom: 1px dotted $generic-divider-color;
+
+                    .comment-clickable {
+                        overflow: auto;
+                        margin-bottom: 10px;
+
+                        .comment-count {
+                            float: right;
+
+                        }
+
+                        .comment-count:hover {
+                            background: $white-color;
+                            color: #373737;
+                        }
+                    }
+                }
+
+                li:hover {
+                    background: whitesmoke;
+                }
+
+                .comment-details {
+                    clear:both;
+
+                    * {
+                        float: left;
+                    }
+
+                    .comment-poster-img {
+                        height: 25px;
+                        width: 25px;
+                        background: gray;
+                    }
+
+                    .comment-poster-name {
+                        margin-top: 4px;
+                        margin-left: 10px;
+                        font-style: italic;
+                        color: gray;
+                    }
+                }
+            }
+
+            // panel that holds new comment form
+            .comment-post {
+                width: 322px;
+                margin: auto;
+                overflow: auto;
+                display: none;
+
+                .new-highlight-wrapper {
+                    overflow: auto;
+                    margin-bottom: 15px;
+                    margin-top: 20px;
+                }
+
+                .comment-submit {
+                    background-color: $white-color;
+                    float:right;
+                    padding: 6px 11px;
+                    border-radius: 2px;
+                    margin-top: 10px;
+                    cursor: pointer;
+                }
+
+                .comment-submit:hover {
+                    background: gray;
+                    color: $white-color;
+                }
+
+                .cancel-comment {
+                    float: right;
+                    cursor: pointer;
+                    display: none;
+                    margin-right: 20px;
+                    margin-top: 16px;
+                    text-decoration: underline;
+                    color: #888;
+                }
+
+                .cancel-comment:hover {
+                    color: #676767;
+                }
+
+                .comment-textarea {
+                    padding: 15px;
+                    font-size: 11pt;
+                    border: $generic-divider-color 1px solid;
+                    resize: none;
+                    color: gray;
+                    outline: none;
+                    width: 290px;
+                    margin: auto;
+                    border-radius: 2px;
+                    display: block;
+                    font-size: 14px;
+                }
+            }
+
+            .comments-buttons {
+                margin: auto;
+                padding-left: 10px;
+                height: 60px;
+                border-bottom: 3px solid $generic-divider-color;
+                @include comments-button;
+
+                .comments-button {
+                    margin-top: 20px;
+                }
+
+                .comments-nav {
+                    overflow: auto;
+                    float: left;
+                    width: 255px;
+                    height: 48px;
+
+                    .comments-title {
+                        margin-left: 8px;
+                        font-size: 22px;
+                        line-height:26px;
+                        margin-top: 19px;
+                    }
+
+                    .comments-index-title {
+                        display: block;
+                    }
+
+                    .comments-button {
+                        display:none;
+                    }
+                }
+
+                .new-comment {
+                    display: block;
+                    width: 44px;
+                    text-align: center;
+                }
+
+            }
+        }
+
+        /*.tab-notes { // delete this when you delete NOTES html
+            width: 290px;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 30px;
+            background-image: url('../images/handmadepaper.png');
+            overflow-y: scroll;
+
+            .tab-explanation {
+                line-height: 27px;
+                outline: none;
+                height:100%;
+                background-image:
+                -webkit-linear-gradient(left, rgba(255,85,91, 0), rgba(255,85,91, 0)),
+                -webkit-linear-gradient(left, rgba(255,85,91, 0), rgba(255,85,91, 0)),
+                -webkit-linear-gradient(top, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 69px, rgba(255,255,255,0) 70px),
+                -webkit-repeating-linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 18px, #d1d1d1 19px, white 20px);
+                background-size: 1px, 1px, auto, auto 27px;
+                background-repeat: repeat-y, repeat-y, no-repeat, repeat;
+                background-position:0 4px;
+            }
+        } */
+    }
+}
