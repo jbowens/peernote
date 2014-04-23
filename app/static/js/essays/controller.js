@@ -439,9 +439,20 @@ $.extend(peernoteNS.essays, {
       var draftsOpen = false;
       $(".timeline h2").click(function() {
           if (draftsOpen) {
-              $(".drafts-list").slideUp();
+              $(".drafts-list").slideUp(
+                  {
+                      duration: 300,
+                      queue: false,
+                  });
           } else {
-              $(".drafts-list").slideDown();
+              $(".drafts-list").slideDown(
+                  {
+                      duration: 300,
+                      queue: false,
+                      complete: function() {
+                          $(".drafts-list").css("height","230px");
+                      }
+                  });
           }
           draftsOpen = !draftsOpen;
       });
@@ -518,50 +529,42 @@ $.extend(peernoteNS.essays, {
       setTabHeight();
       $window.resize(setTabHeight);
 
-      // TODO: CLEAN THIS UP WHEN YOU FIGURE OUT THE UI
       var mode = "allComments";
       $(".all-comments-button").click(function() {
-        $(".cancel-comment").hide();
-        $(".comments-nav .comments-button").hide();
-        $(".new-comment").show();
-        $(".comment-post").hide();
-        $(".comments-index-title").show();
-        $(".comments-index").show();
-        $(".comments-new-title").hide();
-        $(".comment-thread").hide();
-        $(".comment-post-v2-closed").hide();
+          $(".new-comment-pane").hide();
+          $(".comment-thread-pane").hide();
+          $(".all-comments-pane").show();
       });
 
       $(".new-comment").click(function() {
-        $(".cancel-comment").show();
-        $(".comments-new-title").show();
-        //$(".comments-nav .comments-button").show();
-        $(".new-comment").hide();
-        $(".comment-post").show();
-        $(".comments-index-title").hide();
-        $(".comments-index").hide();
-        $(".comment-thread").hide();
-        $(".comment-post-v2-closed").hide();
+          $(".new-comment-pane").show();
+          $(".comment-thread-pane").hide();
+          $(".all-comments-pane").hide();
       });
 
       $(".cancel-comment").click(function() {
-        $(".cancel-comment").hide();
-        $(".comments-new-title").hide();
-        $(".comments-nav .comments-button").hide();
-        $(".new-comment").show();
-        $(".comment-post").hide();
-        $(".comments-index-title").show();
-        $(".comments-index").show();
+          $(".comment-textarea").val("");
+          $(".new-comment-pane").hide();
+          $(".comment-thread-pane").hide();
+          $(".all-comments-pane").show();
       });
 
       $(".comment-submit").click(function() {
-        $(".comments-nav .comments-button").show();
-        $(".comments-new-title").hide();
-        $(".comment-post").hide();
-        $(".comment-thread").show();
-        $(".cancel-comment").hide();
-        $(".new-comment").show();
+          $(".comment-textarea").val("");
+          $(".new-comment-pane").hide();
+          $(".comment-thread-pane").show();
+          $(".all-comments-pane").hide();
+      });
+
+      $(".reply-thread-button").click(function() {
+        $(".comment-post-v2-closed").hide();
+        $(".comment-post-v2-open").show();
+      });
+
+      $(".cancel-thread-button-v2").click(function() {
+        $(".comment-post-v2-open .comment-textarea").val("");
         $(".comment-post-v2-closed").show();
+        $(".comment-post-v2-open").hide();
       });
   },
 
