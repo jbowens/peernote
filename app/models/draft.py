@@ -43,7 +43,7 @@ class Draft(db.Model):
         """
         Returns a json string that is the default body for new essays/drafts.
         """
-        text = text if text else 'Once upon a time...'
+        text = text if text else ''
         body = {
           'type': 'container',
           'children': [{
