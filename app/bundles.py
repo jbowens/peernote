@@ -112,8 +112,9 @@ assets.register('editor_css',
         "scss/widgets/lightbox.scss",
         "scss/essays/editor.scss",
         "scss/essays/paste.scss",
+        "scss/essays/editor_include/_right-panel.scss",
         filters="scss,cssmin",
-        depends="scss/shared/*.scss, scss/editor-toolkit.scss",
+        depends="scss/shared/*.scss, scss/essays/editor-toolkit.scss",
         output="gen/editor.css"
     )
 )

@@ -2,6 +2,7 @@
 // IMPORTANT: this file is imported to editor.scss
 
 @import "./editor-variables.scss";
+@import "../../shared/_variables.scss";
 
 /* invisible panel that pushes the comments panel open */
 .comment-panel-push {
@@ -81,6 +82,7 @@
 
             @mixin comments-button {
                 .comments-button {
+                    display: block !important;
                     float: left;
                     background-color: $white-color;
                     color: #373737;
@@ -113,7 +115,7 @@
                 width: 100%;
                 background-color: #373737;
                 height: 90px;
-                display: none;
+                display: block;
 
                 .thread-buttons {
                     width: 300px;
@@ -132,7 +134,7 @@
                         border:1px solid #9e76bf;
                         color:#ffffff;
                         font-weight:bold;
-                        line-height:39px;
+                        line-height:36px;
                         text-shadow:1px 0px 0px #7d15cd;
                     }
 
@@ -150,7 +152,7 @@
 
                     .thread-button {
                         width: 125px;
-                        height: 40px;
+                        height: 35px;
                         background-color: $white-color;;
                         cursor: pointer;
                         text-align: center;
@@ -158,15 +160,15 @@
                     }
 
                     .reply-thread-button {
-                        float: right;
+                        float: left;
                     }
 
                     .delete-thread-button {
-                        float: left;
+                        float: right;
                         font-weight: bold;
                         color: #bbb;
                         cursor: pointer;
-                        margin: 12px 0 0 25px;
+                        margin: 12px 32px 0 0;
                     }
 
                     .delete-thread-button:hover {
@@ -180,51 +182,96 @@
                 bottom: 0px;
                 width: 100%;
                 background-color: #373737;
-                height: 200px;
-                display: none;
+                height: 215px;
 
                 textarea {
                     resize: none;
                     display: block;
                     font-size: 14px;
                     width: 302px;
-                    border-radius: 2px;
-                    margin:auto;
+                    border-top-right-radius: 2px;
+                    border-top-left-radius: 2px;
+                    border-bottom-right-radius: 2px;
+                    border-bottom-left-radius: 2px;
+                    margin: auto;
                     margin-top: 20px;
                     padding: 10px;
-                    border: 1px solid $generic-divider-color;
+                    border-top: 1px solid $generic-divider-color;
                 }
 
                 .thread-buttons-v2 {
                     overflow: auto;
-                    border: red 1px dashed;
                     width: 322px;
+                    margin: auto;
+                    padding-top: 20px;
+                    border: 0 solid $generic-divider-color;
+                    border-bottom-right-radius: 2px;
+                    border-bottom-left-radius: 2px;
 
                     .thread-button {
-                        width: 125px;
-                        height: 40px;
+                        width: 100px;
+                        height: 35px;
                         background-color: $white-color;;
                         cursor: pointer;
                         text-align: center;
                         border-radius: 2px;
+                        margin-left: 10px;
+                        margin-bottom: 10px;
                     }
 
                     .reply-thread-button-v2 {
                         float: right;
                     }
 
+                    .reply-thread-button-v2 {
+                        -moz-box-shadow:inset 0px 1px 0px 0px #d197fe;
+                        -webkit-box-shadow:inset 0px 1px 0px 0px #d197fe;
+                        box-shadow:inset 0px 1px 0px 0px #d197fe;
+                        background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a973b4), color-stop(1, #a874b4) );
+                        background:-moz-linear-gradient( center top, #a973b4 5%, #a874b4 100% );
+                        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a973b4', endColorstr='#a874b4');
+                        background-color:#a973b4;
+                        text-indent:0;
+                        border:1px solid #9e76bf;
+                        color:#ffffff;
+                        font-weight:bold;
+                        line-height:36px;
+                        text-shadow:1px 0px 0px #7d15cd;
+                    }
+
+                    .reply-thread-button-v2:hover {
+                        background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a874b4), color-stop(1, #a973b4) );
+                        background:-moz-linear-gradient( center top, #a874b4 5%, #a973b4 100% );
+                        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a874b4', endColorstr='#a973b4');
+                        background-color:$theme-color-hover;
+                    }
+
+                    .reply-thread-button-v2:active {
+                        position:relative;
+                        top:1px;
+                    }
+
                     .cancel-thread-button-v2 {
-                        border: red 1px dashed;
                         float: right;
+                        color: #bbb;
+                        line-height: 40px;
+                        cursor: pointer;
+                        font-weight: bold;
+                        margin-right: 10px;
+                        text-decoration: none;
+                    }
+
+                    .cancel-thread-button-v2:hover {
+                        text-decoration: underline;
                     }
                 }
             }
 
             .comment-thread {
-                display: none;
                 width: 322px;
                 margin:auto;
                 padding-top: 20px;
+                display: block;
 
                 .comment-thread-highlight-wrapper {
                     overflow: auto;
@@ -272,7 +319,6 @@
                         }
                     }
                 }
-
             }
 
             h3 {
@@ -315,7 +361,6 @@
 
                         .comment-count {
                             float: right;
-
                         }
 
                         .comment-count:hover {
@@ -356,7 +401,7 @@
                 width: 322px;
                 margin: auto;
                 overflow: auto;
-                display: none;
+                display: block;
 
                 .new-highlight-wrapper {
                     overflow: auto;
@@ -381,11 +426,11 @@
                 .cancel-comment {
                     float: right;
                     cursor: pointer;
-                    display: none;
                     margin-right: 20px;
                     margin-top: 16px;
                     text-decoration: underline;
                     color: #888;
+                    display: block;
                 }
 
                 .cancel-comment:hover {
@@ -434,10 +479,6 @@
                     .comments-index-title {
                         display: block;
                     }
-
-                    .comments-button {
-                        display:none;
-                    }
                 }
 
                 .new-comment {
@@ -445,7 +486,6 @@
                     width: 44px;
                     text-align: center;
                 }
-
             }
         }
 

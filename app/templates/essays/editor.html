@@ -187,11 +187,73 @@
         <div class="comment-panel">
             <div class=" comments-panel-tab comment-tab-line-comments tab-container-selected">
                 <div class="tab-top tab-top-comments tab-selected">Comments</div>
-                <div class="tab-content">
+
+
+                {# This is the html for the "comments index" view of the comments pane #}
+                <div class="tab-content all-comments-pane">
                     <div class="comments-buttons">
                         <div class="comments-nav">
                             <div class="comments-title comments-index-title">All Comments</div>
+                        </div>
+                        <div class="comments-button new-comment">New</div>
+                    </div>
+                    <div class="comments-index">
+                        <ul>
+                            <li>
+                                <div class="comment-clickable">
+                                    <h3>This is the highlighted text</h3>
+                                    <div class="comment-count comments-button">2</div>
+                                </div>
+                                <div class="comment-details">
+                                    <img class="comment-poster-img">
+                                    <div class="comment-poster-name">Bryce Aebi | Updated 7 hours ago</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="comment-clickable">
+                                    <h3>This is the highlighted text</h3>
+                                    <div class="comment-count comments-button">2</div>
+                                </div>
+                                <div class="comment-details">
+                                    <img class="comment-poster-img">
+                                    <div class="comment-poster-name">Bryce Aebi | Updated 8 hours ago</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="comment-clickable">
+                                    <h3>This is the highlighted text</h3>
+                                    <div class="comment-count comments-button">2</div>
+                                </div>
+                                <div class="comment-details">
+                                    <img class="comment-poster-img">
+                                    <div class="comment-poster-name">Bryce Aebi | Updated 3 days ago</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                {# This is the HTML for the "new comment" view of the comments pane #}
+                <div class="tab-content new-comment-pane">
+                    <div class="comments-buttons">
+                        <div class="comments-nav">
                             <div class="comments-title comments-new-title">New Comment</div>
+                        </div>
+                    </div>
+                    <div class="comment-post">
+                        <div class="new-highlight-wrapper">
+                            <h3>This is the highlighted text you selected</h3>
+                        </div>
+                        <textarea class="comment-textarea" rows="7" cols="30" placeholder="Write a comment..."></textarea>
+                        <div class="comment-submit" >Comment</div>
+                        <div class="cancel-comment">Cancel</div>
+                    </div>
+                </div>
+
+                {# This is the HTML for the "view thread" view of a comment #}
+                <div class="tab-content comment-thread-pane">
+                    <div class="comments-buttons">
+                        <div class="comments-nav">
                             <div class="comments-button all-comments-button">All Comments</div>
                             <div class="comments-button">
                                 <i class="fa fa-caret-left"></i>
@@ -203,14 +265,6 @@
                             </div>
                         </div>
                         <div class="comments-button new-comment">New</div>
-                    </div>
-                    <div class="comment-post">
-                        <div class="new-highlight-wrapper">
-                            <h3>This is the highlighted text you selected</h3>
-                        </div>
-                        <textarea class="comment-textarea" rows="7" cols="30" placeholder="Write a comment..."></textarea>
-                        <div class="comment-submit" >Comment</div>
-                        <div class="cancel-comment">Cancel</div>
                     </div>
                     <div class="comment-thread">
                         <div class="comment-thread-highlight-wrapper">
@@ -247,40 +301,6 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="comments-index">
-                        <ul>
-                            <li>
-                                <div class="comment-clickable">
-                                    <h3>This is the highlighted text</h3>
-                                    <div class="comment-count comments-button">2</div>
-                                </div>
-                                <div class="comment-details">
-                                    <img class="comment-poster-img">
-                                    <div class="comment-poster-name">Bryce Aebi | Updated 7 hours ago</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="comment-clickable">
-                                    <h3>This is the highlighted text</h3>
-                                    <div class="comment-count comments-button">2</div>
-                                </div>
-                                <div class="comment-details">
-                                    <img class="comment-poster-img">
-                                    <div class="comment-poster-name">Bryce Aebi | Updated 8 hours ago</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="comment-clickable">
-                                    <h3>This is the highlighted text</h3>
-                                    <div class="comment-count comments-button">2</div>
-                                </div>
-                                <div class="comment-details">
-                                    <img class="comment-poster-img">
-                                    <div class="comment-poster-name">Bryce Aebi | Updated 3 days ago</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
                     <div class="comment-post-v2-closed">
                         <div class="thread-buttons">
                             <div class="delete-thread-button">Delete Thread</div>
@@ -290,8 +310,8 @@
                     <div class="comment-post-v2-open">
                             <textarea class="comment-textarea" rows="5" cols="20" placeholder="Comment"></textarea>
                         <div class="thread-buttons-v2">
+                            <div class="reply-thread-button-v2 thread-button">Post</div>
                             <div class="cancel-thread-button-v2">Cancel</div>
-                            <div class="reply-thread-button-v2 thread-button">Reply</div>
                         </div>
                     </div>
                 </div>
