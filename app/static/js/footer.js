@@ -4,6 +4,11 @@
 var peernoteNS = peernoteNS || {};
 peernoteNS.footer = {
     position: function() {
+        peernoteNS.footer.reposition();
+        $(window).resize(peernoteNS.footer.reposition);
+    },
+
+    reposition: function() {
         var $pageWrapper = $(".wrapper");
         var $footerPush = $(".footer-push");
         var $window = $(window);
@@ -11,41 +16,36 @@ peernoteNS.footer = {
         var $navSection = $(".nav-section");
         var $footer = $(".footer");
 
-        function reposition() {
-            $footerPush.height($pageWrapper.height());
-            var wrapperHeight = $pageWrapper.height();
-            var footerPushHeight = $footerPush.height();
-            var windowHeight = $window.height();
-            var navbarHeight = $nav.height() + $navSection.height();
-            var footerHeight = $footer.height();
-            var contentSpace = windowHeight - navbarHeight - footerHeight;
+        var wrapperHeight = $pageWrapper.height();
+        var footerPushHeight = $footerPush.height();
+        var windowHeight = $window.height();
+        var navbarHeight = $nav.height() + $navSection.height();
+        var footerHeight = $footer.height();
+        var contentSpace = windowHeight - navbarHeight - footerHeight;
 
-            if ($navSection.length > 0 && $navSection.css("opacity").length > 0
-                        && $navSection.css("opacity") == 0) {
-                contentSpace = contentSpace + $navSection.height();
-            }
-
-            if (footerPushHeight < contentSpace) {
-                $footerPush.height(contentSpace + "px");
-            } else if ( footerPushHeight > contentSpace
-                    && footerPushHeight >= wrapperHeight
-                    && wrapperHeight <= contentSpace) {
-                $footerPush.height(contentSpace+"px");
-            }
-
-            if ($navSection.length > 0 && $navSection.css("opacity").length > 0
-                        && $navSection.css("opacity") == 0) {
-                $(".wrapper").height(($footerPush.height() + $footer.height() + 1) + "px");
-            }
+        if ($navSection.length > 0 && $navSection.css("opacity").length > 0
+                && $navSection.css("opacity") == 0) {
+            contentSpace = contentSpace + $navSection.height();
         }
 
-        reposition();
-        $(window).resize(repoition);
+        if (footerPushHeight < contentSpace) {
+            $footerPush.height(contentSpace + "px");
+        } else if ( footerPushHeight > contentSpace
+                && footerPushHeight >= wrapperHeight
+                && wrapperHeight <= contentSpace) {
+            $footerPush.height(contentSpace);
+        }
+
+        if ($navSection.length > 0 && $navSection.css("opacity").length > 0
+                && $navSection.css("opacity") == 0) {
+            $(".wrapper").height(($footerPush.height() + $footer.height() + 1) + "px");
+        }
     }
 }
 
 peernoteNS.init(function() {
     window.load = peernoteNS.errors.wrap(function(e) {
-        peernoteNS.footer.position();
+        $(".footer-push").height($(".wrapper").height());
     });
+    peernoteNS.footer.position();
 });
