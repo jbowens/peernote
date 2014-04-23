@@ -12,6 +12,7 @@ peernoteNS.footer = {
         var $footer = $(".footer");
 
         function reposition() {
+            $footerPush.height($pageWrapper.height());
             var wrapperHeight = $pageWrapper.height();
             var footerPushHeight = $footerPush.height();
             var windowHeight = $window.height();
@@ -29,7 +30,7 @@ peernoteNS.footer = {
             } else if ( footerPushHeight > contentSpace
                     && footerPushHeight >= wrapperHeight
                     && wrapperHeight <= contentSpace) {
-                $footerPush.height(contentSpace);
+                $footerPush.height(contentSpace+"px");
             }
 
             if ($navSection.length > 0 && $navSection.css("opacity").length > 0
@@ -38,12 +39,13 @@ peernoteNS.footer = {
             }
         }
 
-        $footerPush.height($pageWrapper.height());
         reposition();
-        $(window).resize(reposition);
+        $(window).resize(repoition);
     }
 }
 
 peernoteNS.init(function() {
-    peernoteNS.footer.position();
+    window.load = peernoteNS.errors.wrap(function(e) {
+        peernoteNS.footer.position();
+    });
 });
