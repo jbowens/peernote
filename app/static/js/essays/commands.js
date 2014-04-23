@@ -119,7 +119,7 @@ $.extend(peernoteNS.commands, {
         e.preventDefault();
         _this.undo();
       } else if (e.keyCode == peernoteNS.essays.keys.KEY_CODES.Y ||
-          (e.keyCode == peernoteNS.essays.leys.KEY_CODES.Z && e.shiftKey)) {
+          (e.keyCode == peernoteNS.essays.keys.KEY_CODES.Z && e.shiftKey)) {
         // They hit ctrl+y/ctrl+shift+z. We should undo.
         e.preventDefault();
         _this.redo();
