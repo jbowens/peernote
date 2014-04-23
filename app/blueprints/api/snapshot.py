@@ -1,5 +1,5 @@
 from flask import request, jsonify, g
-from app.decorators import json_login_required
+from app.decorators import json_login_required, csrf_post_protected
 from app.blueprints.api import api
 from app.models.snapshot import Snapshot
 from app.models.draft import Draft
@@ -10,6 +10,7 @@ CURRENTLY UNUSED
 """
 @api.route('/snapshot', methods=['POST'])
 @json_login_required
+@csrf_post_protected
 def save_snapshot():
    
     draft = Draft.query.filter_by(did=request.form.get('did')).first()

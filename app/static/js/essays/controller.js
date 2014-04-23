@@ -23,7 +23,8 @@ $.extend(peernoteNS.essays, {
     var _this = this;
     var params = {
       uid: _this.uid,
-      did: _this.did
+      did: _this.did,
+      csrf: peernoteNS.csrf
     };
 
     $.post('/api/next_draft', params, function(data) {
@@ -104,7 +105,8 @@ $.extend(peernoteNS.essays, {
       params = {
         uid: _this.uid,
         did: _this.did,
-        email: email
+        email: email,
+        csrf: peernoteNS.csrf
       };
 
       $.post('/api/email_a_review', params, function(data) {

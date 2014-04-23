@@ -10,7 +10,7 @@ import uuid
 from validate_email import validate_email
 from app.mailer import Mailer
 from app.mailer.templates.review_a_draft import ReviewADraft
-from app.decorators import json_login_required
+from app.decorators import json_login_required, csrf_post_protected
 
 """
 Given a draft, sends it to an email for review.
@@ -25,6 +25,7 @@ uid: id of user who owns draft
 """
 @api.route('/email_a_review', methods=['POST'])
 @json_login_required
+@csrf_post_protected
 def email_a_review():
     current_app.logger.debug('emailing review for a draft')
 

@@ -111,6 +111,7 @@ assets.register('editor_css',
         "scss/widgets/essays-list.scss",
         "scss/widgets/lightbox.scss",
         "scss/essays/editor.scss",
+        "scss/essays/paste.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss, scss/editor-toolkit.scss",
         output="gen/editor.css"
@@ -243,6 +244,7 @@ assets.register('editor_js',
         "js/essays/editor.js",
         "js/essays/controller.js",
         "js/essays/keys.js",
+        "js/essays/paste.js",
         filters="rjsmin",
         output="gen/editor.js"
     )

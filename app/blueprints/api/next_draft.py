@@ -1,5 +1,5 @@
 from flask import request, current_app, jsonify, g
-from app.decorators import json_login_required
+from app.decorators import json_login_required, csrf_post_protected
 from app.blueprints.api import api
 from app.models.draft import Draft
 from app import app
@@ -20,6 +20,7 @@ timestamp: timestamp of new draft
 """
 @api.route('/next_draft', methods=['POST'])
 @json_login_required
+@csrf_post_protected
 def next_draft():
     current_app.logger.debug('creating next draft')
 

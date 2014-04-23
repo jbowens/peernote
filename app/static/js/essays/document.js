@@ -17,18 +17,19 @@ $.extend(peernoteNS.doc, {
     var _this = this;
     this._root = peernoteNS.containerBlock.construct();
     this._root.addChild(peernoteNS.textBlock.construct());
-    $('.page-container .page').keyup(peernoteNS.errors.wrap(function(e) {
-      _this.checkForChanges(e);
-    }));
     this.render();
   },
 
   checkForChanges: function(e) {
+    var _this = peernoteNS.doc;
     var pos = this.getCaret();
-    var changesMade = pos.startBlock.checkForChanges(pos);
-    if (changesMade) {
-      this._documentChanged();
+    if (pos) {
+      var changesMade = pos.startBlock.checkForChanges(pos);
+      if (changesMade) {
+        _this._documentChanged();
+      }
     }
+    return changesMade;
   },
 
   addChangeListener: function(f) {
@@ -51,6 +52,7 @@ $.extend(peernoteNS.doc, {
    */
   setState: function(body) {
     this._root = this.deserializeBlock(body);
+    peernoteNS.doc.render();
   },
 
   deserializeBlock: function(state) {
@@ -160,18 +162,17 @@ $.extend(peernoteNS.doc, {
       if (pos.startBlock != pos.endBlock) {
         pos.startBlock.deleteRange(pos.startOffset);
         pos.endBlock.deleteRange(0, pos.endOffset);
+        var curr = pos.startBlock.getSucceedingBlock();
+        while (curr != pos.endBlock && curr != null) {
+          var next = curr.getSucceedingBlock();
+          curr.getParent().removeChild(curr);
+          curr = next;
+        }
+        pos.startBlock.coalesce(pos.endBlock);
       } else {
         pos.startBlock.deleteRange(pos.startOffset, pos.endOffset);
       }
-      var curr = pos.startBlock.getSucceedingBlock();
-      while (curr != pos.endBlock && curr != null) {
-        var next = curr.getSucceedingBlock();
-        curr.getParent().removeChild(curr);
-        curr = next;
-      }
-      if (pos.startBlock != pos.endBlock) {
-        pos.startBlock.coalesce(pos.endBlock);
-      }
+      peernoteNS.doc.render();
       this.setCaret({
         startBlock: pos.startBlock,
         startOffset: pos.startOffset
@@ -192,6 +193,7 @@ $.extend(peernoteNS.doc, {
         var predecessor = parentBlock.getChildAt(childIndex - 1);
         var predecessorLength = predecessor.getTextLength();
         predecessor.coalesce(pos.startBlock);
+        peernoteNS.doc.render();
         this.setCaret({
           startBlock: predecessor,
           startOffset: predecessorLength
@@ -219,6 +221,7 @@ $.extend(peernoteNS.doc, {
       if (i != lines.length - 1) {
         curr = curr.splitAt(off + lines[i].length);
       } else {
+        this.render();
         this.setCaret({
           startBlock: curr,
           startOffset: off + lines[i].length
@@ -303,12 +306,14 @@ $.extend(peernoteNS.doc, {
     pos.focusOffset = peernoteNS.docutils.getOffset(pos.focusBlock._elmt,
                                                     s.focusNode,
                                                     s.focusOffset);
-    pos.anchorChar = peernoteNS.docutils.getOffset(this._root._elmt,
-                                                   s.anchorNode,
-                                                   s.anchorOffset);
-    pos.focusChar = peernoteNS.docutils.getOffset(this._root._elmt,
-                                                   s.focusNode,
-                                                   s.focusOffset);
+    if (this._root._elmt) {
+      pos.anchorChar = peernoteNS.docutils.getOffset(this._root._elmt,
+                                                     s.anchorNode,
+                                                     s.anchorOffset);
+      pos.focusChar = peernoteNS.docutils.getOffset(this._root._elmt,
+                                                     s.focusNode,
+                                                     s.focusOffset);
+    }
     if (pos.anchorChar <= pos.focusChar) {
       pos.startChar = pos.anchorChar;
       pos.endChar = pos.focusChar;
@@ -433,7 +438,7 @@ $.extend(peernoteNS.doc, {
     var isPage = $(node).hasClass('page');
     if (isPage) {
       // This is a top level document node. Return the first block contained within it.
-      var blocks = $('.page > .pn-block');
+      var blocks = $('.page > .pn-text-block');
       if (blocks.length) {
         return blocks[0].block;
       } else {
@@ -441,7 +446,7 @@ $.extend(peernoteNS.doc, {
       }
     } else {
       /* Find the containing block for the anchor. */
-      var elmt = $(node).closest('.pn-block');
+      var elmt = $(node).closest('.pn-text-block');
       /* It could be that the content-editable put the focus outside of a block
        * chilling in a top-level text node, in which case we should move to the next sibling. */
       if (elmt.length) {

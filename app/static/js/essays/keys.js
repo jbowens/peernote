@@ -8,12 +8,15 @@ peernoteNS.essays.keys = peernoteNS.essays.keys || {};
 $.extend(peernoteNS.essays.keys, {
 
   KEY_CODES: {
-    BACKSPACE: 8,
-    TAB: 9,
-    LEFT_ARROW: 37,
-    DOWN_ARROW: 38,
-    RIGHT_ARROW: 39,
-    DOWN_ARROW: 40
+    BACKSPACE:    8,
+    TAB:          9,
+    LEFT_ARROW:   37,
+    DOWN_ARROW:   38,
+    RIGHT_ARROW:  39,
+    DOWN_ARROW:   40,
+    V:            86,
+    Y:            89,
+    Z:            90
   },
 
   KEY_DOWN_HANDLERS: {},

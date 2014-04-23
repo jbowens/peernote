@@ -32,12 +32,16 @@ def get_notifications():
         else:
             notifications = Notification.query.filter_by(uid=g.user.uid)
 
-        notifications = notifications.order_by(Notification.created_date.asc()).limit(request.args['count'])
+        notifications = notifications.order_by(Notification.created_date.desc()).limit(request.args['count'])
 
 
         notifications_json = []
         for notification in notifications:
             notifications_json.append(notification.to_dict())
+
+        #flip so we return oldest first
+        notifications_json.reverse()
+
 
         return jsonify(status='success', notifications=notifications_json)
 
