@@ -21,31 +21,36 @@ $.extend(peernoteNS.clientsideFormCheck, {
 
     // checks the validity of a textfield
     errorCheckerHelper: function($textfield, textfields, timeout) {
+      var _this = this;
       var textfieldTimeUtil = textfields[$textfield.attr("id")];
       clearTimeout(textfieldTimeUtil.autosaveTimer);
+
       textfieldTimeUtil.autosaveTimer = setTimeout(function() {
-
-        if (!textfieldTimeUtil.validator($textfield.val())) { // if invalid
-            $textfield.siblings().slideDown(300);
-            $textfield.addClass("textfield-error");
-            textfieldTimeUtil.isValid = false;
-        } else {                                              // if valid
-            $textfield.siblings().slideUp(300);
-            $textfield.removeClass("textfield-error");
-            textfieldTimeUtil.isValid = true;
-        }
-
+        _this._runValidator(textfieldTimeUtil, $textfield)
       }, timeout);
+    },
+
+    _runValidator: function(textfieldTimeUtil, $textfield) {
+      if (!textfieldTimeUtil.validator($textfield.val())) {           // if invalid
+        $textfield.siblings().slideDown(300);
+        $textfield.addClass("textfield-error");
+        textfieldTimeUtil.isValid = false;
+      } else {                                      // if valid
+        $textfield.siblings().slideUp(300);
+        $textfield.removeClass("textfield-error");
+        textfieldTimeUtil.isValid = true;
+      }
     },
 
     // check that all fields are valid before submitting
     submit: function(textfields, $form) {
+      var _this = this;
       var doSubmit = true;
       for (var textfield in textfields) {
         var $textfield = $("#"+textfield);
         if ($form.has($textfield).length > 0) { // make sure the textfield is in the submitted form
-            peernoteNS.clientsideFormCheck.errorCheckerHelper($textfield, textfields,0);
 
+            _this._runValidator(textfields[$textfield.attr('id')], $textfield);
             if (!textfields[textfield].isValid) {
                 doSubmit = false;
             }
