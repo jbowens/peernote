@@ -672,12 +672,15 @@
             overflow-y: auto;
 
             .essay-title {
-                outline: none;
+                height: 60%;
+                resize: none;
+                border: none;
+                text-align: center;
+                margin-top: 5px;
                 font-size: 20px;
                 font-weight: 600;
                 width: auto;
                 min-width: 200px;
-                white-space: nowrap; // don't let text spill over onto next line
             }
         }
 

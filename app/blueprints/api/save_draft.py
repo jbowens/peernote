@@ -13,16 +13,18 @@ Expects:
 did: id of draft to save
 uid: id of user who owns draft
 body: new json blob for the body of the draft
+title: new title for draft
 """
 @api.route('/save_draft', methods=['POST'])
 @json_login_required
 @csrf_post_protected
 def save_draft():
-    if 'body' in request.form and 'did' in request.form and 'uid' in request.form:
+    if 'body' in request.form and 'did' in request.form and 'uid' in request.form and 'title' in request.form:
 
         body = request.form['body']
         did = request.form['did']
         uid = request.form['uid']
+        title = request.form['title']
 
         draft = Draft.query.filter_by(did=did).first()
 
@@ -33,6 +35,7 @@ def save_draft():
         new_date = datetime.now()
 
         draft.body = body
+        draft.title = title
         draft.modified_date = new_date
         db.session.add(draft)
         db.session.flush()

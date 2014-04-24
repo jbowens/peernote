@@ -289,7 +289,7 @@ $.extend(peernoteNS.editor, {
    * controller) to load the initial state of the draft)
    */
   loadDraftState: function (title, body) {
-    // TODO: Do something with the title
+    $('.essay-title').val(title);
     peernoteNS.doc.setState(body);
     peernoteNS.commands.clear();
   },
@@ -301,12 +301,19 @@ $.extend(peernoteNS.editor, {
   save: function() {
     var _this = this;
 
+    // only bother trying to save if this is most recent draft
+    if (peernoteNS.essays.did != peernoteNS.essays.drafts[0].did) {
+      return;
+    }
+
     var state = peernoteNS.doc.getState();
+
 
     var params = {
       uid: peernoteNS.essays.uid,
       did: peernoteNS.essays.did,
       body: JSON.stringify(state),
+      title: $('.essay-title').val(),
       csrf: peernoteNS.csrf
     };
 
@@ -386,6 +393,11 @@ $.extend(peernoteNS.editor, {
     toolkitLeft.find('button.center-align').click(peernoteNS.editor.centerAlign);
     toolbar.find('button#undo').click(peernoteNS.editor.undo);
     toolbar.find('button#redo').click(peernoteNS.editor.redo);
+  },
+
+  initTitle: function() {
+    // TODO: IDK WHERE THIS BELONGS
+    $('.essay-title').change(this.onDocumentChange);
   }
 
 });
@@ -394,4 +406,5 @@ peernoteNS.init(function() {
   peernoteNS.editor.setupBlockTypes();
   peernoteNS.editor.initDocument();
   peernoteNS.editor.initToolbar();
+  peernoteNS.editor.initTitle();
 });
