@@ -11,14 +11,16 @@
     {{ super() }}
 
     <script type="text/javascript">
-      // Silly hack to check if reached page via backbutton. If so,
-      // force a reload so new content is displayed instead of cached
-      var $dirty = $('#dirtybit');
-      if ($dirty.val() == '1') {
-        window.location.reload();
-      } else {
-        $dirty.val('1');
-      }
+      peernoteNS.init(function() {
+        // Silly hack to check if reached page via backbutton. If so,
+        // force a reload so new content is displayed instead of cached
+        var $dirty = $('#dirtybit');
+        if ($dirty.val() == '1') {
+          window.location.reload();
+        } else {
+          $dirty.val('1');
+        }
+      });
     </script>
 
     {% assets "editor_js" %}
