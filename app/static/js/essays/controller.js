@@ -687,8 +687,6 @@ peernoteNS.init(function() {
     return;
   }
 
-
-
   peernoteNS.essays.initCommentTabs();
   peernoteNS.essays.initEmailPopup();
   peernoteNS.essays.toolDisplayer();
