@@ -10,11 +10,22 @@
 {% block scripts %}
     {{ super() }}
 
+    <script type="text/javascript">
+      // Silly hack to check if reached page via backbutton. If so,
+      // force a reload so new content is displayed instead of cached
+      var $dirty = $('#dirtybit');
+      if ($dirty.val() == '1') {
+        window.location.reload();
+      } else {
+        $dirty.val('1');
+      }
+    </script>
+
     {% assets "editor_js" %}
         <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
 
-    <script>
+    <script type="text/javascript">
         peernoteNS.essays.uid = {{ current_essay.uid }};
         peernoteNS.essays.did = {{ current_draft.did }};
         peernoteNS.essays.drafts = [];
@@ -398,5 +409,11 @@
         </div>
     </div>
 </div>
+
+{# for checking of reached page from back button #}
+<form name="ignore_me">
+    <input type="hidden" id="dirtybit" name="dirtybit" value="0" />
+</form>
+
 
 {% endblock %}
