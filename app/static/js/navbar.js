@@ -4,12 +4,15 @@ peernoteNS.init(function() {
     var fadeInTime = 60;
     var fadeOutTime = 100;
 
-    $(window).load(function(){
-        var numUnread = $("#notifications-list > li.unread-notification").length;
-        if (numUnread > 0) {
-            $('.new-notifications-symbol').html(numUnread);
-            $('.new-notifications-symbol').show();
-        }
+    $(window).bind('load',function(){
+        setTimeout(function() {
+            var numUnread = $("#notifications-list > li.unread-notification").length;
+            console.log(numUnread);
+            if (numUnread > 0) {
+                $('.new-notifications-symbol').html(numUnread);
+                $('.new-notifications-symbol').show();
+            }
+        }, 1); // TODO: fix. for some reason dom isn't loaded before window.load event
     });
 
     $('.show-dropdown').click(function(e) {
