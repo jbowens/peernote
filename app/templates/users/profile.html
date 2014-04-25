@@ -80,7 +80,7 @@
             <ul class="assignments">
                 {% for review in reviews %}
                 <li class="assignment">
-                <div class="notification-thumbnail"></div>
+                <img src="{{ review.get_requesting_user().email | gravatar }}" class="notification-thumbnail">
                 <div class="notification-content">
                     <div class="author-date">
                         <div class="notification-author"> {{ review.get_requesting_user().first_name }} {{ user.last_initial() }}.

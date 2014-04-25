@@ -7,7 +7,6 @@ peernoteNS.init(function() {
     $(window).bind('load',function(){
         setTimeout(function() {
             var numUnread = $("#notifications-list > li.unread-notification").length;
-            console.log(numUnread);
             if (numUnread > 0) {
                 $('.new-notifications-symbol').html(numUnread);
                 $('.new-notifications-symbol').fadeIn();
