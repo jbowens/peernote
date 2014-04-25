@@ -10,9 +10,9 @@ peernoteNS.init(function() {
             console.log(numUnread);
             if (numUnread > 0) {
                 $('.new-notifications-symbol').html(numUnread);
-                $('.new-notifications-symbol').show();
+                $('.new-notifications-symbol').fadeIn();
             }
-        }, 1); // TODO: fix. for some reason dom isn't loaded before window.load event
+        }, 300);
     });
 
     $('.show-dropdown').click(function(e) {
