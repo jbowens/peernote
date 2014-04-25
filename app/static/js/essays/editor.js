@@ -169,7 +169,7 @@ $.extend(peernoteNS.editor, {
 
   keypress: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.editor;
-    if (e.keyCode == 13) {
+    if (e.keyCode == peernoteNS.essays.keys.KEY_CODES.ENTER) {
       // They hit enter. We should create a new block.
       e.preventDefault();
       peernoteNS.commands.execute({

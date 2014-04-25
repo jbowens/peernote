@@ -10,6 +10,7 @@ $.extend(peernoteNS.essays.keys, {
   KEY_CODES: {
     BACKSPACE:    8,
     TAB:          9,
+    ENTER:        13,
     LEFT_ARROW:   37,
     DOWN_ARROW:   38,
     RIGHT_ARROW:  39,
