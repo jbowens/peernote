@@ -118,13 +118,12 @@ $.extend(peernoteNS.editor, {
   typingListener: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.editor;
     if (peernoteNS.essays.currentMode == peernoteNS.essays.MODES.EDIT) {
+      var pos = peernoteNS.doc.getCaret();
       var state = peernoteNS.doc.getState();
       var changesMade = peernoteNS.doc.checkForChanges(e);
       if (changesMade) {
         // Record this typing event in an undo/redo command.
-        var pos = peernoteNS.doc.getCaret();
         if (_this._typingCommand) {
-          // TODO: Clear typing command on undo/redo stack changes.
           var cmd = _this._typingCommand;
           if (pos.startBlock == _this._typingCommand.block) {
             _this._typingCommand.afterState = peernoteNS.doc.getState();
@@ -169,7 +168,7 @@ $.extend(peernoteNS.editor, {
 
   keypress: peernoteNS.errors.wrap(function(e) {
     var _this = peernoteNS.editor;
-    if (e.keyCode == 13) {
+    if (e.keyCode == peernoteNS.essays.keys.KEY_CODES.ENTER) {
       // They hit enter. We should create a new block.
       e.preventDefault();
       peernoteNS.commands.execute({
