@@ -306,8 +306,7 @@ $.extend(peernoteNS.textBlock, {
               endOffset: pos.startOffset
             });
           }
-          // Re-render the document to reflect the new modifier.
-          peernoteNS.doc.render();
+          // TODO: Maybe re-render the block to reflect the new modifier
         }
         // Clear pending modifiers
         peernoteNS.editor._pendingModifiers = [];

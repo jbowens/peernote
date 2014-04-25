@@ -29,6 +29,7 @@ $.extend(peernoteNS.doc, {
         _this._documentChanged();
       }
     }
+    this.setCaret(pos);
     return changesMade;
   },
 

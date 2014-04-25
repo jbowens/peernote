@@ -65,6 +65,11 @@ $.extend(peernoteNS.docutils, {
   getOffset: function(doc, node, nodeOffset) {
     var offset = 0;
 
+    var zwspIdx = node.nodeValue.indexOf(this.ZERO_WIDTH_SPACE);
+    if (zwspIdx != -1 && nodeOffset > zwspIdx) {
+      --nodeOffset;
+    }
+
     // Do a depth first search on the document, counting text
     // characters as we go.
     var toVisit = [doc];
