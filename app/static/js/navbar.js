@@ -4,6 +4,14 @@ peernoteNS.init(function() {
     var fadeInTime = 60;
     var fadeOutTime = 100;
 
+    $(window).load(function(){
+        var numUnread = $("#notifications-list > li.unread-notification").length;
+        if (numUnread > 0) {
+            $('.new-notifications-symbol').html(numUnread);
+            $('.new-notifications-symbol').show();
+        }
+    });
+
     $('.show-dropdown').click(function(e) {
         e.preventDefault();
         $('.notifications-dropdown').fadeOut(fadeOutTime);
@@ -18,6 +26,7 @@ peernoteNS.init(function() {
 
     $('.show-notifications').click(function(e) {
         e.preventDefault();
+        $('.new-notifications-symbol').hide();
         $('.options-dropdown').fadeOut(fadeOutTime);
         optionsVisible = false;
         if (notificationsVisible) {

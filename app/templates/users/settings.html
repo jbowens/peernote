@@ -19,7 +19,7 @@
     <form class="forms-wrapper" id="delete-form" method="post" action="{{ url_for('users.delete_account') }}">
         {% include "shared/csrf.html" %}
         <h1>Delete Account</h1>
-        <p>Are you sure you would to delete your account? This cannot be undone.</p>
+        <p>Are you sure you want to delete your account and all associated documents? This cannot be undone.</p>
         <table>
             <tr class="field">
                 <td>
