@@ -157,6 +157,16 @@ nav {
                     top: -8px;
                }
            }
+
+           a.notifications-dropdown-see-all-link {
+               font-weight: bold;
+               color: $main-color-2;
+           }
+
+           a.notifications-dropdown-see-all-link:hover {
+               text-decoration: underline;
+               color: $main-color-2;
+           }
         }
 
         .options-dropdown {
