@@ -8,6 +8,26 @@
                             <i class="fa fa-globe fa-lg show-notifications"></i>
                             <div class="new-notifications-symbol">2</div>
                         </a>
+                        <div class="hidden dropdown notifications-dropdown">
+                            <div class="caret-wrapper">
+                                <div class="caret">
+                                    <div class="caret__border"></div>
+                                </div>
+                                <div class="caret-shadow">
+                                    <div class="caret__border"></div>
+                                </div>
+                            </div>
+                            <div class="notifications-dropdown-title">
+                                <div class="notif-title">Notifications</div>
+                            </div>
+                            <ul id="notifications-list"> </ul>
+                            <div class="notifications-dropdown-see-all">
+                                <a class="notifications-dropdown-see-all-link">
+                                    See All
+                                </a>
+                            </div>
+                        </div>
+
                     </li>
                     <li>
                         <a href="/essays" title="Documents">
@@ -16,7 +36,7 @@
                     </li>
                     <li>
                         <a class="light username show-dropdown" href="/">
-                            {{ user.first_name }}
+                            {{ user.first_name | shorten_string(8)}}
                             <i class="fa fa-caret-down"></i>
                         </a>
                     </li>
@@ -38,11 +58,13 @@
 
         {% if is_logged_in %}
             <div class="hidden dropdown options-dropdown">
-                <div class="caret">
-                    <div class="caret__border"></div>
-                </div>
-                <div class="caret-shadow">
-                    <div class="caret__border"></div>
+                <div class="caret-wrapper">
+                    <div class="caret">
+                        <div class="caret__border"></div>
+                    </div>
+                    <div class="caret-shadow">
+                        <div class="caret__border"></div>
+                    </div>
                 </div>
                 <ul>
                     <li>
@@ -62,24 +84,6 @@
                         </a>
                     </li>
                 </ul>
-            </div>
-
-            <div class="hidden dropdown notifications-dropdown">
-                <div class="caret">
-                    <div class="caret__border"></div>
-                </div>
-                <div class="caret-shadow">
-                    <div class="caret__border"></div>
-                </div>
-                <div class="notifications-dropdown-title">
-                    <div class="notif-title">Notifications</div>
-                </div>
-                <ul id="notifications-list"> </ul>
-                <div class="notifications-dropdown-see-all">
-                    <a class="notifications-dropdown-see-all-link">
-                        See All
-                    </a>
-                </div>
             </div>
 
         {% endif %}

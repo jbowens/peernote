@@ -24,3 +24,9 @@ gravatar = Gravatar(app,
                     use_ssl=False,
                     base_url=None)
 
+@app.template_filter('shorten_string')
+def shorten_string(string, maxlength):
+    if len(string) <= 8:
+        return string
+    else:
+        return string[:8]+"..."

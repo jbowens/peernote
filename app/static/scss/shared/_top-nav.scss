@@ -79,6 +79,7 @@ nav {
             li {
                 display: inline-block;
                 margin-left: 20px;
+                position: relative;
 
                 &.username {
                     display: -ms-flexbox;
@@ -120,34 +121,41 @@ nav {
             z-index: 1001;
             line-height: 20px;
 
-            .caret {
-                border-style: solid;
-                border-width: 0px 8px 8px 8px;
-                border-top-color: transparent;
-                border-left-color: transparent;
-                border-bottom-color: white;
-                border-bottom-color: rgb(245, 245, 245);
-                border-right-color: transparent;
-                width: 0px;
-                height: 0px;
-                display: block;
-                position: absolute;
-                z-index: 1003;
-           }
+            .caret-wrapper {
+                width: 100%;
+                text-align: center;
 
-           .caret-shadow {
-                border-style: solid;
-                border-width: 0px 8px 8px 8px;
-                border-top-color: transparent;
-                border-left-color: transparent;
-                border-bottom-color: $generic-divider-color;
-                border-bottom-color: rgba(177,177,177,1);
-                border-right-color: transparent;
-                width: 0px;
-                height: 0px;
-                display: block;
-                position: absolute;
-                z-index: 1002;
+                .caret {
+                    border-style: solid;
+                    border-width: 0px 8px 8px 8px;
+                    border-top-color: transparent;
+                    border-left-color: transparent;
+                    border-bottom-color: white;
+                    border-bottom-color: rgb(245, 245, 245);
+                    border-right-color: transparent;
+                    width: 0px;
+                    height: 0px;
+                    display: inline-block;
+                    position: absolute;
+                    z-index: 1003;
+                    top: -7px;
+               }
+
+               .caret-shadow {
+                    border-style: solid;
+                    border-width: 0px 8px 8px 8px;
+                    border-top-color: transparent;
+                    border-left-color: transparent;
+                    border-bottom-color: $generic-divider-color;
+                    border-bottom-color: rgba(177,177,177,1);
+                    border-right-color: transparent;
+                    width: 0px;
+                    height: 0px;
+                    display: inline-block;
+                    position: absolute;
+                    z-index: 1002;
+                    top: -8px;
+               }
            }
         }
 
@@ -155,14 +163,7 @@ nav {
             right: 2px;
             top: 51px;
 
-            .caret {
-                top: -7px;
-                left: 86px;
-
-            }
-
-            .caret-shadow {
-                top: -8px;
+            .caret, .caret-shadow {
                 left: 86px;
             }
 
@@ -197,8 +198,9 @@ nav {
 
             a:hover {
                 background: $main-color-2;
-                    background-color: rgba(169, 115, 180, 0.87);
+                background-color: rgba(169, 115, 180, 0.87);
                 color: white;
+
                 * {
                     color: white;
                 }
@@ -206,27 +208,15 @@ nav {
         }
 
         .notifications-dropdown {
-            right: 2px;
+            right: -135px;
             top: 51px;
             width: 300px;
             height: 350px;
             background-color: rgb(245, 245, 245);
 
-            .caret {
-                top: -7px;
-                left: 176px;
-            }
-
-            .caret-shadow {
-                top: -8px;
-                left: 176px;
-            }
-
             ul {
                 overflow-y: auto;
                 height: 280px;
-
-
 
                 li {
                     padding: 15px 10px 13px 10px;
@@ -234,6 +224,8 @@ nav {
                     border-bottom: dotted 1px $generic-divider-color;
                     overflow: auto;
                     cursor: pointer;
+                    margin: 0;
+                    display: block;
 
                     .notification-thumbnail {
                         background: #ccc;
@@ -314,7 +306,6 @@ nav {
                 }
             }
         }
-
     }
 }
 
