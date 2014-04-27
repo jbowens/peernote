@@ -4,16 +4,6 @@ peernoteNS.init(function() {
     var fadeInTime = 60;
     var fadeOutTime = 100;
 
-    $(window).bind('load',function(){
-        setTimeout(function() {
-            var numUnread = $("#notifications-list > li.unread-notification").length;
-            if (numUnread > 0) {
-                $('.new-notifications-symbol').html(numUnread);
-                $('.new-notifications-symbol').fadeIn();
-            }
-        }, 300);
-    });
-
     $('.show-dropdown').click(function(e) {
         e.preventDefault();
         $('.notifications-dropdown').fadeOut(fadeOutTime);
@@ -54,7 +44,6 @@ peernoteNS.init(function() {
             $('.notifications-dropdown').fadeOut(fadeOutTime);
         }
     });
-
 
     // subscribe for notifications
     peernoteNS.notifications.subscribe(function(notifications) {
@@ -99,7 +88,6 @@ peernoteNS.init(function() {
 
         $('#notifications-list').slice(0,8);
     });
-
 
     $('.mark-as-read').click(function() {
         //TODO: this is incredibly lazy and probably bad.
