@@ -16,6 +16,7 @@ class User(db.Model):
     may_email = db.Column(db.Boolean)
     is_admin = db.Column(db.Boolean)
     signup_date = db.Column(db.DateTime, default=datetime.now)
+    teacher = db.relationship('Teacher', uselist=False, backref='user')
 
     def __init__(self):
         self.may_email = True
@@ -30,7 +31,7 @@ class User(db.Model):
 
     def check_password(self, password):
         """
-        Takes a plaintext password and verifies that it matches 
+        Takes a plaintext password and verifies that it matches
         the stored hash.
         """
         return check_password_hash(self.password, password)
@@ -54,6 +55,8 @@ class User(db.Model):
     def draft_count(self):
         return Draft.query.filter_by(uid=self.uid).count()
 
+    def is_teacher(self):
+        return self.teacher is not None
 
     @staticmethod
     def generate_url_keyword(first_name, last_name):

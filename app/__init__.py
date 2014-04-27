@@ -59,6 +59,7 @@ from app.models.email import Email
 from app.models.password_token import PasswordToken
 from app.models.snapshot import Snapshot
 from app.models.notification import Notification
+from app.models.teacher import Teacher
 
 # Setup all the blueprints
 from blueprints.front import front
