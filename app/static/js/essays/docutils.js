@@ -64,8 +64,8 @@ $.extend(peernoteNS.docutils, {
    */
   getOffset: function(doc, node, nodeOffset) {
     var offset = 0;
-
-    var zwspIdx = node.nodeValue.indexOf(this.ZERO_WIDTH_SPACE);
+    var txt = node.nodeValue ? node.nodeValue : node.innerText;
+    var zwspIdx = txt.indexOf(this.ZERO_WIDTH_SPACE);
     if (zwspIdx != -1 && nodeOffset > zwspIdx) {
       --nodeOffset;
     }
