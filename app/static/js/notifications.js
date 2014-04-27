@@ -46,6 +46,13 @@ peernoteNS.notifications = {
       }
 
       _this.lastTimestamp = Math.ceil((new Date()).getTime() / 1000);
+
+      // Show notifications symbol if unread notifications
+      var numUnread = $("#notifications-list > li.unread-notification").length;
+      if (numUnread > 0) {
+        $('.new-notifications-symbol').html(numUnread);
+        $('.new-notifications-symbol').fadeIn();
+      }
     });
 
   },
