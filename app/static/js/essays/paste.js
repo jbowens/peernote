@@ -36,10 +36,15 @@ $.extend(peernoteNS.paste, {
   processPaste: peernoteNS.errors.wrap(function() {
     var _this = peernoteNS.paste;
     var pastedText = _this._pasteCatcher.value;
-    // Restore the caret
-    peernoteNS.doc.setCaret(_this._pastePosition);
-    // Insert the new text
-    peernoteNS.doc.insertAtCaret(pastedText);
+    peernoteNS.commands.execute({
+      type: peernoteNS.commands.TYPES.PASTE,
+      execute: function() {
+        // Restore the caret
+        peernoteNS.doc.setCaret(_this._pastePosition);
+        // Insert the new text
+        peernoteNS.doc.insertAtCaret(pastedText);
+      }
+    });
   }),
 
   init: function() {

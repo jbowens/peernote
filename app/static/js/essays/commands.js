@@ -30,7 +30,8 @@ $.extend(peernoteNS.commands, {
     RIGHT_ALIGN:  7,
     NEWLINE:      8,
     TAB:          9,
-    TYPING:      10
+    TYPING:      10,
+    PASTE:       11
   },
 
   addListener: function(f) {
