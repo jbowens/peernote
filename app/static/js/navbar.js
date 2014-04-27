@@ -33,6 +33,9 @@ peernoteNS.init(function() {
         for (var i = 0; i < peernoteNS.notifications.notifications.length; i++) {
             if (!peernoteNS.notifications.notifications[i].seen) {
                 ids.push(peernoteNS.notifications.notifications[i].nid);
+
+                //remember clientside it is seen
+                peernoteNS.notifications.notifications[i].seen = true;
             }
         }
 
