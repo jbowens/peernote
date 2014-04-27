@@ -5,14 +5,14 @@ peernoteNS.settings = peernoteNS.settings || {};
 // error checking utility for each textfield
 $.extend(peernoteNS.settings, {
     TEXTFIELDS: {
-        "first_name": { 
-            validator: function(string) { return string.length > 0; },
+        "first_name": {
+            validator: function(string) { return string.length > 0 && string.length < 31; },
             autosaveTimer: null,
             isValid: false
         },
 
-        "last_name": { 
-            validator: function(string) { return string.length > 0; },
+        "last_name": {
+            validator: function(string) { return string.length > 0 && string.length < 31; },
             autosaveTimer: null,
             isValid: false
         },
@@ -21,19 +21,19 @@ $.extend(peernoteNS.settings, {
             validator: function(string) {
                 string = string.toLowerCase();
                 var emailRegex = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
-                return emailRegex.test(string);
+                return emailRegex.test(string) && string.length < 81;
             },
             autosaveTimer: null,
             isValid: false
         },
 
-        "new_password": { 
+        "new_password": {
             validator: function(string) { return string.length > 5; },
             autosaveTimer: null,
             isValid: false
         },
 
-        "new_password_again": { 
+        "new_password_again": {
             validator: function(string) { return string === $("#new_password").val(); },
             autosaveTimer: null,
             isValid: false

@@ -65,7 +65,7 @@ $.extend(peernoteNS.profile, {
             for (var i = 0; i < notifications.length; i++) {
                 new_notification = "" +
                     '<li class="notification">' +
-                        '<div class="notification-thumbnail"></div>' +
+                        '<img class="notification-thumbnail">' +
                         '<div class="notification-content">' +
                             '<div class="author-date">' +
                                 '<div class="notification-author">' +

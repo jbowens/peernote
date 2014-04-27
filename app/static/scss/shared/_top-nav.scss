@@ -8,7 +8,6 @@ nav {
     position: relative;
 
     .header-container {
-
         position: relative;
         width: $page-width;
         margin: 0 auto;
@@ -54,9 +53,26 @@ nav {
             a {
                 color: $white-color;
                 font-weight: 400;
+                display: block;
+                position: relative;
 
                 &:hover {
                     color: white;
+                }
+
+                .new-notifications-symbol {
+                    background-color: red;
+                    border-radius:3px;
+                    height: 12px;
+                    overflow: auto;
+                    position: absolute;
+                    top: 10px;
+                    left: 13px;
+                    font-size: 10px;
+                    line-height: 11px;
+                    color: white;
+                    padding: 1px 2px 0px 2px;
+                    display:none;
                 }
             }
 

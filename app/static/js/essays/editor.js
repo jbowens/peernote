@@ -396,7 +396,7 @@ $.extend(peernoteNS.editor, {
 
   initTitle: function() {
     // TODO: IDK WHERE THIS BELONGS
-    $('.essay-title').change(this.onDocumentChange);
+    $('.essay-title').keyup(this.onDocumentChange);
   }
 
 });

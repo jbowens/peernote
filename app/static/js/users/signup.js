@@ -6,13 +6,13 @@ $.extend(peernoteNS.signup, {
     // error check utilities for each textfield
     TEXTFIELDS: {
         "signup_first_name": {
-            validator: function(string) { return string.length > 0; },
+            validator: function(string) { return string.length > 0 && string.length < 31 },
             autosaveTimer: null,
             isValid: false
         },
 
         "signup_last_name": {
-            validator: function(string) { return string.length > 0; },
+            validator: function(string) { return string.length > 0 && string.length < 31; },
             autosaveTimer: null,
             isValid: false
         },
@@ -21,7 +21,7 @@ $.extend(peernoteNS.signup, {
             validator: function(string) {
                 string = string.toLowerCase();
                 var emailRegex = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
-                return emailRegex.test(string);
+                return emailRegex.test(string) && string.length < 81;
             },
             autosaveTimer: null,
             isValid: false
