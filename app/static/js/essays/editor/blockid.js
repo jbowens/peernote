@@ -24,6 +24,22 @@ $.extend(peernoteNS.editor.blockid, {
 
   max: function() {
     return this._current;
+  },
+
+  getBlockById: function(blockid) {
+    var toCheck = [peernoteNS.doc._root];
+    while (toCheck.length) {
+      var block = toCheck.pop();
+      if (block._blockid == blockid) {
+        return block;
+      }
+      if (block._children) {
+        for (var i = 0; i < block._children.length; ++i) {
+          toCheck.push(block._children[i]);
+        }
+      }
+    }
+    return null;
   }
 
 });
