@@ -63,9 +63,12 @@ $.extend(peernoteNS.profile, {
     subscribeNotifications: function() {
         peernoteNS.notifications.subscribe(function(notifications) {
             for (var i = 0; i < notifications.length; i++) {
+                // TODO: if sender_gravatar_hash is empty, should have a generic peernote picture
+                var gravatar = 'http://www.gravatar.com/avatar/' + notifications[i].sender_gravatar_hash + '?s=40';
+
                 new_notification = "" +
                     '<li class="notification">' +
-                        '<img class="notification-thumbnail">' +
+                        '<img src="' + gravatar +'" class="notification-thumbnail">' +
                         '<div class="notification-content">' +
                             '<div class="author-date">' +
                                 '<div class="notification-author">' +

@@ -1,3 +1,4 @@
+from hashlib import md5
 from datetime import datetime, timedelta
 from jinja2 import Template
 from app import db
@@ -22,6 +23,14 @@ class Notification(db.Model):
 
         return "Peernote"
 
+    def sender_gravatar_hash(self):
+        if self.from_uid:
+            sender = user.User.query.filter_by(uid=self.from_uid).first()
+            if sender.email:
+                return md5(sender.email).hexdigest()
+
+        return ""
+
     def rendered_short(self):
         return Template(self.short_template).render(sender=self.sender())
 
@@ -41,6 +50,7 @@ class Notification(db.Model):
             'nid': self.nid,
             'created_date': self.pretty_created_date(),
             'sender': self.sender(),
+            'sender_gravatar_hash': self.sender_gravatar_hash(),
             'short_text': self.rendered_short(),
             'url': self.url,
             'long_text': self.rendered_long(),

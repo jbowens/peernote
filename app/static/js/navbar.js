@@ -67,9 +67,12 @@ peernoteNS.init(function() {
         for (var i = 0; i < notifications.length; i++) {
             var notification = notifications[i];
 
+            // TODO: if sender_gravatar_hash is empty, should have a generic peernote picture
+            var gravatar = 'http://www.gravatar.com/avatar/' + notification.sender_gravatar_hash + '?s=40';
+
             notification_html = "" +
                 '<li class="notification">' +
-                    '<div class="notification-thumbnail"></div>' +
+                    '<img src="' + gravatar + '" class="notification-thumbnail">' +
                     '<div class="notification-content">' +
                         '<span class="notification-text">' +
                             '<span class="notification-author">' +
