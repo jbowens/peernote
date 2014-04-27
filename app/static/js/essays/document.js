@@ -45,7 +45,9 @@ $.extend(peernoteNS.doc, {
    * document.
    */
   getState: function() {
-    return this._root.getState();
+    var state = this._root.getState();
+    state.max_blockid = peernoteNS.editor.blockid.max();
+    return state;
   },
 
   /* Sets the state of the document to be the given
@@ -53,6 +55,8 @@ $.extend(peernoteNS.doc, {
    */
   setState: function(body) {
     this._root = this.deserializeBlock(body);
+    // Reset the block id counter
+    peernoteNS.editor.blockid.reset(body.max_blockid ? body.max_blockid : 0);
     peernoteNS.doc.render();
   },
 

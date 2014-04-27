@@ -45,9 +45,12 @@ class Draft(db.Model):
         """
         text = text if text else ''
         body = {
+          'max_blockid': 2,
           'type': 'container',
+          'blockid': 1,
           'children': [{
               'type': 'text',
+              'blockid': 2,
               'text': text,
               'modifiers': []
             }]

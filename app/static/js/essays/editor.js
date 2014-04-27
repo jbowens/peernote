@@ -307,7 +307,6 @@ $.extend(peernoteNS.editor, {
 
     var state = peernoteNS.doc.getState();
 
-
     var params = {
       uid: peernoteNS.essays.uid,
       did: peernoteNS.essays.did,

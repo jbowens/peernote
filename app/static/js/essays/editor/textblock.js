@@ -9,6 +9,8 @@ $.extend(peernoteNS.textBlock, {
 
   BLOCK_TYPE: 'text',
 
+  _blockid: null,
+
   _parent: null,
 
   _blockModifiers: [],
@@ -34,6 +36,7 @@ $.extend(peernoteNS.textBlock, {
   init: function() {
     this._modifiers = [];
     this._blockModifiers = [];
+    this._blockid = peernoteNS.editor.blockid.next();
   },
 
   getText: function() {
@@ -90,7 +93,9 @@ $.extend(peernoteNS.textBlock, {
     }
 
     return {
+      max_blockid: peernoteNS.editor.blockid.max(),
       type: 'text',
+      blockid: this._blockid,
       text: this._text,
       modifiers: modifiers,
       blockModifiers: blockModifiers
@@ -102,6 +107,7 @@ $.extend(peernoteNS.textBlock, {
    */
   deserialize: function(state) {
     var newBlock = this.construct();
+    newBlock._blockid = state.blockid;
     newBlock._text = state.text;
     newBlock._modifiers = state.modifiers ? state.modifiers : [];
     newBlock._blockModifiers = state.blockModifiers ? state.blockModifiers : [];

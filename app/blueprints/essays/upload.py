@@ -66,9 +66,12 @@ def upload_essay():
         draft.uid = g.user.uid
         draft.title = parsed_contents.title if title in parsed_contents else title
         paragraphs = parsed_contents['text'].split('\n')
-        body = {'type': 'container', 'children': []}
+        body = {'blockid': 1, 'type': 'container', 'children': []}
+        blockid = 1
         for p in paragraphs:
-          body['children'].append({'type': 'text', 'text': p, 'modifiers': []})
+            body['children'].append({'blockid': blockid + 1, 'type': 'text', 'text': p, 'modifiers': []})
+            blockid = blockid + 1
+        body['max_blockid'] = blockid
         draft.body = json.dumps(body)
         db.session.add(draft)
         db.session.commit()
