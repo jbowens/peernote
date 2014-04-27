@@ -42,7 +42,6 @@ peernoteNS.init(function() {
         if (ids.length > 0) {
             $.post('/api/notifications/seen', {ids: ids, csrf: peernoteNS.csrf});
 
-            $("#notifications-list li").removeClass("unread-notification");
         }
     });
 
@@ -59,6 +58,7 @@ peernoteNS.init(function() {
             notificationsVisible = false;
             $('.options-dropdown').fadeOut(fadeOutTime);
             $('.notifications-dropdown').fadeOut(fadeOutTime);
+            $("#notifications-list li").removeClass("unread-notification");
         }
     });
 
