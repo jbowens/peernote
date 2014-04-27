@@ -105,7 +105,6 @@ $.extend(peernoteNS.commands, {
   clear: function() {
     this._undo_stack = [];
     this._redo_stack = [];
-    this._changed();
   },
 
   /* Key down event listener that handles undo and

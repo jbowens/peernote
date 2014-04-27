@@ -8,6 +8,8 @@ $.extend(peernoteNS.containerBlock, {
 
   BLOCK_TYPE: 'container',
 
+  _blockid: null,
+
   /* The parent of this block. */
   _parent: null,
 
@@ -30,6 +32,7 @@ $.extend(peernoteNS.containerBlock, {
 
   init: function() {
     this._children = [];
+    this._blockid = peernoteNS.editor.blockid.next();
   },
 
   getState: function() {
@@ -39,6 +42,7 @@ $.extend(peernoteNS.containerBlock, {
     }
     return {
       type: 'container',
+      blockid: this._blockid,
       children: children
     };
   },
@@ -52,6 +56,7 @@ $.extend(peernoteNS.containerBlock, {
       var child = peernoteNS.doc.deserializeBlock(state.children[i]);
       newBlock.addChild(child);
     }
+    newBlock.blockid = state.blockid;
     return newBlock;
   },
 
