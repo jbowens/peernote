@@ -109,7 +109,7 @@ def process_session():
     g.csrf_token = session['csrf']
 
     g.user = None
-    if session.get('uid', None): 
+    if session.get('uid', None):
         # This user is logged in. Grab the user object.
         cur_user = User.query.filter_by(uid=session['uid']).first()
         if not cur_user:
