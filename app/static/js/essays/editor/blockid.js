@@ -20,7 +20,6 @@ $.extend(peernoteNS.editor.blockid, {
     } else {
       this._current = 0;
     }
-    console.log('Reset block id counter to', this._current);
   },
 
   max: function() {
