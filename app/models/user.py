@@ -1,10 +1,14 @@
 from datetime import datetime
+from sqlalchemy import event
 import random
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 from review import Review
 from essay import Essay
 from draft import Draft
+
+def titlecase_name_hook(mapper, connect, target):
+    target.titlecase_name_hook()
 
 class User(db.Model):
     uid = db.Column(db.Integer, primary_key=True)
@@ -58,6 +62,12 @@ class User(db.Model):
     def is_teacher(self):
         return self.teacher is not None
 
+    def titlecase_name_hook(self):
+        if self.first_name:
+            self.first_name = self.first_name.title()
+        if self.last_name:
+            self.last_name = self.last_name.title()
+
     @staticmethod
     def generate_url_keyword(first_name, last_name):
         first_name = first_name.lower()
@@ -83,3 +93,7 @@ class User(db.Model):
     def is_email_used(email):
         user = User.query.filter_by(email=email).first()
         return user is not None
+
+
+event.listen(User, 'before_insert', titlecase_name_hook)
+event.listen(User, 'before_update', titlecase_name_hook)
