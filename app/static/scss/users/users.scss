@@ -35,7 +35,8 @@
         padding-right: 35px;
 
         #user-profile {
-            overflow:auto;
+            overflow-y: auto;
+            overflow-x: hidden;
             padding-bottom: 20px;
             border-bottom: 1px dotted $generic-divider-color;
             margin-bottom: 20px;
