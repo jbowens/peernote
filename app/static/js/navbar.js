@@ -37,6 +37,18 @@ peernoteNS.init(function() {
             $('.notifications-dropdown').fadeIn(fadeInTime);
         }
         notificationsVisible = !notificationsVisible;
+
+        // mark all notifications as seen if any are not seen yet
+        var ids = [];
+        for (var i = 0; i < peernoteNS.notifications.notifications.length; i++) {
+            if (!peernoteNS.notifications.notifications[i].seen) {
+                ids.push(peernoteNS.notifications.notifications[i].nid);
+            }
+        }
+
+        if (ids.length > 0) {
+            $.post('/api/notifications/seen', {ids: ids, csrf: peernoteNS.csrf});
+        }
     });
 
     $(document).click(function(e) {
@@ -98,18 +110,6 @@ peernoteNS.init(function() {
         }
 
         $('#notifications-list').slice(0,8);
-    });
-
-
-    $('.mark-as-read').click(function() {
-        //TODO: this is incredibly lazy and probably bad.
-        var ids = peernoteNS.notifications.notifications.map(function(cv) {
-            return cv.nid;
-        });
-        $.post('/api/notifications/seen', {ids: ids, csrf: peernoteNS.csrf});
-
-        $('#notifications-list li').removeClass('unread-notification');
-
     });
 });
 
