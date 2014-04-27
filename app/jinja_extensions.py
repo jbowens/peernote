@@ -29,4 +29,4 @@ def shorten_string(string, maxlength):
     if len(string) <= 8:
         return string
     else:
-        return string[:8]+"..."
+        return string[:8] + '...'
