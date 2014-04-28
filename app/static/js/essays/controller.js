@@ -259,6 +259,12 @@ $.extend(peernoteNS.essays, {
           if (!data.finalized) {
             // This is the current draft. Enable autosaving
             peernoteNS.editor.enableAutosaving();
+
+            // TODO: alec, there may still be a bug here. if
+            // the doc is in review mode, should autosaving be enabled?
+            if (peernoteNS.essays.currentMode === peernoteNS.essays.MODES.READONLY) {
+                peernoteNS.essays.toEditor();
+            }
           } else {
             // This is an old draft. We need to disable autosaving on the editor.
             peernoteNS.editor.disableAutosaving();
