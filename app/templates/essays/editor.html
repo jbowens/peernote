@@ -69,41 +69,7 @@
         {# Left toolkit #}
         <div class="toolkit">
             <div class="toolkit-left">
-                <div class="toolkit-region toolkit-region-light draft-num-row">
-                    <div class="draft-num-container">
-                        <span class="draft-number">Draft: 1</span>
-                        <span class="mode edit-mode edit-mode"> Mode: Editor</span>
-                        <span class="mode edit-mode readonly-mode"> Mode: Read Only</span>
-                        <span class="mode edit-mode review-mode"> Mode: Review</span>
-                    </div>
-                </div>
-                <div class="toolkit-region toolkit-region-dark" id="doc-manager">
-                    {#<h2>DOC MANAGER</h2>#}
-                    <ul>
-                        <li class="new" title="Create new document">
-                        <a href="{{ url_for('essays.create_essay') }}" target="_blank" >
-                            <i class="fa fa-plus"></i>
-                            New Document
-                        </a>
-                        </li>
-                        <li class="open" title="Open document">
-                        <i class="fa fa-folder-open folder-button"></i> Open
-                        </li>
-                        <li class="next-draft" title="Save copy of current draft">
-                        <i class="fa fa-archive"></i> Next Draft
-                        </li>
-                        <li id="review-request" title="Request review via email">
-                        <i class="fa fa-envelope"></i> Request Review
-                        </li>
-                        <li class="print" title="Print document">
-                        <a href="{{ url_for('essays.print_essay', essayid=current_essay.eid) }}" target="_blank">
-                            <i class="fa fa-print"></i>Print
-                        </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="toolkit-region toolkit-region-dark">
+                <div class="toolkit-region toolkit-region-dark doc-mod-container">
                     <h2>Document Mode</h2>
                     <div class="editor-mode-button-container">
                         <div id="edit-mode-button"
@@ -136,6 +102,32 @@
                         </div>
                     </div>
                 </div>
+                <div class="toolkit-region toolkit-region-dark" id="doc-manager">
+                    {#<h2>DOC MANAGER</h2>#}
+                    <ul>
+                        <li class="new" title="Create new document">
+                        <a href="{{ url_for('essays.create_essay') }}" target="_blank" >
+                            <i class="fa fa-plus"></i>
+                            New Document
+                        </a>
+                        </li>
+                        <li class="open" title="Open document">
+                        <i class="fa fa-folder-open folder-button"></i> Open
+                        </li>
+                        <li class="next-draft" title="Save copy of current draft">
+                        <i class="fa fa-archive"></i> Next Draft
+                        </li>
+                        <li id="review-request" title="Request review via email">
+                        <i class="fa fa-envelope"></i> Request Review
+                        </li>
+                        <li class="print" title="Print document">
+                        <a href="{{ url_for('essays.print_essay', essayid=current_essay.eid) }}" target="_blank">
+                            <i class="fa fa-print"></i>Print
+                        </a>
+                        </li>
+                    </ul>
+                </div>
+
                 <div id="reviewer-tools"
                     class="toolkit-region toolkit-region-dark">
                     <h2>Reviewer Tools</h2>

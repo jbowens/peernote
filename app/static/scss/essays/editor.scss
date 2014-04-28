@@ -208,56 +208,16 @@
             border-bottom: 1px solid black;
         }
 
+        .toolkit-region-dark.doc-mod-container {
+            padding-top: 20px;
+        }
+
         // request review button
         #review {
             cursor: pointer;
         }
 
-        // the toolkit row that states the mode and draft #
-        .draft-num-row {
-            height: 39px;
-            padding: 0;
-
-           .draft-num-container {
-                width: 200px;
-                margin-left: 20px;
-                font-size: 11pt;
-                position:relative;
-                top:12px;
-
-                * {
-                    color: #999;
-                }
-
-                .draft-number {
-                   padding: 0;
-                   font-weight: 500;
-                   font-size: 16px;
-                   margin-right: 20px;
-               }
-
-               .mode {
-                   font-weight: 400;
-               }
-
-               .edit-mode {
-                   color: #39BD41;
-               }
-
-               .review-mode {
-                   display: none;
-                   color: #39b2bd;
-               }
-
-               .readonly-mode {
-                   display: none;
-                   color: $readonly-color;
-               }
-            }
-        }
-
         ul {
-
             * {
                 font-size: 11pt;
             }

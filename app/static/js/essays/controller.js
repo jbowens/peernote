@@ -347,10 +347,6 @@ $.extend(peernoteNS.essays, {
 
     // Enable content editability
     $(".page").attr("contenteditable","true");
-
-    $(".edit-mode").show();
-    $(".readonly-mode").hide();
-    $(".review-mode").hide();
   },
 
   // convert mode to reviewer
@@ -364,10 +360,6 @@ $.extend(peernoteNS.essays, {
 
     // hide readonly stripe
     $(".readonly-stripe").fadeOut();
-
-    $(".edit-mode").hide();
-    $(".readonly-mode").hide();
-    $(".review-mode").show();
 
     if (!peernoteNS.essays.COMMENTS_PANE_OPEN) {
       peernoteNS.essays.COMMENTS_PANE_OPEN = peernoteNS.essays.togglePane(
@@ -395,10 +387,6 @@ $.extend(peernoteNS.essays, {
 
     // show readonly stripe
     $(".readonly-stripe").fadeIn();
-
-    $(".edit-mode").hide();
-    $(".readonly-mode").show();
-    $(".review-mode").hide();
 
     peernoteNS.essays.modeButtonsSelect($("#readonly-mode-button"));
     peernoteNS.essays.currentMode = peernoteNS.essays.MODES.READONLY;
