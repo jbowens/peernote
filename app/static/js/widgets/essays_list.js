@@ -37,7 +37,7 @@ peernoteNS.widgets.essaysList = {
         '<i class="fa fa-caret-up"></i>' +
         '</th>' +
         '<th class="draft-number">' +
-        'Draft' +
+        '# Drafts' +
         '<i class="fa fa-caret-down"></i>' +
         '<i class="fa fa-caret-up"></i>' +
         '</th>' +

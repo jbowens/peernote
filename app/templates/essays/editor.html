@@ -80,22 +80,22 @@
                 <div class="toolkit-region toolkit-region-dark" id="doc-manager">
                     {#<h2>DOC MANAGER</h2>#}
                     <ul>
-                        <li class="new">
+                        <li class="new" title="Create new document">
                         <a href="{{ url_for('essays.create_essay') }}" target="_blank" >
                             <i class="fa fa-plus"></i>
                             New Document
                         </a>
                         </li>
-                        <li class="open">
+                        <li class="open" title="Open document">
                         <i class="fa fa-folder-open folder-button"></i> Open
                         </li>
-                        <li class="next-draft">
+                        <li class="next-draft" title="Save copy of current draft">
                         <i class="fa fa-archive"></i> Next Draft
                         </li>
-                        <li id="review-request">
+                        <li id="review-request" title="Request review via email">
                         <i class="fa fa-envelope"></i> Request Review
                         </li>
-                        <li class="print">
+                        <li class="print" title="Print document">
                         <a href="{{ url_for('essays.print_essay', essayid=current_essay.eid) }}" target="_blank">
                             <i class="fa fa-print"></i>Print
                         </a>
@@ -107,7 +107,8 @@
                     <h2>Document Mode</h2>
                     <div class="editor-mode-button-container">
                         <div id="edit-mode-button"
-                            class="editor-mode-button editor-mode-button-active">
+                            class="editor-mode-button editor-mode-button-active"
+                            title="Switch to edit mode">
                             <div class="icon-container">
                                 <i class="fa fa-pencil"></i>
                             </div>
@@ -116,7 +117,8 @@
                     </div>
                     <div class="editor-mode-button-container">
                         <div id="review-mode-button"
-                            class="editor-mode-button editor-mode-button-selectable">
+                            class="editor-mode-button editor-mode-button-selectable"
+                            title="Switch to review mode">
                             <div class="icon-container">
                                 <i class="fa fa-inbox"></i>
                             </div>
@@ -125,7 +127,8 @@
                     </div>
                     <div class="editor-mode-button-container">
                         <div id="readonly-mode-button"
-                            class="editor-mode-button editor-mode-button-disabled">
+                            class="editor-mode-button editor-mode-button-disabled"
+                            title="Read only mode">
                             <div class="icon-container">
                                 <i class="fa fa-lock"></i>
                             </div>
@@ -342,7 +345,7 @@
             <div class="buttons buttons-position-absolute">
                 <div class="toolbar">
                     <div class="toolbar-left">
-                        <div class="toolkit-open-button">
+                        <div class="toolkit-open-button" title="Show/hide tool panel">
                             <i class="fa fa-bars"></i>
                         </div>
                         <div class="btn-set btn-set-status right-border" title="Save status">
