@@ -42,6 +42,7 @@ $.extend(peernoteNS.essays, {
    * and emulates a click on the new draft to open it.
    */
   addNewDraftAndOpen: function(did, version, ts) {
+    var _this = this;
     this.drafts.unshift({
         did: did,
         ts: ts
@@ -59,12 +60,30 @@ $.extend(peernoteNS.essays, {
       '</li>'
     );
 
-    $newLi.hide();
-    $('.timeline ul').prepend($newLi);
-    $newLi.slideDown();
-    $newLi.click({clicked: $newLi}, this.selectDraft);
+    // Make sure the draft histories panel is OPEN
+    // before adding a new draft so that there is
+    // visual feedback
+    if (peernoteNS.essays.TIMELINE_OPEN) {
+        add();
+    } else {
+        $(".drafts-list").slideDown({
+            duration: 300,
+            queue: false,
+            complete: function() {
+                $(".drafts-list").css("height","230px");
+                peernoteNS.essays.TIMELINE_OPEN = true;
+                add();
+            }
+        });
+    }
 
-    $newLi.click();
+    function add() { // add draft to draft history panel
+        $newLi.hide();
+        $('.timeline ul').prepend($newLi);
+        $newLi.slideDown();
+        $newLi.click({clicked: $newLi}, _this.selectDraft);
+        $newLi.click();
+    }
   },
 
   initToolkit: function() {
@@ -436,9 +455,8 @@ $.extend(peernoteNS.essays, {
 
       setHeight(); // set initial height
 
-      var draftsOpen = false;
       $(".timeline h2").click(function() {
-          if (draftsOpen) {
+          if (peernoteNS.essays.TIMELINE_OPEN) {
               $(".drafts-list").slideUp(
                   {
                       duration: 300,
@@ -454,9 +472,11 @@ $.extend(peernoteNS.essays, {
                       }
                   });
           }
-          draftsOpen = !draftsOpen;
+          peernoteNS.essays.TIMELINE_OPEN = !peernoteNS.essays.TIMELINE_OPEN;
       });
   },
+
+  TIMELINE_OPEN: false, // constant indicates if draft history panel opened or closed
 
   // JS to open and close pannels
   // $pannel is the target panel (left or right)
