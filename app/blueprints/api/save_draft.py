@@ -25,6 +25,8 @@ def save_draft():
         did = request.form['did']
         uid = request.form['uid']
         title = request.form['title']
+        if title == "":
+            title = "**Untitled**" # important, because unique
 
         draft = Draft.query.filter_by(did=did).first()
 

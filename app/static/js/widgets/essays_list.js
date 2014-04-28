@@ -62,10 +62,15 @@ peernoteNS.widgets.essaysList = {
         '</td>'
     }
 
+    var essayTitle = essay.title;
+    if (essayTitle === "**Untitled**") {
+        essayTitle = "Untitled";
+    }
+
     return '' +
       '<tr class="row-link">' +
         '<td class="essay-name">' +
-        aHtmlStart + essay.title + '</a>' +
+        aHtmlStart + essayTitle + '</a>' +
         '</td>' +
         '<td class="essay-created">' +
         aHtmlStart + essay.created_date + '</a></td>' +

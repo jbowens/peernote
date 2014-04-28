@@ -30,3 +30,10 @@ def shorten_string(string, maxlength):
         return string
     else:
         return string[:maxlength] + '...'
+
+@app.template_filter('check_untitled')
+def check_untitled(string):
+    if string == '**Untitled**':
+        return 'Untitled'
+    else:
+        return string

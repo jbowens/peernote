@@ -54,7 +54,7 @@
             {% for essay in recent_essays %}
                 <li>
                     <a href="{{ url_for('essays.edit_essay', essayid=essay.eid) }}">
-                        <div class="recent-doc">{{ essay.get_current_draft().title }}</div>
+                        <div class="recent-doc">{{ essay.get_current_draft().title | check_untitled }}</div>
                         <div class="date">{{ essay.pretty_modified_date() }} </div>
                     </a>
                 </li>

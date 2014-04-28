@@ -288,7 +288,12 @@ $.extend(peernoteNS.editor, {
    * controller) to load the initial state of the draft)
    */
   loadDraftState: function (title, body) {
-    $('.essay-title').val(title);
+    if (title === "**Untitled**"){
+        $('.essay-title').val("");
+    } else {
+        $('.essay-title').val(title);
+    }
+
     peernoteNS.doc.setState(body);
     peernoteNS.commands.clear();
   },
