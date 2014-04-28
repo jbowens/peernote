@@ -87,6 +87,15 @@ assets.register("reset-password_css",
     )
 )
 
+assets.register("404_css",
+    Bundle(
+        "scss/static-pages/404.scss",
+        filters="scss,cssmin",
+        depends="scss/shared/*.scss",
+        output="gen/404.css"
+    )
+)
+
 assets.register('login_css',
     Bundle(
         "scss/users/login.scss",

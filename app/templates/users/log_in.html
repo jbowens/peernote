@@ -27,7 +27,7 @@
                     <tr>
                         <td>
                             <a href="/log-out">
-                                <input id="login" class="button-field" 
+                                <input id="login" class="button-field"
                                 type="submit" value="Sign Out" />
                             </a>
                         </td>
@@ -47,37 +47,37 @@
                     {% endif %}
                     <tr class="field">
                         <td>
-                            <input class="textfield" type="text" 
+                            <input class="textfield" type="text"
                                 placeholder="Email" id="login_email" name="email" />
                             <div class="form-error-message hidden">Invalid email</div>
                         </td>
                     </tr>
                     <tr class="field">
                         <td>
-                            <input class="textfield" type="password" 
+                            <input class="textfield" type="password"
                                 placeholder="Password" id="login_password" name="password" />
                             <div class="form-error-message hidden">Required field</div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input id="login" class="button-field" 
+                            <input id="login" class="button-field"
                                 type="submit" value="Log In" />
                         </td>
                     </tr>
                     <tr>
                         <td class="links">
-                            <div class="forgot-password"> 
-                                <p>Don't have an account? 
-                                    <a class="sign-up-link" 
+                            <div class="forgot-password">
+                                <p>Don't have an account?
+                                    <a class="sign-up-link"
                                         href="{{ url_for('users.signup') }}">
                                             Sign up
                                     </a>
                                 </p>
-                                <a class="password-forgot-link" 
+                                <a class="password-forgot-link"
                                     href="{{ url_for('users.forgot_password') }}">
                                     Forgot password?
-                                </a> 
+                                </a>
                             </div>
                         </td>
                     </tr>

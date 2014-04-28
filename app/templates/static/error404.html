@@ -1,8 +1,17 @@
 {% extends 'base/application_main.html' %}
 
+{% block styles %}
+    {{ super() }}
+    {% assets "404_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+{% endblock %}
+
 {% block content %}
-<div class="page-container top-margin bottom-margin">
-    <h1> 404 Page Not Found </h2>
-    <p> Whoops, this page doesn't exist friend buddy.</p>
+<div class="page-container forms-wrapper top-margin bottom-margin">
+    <div class="table-wrapper">
+        <h1> 404 Page Not Found </h2>
+        <p> Whoops, this page doesn't exist friend buddy.</p>
+    </div>
 </div>
 {% endblock %}
