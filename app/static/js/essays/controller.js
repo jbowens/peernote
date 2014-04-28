@@ -92,8 +92,19 @@ $.extend(peernoteNS.essays, {
     $toolkit.find('.next-draft').click(function(e) {
       e.preventDefault();
       if (peernoteNS.essays.drafts[0].did != peernoteNS.essays.did) {
-        // Currently on older draft, just open the draft following it
-        $('.timeline ul li.active-draft').prev().click();
+
+        // Currently on older draft, just open the draft following it.
+        // make sure draft history panel is open so you can see
+        // the animation.
+        $(".drafts-list").slideDown({
+            duration: 300,
+            queue: false,
+            complete: function() {
+                $(".drafts-list").css("height","230px");
+                peernoteNS.essays.TIMELINE_OPEN = true;
+                $('.timeline ul li.active-draft').prev().click();
+            }
+        });
       } else {
         _this.createNextDraft();
       }
