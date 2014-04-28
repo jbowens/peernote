@@ -259,9 +259,6 @@ $.extend(peernoteNS.essays, {
           if (!data.finalized) {
             // This is the current draft. Enable autosaving
             peernoteNS.editor.enableAutosaving();
-
-            // Move to editor mode
-            peernoteNS.essays.toEditor();
           } else {
             // This is an old draft. We need to disable autosaving on the editor.
             peernoteNS.editor.disableAutosaving();
