@@ -40,8 +40,10 @@ def email_a_review():
         if not draft or draft.uid != g.user.uid:
             return jsonify(error="Invalid draft"), 400
 
+        """
         if not validate_email(email, check_mx=True):
             return jsonify(error="Invalid email"), 400
+        """
 
         # create review pointing to the draft
         review = Review()
