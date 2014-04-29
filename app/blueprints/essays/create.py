@@ -22,7 +22,7 @@ def create_essay():
     draft.uid = g.user.uid
 
     draft.body = Draft.default_body()
-    draft.title = "Title Here"
+    draft.title = ""
     db.session.add(draft)
     db.session.commit()
 
