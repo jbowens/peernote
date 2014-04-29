@@ -16,7 +16,10 @@ peernoteNS.widgets.initEssaysList = function(container, options) {
 
 peernoteNS.widgets.essaysList = {
 
-  html: function() {
+  parent_container: null,
+  options: null,
+
+  _html: function() {
     return '' +
       '<table class="essays-table">' +
       '<thead class="essays-header">' +
@@ -46,7 +49,7 @@ peernoteNS.widgets.essaysList = {
       '</table>';
   },
 
-  listElementHtml: function(essay, index, options) {
+  _listElementHtml: function(essay, index, options) {
     var aHtmlStart = '<a href="/essays/edit/' + essay.eid +'" '
 
     if (options.newTab) {
@@ -82,11 +85,11 @@ peernoteNS.widgets.essaysList = {
       '</tr>';
   },
 
-  noEssaysHtml: function() {
+  _noEssaysHtml: function() {
     return 'You have no essays. Would you like to <a href="/essays/create"> create </a> one?'
   },
 
-  initTrashButtons: function(essays) {
+  _initTrashButtons: function(essays) {
     for (var i = 0; i < essays.length; i++) {
 
       (function (i) {
@@ -105,17 +108,48 @@ peernoteNS.widgets.essaysList = {
   },
 
   /*
+   * reloads all essays
+   */
+  refresh: function() {
+    var _this = this;
+
+    $essaysList = $(_this._html())
+    _this.parent_container.html($essaysList);
+    $essaysTable = _this.parent_container.find('.essays-table');
+
+    $.get('/api/users/essays', function(data) {
+      if (data.status == "success") {
+
+        if (data.essays.length == 0) {
+          _this.parent_container.html(_this._noEssaysHtml());
+          return;
+        }
+
+        for (var i = 0; i < data.essays.length; i++) {
+          $essaysTable.append(_this._listElementHtml(data.essays[i], i, _this.options));
+        }
+
+        _this._initTrashButtons(data.essays);
+
+        $(".essays-table").tablesorter({cssAsc: "show-up", cssDesc: "show-down",
+            headers: { // sort these columns using the sugar.js date sorter lib
+                1: { sorter:'sugar' },
+                2: { sorter:'sugar' }
+            }
+        });
+
+        $(".essay-name").trigger("click");
+      }
+    });
+  },
+
+  /*
    * options: {
-   *   essays: optional jsonified essays. If null fetches.
    *   newTab: boolean specifying whether to open essays in a new tab
    *   deletable: boolean specifying whether you can delete essays
    * }
    */
   init : function(parent_container, options) {
-    var _this = this;
-    var $essaysList = $(_this.html())
-    parent_container.append($essaysList);
-    $essaysTable = parent_container.find('.essays-table');
 
     if (!("newTab" in options)) {
       options.newTab = false;
@@ -125,35 +159,11 @@ peernoteNS.widgets.essaysList = {
       options.deletable = true;
     }
 
-    if (!options.essays) {
-      $.get('/api/users/essays', function(data) {
-        if (data.status == "success") {
 
-          if (data.essays.length == 0) {
-            parent_container.html(_this.noEssaysHtml());
-            return;
-          }
+    this.parent_container = parent_container;
+    this.options = options;
 
-          for (var i = 0; i < data.essays.length; i++) {
-            $essaysTable.append(_this.listElementHtml(data.essays[i], i, options));
-          }
-
-          _this.initTrashButtons(data.essays);
-
-          $(".essays-table").tablesorter({cssAsc: "show-up", cssDesc: "show-down",
-              headers: { // sort these columns using the sugar.js date sorter lib
-                  1: { sorter:'sugar' },
-                  2: { sorter:'sugar' }
-              }
-          });
-
-          $(".essay-name").trigger("click");
-        }
-      });
-    } else {
-      // NOT SUPPORTED YET LOL!
-    }
-
-    return _this;
+    this.refresh();
+    return this;
   }
 }

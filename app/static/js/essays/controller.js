@@ -659,11 +659,12 @@ $.extend(peernoteNS.essays, {
       closeIcon: true
     });
 
-    peernoteNS.widgets.essaysList.init($('.essays-selector'), { newTab: true,
+    var essayList = peernoteNS.widgets.essaysList.init($('.essays-selector'), { newTab: true,
       deletable: false
     });
 
     $("li.open").click(function() {
+      essayList.refresh();
       lightbox.open();
     });
   },
