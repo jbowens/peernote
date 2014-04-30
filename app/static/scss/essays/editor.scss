@@ -257,7 +257,6 @@
             li:hover {
                 background-color: black;
             }
-
         }
 
         .timeline {
@@ -269,6 +268,9 @@
             h2 {
                 padding-bottom: 18px;
                 padding-top: 20px;
+                margin-left: 0;
+                padding-left: 20px;
+
                 cursor: pointer;
 
                 .fa-caret-down {
@@ -346,6 +348,11 @@
                 }
             }
         }
+
+        .timeline h2:hover {
+            background: #3b3b3b;
+        }
+
         .timeline-bottom-border {
             width: 100%;
             border-top: 1px solid #555;

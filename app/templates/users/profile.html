@@ -34,10 +34,10 @@
             </div>
             <div class="button-panel">
                 <a class="button" href="{{ url_for('essays.create_essay') }}">
-                    Write Paper
+                    New Document
                 </a>
                 <a class="button" href="{{ url_for('essays.upload_essay') }}">
-                    Upload Paper
+                    Upload Document
                 </a>
             </div>
         </div>
@@ -54,7 +54,7 @@
             {% for essay in recent_essays %}
                 <li>
                     <a href="{{ url_for('essays.edit_essay', essayid=essay.eid) }}">
-                        <div class="recent-doc">{{ essay.get_current_draft().title | check_untitled }}</div>
+                        <div class="recent-doc">{{ essay.get_current_draft().title | check_untitled | shorten_string(25) }}</div>
                         <div class="date">{{ essay.pretty_modified_date() }} </div>
                     </a>
                 </li>

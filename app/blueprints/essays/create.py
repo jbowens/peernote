@@ -31,7 +31,7 @@ def create_essay():
     draft.modified_date = now
 
     draft.body = Draft.default_body()
-    draft.title = "Title Here"
+    draft.title = ""
     db.session.add(draft)
     db.session.commit()
 
