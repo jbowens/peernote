@@ -1,4 +1,5 @@
 import os, json
+from datetime import datetime
 from flask import render_template, g, request, url_for, redirect, current_app, flash
 from app.blueprints.essays import essays
 from app.decorators import login_required, csrf_post_protected
@@ -53,10 +54,16 @@ def upload_essay():
         k.key = str(new_upload.upload_id) + '-' + f.filename
         k.set_contents_from_string(contents)
 
+        # create a single datetime object so both draft and essay have the
+        # same instead of being slightly different
+        now = datetime.now()
+
         # Create the essay entry
         new_essay = Essay()
         new_essay.uid = g.user.uid
         new_essay.upload_id = new_upload.upload_id
+        new_essay.created_date = now
+        new_essay.modified_date = now
         db.session.add(new_essay)
         db.session.flush()
 
@@ -64,6 +71,8 @@ def upload_essay():
         draft = Draft()
         draft.eid = new_essay.eid
         draft.uid = g.user.uid
+        draft.created_date = now
+        draft.modified_date = now
         draft.title = parsed_contents.title if title in parsed_contents else title
         paragraphs = parsed_contents['text'].split('\n')
         body = {'blockid': 1, 'type': 'container', 'children': []}
