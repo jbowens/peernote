@@ -635,6 +635,8 @@ $.extend(peernoteNS.essays, {
       $('.line-height').click(function(e) {
           $('.spacing').hide();
           var scale = $(this).attr('scale');
+          var scales = {1: "18px", 1.5: "25px", 2: "32px"};
+          scale = scales[scale];
           $('.content').css('line-height', scale);
       });
 
