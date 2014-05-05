@@ -35,38 +35,47 @@
             <table>
                 <tr class="field">
                     <td>
-                        <input class="textfield" type="text"
+                        <div class="td-contents">
+                            <input class="textfield" type="text"
                             id="signup_first_name" name="first_name"
                             placeholder="First Name" />
                             <div class="form-error-message hidden">Invalid entry</div>
+                        </div>
                     </td>
                 </tr>
                 <tr class="field">
                     <td>
-                        <input class="textfield" type="text"
-                            id="signup_last_name" name="last_name" placeholder="Last Name"/>
-                            <div class="form-error-message hidden">Invalid entry</div>
-                    </td>
-                </tr>
-
-                <tr class="field">
-                    <td>
-                        <input class="textfield" type="text" placeholder="Email" autocomplete="off" id="signup_email" name="email" />
-                        <div class="form-error-message hidden">Invalid email address</div>
+                        <div class="td-contents">
+                            <input class="textfield" type="text"
+                                id="signup_last_name" name="last_name" placeholder="Last Name"/>
+                                <div class="form-error-message hidden">Invalid entry</div>
+                        </div>
                     </td>
                 </tr>
                 <tr class="field">
                     <td>
-                        <input class="textfield" type="password"
+                        <div class="td-contents">
+                            <input class="textfield" type="text" placeholder="Email" autocomplete="off" id="signup_email" name="email" />
+                            <div class="form-error-message hidden">Invalid email address</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="field">
+                    <td>
+                        <div class="td-contents">
+                            <input class="textfield" type="password"
                             id="signup_password" name="pw" placeholder="Password"/>
                             <div class="form-error-message hidden">6 or more characters</div>
+                        </div>
                     </td>
                 </tr>
                 <tr class="field">
                     <td>
-                        <input class="textfield" type="password"
+                        <div class="td-contents">
+                            <input class="textfield" type="password"
                             id="signup_password_confirm" name="pw_again" placeholder="Password Again"/>
                             <div class="form-error-message hidden">Doesn't match password</div>
+                        </div>
                     </td>
                 </tr>
                 {# ~*~*~*~ BEGIN HONEYPOT INPUT FIELDS. ~*~*~*~
@@ -77,22 +86,28 @@
                 #}
                 <tr class="field winnie-the-pooh">
                     <td>
-                        <input class="textfield" type="text"
+                        <div class="td-contents">
+                            <input class="textfield" type="text"
                             id="very_important_field" name="very_important_field" placeholder="Name" />
                             <div class="form-error-message hidden">You cray.</div>
+                        </div>
                     </td>
                 </tr>
                 {# ~*~*~*~ END HONEYPOT INPUT FIELDS ~*~*~*~ #}
                 <tr>
                     <td>
-                        <input id="signup-submit" class="button-field"
+                        <div class="td-contents">
+                            <input id="signup-submit" class="button-field"
                             type="submit" value="Sign up" />
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td class="already-account">
-                        Already have an account?
-                        <a class="log-in-link" href="/log-in">Log in</a>
+                        <div class="td-contents">
+                            Already have an account?
+                            <a class="log-in-link" href="/log-in">Log in</a>
+                        </div>
                     </td>
                 </tr>
             </table>

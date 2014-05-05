@@ -26,12 +26,11 @@ body {
 }
 
 .forms-wrapper {
-
     h1 {
         border-bottom: 1px solid $generic-divider-color;
         padding-bottom: 15px;
     }
-    
+
     p {
         display: block;
         margin-top: 20px;
@@ -44,6 +43,7 @@ body {
         td {
             padding: 15px 15px 15px 0px;
             width: 180px;
+            position: relative;
         }
 
         .checkbox {

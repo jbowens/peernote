@@ -22,7 +22,7 @@ table {
     width: 250px;
     margin: auto;
     margin-bottom: 20px !important;
-    
+
     td {
         position: relative;
         height: 30px;
@@ -32,6 +32,10 @@ table {
             height: 20px;
             width: 234px !important;
         }
+    }
+
+    .td-contents {
+        position: relative; // in firefox, setting td to relative doesnt work well
     }
 }
 

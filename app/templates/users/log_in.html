@@ -52,37 +52,45 @@
                     {% endif %}
                     <tr class="field">
                         <td>
-                            <input class="textfield" type="text"
+                            <div class="td-contents">
+                                <input class="textfield" type="text"
                                 placeholder="Email" id="login_email" name="email" />
-                            <div class="form-error-message hidden">Invalid email</div>
+                                <div class="form-error-message hidden">Invalid email</div>
+                            </div>
                         </td>
                     </tr>
                     <tr class="field">
                         <td>
-                            <input class="textfield" type="password"
-                                placeholder="Password" id="login_password" name="password" />
-                            <div class="form-error-message hidden">Required field</div>
+                            <div class="td-contents">
+                                <input class="textfield" type="password"
+                                    placeholder="Password" id="login_password" name="password" />
+                                <div class="form-error-message hidden">Required field</div>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input id="login" class="button-field"
-                                type="submit" value="Log In" />
+                            <div class="td-contents">
+                                <input id="login" class="button-field"
+                                    type="submit" value="Log In" />
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td class="links">
-                            <div class="forgot-password">
-                                <p>Don't have an account?
-                                    <a class="sign-up-link"
-                                        href="{{ url_for('users.signup') }}">
-                                            Sign up
+                            <div class="td-contents">
+                                <div class="forgot-password">
+                                    <p>Don't have an account?
+                                        <a class="sign-up-link"
+                                            href="{{ url_for('users.signup') }}">
+                                                Sign up
+                                        </a>
+                                    </p>
+                                    <a class="password-forgot-link"
+                                        href="{{ url_for('users.forgot_password') }}">
+                                        Forgot password?
                                     </a>
-                                </p>
-                                <a class="password-forgot-link"
-                                    href="{{ url_for('users.forgot_password') }}">
-                                    Forgot password?
-                                </a>
+                                </div>
                             </div>
                         </td>
                     </tr>

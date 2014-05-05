@@ -48,8 +48,10 @@
                     <label for="first_name">First Name (Required)</label>
                 </td>
                 <td>
-                    <input class="textfield" type="text" id="first_name" name="first_name" value="{{ user.first_name }}" />
-                    <div class="form-error-message hidden">Invalid entry</div>
+                    <div class="td-contents">
+                        <input class="textfield" type="text" id="first_name" name="first_name" value="{{ user.first_name }}" />
+                        <div class="form-error-message hidden">Invalid entry</div>
+                    </div>
                 </td>
             </tr>
             <tr class="field">
@@ -57,8 +59,10 @@
                     <label for="last_name">Last Name (Required)</label>
                 </td>
                 <td>
-                    <input class="textfield" type="text" id="last_name" name="last_name" value="{{ user.last_name }}" />
-                    <div class="form-error-message hidden">Invalid entry</div>
+                    <div class="td-contents">
+                        <input class="textfield" type="text" id="last_name" name="last_name" value="{{ user.last_name }}" />
+                        <div class="form-error-message hidden">Invalid entry</div>
+                    </div>
                 </td>
             </tr>
             <tr class="field">
@@ -66,8 +70,10 @@
                     <label for="new_email">Email (Required)</label>
                 </td>
                 <td>
-                    <input type="text" class="textfield" id="new_email" name="email" value="{{ user.email }}" />
-                    <div class="form-error-message hidden">Invalid email</div>
+                    <div class="td-contents">
+                        <input type="text" class="textfield" id="new_email" name="email" value="{{ user.email }}" />
+                        <div class="form-error-message hidden">Invalid email</div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -87,8 +93,10 @@
                     <label for="new_password">New Password</label>
                 </td>
                 <td>
-                    <input type="password" class="textfield" id="new_password" name="password" />
-                    <div class="form-error-message hidden">Require at least 6 characters</div>
+                    <div class="td-contents">
+                        <input type="password" class="textfield" id="new_password" name="password" />
+                        <div class="form-error-message hidden">Require at least 6 characters</div>
+                    </div>
                 </td>
             </tr>
             <tr class="field">
@@ -96,9 +104,11 @@
                     <label for="new_password_again">New Password Again</label>
                 </td>
                 <td>
-                    <input type="password" class="textfield" 
-                    id="new_password_again" name="password_again" />
-                    <div class="form-error-message hidden">Doesn't match password</div>
+                    <div class="td-contents">
+                        <input type="password" class="textfield"
+                        id="new_password_again" name="password_again" />
+                        <div class="form-error-message hidden">Doesn't match password</div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -118,7 +128,9 @@
                     <label for="check-1">Someone finishes reviewing my document</label>
                 </td>
                 <td>
-                    <input id="check-1" class="checkbox" type="checkbox" checked />
+                    <div class="td-contents">
+                        <input id="check-1" class="checkbox" type="checkbox" checked />
+                    </div>
                 </td>
             </tr>
             <tr class="field">
@@ -150,6 +162,5 @@
     <a id="delete-button" class="btn btn-primary">Delete Account</a>
 </div>
 </div>
-
 
 {% endblock %}
