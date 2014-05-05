@@ -537,11 +537,13 @@
         height: 41px;
 
         .toolbar-left {
-            float: left;
+            position: absolute;
+            left: 0;
         }
 
         .toolbar-right {
-            float: right;
+            position: absolute;
+            right: 0;
         }
     }
 
