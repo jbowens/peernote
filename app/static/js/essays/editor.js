@@ -288,10 +288,12 @@ $.extend(peernoteNS.editor, {
    * controller) to load the initial state of the draft)
    */
   loadDraftState: function (title, body) {
-    if (title === "**Untitled**"){
-        $('.essay-title').val("");
+    if (title === '**Untitled**'){
+        $('.essay-title').val('');
+        $(document).attr('title','Untitled');
     } else {
         $('.essay-title').val(title);
+        $(document).attr('title',title);
     }
 
     peernoteNS.doc.setState(body);
@@ -356,6 +358,10 @@ $.extend(peernoteNS.editor, {
 
     _this.autosave_timer = setTimeout(function() {
       _this.save();
+
+      // change page title to match essay title upon save
+      $(document).attr('title',$('.essay-title').val()); // not sure where to put this
+
       _this.autosave_timer = null;
     }, _this.AUTOSAVE_PAUSE_MILLIS);
   }),

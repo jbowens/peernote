@@ -1,5 +1,9 @@
 {% extends 'base/application_editor.html' %}
 
+{% block title %}
+    
+{% endblock %}
+
 {% block styles %}
     {{ super() }}
     {% assets "editor_css" %}
@@ -381,7 +385,7 @@
                                     <li class="zoom-size zoom-click" scale="0.75">75%</li>
                                     <li class="zoom-size zoom-click" scale="1">100%</li>
                                     <li class="zoom-size zoom-click" scale="1.25">125%</li>
-                                    <li class="zoom-size zoom-click" s="" cale="1.5">150%</li>
+                                    {#<li class="zoom-size zoom-click" scale="1.5">150%</li>#}
                                 </ul>
                               </div>
                         </div>
