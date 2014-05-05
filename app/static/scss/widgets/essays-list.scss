@@ -30,7 +30,7 @@
     }
 
     .show-up {
-        color:$main-color-2; 
+        color:$main-color-2;
         .fa-caret-up {
             display: inline-block;
         }
@@ -45,9 +45,10 @@
 }
 
 .essays-table {
-
     tbody {
-        overflow-y: scroll;
+        overflow-y: auto;
+        display: block;
+        height: 450px;
     }
 
     tr, th, td {
@@ -57,6 +58,7 @@
 
     tr {
         border-bottom: 1px #D2D2D2 solid;
+        display: block;
         width: 100%;
 
         a {
@@ -74,13 +76,14 @@
 }
 
 .essays-table, .essays-header {
-
     .essay-name, .essay-created, .essay-modified {
-        width: 25%;
+        width: 230px;
+        max-width: 230px;
+        overflow: hidden;
     }
 
     .draft-number {
-        width: 10%;
+        width: 100px;
     }
 
     td.draft-number {
@@ -88,7 +91,7 @@
     }
 
     .trash-essay {
-        width: 5%;
+        width: 50px;
         padding-right: 0;
 
         &:hover {
@@ -101,7 +104,6 @@
             font-size: 17px;
             position: relative;
             bottom: 2px;
-            
         }
 
         .fa-trash-o:hover {
