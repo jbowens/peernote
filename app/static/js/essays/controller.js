@@ -516,35 +516,35 @@ $.extend(peernoteNS.essays, {
   initCommentTabs: function () {
       /* JS to switch between tabs on the comments panel */
       var currentTabIsComments = true;
-      $noteTab = $(".tab-top-notes");
+      $submitTab = $(".tab-top-submit");
       $commentTab = $(".tab-top-comments");
       $commentTabContainer = $(".comment-tab-line-comments");
-      $noteTabContainer = $(".comment-tab-notes");
+      $submitTabContainer = $(".comment-tab-notes");
 
-      $noteTab.click(function() {
+      $submitTab.click(function() {
           if (currentTabIsComments) {
-              $noteTab.addClass("tab-selected");
-              $noteTab.removeClass("tab-unselected");
+              $submitTab.addClass("tab-selected");
+              $submitTab.removeClass("tab-unselected");
               $commentTab.removeClass("tab-selected");
               $commentTab.addClass("tab-unselected");
               $commentTabContainer.addClass("tab-container-unselected");
               $commentTabContainer.removeClass("tab-container-selected");
-              $noteTabContainer.addClass("tab-container-selected");
-              $noteTabContainer.removeClass("tab-container-unselected");
+              $submitTabContainer.addClass("tab-container-selected");
+              $submitTabContainer.removeClass("tab-container-unselected");
           }
           currentTabIsComments = !currentTabIsComments;
       });
 
       $(".tab-top-comments").click(function() {
           if (!currentTabIsComments) {
-              $noteTab.addClass("tab-unselected");
-              $noteTab.removeClass("tab-selected");
+              $submitTab.addClass("tab-unselected");
+              $submitTab.removeClass("tab-selected");
               $commentTab.removeClass("tab-unselected");
               $commentTab.addClass("tab-selected");
               $commentTabContainer.addClass("tab-container-selected");
               $commentTabContainer.removeClass("tab-container-unselected");
-              $noteTabContainer.addClass("tab-container-unselected");
-              $noteTabContainer.removeClass("tab-container-selected");
+              $submitTabContainer.addClass("tab-container-unselected");
+              $submitTabContainer.removeClass("tab-container-selected");
           }
           currentTabIsComments = !currentTabIsComments;
       });

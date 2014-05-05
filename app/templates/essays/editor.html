@@ -1,9 +1,5 @@
 {% extends 'base/application_editor.html' %}
 
-{% block title %}
-    
-{% endblock %}
-
 {% block styles %}
     {{ super() }}
     {% assets "editor_css" %}
@@ -328,13 +324,14 @@
                     </div>
                 </div>
             </div>
-            {# don't delete this html, replace with different tab content later #}
-            {# <div class="comments-panel-tab comment-tab-notes">
-                <div class="tab-top tab-top-notes tab-unselected">Notepad</div>
+
+            {# Review Submit Tab #}
+             <div class="comments-panel-tab comment-tab-notes">
+                <div class="tab-top tab-top-submit tab-unselected">Submit Review</div>
                 <div class="tab-content tab-notes">
-                    <div class="tab-explanation" contenteditable="true" spellcheck="false">Leave general notes here.</div>
+                    <div class="tab-explanation"></div>
                 </div>
-            </div> #}
+            </div>
         </div>
         <div class="main-panel">
             {# Top tool bar #}

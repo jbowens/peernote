@@ -69,9 +69,11 @@
             z-index: 0;
         }
 
-        .tab-top-notes {
+        .tab-top-submit {
             position: relative;
             left: $tab-width + 10px;
+            padding-left: 10px;
+            padding-right: 10px;
         }
 
         .tab-content {
