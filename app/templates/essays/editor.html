@@ -49,8 +49,8 @@
 
 {# Popup Light Box #}
 <div class="send-review-pane">
-    <h3>Send a review</h3>
-    <div>Let your friend review this draft of your essay</div>
+    <h3>Request a review</h3>
+    <div>Ask someone to review this draft of your essay. Any changes made after this request will not be seen by your reviewer. Feel free to keep writing.</div>
     <form>
         <input type="text" name="email" placeholder="Email Address" class="send-review-pane-email">
         <input type="submit" value="SEND REVIEW" class="send-review-pane-submit">
@@ -128,7 +128,7 @@
                     </ul>
                 </div>
 
-                <div id="reviewer-tools"
+                {#<div id="reviewer-tools"
                     class="toolkit-region toolkit-region-dark">
                     <h2>Reviewer Tools</h2>
                     <div class="editor-tool-container">
@@ -139,8 +139,8 @@
                             <i class="fa fa-comment"></i>
                         </button>
                     </div>
-                </div>
-                <div id="editor-tools"
+                </div> #}
+                {#<div id="editor-tools"
                     class="toolkit-region toolkit-region-dark">
                     <h2>Editor Tools</h2>
                     <div class="editor-tool-container">
@@ -163,7 +163,7 @@
                             <i class="fa fa-align-right"></i>
                         </button>
                     </div>
-                </div>
+                </div>#}
                 <div class="toolkit-region toolkit-region-light timeline">
                     <h2>
                         <i class="fa fa-clock-o"></i>Draft History
@@ -337,6 +337,34 @@
             {# Top tool bar #}
             <div class="buttons buttons-position-absolute">
                 <div class="toolbar">
+                    <div class="small-tool-box" id="editor-tools">
+                        <button class="btn-editor bold" title="Bold">
+                            <i class="fa fa-bold"></i>
+                        </button>
+                        <button class="btn-editor italic"  title="Italicize">
+                            <i class="fa fa-italic"></i>
+                        </button>
+                        <button class="btn-editor underline" title="Underline">
+                            <i class="fa fa-underline"></i>
+                        </button>
+                        <button class="btn-editor left-align" title="Left Align">
+                            <i class="fa fa-align-left"></i>
+                        </button>
+                        <button class="btn-editor center-align" title="Center Align">
+                            <i class="fa fa-align-center"></i>
+                        </button>
+                        <button class="btn-editor right-align" title="Right Align">
+                            <i class="fa fa-align-right"></i>
+                        </button>
+                    </div>
+                    <div class="small-tool-box reviewer-tools">
+                        <button class="btn-editor strikethrough" title="Strikethrough">
+                            <i class="fa fa-strikethrough"></i>
+                        </button>
+                        <button class="btn-editor left-panel-comment-button" title="Comment">
+                            <i class="fa fa-comment-o"></i>
+                        </button>
+                    </div>
                     <div class="toolbar-left">
                         <div class="toolkit-open-button" title="Show/hide tool panel">
                             <i class="fa fa-bars"></i>

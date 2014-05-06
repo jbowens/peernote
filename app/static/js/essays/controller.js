@@ -346,8 +346,8 @@ $.extend(peernoteNS.essays, {
   // convert mode to editor
   toEditor: function() {
     peernoteNS.essays.modeButtonsSelect($("#edit-mode-button"));
-    $("#reviewer-tools").slideUp();
-    $("#editor-tools").slideDown();
+    $(".reviewer-tools").slideUp();
+    $("#editor-tools").show();
     peernoteNS.essays.currentMode = peernoteNS.essays.MODES.EDIT;
     if (peernoteNS.essays.COMMENTS_PANE_OPEN) {
         peernoteNS.essays.COMMENTS_PANE_OPEN = peernoteNS.essays.togglePane(
@@ -357,7 +357,7 @@ $.extend(peernoteNS.essays, {
     }
 
     // hide readonly stripe
-    $(".readonly-stripe").fadeOut();
+    $(".readonly-stripe").fadeOut(50);
 
     // Enable content editability
     $(".page").attr("contenteditable","true");
@@ -372,8 +372,8 @@ $.extend(peernoteNS.essays, {
       // If review only context, let initReviewOnly handle mode buttons
       peernoteNS.essays.modeButtonsSelect($("#review-mode-button"));
     }
-    $("#editor-tools").slideUp();
-    $("#reviewer-tools").slideDown();
+    $("#editor-tools").hide();
+    $(".reviewer-tools").fadeIn();
 
     // hide readonly stripe
     $(".readonly-stripe").fadeOut();
@@ -402,8 +402,8 @@ $.extend(peernoteNS.essays, {
     $(".page").attr("contenteditable","false");
 
     // hide tools-kits for other modes
-    $("#editor-tools").slideUp();
-    $("#reviewer-tools").slideUp();
+    $("#editor-tools").hide();
+    $(".reviewer-tools").fadeOut();
 
     // show readonly stripe
     $(".readonly-stripe").fadeIn();
@@ -690,7 +690,7 @@ $.extend(peernoteNS.essays, {
     $('#doc-manager').hide();
     $('.timeline').hide();
     $('#editor-tools').hide();
-    $('#reviewer-tools').show();
+    $('.reviewer-tools').show();
   },
 
   // Date of when essay was last modified as string

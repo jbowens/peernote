@@ -393,7 +393,7 @@ $.extend(peernoteNS.editor, {
 
   initToolbar: function() {
     var toolbar = $('.toolbar');
-    var toolkitLeft = $('.toolkit-left');
+    var toolkitLeft = $('#editor-tools');
     toolkitLeft.find('button.bold').click(peernoteNS.editor.bold);
     toolkitLeft.find('button.italic').click(peernoteNS.editor.italic);
     toolkitLeft.find('button.underline').click(peernoteNS.editor.underline);
