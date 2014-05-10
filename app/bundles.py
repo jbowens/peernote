@@ -240,6 +240,7 @@ assets.register('login_js',
 )
 
 assets.register('editor_js',
+    "js/include/jquery-ui-slide-effect-only-1.10.4.custom.min.js",
     "js/include/sugar.min.js",
     Bundle(
         "js/widgets/lightbox.js",

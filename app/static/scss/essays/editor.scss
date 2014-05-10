@@ -586,11 +586,32 @@
             button:active {
                 box-shadow: inset 0 0 2px rgba(0,0,0,.3);
             }
+
+            .btn-set {
+                float: left;
+            }
         }
 
         .toolbar-right {
             position: absolute;
             right: 0;
+
+            .btn-set {
+                float: right;
+            }
+
+            .nav-review-tools {
+                width: 0px;
+                float: right;
+                overflow-x: hidden;
+                overflow-y: auto;
+                height: 41px;
+
+                .strikethrough-container {
+                    width: 50px;
+                    padding: 0;
+                }
+            }
         }
     }
 
@@ -641,7 +662,7 @@
         .btn-set {
             padding: 0 10px;
             height: 40px;
-            display: inline-block;
+            display: block;
 
             &:first-child {
                 border-left: 1px solid $border;

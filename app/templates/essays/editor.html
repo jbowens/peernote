@@ -50,7 +50,7 @@
 {# Popup Light Box #}
 <div class="send-review-pane">
     <h3>Request a review</h3>
-    <div>Ask someone to review this draft of your essay. Any changes made after this request will not be seen by your reviewer. Feel free to keep writing.</div>
+    <div>Ask someone to review this draft of your essay. Subsequent changes won't be seen by your reviewer.</div>
     <form>
         <input type="text" name="email" placeholder="Email Address" class="send-review-pane-email">
         <input type="submit" value="SEND REVIEW" class="send-review-pane-submit">
@@ -127,43 +127,6 @@
                         </li>
                     </ul>
                 </div>
-
-                {#<div id="reviewer-tools"
-                    class="toolkit-region toolkit-region-dark">
-                    <h2>Reviewer Tools</h2>
-                    <div class="editor-tool-container">
-                        <button class="btn-editor strikethrough" title="Strikethrough">
-                            <i class="fa fa-strikethrough"></i>
-                        </button>
-                        <button class="btn-editor left-panel-comment-button" title="Comment">
-                            <i class="fa fa-comment"></i>
-                        </button>
-                    </div>
-                </div> #}
-                {#<div id="editor-tools"
-                    class="toolkit-region toolkit-region-dark">
-                    <h2>Editor Tools</h2>
-                    <div class="editor-tool-container">
-                        <button class="btn-editor bold" title="Bold">
-                            <i class="fa fa-bold"></i>
-                        </button>
-                        <button class="btn-editor italic"  title="Italicize">
-                            <i class="fa fa-italic"></i>
-                        </button>
-                        <button class="btn-editor underline" title="Underline">
-                            <i class="fa fa-underline"></i>
-                        </button>
-                        <button class="btn-editor left-align" title="Left Align">
-                            <i class="fa fa-align-left"></i>
-                        </button>
-                        <button class="btn-editor center-align" title="Center Align">
-                            <i class="fa fa-align-center"></i>
-                        </button>
-                        <button class="btn-editor right-align" title="Right Align">
-                            <i class="fa fa-align-right"></i>
-                        </button>
-                    </div>
-                </div>#}
                 <div class="toolkit-region toolkit-region-light timeline">
                     <h2>
                         <i class="fa fa-clock-o"></i>Draft History
@@ -357,14 +320,6 @@
                             <i class="fa fa-align-right"></i>
                         </button>
                     </div>
-                    <div class="small-tool-box reviewer-tools">
-                        <button class="btn-editor strikethrough" title="Strikethrough">
-                            <i class="fa fa-strikethrough"></i>
-                        </button>
-                        <button class="btn-editor left-panel-comment-button" title="Comment">
-                            <i class="fa fa-comment-o"></i>
-                        </button>
-                    </div>
                     <div class="toolbar-left">
                         <div class="toolkit-open-button" title="Show/hide tool panel">
                             <i class="fa fa-bars"></i>
@@ -382,21 +337,14 @@
                         </div>
                     </div>
                     <div class="toolbar-right">
-                        {# <div class="toolkit-comment-button">
-                            <i class="fa fa-comment"></i>
-                        </div> #}
-                        <div class="btn-set left-border">
-                            <div class="line-height-dropdown line-height-click" title="Line spacing">
-                                <div class="line-height-btn line-height-click" data-tag="line-height">
-                                    <i class="fa fa-align-justify combine-icon line-height-click"></i>
-                                    <i class="fa fa-arrows-v line-height-click"></i>
-                                    <i class="fa fa-caret-down line-height-click"></i>
-                                </div>
-                                <ul class="spacing line-height-click" style="display: none;">
-                                    <li class="line-height line-height-click" scale="1">Single</li>
-                                    <li class="line-height line-height-click" scale="1.5">1.5</li>
-                                    <li class="line-height line-height-click" scale="2">Double</li>
-                                </ul>
+                        <div class="nav-review-tools">
+                            <div class="toolkit-comment-button">
+                                <i class="fa fa-comment"></i>
+                            </div>
+                            <div class="btn-set left-border strikethrough-container">
+                                <button class="btn-editor strikethrough" title="Strikethrough">
+                                    <i class="fa fa-strikethrough"></i>
+                                </button>
                             </div>
                         </div>
                         <div class="btn-set left-border" title="Zoom">
@@ -413,6 +361,20 @@
                                     {#<li class="zoom-size zoom-click" scale="1.5">150%</li>#}
                                 </ul>
                               </div>
+                        </div>
+                        <div class="btn-set left-border">
+                            <div class="line-height-dropdown line-height-click" title="Line spacing">
+                                <div class="line-height-btn line-height-click" data-tag="line-height">
+                                    <i class="fa fa-align-justify combine-icon line-height-click"></i>
+                                    <i class="fa fa-arrows-v line-height-click"></i>
+                                    <i class="fa fa-caret-down line-height-click"></i>
+                                </div>
+                                <ul class="spacing line-height-click" style="display: none;">
+                                    <li class="line-height line-height-click" scale="1">Single</li>
+                                    <li class="line-height line-height-click" scale="1.5">1.5</li>
+                                    <li class="line-height line-height-click" scale="2">Double</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div class="btn-set essay-title-container">

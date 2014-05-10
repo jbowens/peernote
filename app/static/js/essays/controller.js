@@ -346,15 +346,7 @@ $.extend(peernoteNS.essays, {
   // convert mode to editor
   toEditor: function() {
     peernoteNS.essays.modeButtonsSelect($("#edit-mode-button"));
-    $(".reviewer-tools").slideUp();
-    $("#editor-tools").show();
     peernoteNS.essays.currentMode = peernoteNS.essays.MODES.EDIT;
-    if (peernoteNS.essays.COMMENTS_PANE_OPEN) {
-        peernoteNS.essays.COMMENTS_PANE_OPEN = peernoteNS.essays.togglePane(
-            $('.comment-panel-push'),
-            peernoteNS.essays.COMMENTS_PANE_OPEN,
-            peernoteNS.essays.COMMENTS_PANE_WIDTH);
-    }
 
     // hide readonly stripe
     $(".readonly-stripe").fadeOut(50);
@@ -364,6 +356,17 @@ $.extend(peernoteNS.essays, {
 
     // enable title editting
     $(".essay-title").prop("readonly", false);
+
+    $(".nav-review-tools").animate({"width": "0"}, 200,
+        function() {
+            if (peernoteNS.essays.COMMENTS_PANE_OPEN) {
+                peernoteNS.essays.COMMENTS_PANE_OPEN = peernoteNS.essays.togglePane(
+                    $('.comment-panel-push'),
+                    peernoteNS.essays.COMMENTS_PANE_OPEN,
+                    peernoteNS.essays.COMMENTS_PANE_WIDTH);
+            }
+            $("#editor-tools").show();
+        });
   },
 
   // convert mode to reviewer
@@ -381,12 +384,15 @@ $.extend(peernoteNS.essays, {
     // disable title editting
     $(".essay-title").prop("readonly", true);
 
-    if (!peernoteNS.essays.COMMENTS_PANE_OPEN) {
-      peernoteNS.essays.COMMENTS_PANE_OPEN = peernoteNS.essays.togglePane(
-        $('.comment-panel-push'),
-        peernoteNS.essays.COMMENTS_PANE_OPEN,
-        peernoteNS.essays.COMMENTS_PANE_WIDTH);
-    }
+    $(".nav-review-tools").animate({"width": "96px"},200,
+            function() {
+                if (!peernoteNS.essays.COMMENTS_PANE_OPEN) {
+                    peernoteNS.essays.COMMENTS_PANE_OPEN = peernoteNS.essays.togglePane(
+                        $('.comment-panel-push'),
+                        peernoteNS.essays.COMMENTS_PANE_OPEN,
+                        peernoteNS.essays.COMMENTS_PANE_WIDTH);
+                }
+            });
 
     // For now, disable autosaving/editing in review mode until reviewing
     // even has things to be saved.
@@ -402,14 +408,19 @@ $.extend(peernoteNS.essays, {
     $(".page").attr("contenteditable","false");
 
     // hide tools-kits for other modes
-    $("#editor-tools").hide();
-    $(".reviewer-tools").fadeOut();
+    $("#editor-tools").animate({"width":"0"},200);
 
     // show readonly stripe
     $(".readonly-stripe").fadeIn();
 
     // disable title editting
     $(".essay-title").prop("readonly", true);
+
+    // hide strikethrough button in navbar
+    $(".nav-review-tools").animate({"width": "46px"},200);
+
+    // show comments panel toggler in navbar
+    $(".toolkit-comment-button").show();
 
     peernoteNS.essays.modeButtonsSelect($("#readonly-mode-button"));
     peernoteNS.essays.currentMode = peernoteNS.essays.MODES.READONLY;
