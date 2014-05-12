@@ -19,7 +19,7 @@
     width: 350px;
     float: right;
     height: 100%;
-    position: fixed;
+    position: absolute;
     z-index: 19; //2000; <-- changed this value for testing
     right:0;
 
@@ -32,13 +32,13 @@
         position: absolute;
         width: 350px;
         left: 0px;
-        top: 50px;
+        top: 0px;
 
         .tab-content, .tab-top {
             float: left;
             clear: both;
-            position: relative;
-            top: -50px;
+            position: absolute;
+            top: 0px;
         }
 
         $tab-width: 100px;
@@ -79,7 +79,8 @@
         .tab-content {
             background: white;
             height: 900px;
-            width: 350px;
+            top: 48px;
+            width: 344px;
             border-left: 3px solid $white-color;
 
             @mixin comments-button {

@@ -579,7 +579,9 @@ $.extend(peernoteNS.essays, {
         var height = $window.height();
         var navHeight = $("nav").height();
         var tabHeight = $(".tab-top").height();
-        $(".tab-content").css("height",height - navHeight - tabHeight +"px");
+
+        // I dunno where that 13 came from. Changed some css and shit broke
+        $(".tab-content").css("height",height - navHeight - tabHeight - 13 +"px");
       }
       setTabHeight();
       $window.resize(setTabHeight);

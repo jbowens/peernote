@@ -26,6 +26,10 @@
     }
 }
 
+body {
+    min-width: 1250px;
+}
+
 /* invisible panel that pushes the toolkit panel open */
 .main-panel-push {
     width: 250px;
@@ -40,13 +44,15 @@
 .tools {
     height: 100%;
     overflow: auto;
+    position: relative;
 
     .toolkit { // this is the left column of tools
         background: #373737;
         width: 250px;
         float: left;
         height: 100%;
-        position: fixed;
+        position: absolute;
+        left:0;
         z-index: 20;
 
         .toolkit-left {
@@ -582,6 +588,8 @@
 
         .toolbar-left {
             position: absolute;
+            background: white;
+            min-width: 215px;
             left: 0;
 
             button {
@@ -610,6 +618,7 @@
 
         .toolbar-right {
             position: absolute;
+            min-width: 263px;
             right: 0;
 
             .btn-set {
@@ -637,7 +646,8 @@
         width: 100%;
         z-index: 102;
         background: rgba(0,0,0,0);
-        position: fixed;
+        position: absolute;
+        left: 0;
 
         -webkit-touch-callout: none;
         -webkit-user-select: none;
