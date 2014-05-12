@@ -47,7 +47,7 @@
 
 {% block content %}
 
-{# Popup Light Box #}
+{# Popup Light Box for Review Request #}
 <div class="send-review-pane">
     <h3>Request a review</h3>
     <div>Ask someone to review this draft of your essay. Subsequent changes won't be seen by your reviewer.</div>
@@ -59,6 +59,7 @@
     </form>
 </div>
 
+{# Popup Light Box for Open dialogue #}
 <div class="essays-list-container">
     <h1> Your Essays </h1>
     <div class="essays-selector"></div>
@@ -102,8 +103,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="toolkit-region toolkit-region-dark review-submit-container">
+                    <h2> Finish and Submit Review</h2>
+                    <div class="review-submit-button">
+                        Submit
+                    </div>
+                </div>
                 <div class="toolkit-region toolkit-region-dark" id="doc-manager">
-                    {#<h2>DOC MANAGER</h2>#}
                     <ul>
                         <li class="new" title="Create new document">
                         <a href="{{ url_for('essays.create_essay') }}" target="_blank" >
@@ -287,14 +293,13 @@
                     </div>
                 </div>
             </div>
-
             {# Review Submit Tab #}
-             <div class="comments-panel-tab comment-tab-notes">
+            {#<div class="comments-panel-tab comment-tab-notes">
                 <div class="tab-top tab-top-submit tab-unselected">Submit Review</div>
                 <div class="tab-content tab-notes">
                     <div class="tab-explanation"></div>
                 </div>
-            </div>
+            </div>#}
         </div>
         <div class="main-panel">
             {# Top tool bar #}
@@ -402,6 +407,5 @@
 <form name="ignore_me">
     <input type="hidden" id="dirtybit" name="dirtybit" value="0" />
 </form>
-
 
 {% endblock %}

@@ -172,6 +172,7 @@ JAVASCRIPT BUNDLES
 """
 assets.register('base_js',
     "js/include/jquery-2.1.0.min.js",
+    "js/include/jquery.color-2.1.2.min.js",
     Bundle(
         "js/errors.js",
         "js/init.js",

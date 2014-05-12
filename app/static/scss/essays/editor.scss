@@ -47,7 +47,7 @@
         float: left;
         height: 100%;
         position: fixed;
-        z-index: 20; //20; <-- changed this value for testing
+        z-index: 20;
 
         .toolkit-left {
             height: 100%;
@@ -187,6 +187,31 @@
 
         .toolkit-region-dark.doc-mod-container {
             padding-top: 20px;
+        }
+
+        .toolkit-region-dark.review-submit-container {
+            display: none;
+
+            .review-submit-button {
+                margin: 15px 30px 10px 20px;
+                cursor: pointer;
+                text-align: center;
+                background-color:gainsboro;
+                text-indent:0;
+                border:1px solid #575757;
+                border-radius: 2px;
+                color:#666;
+                font-weight:bold;
+                line-height:36px;
+            }
+
+            .review-submit-button:hover {
+                border: 1px solid #39bd41;
+                color: #39bd41;
+                color: #40B347;
+                background: #408347;
+                color: $white-color;
+            }
         }
 
         // request review button
@@ -447,15 +472,6 @@
         &.toolbar-padding {
             padding-top: 90px;
         }
-
-        /*.status-line {
-            @include calc(width, "#{$contentwidth}");
-            height: 2em;
-            margin: 0 auto;
-            font-size: 16px;
-            font-weight: 500;
-            color: #666;
-        }*/
 
         .notes {
             position: absolute;
@@ -782,4 +798,3 @@
         }
     }
 }
-

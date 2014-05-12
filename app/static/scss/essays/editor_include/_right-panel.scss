@@ -115,9 +115,10 @@
                 position: absolute;
                 bottom: 0px;
                 width: 100%;
-                background-color: #373737;
+                background-color: gainsboro;
                 height: 90px;
                 display: block;
+                border-top: #bbb 1px solid;
 
                 .thread-buttons {
                     width: 300px;
@@ -168,7 +169,7 @@
                     .delete-thread-button {
                         float: right;
                         font-weight: bold;
-                        color: #bbb;
+                        color: #888;
                         cursor: pointer;
                         margin: 12px 32px 0 0;
                     }
@@ -183,8 +184,9 @@
                 position: absolute;
                 bottom: 0px;
                 width: 100%;
-                background-color: #373737;
+                background-color: gainsboro;
                 height: 215px;
+                border-top: #bbb 1px solid;
 
                 textarea {
                     resize: none;
@@ -198,7 +200,8 @@
                     margin: auto;
                     margin-top: 20px;
                     padding: 10px;
-                    border-top: 1px solid $generic-divider-color;
+                    border: 1px solid #bbb;
+                    color: #373737;
                 }
 
                 .thread-buttons-v2 {
@@ -255,7 +258,7 @@
 
                     .cancel-thread-button-v2 {
                         float: right;
-                        color: #bbb;
+                        color: #888;
                         line-height: 40px;
                         cursor: pointer;
                         font-weight: bold;
@@ -265,6 +268,7 @@
 
                     .cancel-thread-button-v2:hover {
                         text-decoration: underline;
+                        color: #888;
                     }
                 }
             }

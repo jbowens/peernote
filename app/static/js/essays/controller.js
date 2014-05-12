@@ -354,10 +354,12 @@ $.extend(peernoteNS.essays, {
     // Enable content editability
     $(".page").attr("contenteditable","true");
 
-    $("#doc-manager").slideDown();
+    $("#doc-manager").show();
 
-    // enable title editting
+    // enable title editing
     $(".essay-title").prop("readonly", false);
+
+    $(".review-submit-container").hide();
 
     $(".nav-review-tools").animate({"width": "0"}, 200,
         function() {
@@ -383,7 +385,8 @@ $.extend(peernoteNS.essays, {
     // hide readonly stripe
     $(".readonly-stripe").fadeOut();
 
-    $("#doc-manager").slideUp();
+    $("#doc-manager").hide();
+    $(".review-submit-container").show();
 
     // disable title editting
     $(".essay-title").prop("readonly", true);
@@ -411,13 +414,16 @@ $.extend(peernoteNS.essays, {
     // Disable content editability
     $(".page").attr("contenteditable","false");
 
-    $("#doc-manager").slideDown();
+    $("#doc-manager").show();
 
     // hide tools-kits for other modes
     $("#editor-tools").hide();
 
     // show readonly stripe
     $(".readonly-stripe").fadeIn();
+
+    // hide container that lets you submit completed review
+    $(".review-submit-container").hide();
 
     // disable title editting
     $(".essay-title").prop("readonly", true);
@@ -603,6 +609,8 @@ $.extend(peernoteNS.essays, {
           $(".new-comment-pane").hide();
           $(".comment-thread-pane").show();
           $(".all-comments-pane").hide();
+          $(".comment-post-v2-open").hide();
+          $(".comment-post-v2-closed").show();
       });
 
       $(".reply-thread-button").click(function() {
