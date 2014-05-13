@@ -476,6 +476,7 @@ $.extend(peernoteNS.essays, {
           }
 
           setHeight();
+          peernoteNS.essays.positionTitle();
       });
 
       // JS sets the height of the body and content wrapper
@@ -526,14 +527,21 @@ $.extend(peernoteNS.essays, {
           $panel.animate({width: "0px"}, {duration: time });
           $(".buttons").animate(
                   {width: (buttonPanelWidth+width) + "px"},
-                  {duration: time, queue: true});
+                  {duration: time, queue: true, step: peernoteNS.essays.positionTitle});
       } else {
           $panel.animate({width: width + "px"}, {duration: time });
           $(".buttons").animate(
                   {width: (buttonPanelWidth-width) + "px"},
-                  {duration: time, queue: false});
+                  {duration: time, queue: false, step: peernoteNS.essays.positionTitle});
       }
       return !isOpen;
+  },
+
+  positionTitle: function() {
+     // position title differently depending on how narrow the bar is
+     var titleSpace = $(".toolbar").width() -
+         $(".toolbar-right").width() - $(".toolbar-left").width();
+     $(".essay-title").width((titleSpace-20) + "px");
   },
 
   /* JS to initialize comment tab functionality */
@@ -633,6 +641,9 @@ $.extend(peernoteNS.essays, {
       $('.curr-zoom').click(function(e) {
           $('.zoom').toggle();
       });
+
+      // position title appropriately
+      peernoteNS.essays.positionTitle();
 
       // toggle line height dropdown
       $('.line-height-btn').click(function(e) {

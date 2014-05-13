@@ -591,6 +591,7 @@ body {
             background: white;
             min-width: 215px;
             left: 0;
+            float: left;
 
             button {
                 width: 28px;
@@ -720,23 +721,19 @@ body {
             }
         }
 
-        .essay-title-container { // this allows the essay title to overflow if too long
+        .essay-title {
+            height: 30px;
+            resize: none;
+            border: none;
+            text-align: center;
+            margin-top: 5px;
+            font-size: 18px;
+            font-weight: 600;
             width: auto;
-            max-width: 500px;
-            margin: auto;
-            overflow-y: auto;
+            min-width: 100px;
+        }
 
-            .essay-title {
-                height: 60%;
-                resize: none;
-                border: none;
-                text-align: center;
-                margin-top: 5px;
-                font-size: 20px;
-                font-weight: 600;
-                width: auto;
-                min-width: 300px;
-            }
+        .essay-title:focus {
         }
 
         .line-height-dropdown {
