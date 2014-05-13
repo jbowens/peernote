@@ -298,7 +298,7 @@ $.extend(peernoteNS.essays, {
 
   // constant widths of left and right panels
   TOOLKIT_PANE_WIDTH: 250,
-  COMMENTS_PANE_WIDTH: 350,
+  COMMENTS_PANE_WIDTH: 300,
 
   // open/close status of left and right panels
   TOOLKIT_PANE_OPEN:  true,

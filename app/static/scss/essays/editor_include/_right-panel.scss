@@ -16,7 +16,7 @@
 .comment-panel {
     width: 250px;
     background: #373737;
-    width: 350px;
+    width: 300px;
     float: right;
     height: 100%;
     position: absolute;
@@ -30,7 +30,7 @@
     .comments-panel-tab {
         height: 100%;
         position: absolute;
-        width: 350px;
+        width: 300px;
         left: 0px;
         top: 0px;
 
@@ -80,7 +80,7 @@
             background: white;
             height: 900px;
             top: 48px;
-            width: 344px;
+            width: 297px;
             border-left: 3px solid $white-color;
 
             @mixin comments-button {
@@ -90,7 +90,7 @@
                     background-color: $white-color;
                     color: #373737;
                     border-radius: 2px;
-                    padding: 6px 11px;
+                    padding: 6px 10px;
                     margin-left: 5px;
                     cursor: pointer;
 
@@ -122,7 +122,7 @@
                 border-top: #bbb 1px solid;
 
                 .thread-buttons {
-                    width: 300px;
+                    width: 250px;
                     margin: auto;
                     margin-top: 20px;
 
@@ -172,7 +172,7 @@
                         font-weight: bold;
                         color: #888;
                         cursor: pointer;
-                        margin: 12px 32px 0 0;
+                        margin: 12px 0 0 0;
                     }
 
                     .delete-thread-button:hover {
@@ -193,7 +193,7 @@
                     resize: none;
                     display: block;
                     font-size: 14px;
-                    width: 302px;
+                    width: 252px;
                     border-top-right-radius: 2px;
                     border-top-left-radius: 2px;
                     border-bottom-right-radius: 2px;
@@ -207,7 +207,7 @@
 
                 .thread-buttons-v2 {
                     overflow: auto;
-                    width: 322px;
+                    width: 272px;
                     margin: auto;
                     padding-top: 20px;
                     border: 0 solid $generic-divider-color;
@@ -275,7 +275,7 @@
             }
 
             .comment-thread {
-                width: 322px;
+                width: 272px;
                 margin:auto;
                 padding-top: 20px;
                 display: block;
@@ -301,7 +301,7 @@
 
                     .thread-comment-content {
                         margin-left: 10px;
-                        width: 287px;
+                        width: 237px;
                         float: left;
 
                         .thread-comment-header {
@@ -318,6 +318,8 @@
                                 float: right;
                                 font-style: italic;
                                 color: #888;
+                                position:relative;
+                                right: 1px;
                             }
                         }
 
@@ -356,7 +358,7 @@
                     background-color: white;
                     cursor: pointer;
                     overflow: auto;
-                    width: 322px;
+                    width: 272px;
                     margin: auto;
                     padding-bottom: 20px;
                     padding-top: 20px;
@@ -405,7 +407,7 @@
 
             // panel that holds new comment form
             .comment-post {
-                width: 322px;
+                width: 272px;
                 margin: auto;
                 overflow: auto;
                 display: block;
@@ -451,7 +453,7 @@
                     resize: none;
                     color: gray;
                     outline: none;
-                    width: 290px;
+                    width: 240px;
                     margin: auto;
                     border-radius: 2px;
                     display: block;
@@ -473,7 +475,7 @@
                 .comments-nav {
                     overflow: auto;
                     float: left;
-                    width: 255px;
+                    width: 205px;
                     height: 48px;
 
                     .comments-title {
@@ -490,8 +492,8 @@
 
                 .new-comment {
                     display: block;
-                    width: 44px;
                     text-align: center;
+                    width: 45px;
                 }
             }
         }
