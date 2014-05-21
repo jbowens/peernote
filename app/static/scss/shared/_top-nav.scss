@@ -17,29 +17,19 @@ nav {
                 float: left;
                 position: absolute;
 
-                #eraser{
-                    width: 50px;
-                    height: 10px;
-                    background-color: $main-color-2;
-                }
-
-                #pencil {
-                    width: 50px;
-                    height: 40px;
-                    background-color: $main-color-2;
-                    line-height: 34px;
-                    text-align: center;
-                    color: $main-dark;
-                    font-size: 24px;
-                    font-family: 'Pacifico', cursive;
+                img {
+                    height: 38px;
+                    width: 38px;
+                    margin-top: 6px;
                 }
             }
 
             #logo-name {
-                margin-left: 70px;
+                margin-left: 53px;
                 letter-spacing: 5px;
                 font-weight: 100;
                 color: $white-color;
+
                 &:hover {
                     color: white;
                 }

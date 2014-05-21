@@ -175,28 +175,10 @@ html, body {
         float: left;
         position: absolute;
 
-        #eraser{
-            width: 50px;
-            height: 10px;
-            background-color: $main-color-2;
-        }
-
-        #metal {
-            width: 50px;
-            height: 3px;
-            margin-bottom: 1px;
-            background-color: $main-color-2;
-        }
-
-        #pencil {
-            width: 50px;
-            height: 40px;
-            background-color: $main-color-2;
-            line-height: 34px;
-            text-align: center;
-            color: $main-dark;
-            font-size: 24px;
-            font-family: 'Pacifico', cursive;
+        img {
+            height: 38px;
+            width: 38px;
+            margin-top: 6px;
         }
     }
 
@@ -218,7 +200,7 @@ html, body {
 
     .about-button {
         width: 120px;
-        margin-left: 50px;
+        margin-left: 45px;
     }
 
     .services-button {
