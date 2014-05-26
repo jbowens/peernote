@@ -54,7 +54,7 @@ $.extend(peernoteNS.essays, {
           '<span class="draft-number">' +
             'Draft ' +  version +
           '</span>' +
-          '<i class="fa fa-trash-o"> </i>' +
+          '<i class="fa fa-times"> </i>' +
           '<span class="draft-date">' + ts + '</span>' +
         '</a>' +
       '</li>'
@@ -187,12 +187,12 @@ $.extend(peernoteNS.essays, {
     var i = clicked.index();
     var cur_did = peernoteNS.essays.drafts[i].did;
 
-    if ($(event.target).attr('class') == 'fa fa-trash-o') {
+    if ($(event.target).attr('class') == 'fa fa-times') {
       // User actually clicked to remove this draft.
 
       $.post('/api/drafts/delete', {did: cur_did, csrf: peernoteNS.csrf}, function(data) {
         if (data.status =="success") {
-          clicked.slideUp();
+          clicked.slideUp(200);
           if (peernoteNS.essays.did == cur_did) {
             // deleting currently selected draft, switch to current draft
             $('.timeline ul li').first().click();

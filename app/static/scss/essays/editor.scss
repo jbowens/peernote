@@ -315,11 +315,12 @@ body {
                             opacity: 0;
                         }
 
-                        i.fa-trash-o {
+                        i.fa-times {
                             float: right;
+                            color: rgba(0,0,0,0);
                         }
 
-                         draft-number {
+                        .draft-number {
                             float: left;
                         }
 
@@ -333,10 +334,17 @@ body {
                 li:hover {
                     background-color: black;
                     border-top: black 1px solid;
+
+                    i.fa-times {
+                        color: #999;
+                    }
+
+                    i.fa-times:hover {
+                        color: #a75d5d;
+                    }
                 }
 
                 li.active-draft {
-
                     * {
                         color: $white-color;
                         font-weight: 700;
@@ -350,7 +358,7 @@ body {
                 }
 
                 li:first-child {
-                    i.fa-trash-o {
+                    i.fa-times {
                       opacity: 0;
                     }
                 }
