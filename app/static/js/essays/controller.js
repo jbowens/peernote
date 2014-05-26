@@ -102,7 +102,22 @@ $.extend(peernoteNS.essays, {
             complete: function() {
                 $(".drafts-list").css("height","230px");
                 peernoteNS.essays.TIMELINE_OPEN = true;
-                $('.timeline ul li.active-draft').prev().click();
+
+                // find the next draft that was not deleted by the user.
+                // deleted drafts are marked with the class "deleted-draft"
+                var currentDraft = $('.timeline ul li.active-draft');
+                var isDeletedDraft = true;
+                while (isDeletedDraft) {
+                    var prevDraft = currentDraft.prev();
+                    if (!prevDraft) {
+                      return; // ERROR
+                    } else if (!prevDraft.hasClass("deleted-draft")){
+                        isDeletedDraft = false;
+                    } else {
+                        currentDraft = prevDraft;
+                    }
+                }
+                prevDraft.click();
             }
         });
       } else {
@@ -192,7 +207,9 @@ $.extend(peernoteNS.essays, {
 
       $.post('/api/drafts/delete', {did: cur_did, csrf: peernoteNS.csrf}, function(data) {
         if (data.status =="success") {
-          clicked.slideUp(200);
+
+          clicked.slideUp(200, function() { clicked.addClass("deleted-draft"); });
+
           if (peernoteNS.essays.did == cur_did) {
             // deleting currently selected draft, switch to current draft
             $('.timeline ul li').first().click();
