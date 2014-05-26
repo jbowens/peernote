@@ -331,7 +331,25 @@ $.extend(peernoteNS.essays, {
 
     $editModeButton.click(function() {
         if ($editModeButton.hasClass("editor-mode-button-selectable")) {
-            peernoteNS.essays.toEditor();
+
+            // if in readonly mode, essay should switch to current draft. user
+            // needs to be able to see that this is happening, so we open the
+            // timeline if it is closed
+            if (peernoteNS.essays.currentMode === peernoteNS.essays.MODES.READONLY) {
+                $(".drafts-list").slideDown({
+                    duration: 300,
+                    queue: false,
+                    complete: function() {
+                        $(".drafts-list").css("height","230px");
+                        peernoteNS.essays.TIMELINE_OPEN = true;
+                        $(".drafts-list li").first().click();
+                        $(".drafts-list").scrollTop(0);
+                        peernoteNS.essays.toEditor();
+                    }
+                });
+            } else {
+                peernoteNS.essays.toEditor();
+            }
         }
     });
 
@@ -350,8 +368,10 @@ $.extend(peernoteNS.essays, {
     $button.addClass("editor-mode-button-active editor-mode-button-selectable");
 
     if ($button.selector === $readonlyButton.selector) {
-        $buttons.addClass("editor-mode-button-disabled");
-        $buttons.removeClass("editor-mode-button-selectable");
+        $("#review-mode-button").addClass("editor-mode-button-disabled");
+        $("#review-mode-button").removeClass("editor-mode-button-selectable");
+        $("#edit-mode-button").addClass("editor-mode-button-selectable");
+        $("#edit-mode-button").removeClass("editor-mode-button-disabled");
         $button.removeClass("editor-mode-button-disabled");
     } else {
         $readonlyButton.addClass("editor-mode-button-disabled");
@@ -446,7 +466,7 @@ $.extend(peernoteNS.essays, {
     $(".essay-title").prop("readonly", true);
 
     // hide strikethrough button in navbar
-    $(".nav-review-tools").animate({"width": "46px"},200);
+    $(".nav-review-tools").animate({"width": "46px"}, 200);
 
     // show comments panel toggler in navbar
     $(".toolkit-comment-button").show();
