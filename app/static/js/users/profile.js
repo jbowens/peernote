@@ -6,6 +6,21 @@ $.extend(peernoteNS.profile, {
         this.tabFunctionality();
         this.pageHeight();
         this.subscribeNotifications();
+        this.fixDivs();
+    },
+
+    fixDivs: function() {
+        $window.scroll(function() {
+            var heightToCheck = $(".header-container").height()
+                + $("#user-profile").height()
+                + $(".top-push").height()
+                + parseInt($("#user-profile").css("margin-bottom")) + 25;
+            if ($window.scrollTop() > heightToCheck) {
+                $(".left-col").css({"position":"fixed"});
+            } else {
+                $(".left-col").css({"position":"static"});
+            }
+        });
     },
 
     /* Make tabs work */

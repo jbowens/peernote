@@ -20,31 +20,80 @@ Home
 
 {% block content %}
 <div class="dashboard">
-    <div class="left-col">
-        <div class="top-push"></div>
-        <div id="user-profile">
+    <div class="top-push"></div>
+    <div id="user-profile">
+        <div class="week-calendar">
+            <div class="calendar-header">
+                <div class="calendar-controls">
+                    <div class="previous-week-button calendar-button">
+                        <i class="fa fa-caret-left"></i>
+                    </div>
+                    <div class="current-date-button calendar-button">Today</div>
+                    <div class="next-week-button calendar-button">
+                        <i class="fa fa-caret-right"></i>
+                    </div>
+                </div>
+                <h2> Week of June 9th</h2>
+            </div>
+            <ul class="weekdays">
+                <li class="weekday monday">
+                    <div class="weekday-name">Monday</div>
+                    <div class="assignment-block">
+                        <div class="assignment-block-header">English</div>
+                        <div class="assignment-block-text">
+                            Assignment due today.
+                        </div>
+                    </div>
+                </li>
+                <li class="weekday tuesday">
+                    <div class="weekday-name">Tuesday</div>
+                </li>
+                <li class="weekday wednesday current-weekday">
+                    <div class="weekday-name">Wednesday</div>
+                </li>
+                <li class="weekday thursday">
+                    <div class="weekday-name">Thursday</div>
+                </li>
+                <li class="weekday friday">
+                    <div class="weekday-name">Friday</div>
+                    <div class="assignment-block">
+                        <div class="assignment-block-header">English</div>
+                        <div class="assignment-block-text">
+                            Test today.
+                        </div>
+                    </div>
+                    <div class="assignment-block">
+                        <div class="assignment-block-header">English</div>
+                        <div class="assignment-block-text">
+                            Assignment due today.
+                        </div>
+                    </div>
+                </li>
+                <li class="weekday saturday">
+                    <div class="weekday-name">Saturday</div>
+                </li>
+                <li class="weekday sunday">
+                    <div class="weekday-name">Sunday</div>
+                </li>
+            </ul>
+        </div>
+        <div class="user-profile-container">
             <img src="{{ user.email | gravatar }}" />
-            <div class="item-count item-count-first">
+            {#<div class="item-count item-count-first">
                 <a href="/essays">{{ user.essay_count() }}</a>
                 Documents
             </div>
             <div class="item-count item-count-last">
                 <a href="#">{{ user.draft_count() }}</a>
                 Drafts
-            </div>
+            </div>#}
             <div id="user-info">
                 <h1>{{ user.first_name | shorten_string(12) }} {{ user.last_name | shorten_string(12) }}</h1>
                 <div>Student</div>
             </div>
-            <div class="button-panel">
-                <a class="button" href="{{ url_for('essays.create_essay') }}">
-                    New Document
-                </a>
-                <a class="button" href="{{ url_for('essays.upload_essay') }}">
-                    Upload Document
-                </a>
-            </div>
         </div>
+    </div>
+    <div class="left-col">
         <div class="recent-essays">
             <div class="recent-essays-header">
                 <h2>Recent Documents</h2>
@@ -69,13 +118,33 @@ Home
             </div>
             {% endif %}
             </ul>
+                <div class="button-panel">
+                    <a class="button" href="{{ url_for('essays.create_essay') }}">
+                        <i class="fa fa-plus"></i>New
+                    </a>
+                    <a class="button" href="{{ url_for('essays.upload_essay') }}">
+                        <i class="fa fa-upload"></i>Upload
+                    </a>
+                </div>
         </div>
     </div>
     <div class="right-col">
-        <div class="top-push"></div>
-        <h1 class="tab-selected" id="notifications">Notifications</h1>
-        <h1 class="tab-unselected" id="assignments">Assignments</h1>
-        <div class="tab-fill"></div>
+        <div class="tabs">
+            <div class="tab">
+                <h1 class="tab-selected" id="notifications">
+                    <i class="fa fa-globe"></i>
+                    Notifications
+                </h1>
+            </div>
+            <div class="small-tab-fill"></div>
+            <div class="tab">
+                <h1 class="tab-unselected" id="assignments">
+                    <i class="fa fa-pencil"></i>
+                    Assignments
+                </h1>
+            </div>
+            <div class="tab-fill"></div>
+        </div>
         <ul class="notifications">
         </ul>
         {% set reviews = user.get_assigned_reviews(5) %}

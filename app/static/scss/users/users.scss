@@ -10,77 +10,174 @@
     opacity: 0;
 }
 
+$box-padding: 20px;
+
 .dashboard {
-    width: $page-width - 70px;
+    width: $page-width;
     height: 800px;
-    background: white;
-    padding: 0 35px;
+    background: whitesmoke;
     z-index: -1;
     margin:auto;
-    border: 1px solid  $generic-divider-color;
     border-top: 0px solid red;
 
     .top-push {
         width: 100%;
-        height: 35px;
+        height: 20px;
     }
 
-    $left-col-width: 250px;
+    #user-profile {
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 20px;
+        background: white;
+        margin-bottom: 15px;
+        border: 1px solid gainsboro;
+        border-radius: 2px;
 
-    .left-col {
-        height: 100%;
-        border-right: $generic-divider-color 1px solid;
-        float: left;
-        width: $left-col-width;
-        padding-right: 35px;
+        $user-profile-container-width: 172px;
 
-        #user-profile {
-            overflow-y: auto;
-            overflow-x: hidden;
-            padding-bottom: 20px;
-            border-bottom: 1px dotted $generic-divider-color;
-            margin-bottom: 20px;
+        .week-calendar {
+            $dark-border-color: gainsboro;
+            $calendar-width:  $page-width - $user-profile-container-width - (3 * $box-padding);
+            $calendar-height: 260px;
+            $calendar-header-height: 30px;
+            width: $calendar-width;
+            height: $calendar-height;
+            float: right;
+            border-radius: 2px;
 
-            .item-count {
-                float: right;
-                width: 65px;
-                font-size: 12px;
-                font-weight: 500;
-                //border-bottom: $generic-divider-color 1px solid;
-                padding-bottom: 15px;
-                clear: right;
-                margin-bottom: 15px;
+            .calendar-header {
+                $calendar-header-border-width: 1px;
+                background-color: gainsboro;
+                border: 1px solid #ccc;
+                width: $calendar-width - 2px;
+                height: $calendar-header-height - $calendar-header-border-width;
+                border-bottom: $calendar-header-border-width solid $dark-border-color;
+                text-align: center;
+                position: relative;
 
-                a {
-                    font-size: 20px;
-                    display:block;
-                    width: 100%;
-                    margin-bottom: 2px;
+                h2 {
+                    padding-top: 6px;
+                }
+
+                .calendar-controls {
+                    width: 120px;
+                    position: absolute;
+                    left: 0;
+                    top: 2px;
+
+                    .calendar-button {
+                        float: left;
+                        cursor: pointer;
+                        border: 1px solid rgba(0,0,0,0);
+                        padding: 4px;
+                    }
+
+                    .calendar-button:hover {
+                        border: 1px solid #bbb;
+                        background: #ccc;
+                        border-radius: 2px;
+                    }
+
+                    i {
+                        width: 15px;
+                        display: block;
+                    }
+
+                    .current-date-button {
+                        width: 40px;
+                        font-size: 12px;
+                        font-weight: 500;
+                        position:relative;
+                        bottom: 1px;
+                        padding-top: 3px;
+                        padding-bottom: 5px;
+                    }
                 }
             }
 
-            .item-count-first {
-                margin-top: 55px;
+            .weekday {
+                $weekday-width: 99px;
+                width: $weekday-width;
+                height: $calendar-height - $calendar-header-height;
+                border-right: 1px solid $dark-border-color;
+                border-bottom: 1px solid gainsboro;
+                float: left;
+                overflow-y: scroll;
+                background: white;
+
+                .weekday-name {
+                    margin-top:2px;
+                    margin-left: 6px;
+                }
+
+                .assignment-block {
+                    $assignment-block-width: $weekday-width - 10px;
+                    width: $assignment-block-width;
+                    border-radius: 2px;
+                    margin:auto;
+                    margin-top: 5px;
+                    border: 1px solid $dark-border-color;
+                    max-height: 80px;
+                    font-size: 12px;
+                    cursor: pointer;
+                    background: rgba(169, 115, 180, 0.5);
+
+                    .assignment-block-header {
+                        margin: 2px;
+                        height: 20px;
+                        width: $weekday-width - 18px;
+                        background: #373737;
+                        color: $white-color;
+                        font-weight: 500;
+                        font-size: 12px;
+                        padding-left: 4px;
+                    }
+
+                    .assignment-block-text {
+                        $horizontal-padding: 3px;
+                        width: $assignment-block-width - (2 * $horizontal-padding);
+                        padding: 0 $horizontal-padding;
+                        padding-bottom: 3px;
+                    }
+                }
+
+                .assignment-block:hover {
+                    background: rgba(169, 115, 180, 0.6);
+                }
+
             }
 
-            .item-count-last {
-                border-bottom: 0px 1px red;
+            .weekday.sunday {
+                border-right: 1px solid gainsboro;
+                width: 106px;
             }
+
+            .weekday.monday {
+                border-left: 1px solid gainsboro;
+            }
+
+            .current-weekday {
+                background: #F1EBF2;
+            }
+        }
+
+        .user-profile-container {
+            margin-right: $box-padding;
+            width: $user-profile-container-width;
+            height: auto;
 
             img {
                 float: left;
-                height: 160px;
+                height: 150px;
                 display: inline-block;
                 padding: 6px;
                 border: 1px $generic-divider-color solid;
-                margin-bottom: 15px;
             }
 
             #user-info {
-                min-height: 60px;
-                display: inline-block;
-                vertical-align: top;
-                margin-bottom: 5px;
+                float: left;
+                margin-top: 10px;
 
                 h1 {
                     font-size:24px;
@@ -88,17 +185,34 @@
                 }
             }
 
-            .button-panel {
-                float: left;
-                overflow: auto;
-                margin-bottom: 10px;
-            }
         }
+    }
+
+    $left-col-width: 300px;
+
+    .left-col {
+        height: 100%;
+        float: left;
+        width: $left-col-width;
+        top: 20px;
 
         .recent-essays {
-            width: 100%;
+            width: 258px;
             float: left;
             clear: both;
+            background: white;
+            border: 1px solid gainsboro;
+            padding: 20px;
+
+            .button-panel {
+                float: right;
+                overflow: auto;
+                margin-top: 10px;
+
+                i {
+                    margin-right: 4px;
+                }
+            }
 
             .recent-essays-header {
                 overflow: auto;
@@ -106,8 +220,7 @@
 
                 h2 {
                     float: left;
-                    margin-top:8px;
-                    font-size: 16px;
+                    font-size: 14px;
                 }
             }
 
@@ -117,7 +230,6 @@
 
             .see-all-recent-wrapper {
                 float:right;
-                margin-top: 8px;
 
                 i {
                     float: right;
@@ -174,38 +286,50 @@
     }
 
     .right-col {
-        float:left;
-        padding: 0 0 0 35px;
-        width: 542px;
+        float: right;
+        width: 583px;
+        margin-left: 15px;
+        padding: $box-padding;
+        background: white;
+        border-radius: 2px;
+        border: 1px gainsboro solid;
 
         h1 {
             float: left;
-            padding: 8px 18px 7px 18px;
-            font-size: 16px;
+            padding: 0 8px 5px 0px;
+            font-size: 14px;
             cursor: pointer;
+            margin-bottom: 0px;
+
+            i {
+                margin-right: 3px;
+            }
         }
 
         .tab-selected {
-            border-left: 1px solid $generic-divider-color;
-            border-top: 1px solid $generic-divider-color;
-            border-right: 1px solid $generic-divider-color;
-            border-bottom: 1px solid rgba(0,0,0,0);
-            border-radius: 2px;
+            border-bottom: 1px solid $main-color-2;
+            color: $main-color-2;
+            background: white;
         }
 
         .tab-unselected {
             border-bottom: 1px solid $generic-divider-color;
-            border-top: 1px solid rgba(0,0,0,0);
-            border-left: 1px solid rgba(0,0,0,0);
-            border-right: 1px solid rgba(0,0,0,0);
             color: #888;
         }
 
+        $tab-fill-height: 31px;
         .tab-fill {
-           width: 265px;
-           height: 41px;
+           width: 335px;
+           height: $tab-fill-height;
            float: left;
            border-bottom: 1px solid $generic-divider-color;
+        }
+
+        .small-tab-fill {
+            width: 15px;
+            height: $tab-fill-height;
+            float: left;
+            border-bottom: 1px solid $generic-divider-color;
         }
 
         .assigned-reviews {
@@ -220,9 +344,8 @@
 
         .notifications, .assignments {
             overflow: auto;
-            padding-top: 20px;
             clear: both;
-            max-height:600px;
+            padding-top: 20px;
 
             .notification, .assignment {
                 overflow: auto;
@@ -239,7 +362,7 @@
 
                 .notification-content {
                     float: left;
-                    width: 485px;
+                    width: 500px;
                     margin-left: 15px;
 
                     .author-date {
@@ -269,7 +392,7 @@
         display: inline-block;
         height: 24px;
         padding: 0 7px 0 7px;
-        margin: 0 7px 0 0;
+        margin: 0 0 0 7px;
         font-size: 11px;
         font-weight: bold;
         line-height: 24px;
