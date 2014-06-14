@@ -9,7 +9,7 @@ $theme-color: $main-color-2;
 $theme-color-hover: $main-color-2-hover;
 $large-font: 30pt;
 $large-font-2: 20pt;
-$large-explanation: 15pt;  
+$large-explanation: 15pt;
 $small-explanation: 13pt;
 $button-font-size: 10pt;
 $white-color: #e5e5e5;
@@ -44,7 +44,7 @@ html, body {
 }
 
 .splash-container {
-    width: 100%;    
+    width: 100%;
     background:#ccc;
 }
 
@@ -176,12 +176,12 @@ html, body {
         position: absolute;
 
         img {
-            height: 38px;
-            width: 38px;
-            margin-top: 6px;
+            height: 33px;
+            width: 33px;
+            margin-top: 8px;
         }
     }
-
+/*
     #logo-name {
         margin-left: 70px;
         letter-spacing: 5px;
@@ -193,14 +193,14 @@ html, body {
             color: white;
         }
     }
-
+*/
     * {
         color: $white-color;
     }
 
     .about-button {
         width: 120px;
-        margin-left: 45px;
+        margin-left: 42px;
     }
 
     .services-button {
