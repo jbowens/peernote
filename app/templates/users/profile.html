@@ -93,41 +93,6 @@ Home
             </div>
         </div>
     </div>
-    <div class="left-col">
-        <div class="recent-essays">
-            <div class="recent-essays-header">
-                <h2>Recent Documents</h2>
-                <div class="see-all-recent-wrapper">
-                    <i class="fa fa-caret-right"></i>
-                    <a href="/essays" class="see-all-recent">See All</a>
-                </div>
-            </div>
-            <ul>
-            {% if recent_essays %}
-            {% for essay in recent_essays %}
-                <li>
-                    <a href="{{ url_for('essays.edit_essay', essayid=essay.eid) }}">
-                        <div class="recent-doc">{{ essay.get_current_draft().title | check_untitled | shorten_string(25) }}</div>
-                        <div class="date">{{ essay.pretty_modified_date() }} </div>
-                    </a>
-                </li>
-            {% endfor %}
-            {% else %}
-            <div class="no-documents">
-                No documents. Create one <a href="/essays/create">here</a>!
-            </div>
-            {% endif %}
-            </ul>
-                <div class="button-panel">
-                    <a class="button" href="{{ url_for('essays.create_essay') }}">
-                        <i class="fa fa-plus"></i>New
-                    </a>
-                    <a class="button" href="{{ url_for('essays.upload_essay') }}">
-                        <i class="fa fa-upload"></i>Upload
-                    </a>
-                </div>
-        </div>
-    </div>
     <div class="right-col">
         <div class="tabs">
             <div class="tab">
@@ -176,6 +141,43 @@ Home
             </div>
         </div>
         {% endif %}
+    </div>
+    <div class="fix-container">
+        <div class="left-col">
+            <div class="recent-essays">
+                <div class="recent-essays-header">
+                    <h2>Recent Documents</h2>
+                    <div class="see-all-recent-wrapper">
+                        <i class="fa fa-caret-right"></i>
+                        <a href="/essays" class="see-all-recent">See All</a>
+                    </div>
+                </div>
+                <ul>
+                {% if recent_essays %}
+                {% for essay in recent_essays %}
+                    <li>
+                        <a href="{{ url_for('essays.edit_essay', essayid=essay.eid) }}">
+                            <div class="recent-doc">{{ essay.get_current_draft().title | check_untitled | shorten_string(25) }}</div>
+                            <div class="date">{{ essay.pretty_modified_date() }} </div>
+                        </a>
+                    </li>
+                {% endfor %}
+                {% else %}
+                <div class="no-documents">
+                    No documents. Create one <a href="/essays/create">here</a>!
+                </div>
+                {% endif %}
+                </ul>
+                    <div class="button-panel">
+                        <a class="button" href="{{ url_for('essays.create_essay') }}">
+                            <i class="fa fa-plus"></i>New
+                        </a>
+                        <a class="button" href="{{ url_for('essays.upload_essay') }}">
+                            <i class="fa fa-upload"></i>Upload
+                        </a>
+                    </div>
+            </div>
+        </div>
     </div>
 </div>
 

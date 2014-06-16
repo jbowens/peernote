@@ -16,9 +16,9 @@ $.extend(peernoteNS.profile, {
                 + $(".top-push").height()
                 + parseInt($("#user-profile").css("margin-bottom")) + 25;
             if ($window.scrollTop() > heightToCheck) {
-                $(".left-col").css({"position":"fixed"});
+                $(".fix-container").css({"position":"fixed","width":$(".dashboard").width()+"px"});
             } else {
-                $(".left-col").css({"position":"static"});
+                $(".fix-container").css({"position":"static","width":"auto"});
             }
         });
     },

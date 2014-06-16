@@ -16,13 +16,13 @@ $box-padding: 20px;
     width: $page-width;
     height: 800px;
     background: whitesmoke;
-    z-index: -1;
+    position:relative;
     margin:auto;
     border-top: 0px solid red;
 
     .top-push {
         width: 100%;
-        height: 20px;
+        height: 15px;
     }
 
     #user-profile {
@@ -188,13 +188,22 @@ $box-padding: 20px;
         }
     }
 
+    .fix-container {
+        float: right;
+        overflow: auto;
+        height:100%;
+        top:15px;
+        //border: 1px red dashed;
+    }
+
     $left-col-width: 300px;
 
     .left-col {
         height: 100%;
-        float: left;
+        float: right;
         width: $left-col-width;
-        top: 20px;
+        top: 15px;
+        right: 0;
 
         .recent-essays {
             width: 258px;
@@ -286,9 +295,9 @@ $box-padding: 20px;
     }
 
     .right-col {
-        float: right;
+        float: left;
         width: 583px;
-        margin-left: 15px;
+        margin-right: 15px;
         padding: $box-padding;
         background: white;
         border-radius: 2px;
