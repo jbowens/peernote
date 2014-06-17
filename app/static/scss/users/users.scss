@@ -296,7 +296,7 @@ $box-padding: 20px;
 
                     .weekday {
                         border-top:1px solid gainsboro;
-                        $weekday-width: 98px;
+                        $weekday-width: 118px;
                         width: $weekday-width;
                         height: 230px;
                         border-right: 1px solid $dark-border-color;
@@ -351,8 +351,8 @@ $box-padding: 20px;
                         }
                     }
 
-                    .weekday.saturday {
-                        width: 103px;
+                    .weekday.friday {
+                        width: 122px;
                     }
 
                     .weekday.monday {
