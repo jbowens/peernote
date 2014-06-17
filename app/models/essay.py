@@ -6,8 +6,18 @@ class Essay(db.Model):
     eid = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, db.ForeignKey('user.uid', ondelete='cascade'), nullable=False)
     upload_id = db.Column(db.Integer, db.ForeignKey('upload.upload_id'), nullable=True)
-    created_date = db.Column(db.DateTime, default=datetime.now)
-    modified_date = db.Column(db.DateTime, default=datetime.now)
+
+    def created_date(self):
+        """
+        Created date of most recent draft associated with this essay
+        """
+        return self.get_current_draft().created_date
+
+    def modified_date(self):
+        """
+        Modified date of most recent draft associated with this essay
+        """
+        return self.get_current_draft().modified_date
 
     def get_paragraphs(self):
       """
@@ -39,10 +49,10 @@ class Essay(db.Model):
         return drafts
 
     def pretty_created_date(self):
-        return self._pretty_datetime(self.created_date)
+        return self._pretty_datetime(self.created_date())
 
     def pretty_modified_date(self):
-        return self._pretty_datetime(self.modified_date)
+        return self._pretty_datetime(self.modified_date())
 
     def _pretty_datetime(self, dt):
         if dt.date() ==  datetime.today().date():

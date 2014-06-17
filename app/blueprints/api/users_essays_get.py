@@ -17,7 +17,10 @@ essays: prettified json representation of essay
 def get_user_essays():
     current_app.logger.debug('getting logged in users essays')
     essays_json = []
-    essays = Essay.query.filter_by(uid=g.user.uid).order_by(Essay.modified_date.desc())
+
+    essays = Essay.query.filter_by(uid=g.user.uid).all()
+    essays = sorted(essays, key=lambda essay: essay.modified_date(), reverse=True)
+
     for essay in essays:
         essays_json.append(essay.to_dict())
 

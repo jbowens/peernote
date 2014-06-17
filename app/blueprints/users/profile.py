@@ -10,7 +10,8 @@ For now, the only profile you can view is your own when logged in.
 @users.route('/users/profile', methods=['GET'])
 @login_required
 def show_user_profile():
-    essays = Essay.query.filter_by(uid=g.user.uid).order_by(Essay.modified_date.desc())[:7]
+    essays = Essay.query.filter_by(uid=g.user.uid).all()
+    essays = sorted(essays, key=lambda essay: essay.modified_date(), reverse=True)[:7]
 
     return render_template('users/profile.html',
         recent_essays=essays,

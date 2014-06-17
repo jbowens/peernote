@@ -40,9 +40,6 @@ def save_draft():
         draft.title = title
         draft.modified_date = new_date
         db.session.add(draft)
-        db.session.flush()
-
-        Essay.query.filter_by(eid=draft.eid).update({'modified_date': new_date})
         db.session.commit()
 
         return jsonify(status='success',

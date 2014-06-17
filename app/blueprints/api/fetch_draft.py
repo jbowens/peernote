@@ -38,7 +38,7 @@ def fetch_draft():
 
         if 'timestamp' in request.args:
             timestamp = str(request.args['timestamp'])
-            if timestamp == str(essay.modified_date):
+            if timestamp == str(essay.modified_date()):
                 return '', 204
 
 

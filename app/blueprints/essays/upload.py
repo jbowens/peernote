@@ -54,18 +54,14 @@ def upload_essay():
         k.key = str(new_upload.upload_id) + '-' + f.filename
         k.set_contents_from_string(contents)
 
-        # create a single datetime object so both draft and essay have the
-        # same instead of being slightly different
-        now = datetime.now()
-
         # Create the essay entry
         new_essay = Essay()
         new_essay.uid = g.user.uid
         new_essay.upload_id = new_upload.upload_id
-        new_essay.created_date = now
-        new_essay.modified_date = now
         db.session.add(new_essay)
         db.session.flush()
+
+        now = datetime.now()
 
         # Create draft associated with essay
         draft = Draft()
