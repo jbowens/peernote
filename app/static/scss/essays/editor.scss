@@ -82,7 +82,7 @@ body {
             }
 
             .editor-mode-button-container {
-                width: 80px;
+                width: 78px;
                 overflow: auto;
                 float: left;
                 margin: 20px 0 0 0;
@@ -90,7 +90,7 @@ body {
                 .editor-mode-button {
                     overflow: auto;
                     width: 65px;
-                    height: 60px;
+                    height: 70px;
                     margin: auto;
                     margin-bottom: 10px;
                     cursor: pointer;
@@ -258,7 +258,7 @@ body {
                 padding: 10px 20px;
                 cursor: pointer;
                 color: $white-color;
-                width: 210px;
+                width: 195px;
 
                 a {
                     color: $white-color;
@@ -310,6 +310,7 @@ body {
                     overflow: auto;
                     border-bottom:black 1px solid;
                     border-top: #444 1px solid;
+                    width: 180px;
 
                     a {
                         * {
@@ -327,6 +328,8 @@ body {
                         i.fa-times {
                             float: right;
                             color: rgba(0,0,0,0);
+                            margin-right: 0;
+                            margin-left: 10px;
                         }
 
                         .draft-number {
@@ -335,7 +338,7 @@ body {
 
                         .draft-date {
                             float: right;
-                            margin-right: 20px;
+                            margin-right: 0px;
                         }
                     }
                 }

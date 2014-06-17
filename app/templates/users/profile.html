@@ -84,8 +84,15 @@ Home
                 <div class="small-tab-fill"></div>
                 <div class="tab">
                     <h1 class="tab-unselected" id="assignments">
-                        <i class="fa fa-pencil"></i>
+                        <i class="fa fa-pencil-square-o"></i>
                         Assignments
+                    </h1>
+                </div>
+                <div class="small-tab-fill"></div>
+                <div class="tab">
+                    <h1 class="tab-unselected" id="courses">
+                        <i class="fa fa-graduation-cap"></i>
+                        Courses
                     </h1>
                 </div>
                 <div class="tab-fill"></div>
@@ -152,24 +159,11 @@ Home
                             </div>
                         </div>
                     </li>
-                    {#<li class="weekday saturday">
-                        <div class="weekday-name">
-                            <span class="wd-date">14/15</span>
-                            <span class="wd-day">Wkn</span>
-                        </div>
-                        </li>#}
-                    {#
-                    <li class="weekday sunday">
-                        <div class="weekday-name">
-                            <span class="wd-date">15</span>
-                            <span class="wd-day">Sun</span>
-                        </div>
-                        </li>#}
                 </ul>
             </div>
             {% set reviews = user.get_assigned_reviews(5) %}
             {% if reviews %}
-            <div class="assigned-reviews">
+            <div class="assignments-tab">
                 <ul class="assignments">
                     {% for review in reviews %}
                     <li class="assignment">
@@ -194,6 +188,86 @@ Home
                     <a href="#" class="see-all-recent">Past Assignments</a>
                     <i class="fa fa-caret-right"></i>
                 </div>#}
+            </div>
+            <div class="courses-tab">
+                <div class="no-courses-added">You have not added any courses yet.</div>
+                <ul class="course-list">
+                    <div class="course-li">
+                        <div class="course-li-header">
+                            <h2>English - Deboer-Langworthy</h2>
+                            <a>
+                                Go to course page
+                                <i class="fa fa-caret-right"></i>
+                            </a>
+                        </div>
+                        <div class="course-contents">
+                            <div class="course-announcements">
+                                <h2>
+                                    <i class="fa fa-bullhorn"></i>
+                                    Announcements
+                                </h2>
+                                <ul class="course-announcements-list">
+                                    <li class="no-announcements course-announcement">
+                                        No announcements
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-li">
+                        <div class="course-li-header">
+                            <h2>US History - Chester</h2>
+                            <a>
+                                Go to course page
+                                <i class="fa fa-caret-right"></i>
+                            </a>
+                        </div>
+                        <div class="course-contents">
+                            <div class="course-announcements">
+                                <h2>
+                                    <i class="fa fa-bullhorn"></i>
+                                    Announcements
+                                </h2>
+                                <ul class="course-announcements-list">
+                                    <li class="course-announcement">
+                                        <i class="fa fa-angle-double-right"></i>
+                                        You should complete the Adams reading by Monday.
+                                    </li>
+                                    <li class="course-announcement">
+                                        <i class="fa fa-angle-double-right"></i>
+                                        Don't forget, we'll be having a pop quiz next week covering material in the current unit.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+                <div class="add-course-link">
+                    <div class="icon-container">
+                        <i class="fa fa-plus"></i>
+                    </div>
+                    Find and Add Course
+                </div>
+                {#<ul class="course-list">
+                    <li class="course">
+                        <div class="course-title"></div>
+                        <div class="course-description">
+                            This is a one sentence description of the course. It should be short!
+                        </div>
+                        <div class="course-announcements">
+                            <h2>Announcements</h2>
+                            <ul class="announcements-list">
+                                <li>Test coming up on Friday.</li>
+                                <li>Remember to get permission slips signed by parents.</li>
+                            </ul>
+                        </div>
+                        <div class="course-assignments">
+                            <h2>Current Assignments</h2>
+                            <ul class="assignments-list">
+                            </ul>
+                        </div>
+                    </li>
+                </ul>#}
             </div>
         </div>
         <div class="notifications-container">

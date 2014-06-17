@@ -9,34 +9,47 @@ $.extend(peernoteNS.profile, {
 
     /* Make tabs work */
     tabFunctionality: function() {
-        $assignmentsPanel = $(".assigned-reviews");
+        $assignmentsPanel = $(".assignments-tab");
         $notificationsPanel = $(".week-calendar");
+        $coursesPanel = $(".courses-tab");
         $assignmentsTab = $("#assignments");
         $notificationsTab = $("#notifications");
+        $coursesTab = $("#courses");
 
-        var notificationsVisible = true;
         $assignmentsTab.click(function() {
-            if (notificationsVisible) {
                 $notificationsPanel.hide();
+                $coursesPanel.hide();
                 $assignmentsPanel.show();
                 $assignmentsTab.addClass("tab-selected");
                 $assignmentsTab.removeClass("tab-unselected");
                 $notificationsTab.addClass("tab-unselected");
                 $notificationsTab.removeClass("tab-selected");
-                notificationsVisible = false;
-            }
+                $coursesTab.addClass("tab-unselected");
+                $coursesTab.removeClass("tab-selected");
+        });
+
+        $coursesTab.click(function() {
+            $notificationsPanel.hide();
+            $coursesPanel.show();
+            $assignmentsPanel.hide();
+            $assignmentsTab.addClass("tab-unselected");
+            $assignmentsTab.removeClass("tab-selected");
+            $notificationsTab.addClass("tab-unselected");
+            $notificationsTab.removeClass("tab-selected");
+            $coursesTab.removeClass("tab-unselected");
+            $coursesTab.addClass("tab-selected");
         });
 
         $notificationsTab.click(function() {
-            if (!notificationsVisible) {
                 $notificationsPanel.show();
+                $coursesPanel.hide();
                 $assignmentsPanel.hide();
                 $notificationsTab.addClass("tab-selected");
                 $notificationsTab.removeClass("tab-unselected");
                 $assignmentsTab.addClass("tab-unselected");
                 $assignmentsTab.removeClass("tab-selected");
-                notificationsVisible = true;
-            }
+                $coursesTab.addClass("tab-unselected");
+                $coursesTab.removeClass("tab-selected");
         });
     },
 
