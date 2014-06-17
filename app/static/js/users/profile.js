@@ -4,29 +4,13 @@ peernoteNS.profile = peernoteNS.profile || {};
 $.extend(peernoteNS.profile, {
     init: function() {
         this.tabFunctionality();
-        this.pageHeight();
         this.subscribeNotifications();
-        this.fixDivs();
-    },
-
-    fixDivs: function() {
-        $window.scroll(function() {
-            var heightToCheck = $(".header-container").height()
-                + $("#user-profile").height()
-                + $(".top-push").height()
-                + parseInt($("#user-profile").css("margin-bottom")) + 25;
-            if ($window.scrollTop() > heightToCheck) {
-                $(".fix-container").css({"position":"fixed","width":$(".dashboard").width()+"px"});
-            } else {
-                $(".fix-container").css({"position":"static","width":"auto"});
-            }
-        });
     },
 
     /* Make tabs work */
     tabFunctionality: function() {
         $assignmentsPanel = $(".assigned-reviews");
-        $notificationsPanel = $(".notifications");
+        $notificationsPanel = $(".week-calendar");
         $assignmentsTab = $("#assignments");
         $notificationsTab = $("#notifications");
 
@@ -42,6 +26,7 @@ $.extend(peernoteNS.profile, {
                 notificationsVisible = false;
             }
         });
+
         $notificationsTab.click(function() {
             if (!notificationsVisible) {
                 $notificationsPanel.show();
@@ -53,25 +38,6 @@ $.extend(peernoteNS.profile, {
                 notificationsVisible = true;
             }
         });
-    },
-
-    /* Set min height of page */
-    pageHeight: function() {
-        $footer = $(".footer");
-        $nav = $("nav");
-        $dashboard = $(".dashboard");
-        $window = $(window);
-        var footerHeight = $footer.height();
-        var navHeight = $nav.height();
-
-        function resize() {
-            if ($dashboard.height() < $window.height() - footerHeight - navHeight) {
-                $dashboard.height($window.height() - footerHeight - navHeight);
-            }
-        }
-
-        $(window).resize(resize);
-        resize();
     },
 
     /* listen for new notifications */

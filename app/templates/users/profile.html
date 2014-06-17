@@ -19,64 +19,10 @@ Home
 {% endblock %}
 
 {% block content %}
+<div class="dummy-nav"></div>
 <div class="dashboard">
     <div class="top-push"></div>
     <div id="user-profile">
-        <div class="week-calendar">
-            <div class="calendar-header">
-                <div class="calendar-controls">
-                    <div class="previous-week-button calendar-button">
-                        <i class="fa fa-caret-left"></i>
-                    </div>
-                    <div class="current-date-button calendar-button">Today</div>
-                    <div class="next-week-button calendar-button">
-                        <i class="fa fa-caret-right"></i>
-                    </div>
-                </div>
-                <h2> Week of June 9th</h2>
-            </div>
-            <ul class="weekdays">
-                <li class="weekday monday">
-                    <div class="weekday-name">Monday</div>
-                    <div class="assignment-block">
-                        <div class="assignment-block-header">English</div>
-                        <div class="assignment-block-text">
-                            Assignment due today.
-                        </div>
-                    </div>
-                </li>
-                <li class="weekday tuesday">
-                    <div class="weekday-name">Tuesday</div>
-                </li>
-                <li class="weekday wednesday current-weekday">
-                    <div class="weekday-name">Wednesday</div>
-                </li>
-                <li class="weekday thursday">
-                    <div class="weekday-name">Thursday</div>
-                </li>
-                <li class="weekday friday">
-                    <div class="weekday-name">Friday</div>
-                    <div class="assignment-block">
-                        <div class="assignment-block-header">English</div>
-                        <div class="assignment-block-text">
-                            Test today.
-                        </div>
-                    </div>
-                    <div class="assignment-block">
-                        <div class="assignment-block-header">English</div>
-                        <div class="assignment-block-text">
-                            Assignment due today.
-                        </div>
-                    </div>
-                </li>
-                <li class="weekday saturday">
-                    <div class="weekday-name">Saturday</div>
-                </li>
-                <li class="weekday sunday">
-                    <div class="weekday-name">Sunday</div>
-                </li>
-            </ul>
-        </div>
         <div class="user-profile-container">
             <img src="{{ user.email | gravatar }}" />
             {#<div class="item-count item-count-first">
@@ -92,94 +38,172 @@ Home
                 <div>Student</div>
             </div>
         </div>
-    </div>
-    <div class="right-col">
-        <div class="tabs">
-            <div class="tab">
-                <h1 class="tab-selected" id="notifications">
-                    <i class="fa fa-globe"></i>
-                    Notifications
-                </h1>
-            </div>
-            <div class="small-tab-fill"></div>
-            <div class="tab">
-                <h1 class="tab-unselected" id="assignments">
-                    <i class="fa fa-pencil"></i>
-                    Assignments
-                </h1>
-            </div>
-            <div class="tab-fill"></div>
-        </div>
-        <ul class="notifications">
-        </ul>
-        {% set reviews = user.get_assigned_reviews(5) %}
-        {% if reviews %}
-        <div class="assigned-reviews">
-            <ul class="assignments">
-                {% for review in reviews %}
-                <li class="assignment">
-                <img src="{{ review.get_requesting_user().email | gravatar }}" class="notification-thumbnail">
-                <div class="notification-content">
-                    <div class="author-date">
-                        <div class="notification-author"> {{ review.get_requesting_user().first_name }} {{ user.last_initial() }}.
-                        </div>
-                        <div class="notification-date">{{ review.pretty_request_date() }}</div>
-                    </div>
-                    <div class="notification-text">
-                        {{ review.get_requesting_user().first_name }} requested a review.
-                        <a href="{{ url_for('essays.review_draft', reviewhash=review.urlhash) }}">
-                            {{ review.get_draft().title }}
-                        </a>
-                    </div>
+        <div class="recent-essays">
+            <div class="recent-essays-header">
+                <h2>Recent Documents</h2>
+                <div class="see-all-recent-wrapper">
+                    <i class="fa fa-caret-right"></i>
+                    <a href="/essays" class="see-all-recent">See All</a>
                 </div>
-                </li>
-                {% endfor %}
-            </ul>
-            <div class="past-assignments">
-                <a href="#" class="see-all-recent">Past Assignments</a>
-                <i class="fa fa-caret-right"></i>
             </div>
-        </div>
-        {% endif %}
-    </div>
-    <div class="fix-container">
-        <div class="left-col">
-            <div class="recent-essays">
-                <div class="recent-essays-header">
-                    <h2>Recent Documents</h2>
-                    <div class="see-all-recent-wrapper">
-                        <i class="fa fa-caret-right"></i>
-                        <a href="/essays" class="see-all-recent">See All</a>
-                    </div>
-                </div>
-                <ul>
+            <ul>
                 {% if recent_essays %}
                 {% for essay in recent_essays %}
-                    <li>
-                        <a href="{{ url_for('essays.edit_essay', essayid=essay.eid) }}">
-                            <div class="recent-doc">{{ essay.get_current_draft().title | check_untitled | shorten_string(25) }}</div>
-                            <div class="date">{{ essay.pretty_modified_date() }} </div>
-                        </a>
-                    </li>
+                <li>
+                <a href="{{ url_for('essays.edit_essay', essayid=essay.eid) }}">
+                    <div class="recent-doc">{{ essay.get_current_draft().title | check_untitled | shorten_string(25) }}</div>
+                    <div class="date">{{ essay.pretty_modified_date() }} </div>
+                </a>
+                </li>
                 {% endfor %}
                 {% else %}
                 <div class="no-documents">
                     No documents. Create one <a href="/essays/create">here</a>!
                 </div>
                 {% endif %}
-                </ul>
-                    <div class="button-panel">
-                        <a class="button" href="{{ url_for('essays.create_essay') }}">
-                            <i class="fa fa-plus"></i>New
-                        </a>
-                        <a class="button" href="{{ url_for('essays.upload_essay') }}">
-                            <i class="fa fa-upload"></i>Upload
-                        </a>
-                    </div>
+            </ul>
+            <div class="button-panel">
+                <a class="button" href="{{ url_for('essays.create_essay') }}">
+                    <i class="fa fa-plus"></i>New
+                </a>
+                <a class="button" href="{{ url_for('essays.upload_essay') }}">
+                    <i class="fa fa-upload"></i>Upload
+                </a>
             </div>
         </div>
     </div>
+    <div class="right-col">
+        <div class="tabbed-panes">
+            <div class="tabs">
+                <div class="tab">
+                    <h1 class="tab-selected" id="notifications">
+                        <i class="fa fa-calendar"></i>
+                        Calendar
+                    </h1>
+                </div>
+                <div class="small-tab-fill"></div>
+                <div class="tab">
+                    <h1 class="tab-unselected" id="assignments">
+                        <i class="fa fa-pencil"></i>
+                        Assignments
+                    </h1>
+                </div>
+                <div class="tab-fill"></div>
+            </div>
+            <div class="week-calendar">
+                <div class="calendar-header">
+                    <div class="calendar-controls">
+                        <div class="previous-week-button calendar-button">
+                            <i class="fa fa-caret-left"></i>
+                        </div>
+                        <div class="current-date-button calendar-button">Today</div>
+                        <div class="next-week-button calendar-button">
+                            <i class="fa fa-caret-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <ul class="weekdays">
+                    <li class="weekday monday">
+                        <div class="weekday-name">
+                            <span class="wd-date">9</span>
+                            <span class="wd-day">Mon</span>
+                        </div>
+                        <div class="assignment-block">
+                            <div class="assignment-block-header">English</div>
+                            <div class="assignment-block-text">
+                                Assignment due today.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="weekday tuesday">
+                        <div class="weekday-name">
+                            <span class="wd-date">10</span>
+                            <span class="wd-day">Tue</span>
+                        </div>
+                    </li>
+                    <li class="weekday wednesday current-weekday">
+                        <div class="weekday-name">
+                            <span class="wd-date">11</span>
+                            <span class="wd-day">Wed</span>
+                        </div>
+                    </li>
+                    <li class="weekday thursday">
+                        <div class="weekday-name">
+                            <span class="wd-date">12</span>
+                            <span class="wd-day">Thu</span>
+                        </div>
+                    </li>
+                    <li class="weekday friday">
+                        <div class="weekday-name">
+                            <span class="wd-date">13</span>
+                            <span class="wd-day">Fri</span>
+                        </div>
+                        <div class="assignment-block">
+                            <div class="assignment-block-header">English</div>
+                            <div class="assignment-block-text">
+                                Test today.
+                            </div>
+                        </div>
+                        <div class="assignment-block">
+                            <div class="assignment-block-header">English</div>
+                            <div class="assignment-block-text">
+                                Assignment due today.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="weekday saturday">
+                        <div class="weekday-name">
+                            <span class="wd-date">14/15</span>
+                            <span class="wd-day">Wkn</span>
+                        </div>
+                    </li>
+                    {#
+                    <li class="weekday sunday">
+                        <div class="weekday-name">
+                            <span class="wd-date">15</span>
+                            <span class="wd-day">Sun</span>
+                        </div>
+                        </li>#}
+                </ul>
+            </div>
+            {% set reviews = user.get_assigned_reviews(5) %}
+            {% if reviews %}
+            <div class="assigned-reviews">
+                <ul class="assignments">
+                    {% for review in reviews %}
+                    <li class="assignment">
+                    <img src="{{ review.get_requesting_user().email | gravatar }}" class="notification-thumbnail">
+                    <div class="notification-content">
+                        <div class="author-date">
+                            <div class="notification-author"> {{ review.get_requesting_user().first_name }} {{ user.last_initial() }}.
+                            </div>
+                            <div class="notification-date">{{ review.pretty_request_date() }}</div>
+                        </div>
+                        <div class="notification-text">
+                            {{ review.get_requesting_user().first_name }} requested a review.
+                            <a href="{{ url_for('essays.review_draft', reviewhash=review.urlhash) }}">
+                                {{ review.get_draft().title }}
+                            </a>
+                        </div>
+                    </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {#<div class="past-assignments">
+                    <a href="#" class="see-all-recent">Past Assignments</a>
+                    <i class="fa fa-caret-right"></i>
+                </div>#}
+            </div>
+        </div>
+        <div class="notifications-container">
+            <h2>
+                Notifications
+            </h2>
+            <ul class="notifications">
+            </ul>
+        </div>
+        {% endif %}
+    </div>
 </div>
-
 
 {% endblock %}

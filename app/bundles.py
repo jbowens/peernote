@@ -178,7 +178,6 @@ assets.register('base_js',
         "js/init.js",
         "js/notifications.js",
         "js/navbar.js",
-        "js/footer.js",
         filters="rjsmin",
         output="gen/base.js"
     )
@@ -208,6 +207,7 @@ assets.register('signup_js',
     Bundle(
         "js/users/_clientsideFormCheck.js",
         "js/users/signup.js",
+        "js/footer.js",
         filters="rjsmin",
         output="gen/signup.js"
     )
@@ -217,6 +217,7 @@ assets.register('reset_password_js',
     Bundle(
         "js/users/_clientsideFormCheck.js",
         "js/users/reset_password.js",
+        "js/footer.js",
         filters="rjsmin",
         output="gen/reset_password.js"
     )
@@ -226,6 +227,7 @@ assets.register('forgot_password_js',
     Bundle(
         "js/users/_clientsideFormCheck.js",
         "js/users/forgot_password.js",
+        "js/footer.js",
         filters="rjsmin",
         output="gen/forgot_password.js"
     )
@@ -235,6 +237,7 @@ assets.register('login_js',
     Bundle(
         "js/users/_clientsideFormCheck.js",
         "js/users/login.js",
+        "js/footer.js",
         filters="rjsmin",
         output="gen/login.js"
     )
@@ -269,6 +272,7 @@ assets.register('essays_index_js',
         "js/essays/index.js",
         "js/include/jquery.tablesorter.js",
         "js/include/parser-date.js",
+        "js/footer.js",
         filters="rjsmin",
         output="gen/essays_index.js"
     )
@@ -282,6 +286,7 @@ assets.register('reviewer_js',
     Bundle(
         "js/essays/docutils.js",
         "js/reviews/review.js",
+        "js/footer.js",
         filters="rjsmin",
         output="gen/reviewer.js"
     )
@@ -292,6 +297,7 @@ assets.register('settings_js',
         "js/widgets/lightbox.js",
         "js/users/_clientsideFormCheck.js",
         "js/users/settings.js",
+        "js/footer.js",
         depends="js/users/settings.js",
         filters="rjsmin",
         output="gen/settings.js"

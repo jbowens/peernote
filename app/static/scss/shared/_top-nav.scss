@@ -6,7 +6,7 @@ nav {
     line-height: 50px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.4);
     position: relative;
-    z-index:1;
+    z-index: 100;
 
     .header-container {
         position: relative;
@@ -239,7 +239,7 @@ nav {
                         float: left;
                         overflow: auto;
                         //border: 1px red dashed;
-                        width: 231px;
+                        width: 217px;
                         margin-left: 8px;
                         height: 45px;
                         position:relative;
