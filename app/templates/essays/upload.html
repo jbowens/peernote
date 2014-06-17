@@ -11,6 +11,13 @@
     {% endassets %}
 {% endblock %}
 
+{% block scripts %}
+    {{ super() }}
+    {% assets "upload_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+{% endblock %}
+
 {% block content %}
 <div class="page-container forms-wrapper top-margin bottom-margin">
     <div class="table-wrapper">

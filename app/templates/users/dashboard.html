@@ -6,7 +6,7 @@ Home
 
 {% block styles %}
     {{ super() }}
-    {% assets "users_css" %}
+    {% assets "dashboard_css" %}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
     {% endassets %}
 {% endblock %}
@@ -164,30 +164,70 @@ Home
             {% set reviews = user.get_assigned_reviews(5) %}
             {% if reviews %}
             <div class="assignments-tab">
-                <ul class="assignments">
-                    {% for review in reviews %}
-                    <li class="assignment">
-                    <img src="{{ review.get_requesting_user().email | gravatar }}" class="notification-thumbnail">
-                    <div class="notification-content">
-                        <div class="author-date">
-                            <div class="notification-author"> {{ review.get_requesting_user().first_name }} {{ user.last_initial() }}.
-                            </div>
-                            <div class="notification-date">{{ review.pretty_request_date() }}</div>
-                        </div>
-                        <div class="notification-text">
-                            {{ review.get_requesting_user().first_name }} requested a review.
-                            <a href="{{ url_for('essays.review_draft', reviewhash=review.urlhash) }}">
-                                {{ review.get_draft().title }}
-                            </a>
-                        </div>
-                    </div>
+                <ul class="course-assignments-blocks">
+                    <li class="course-assignments-block">
+                        <h2 title="Go to course page">English - Deboer-Langworthy</h2>
+                        <ul class="course-assignments">
+                            <li class="course-assignment">
+                                <div class="course-assignment-date">
+                                    Tomorrow
+                                </div>
+                                <div class="course-assignment-content">
+                                    Read Chapter 5 from Simons et al.
+                                </div>
+                            </li>
+                            <li class="course-assignment">
+                                <div class="course-assignment-date">
+                                    June 21
+                                </div>
+                                <div class="course-assignment-content">
+                                    <div class="course-assignment-text">
+                                        Complete the first draft of your response paper on Atticus Finch. Remember to avoid passive voice.
+                                    </div>
+                                    <a class="button"
+                                        href="{{ url_for('essays.create_essay') }}">
+                                        Begin Assignment
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
                     </li>
-                    {% endfor %}
+                    <li class="course-assignments-block">
+                        <h2 title="Go to course page">US History - Chester</h2>
+                        <ul class="course-assignments">
+                            <li class="course-assignment">
+                                <span class="course-assignment-date">
+                                    Tomorrow
+                                </span>
+                                <span class="course-assignment-content">
+                                    Read Chapter 5 from Simons et al.
+                                </span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="course-assignments-block">
+                        <h2 title="Go to course page">Miscellaneous</h2>
+                        <ul class="course-assignments">
+                            {% for review in reviews %}
+                            <li class="course-assignment">
+                            <span class="course-assignment-date">
+                                {{ review.pretty_request_date() }}
+                            </span>
+                            <span class="course-assignment-content">
+                                <div class="course-assignment-text">
+                                    {{ review.get_requesting_user().first_name }} {{ user.last_initial() }}. requested a review on his paper, "{{ review.get_draft().title }}."
+                                </div>
+                                <a class="button"  href="{{ url_for('essays.review_draft', reviewhash=review.urlhash) }}">
+                                    Begin Review
+                                </a>
+                            </span>
+                                {#<img src="{{ review.get_requesting_user().email | gravatar }}" class="notification-thumbnail">#}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
                 </ul>
-                {#<div class="past-assignments">
-                    <a href="#" class="see-all-recent">Past Assignments</a>
-                    <i class="fa fa-caret-right"></i>
-                </div>#}
             </div>
             <div class="courses-tab">
                 <div class="no-courses-added">You have not added any courses yet.</div>

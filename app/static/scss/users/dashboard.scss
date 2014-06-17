@@ -173,6 +173,7 @@ $box-padding: 20px;
 
         .tabs {
             overflow: auto;
+            margin-bottom: 20px;
 
             h1 {
                 float: left;
@@ -236,7 +237,6 @@ $box-padding: 20px;
                     border-top-left-radius: 2px;
                     border-top-right-radius: 2px;
                     overflow: auto;
-                    margin-top: 15px;
 
                     h2 {
                         text-align: center;
@@ -375,12 +375,62 @@ $box-padding: 20px;
                 width: 600px;
                 display: none;
 
-                .assignments {
-                    margin-top: 20px;
-                }
+                .course-assignments-block {
+                    border-bottom: 2px solid gainsboro;
+                    margin-bottom: 20px;
 
-                .past-assignments {
-                    float: right;
+                    h2 {
+                        margin-bottom: 20px;
+                        cursor: pointer;
+                    }
+
+                    h2:hover {
+                        text-decoration: underline;
+                    }
+
+                    .course-assignment {
+                        padding-bottom: 15px;
+                        overflow: auto;
+                        margin-left: 10px;
+                        margin-bottom: 15px;
+                        border-bottom: 1px dotted gainsboro;
+
+                        .course-assignment-date {
+                            font-weight: 500;
+                            width: 100px;
+                            float: left;
+                        }
+
+                        .course-assignment-content {
+                            float: left;
+
+                            .course-assignment-text {
+                                display: block;
+                                float: left;
+                                width: 350px;
+                            }
+
+                            a {
+                                display: block;
+                                margin: 0;
+                                margin-top: 5px;
+                                margin-left: 10px;
+                                float: left;
+
+                                i {
+                                    margin-left:4px;
+                                }
+                            }
+                        }
+                    }
+
+                    .course-assignment:last-child {
+                        border-bottom: none;
+                    }
+                }
+                .course-assignments-block:last-child {
+                    border-bottom: none;
+                    margin-bottom: 0;
                 }
             }
 
@@ -388,7 +438,6 @@ $box-padding: 20px;
                 width: 600px;
                 min-height: 250px;
                 display: none;
-                padding-top: 20px;
 
                 .no-courses-added {
                     font-style: italic;
@@ -397,6 +446,9 @@ $box-padding: 20px;
                 }
 
                 .course-list {
+                    max-height: 400px;
+                    overflow-y: auto;
+
                     .course-li {
                         border: 1px solid gainsboro;
                         border-radius: 2px;
@@ -406,7 +458,7 @@ $box-padding: 20px;
                         .course-li-header {
                             background: $white-color;
                             padding: 5px 15px;
-                            border-bottom: 1px solid gainsboro;
+                            border-bottom: 1px solid #ccc;
                             overflow: auto;
 
                             h2 {
@@ -458,6 +510,7 @@ $box-padding: 20px;
                 .add-course-link {
                     cursor: pointer;
                     color: #777;
+                    float: left;
 
                     .icon-container {
                         position: relative;
@@ -484,50 +537,6 @@ $box-padding: 20px;
             }
         }
 
-        .notifications, .assignments {
-            overflow: auto;
-            clear: both;
-
-            .notification, .assignment {
-                overflow: auto;
-                padding-bottom:25px;
-                margin-bottom: 25px;
-                border-bottom: 1px dotted $generic-divider-color;
-
-                .notification-thumbnail {
-                    height: 40px;
-                    width: 40px;
-                    background: #ccc;
-                    float: left;
-                }
-
-                .notification-content {
-                    float: left;
-                    width: 530px;
-                    margin-left: 15px;
-
-                    .author-date {
-                        margin-bottom: 25px;
-                        .notification-author {
-                            float: left;
-                            font-weight: 600;
-                        }
-
-                        .notification-date {
-                            float: right;
-                            font-weight: 500;
-                            color: #888;
-                            font-size: 11px;
-                        }
-                    }
-
-                    .notification-text {
-                        line-height: 18px;
-                    }
-                }
-            }
-        }
-
         .notifications-container {
             background: white;
             clear: both;
@@ -537,6 +546,50 @@ $box-padding: 20px;
             width: 600px;
             border: 1px gainsboro solid;
             border-radius: 2px;
+
+            .notifications {
+                overflow: auto;
+                clear: both;
+
+                .notification {
+                    overflow: auto;
+                    padding-bottom:25px;
+                    margin-bottom: 25px;
+                    border-bottom: 1px dotted $generic-divider-color;
+
+                    .notification-thumbnail {
+                        height: 40px;
+                        width: 40px;
+                        background: #ccc;
+                        float: left;
+                    }
+
+                    .notification-content {
+                        float: left;
+                        width: 530px;
+                        margin-left: 15px;
+
+                        .author-date {
+                            margin-bottom: 25px;
+                            .notification-author {
+                                float: left;
+                                font-weight: 600;
+                            }
+
+                            .notification-date {
+                                float: right;
+                                font-weight: 500;
+                                color: #888;
+                                font-size: 11px;
+                            }
+                        }
+
+                        .notification-text {
+                            line-height: 18px;
+                        }
+                    }
+                }
+            }
 
             h2 {
                 margin-bottom: 20px;

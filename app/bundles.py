@@ -128,12 +128,12 @@ assets.register('editor_css',
     )
 )
 
-assets.register('users_css',
+assets.register('dashboard_css',
     Bundle(
-        "scss/users/users.scss",
+        "scss/users/dashboard.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
-        output="gen/users.css"
+        output="gen/dashboard.css"
     )
 )
 
@@ -240,6 +240,14 @@ assets.register('login_js',
         "js/footer.js",
         filters="rjsmin",
         output="gen/login.js"
+    )
+)
+
+assets.register('upload_js',
+    Bundle(
+        "js/footer.js",
+        filters="rjsmin",
+        output="gen/upload.js"
     )
 )
 
