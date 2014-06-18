@@ -47,6 +47,7 @@ $.extend(peernoteNS.profile, {
         $(".add-course-back-button").click(function() {
             $(".add-course-steps").animate({"right":"-="+shift+"px" }, 200);
             peernoteNS.profile.lightboxStep = 1;
+            $(".add-course-back-button").fadeOut(200);
         });
 
         $(".add-course-finish-button").click(function() {

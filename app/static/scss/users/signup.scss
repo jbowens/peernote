@@ -19,6 +19,33 @@ h1.sign-up {
     color: #373737;
 }
 
+.radio-pair {
+    float: left;
+
+    label, input {
+        cursor: pointer;
+        float: left;
+    }
+
+    input {
+        margin-right: 8px;
+    }
+}
+
+.ima {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.radio-pair-first {
+    margin-right: 40px;
+}
+
+#radio-td {
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
 // For the honey pots
 .winnie-the-pooh {
     display: none;

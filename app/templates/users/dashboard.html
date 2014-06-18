@@ -31,7 +31,7 @@ Home
                 <input placeholder="School name"></input>
             </li>
             <li class="add-course-step add-course-step-2">
-                <h1>Step 2: Select your course.</h2>
+                <h1>Step 2: Select your course</h2>
                 <select placeholder="Course - Instructor">
                     <option>English - Deboer-Langworthy</option>
                     <option>French I - Tubiana</option>
@@ -87,7 +87,9 @@ Home
                 <h2>Recent Documents</h2>
                 <div class="see-all-recent-wrapper">
                     <i class="fa fa-caret-right"></i>
-                    <a href="/essays" class="see-all-recent">See All</a>
+                    <a href="/essays" class="see-all-recent" title="See all documents">
+                        See All
+                    </a>
                 </div>
             </div>
             <ul>
@@ -107,10 +109,12 @@ Home
                 {% endif %}
             </ul>
             <div class="button-panel">
-                <a class="button" href="{{ url_for('essays.create_essay') }}">
+                <a class="button" title="Create new document"
+                    href="{{ url_for('essays.create_essay') }}">
                     <i class="fa fa-plus"></i>New
                 </a>
-                <a class="button" href="{{ url_for('essays.upload_essay') }}">
+                <a class="button" title="Upload document"
+                    href="{{ url_for('essays.upload_essay') }}">
                     <i class="fa fa-upload"></i>Upload
                 </a>
             </div>
@@ -144,11 +148,16 @@ Home
             <div class="week-calendar">
                 <div class="calendar-header">
                     <div class="calendar-controls">
-                        <div class="previous-week-button calendar-button">
+                        <div class="previous-week-button calendar-button"
+                            title="See previous week">
                             <i class="fa fa-caret-left"></i>
                         </div>
-                        <div class="current-date-button calendar-button">Today</div>
-                        <div class="next-week-button calendar-button">
+                        <div class="current-date-button calendar-button"
+                            title="See current week">
+                            Today
+                        </div>
+                        <div class="next-week-button calendar-button"
+                            title="See next week">
                             <i class="fa fa-caret-right"></i>
                         </div>
                     </div>
