@@ -67,11 +67,13 @@ from blueprints.users import users
 from blueprints.essays import essays
 from blueprints.api import api
 from blueprints.admin import admin
+from blueprints.courses import courses
 from error import *
 
 app.register_blueprint(front)
 if not app.config.get('IS_PRODUCTION'):
     app.register_blueprint(users)
+    app.register_blueprint(courses)
     app.register_blueprint(essays, url_prefix='/essays')
     app.register_blueprint(api, url_prefix='/api')
     app.register_blueprint(admin, url_prefix='/admin')

@@ -1,0 +1,23 @@
+{% extends 'base/application_main.html' %}
+
+{% block title %}
+    Temp Course Dashboard
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    {% assets "course-dashboard_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {% assets "course_dashboard_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+{% endblock %}
+
+{% block content %}
+test
+{% endblock %}

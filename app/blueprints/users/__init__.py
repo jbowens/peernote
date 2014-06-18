@@ -1,5 +1,5 @@
 """
-A flask blueprint for users related endpoints. 
+A flask blueprint for users related endpoints.
 """
 from flask import Blueprint
 

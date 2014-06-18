@@ -87,6 +87,14 @@ assets.register("reset-password_css",
     )
 )
 
+assets.register("course-dashboard_css",
+    Bundle(
+        "scss/courses/course-dashboard.scss",
+        filters="scss,cssmin",
+        output="gen/course-dashboard.css"
+    )
+)
+
 assets.register("404_css",
     Bundle(
         "scss/static-pages/404.scss",
@@ -193,6 +201,14 @@ assets.register('splash_js',
         "js/splash/drop-a-line.js",
         filters="rjsmin",
         output="gen/splash.js"
+    )
+)
+
+assets.register('course_dashboard_js',
+    Bundle(
+        "js/footer.js",
+        filters="rjsmin",
+        output="gen/course_dashboard.js"
     )
 )
 
