@@ -1,5 +1,10 @@
 @import "../shared/_small-form.scss";
 
+.nav-section {
+    opacity:0;
+    position: fixed;
+}
+
 .signup-wrapper {
     border: 1px $generic-divider-color solid;
     padding-top: 40px;

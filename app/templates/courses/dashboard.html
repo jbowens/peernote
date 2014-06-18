@@ -6,14 +6,14 @@
 
 {% block styles %}
     {{ super() }}
-    {% assets "course-dashboard_css" %}
+    {% assets "courses-dashboard_css" %}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
     {% endassets %}
 {% endblock %}
 
 {% block scripts %}
     {{ super() }}
-    {% assets "course_dashboard_js" %}
+    {% assets "courses-dashboard_js" %}
         <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
 {% endblock %}

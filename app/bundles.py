@@ -69,6 +69,15 @@ assets.register('signup_css',
     )
 )
 
+assets.register('courses-create_css',
+    Bundle(
+        "scss/courses/create-course.scss",
+        filters="scss,cssmin",
+        depends="scss/shared/*.scss",
+        output="gen/courses/create.css"
+    )
+)
+
 assets.register("forgot-password_css",
     Bundle(
         "scss/users/forgot-password.scss",
@@ -87,11 +96,11 @@ assets.register("reset-password_css",
     )
 )
 
-assets.register("course-dashboard_css",
+assets.register("courses-dashboard_css",
     Bundle(
         "scss/courses/course-dashboard.scss",
         filters="scss,cssmin",
-        output="gen/course-dashboard.css"
+        output="gen/courses/dashboard.css"
     )
 )
 
@@ -204,11 +213,11 @@ assets.register('splash_js',
     )
 )
 
-assets.register('course_dashboard_js',
+assets.register('courses-dashboard_js',
     Bundle(
         "js/footer.js",
         filters="rjsmin",
-        output="gen/course_dashboard.js"
+        output="gen/courses/dashboard.js"
     )
 )
 
@@ -218,6 +227,14 @@ assets.register('profile_js',
         "js/users/profile.js",
         filters="rjsmin",
         output="gen/profile.js"
+    )
+)
+
+assets.register('courses-create_js',
+    Bundle(
+        "js/footer.js",
+        filters="rjsmin",
+        output="gen/courses/create.js"
     )
 )
 
@@ -280,6 +297,7 @@ assets.register('404_js',
 assets.register('editor_js',
     "js/include/sugar.min.js",
     Bundle(
+        "js/footer.js",
         "js/widgets/lightbox.js",
         "js/include/jquery.tablesorter.js",
         "js/include/parser-date.js",

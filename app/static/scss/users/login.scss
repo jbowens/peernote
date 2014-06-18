@@ -1,16 +1,14 @@
 @import "../shared/_small-form.scss";
 
+.nav-section {
+    opacity:0;
+    position: fixed;
+}
+
 #login {
     padding-left: 25px;
     padding-right: 25px;
     margin-top: 10px;
-}
-
-.explan {
-    width: 250px;
-    margin: auto;
-    margin-bottom: 10px !important;
-    margin-top: 0 !important;
 }
 
 .table-wrapper {
@@ -18,6 +16,12 @@
     padding-top: 30px;
     background: white;
     box-shadow: 0 1px 11px -2px rgba(0,0,0,0.1);
+
+    .welcome {
+        width: 250px;
+        margin:auto;
+        margin-bottom: 15px;
+    }
 
     .links {
         padding: 10px 0;
@@ -29,41 +33,19 @@
             text-align: center;
         }
 
-        .password-forgot-link {
-            width: 250px;
+        .forgot-password {
             margin: auto;
-            display:block;
-            text-align: center;
-            position: relative;
-            top: 10px;
+            margin-top: 0px !important;
+            display: block;
+
+            .password-forgot-link {
+                width: 250px;
+                margin: auto;
+                display:block;
+                text-align: center;
+                position: relative;
+                top: 10px;
+            }
         }
     }
 }
-
-#welcome {
-    width: 250px !important;
-    margin:auto;
-    margin-bottom: 15px;
-}
-
-.forgot-password {
-    margin: auto;
-    margin-top: 0px !important;
-    display: block;
-
-    /*a {
-        display:block;
-        color: #888;
-        float: left;
-        clear: both;
-        margin-right: 20px;
-    }*/
-}
-
-.message {
-    width: 250px;
-    display: block;
-    margin: auto;
-    color: #b8211d;
-}
-

@@ -7,48 +7,48 @@
     background-position: center;
     background-size: cover;
     height: 100%;
-}
 
-.nav-section {
-    opacity:0;
-    position: fixed;
-}
-
-.page-container {
-    width: 350px;
-}
-
-table {
-    width: 250px;
-    margin: auto;
-    margin-bottom: 20px !important;
-
-    td {
-        position: relative;
-        height: 30px;
-        padding-right: 0px !important;
-
-        input.textfield {
-            height: 20px;
-            width: 234px !important;
-        }
+    .nav-section {
+        opacity:0;
+        position: fixed;
     }
 
-    .td-contents {
-        position: relative; // in firefox, setting td to relative doesnt work well
+    .page-container {
+        width: 350px;
+
+        table {
+            width: 250px;
+            margin: auto;
+            margin-bottom: 20px !important;
+
+            td {
+                position: relative;
+                height: 30px;
+                padding-right: 0px !important;
+
+                input.textfield {
+                    height: 20px;
+                    width: 234px !important;
+                }
+
+                .button-field {
+                    padding: 10px 25px 10px 25px !important;
+                    width: 250px !important;
+                    height: 50px;
+                    margin-top: 10px !important;
+                    display: block;
+                }
+            }
+
+            .td-contents {
+                position: relative; // in firefox, setting td to relative doesnt work well
+            }
+        }
     }
 }
 
 .table-wrapper, .signup-wrapper {
     border-radius: 2px;
-}
-
-.button-field {
-    padding: 10px 25px 10px 25px !important;
-    width: 250px !important;
-    height: 50px;
-    margin-top: 10px !important;
-    display: block;
 }
 
 .footer {

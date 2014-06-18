@@ -7,8 +7,15 @@ from app.decorators import login_required
 For now, display a temporary course dashboard page
 so that Bryce can design it. This code will change upon implementation
 """
-@courses.route('/courses/course_dashboard', methods=['GET'])
+@courses.route('dashboard', methods=['GET'])
 @login_required
 def show_course_dashboard():
-    return render_template('courses/course_dashboard.html')
+    return render_template('courses/dashboard.html')
 
+"""
+This route creates a new course. TODO: Post request
+"""
+@courses.route('create', methods=['GET', 'POST'])
+@login_required
+def create_course():
+    return render_template('courses/create.html')

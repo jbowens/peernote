@@ -24,7 +24,6 @@ class SignUpForm(Form):
 
 @users.route('/sign-up', methods=['GET','POST'])
 def signup():
-    
     if g.user:
         return redirect('/')
 
@@ -82,5 +81,5 @@ def signup():
         session['uid'] = newuser.uid
         current_app.logger.debug('Logging in as uid = %d', session['uid'])
         return redirect('/')
-        
+
     return render_template('users/signup.html', form=form,page_title="Welcome")
