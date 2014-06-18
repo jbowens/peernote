@@ -11,40 +11,44 @@
     margin-top: 10px;
 }
 
-.table-wrapper {
-    border: 1px $generic-divider-color solid;
-    padding-top: 30px;
-    background: white;
-    box-shadow: 0 1px 11px -2px rgba(0,0,0,0.1);
+.wrapper {
+    .page-container {
+        .table-wrapper {
+            border: 1px $generic-divider-color solid;
+            padding-top: 30px;
+            background: white;
+            box-shadow: 0 1px 11px -2px rgba(0,0,0,0.1);
 
-    .welcome {
-        width: 250px;
-        margin:auto;
-        margin-bottom: 15px;
-    }
-
-    .links {
-        padding: 10px 0;
-
-        p {
-            margin: auto;
-            width: 250px;
-            display: block;
-            text-align: center;
-        }
-
-        .forgot-password {
-            margin: auto;
-            margin-top: 0px !important;
-            display: block;
-
-            .password-forgot-link {
+            .welcome {
                 width: 250px;
-                margin: auto;
-                display:block;
-                text-align: center;
-                position: relative;
-                top: 10px;
+                margin:auto;
+                margin-bottom: 15px;
+            }
+
+            .links {
+                padding: 10px 0;
+
+                p {
+                    margin: auto;
+                    width: 250px;
+                    display: block;
+                    text-align: center;
+                }
+
+                .forgot-password {
+                    margin: auto;
+                    margin-top: 0px !important;
+                    display: block;
+
+                    .password-forgot-link {
+                        width: 250px;
+                        margin: auto;
+                        display:block;
+                        text-align: center;
+                        position: relative;
+                        top: 10px;
+                    }
+                }
             }
         }
     }

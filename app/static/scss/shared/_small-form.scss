@@ -16,32 +16,31 @@
     .page-container {
         width: 350px;
 
-        table {
+        .table-wrapper table {
             width: 250px;
             margin: auto;
-            margin-bottom: 20px !important;
+            margin-bottom: 20px;
 
             td {
                 position: relative;
                 height: 30px;
-                padding-right: 0px !important;
+                padding-right: 0px;
+                .td-contents {
+                    position: relative; // in firefox, setting td to relative doesnt work well
 
-                input.textfield {
-                    height: 20px;
-                    width: 234px !important;
+                    input.textfield {
+                        height: 20px;
+                        width: 234px;
+                    }
+
+                    .button-field {
+                        padding: 10px 25px 10px 25px;
+                        width: 250px;
+                        height: 50px;
+                        margin-top: 10px;
+                        display: block;
+                    }
                 }
-
-                .button-field {
-                    padding: 10px 25px 10px 25px !important;
-                    width: 250px !important;
-                    height: 50px;
-                    margin-top: 10px !important;
-                    display: block;
-                }
-            }
-
-            .td-contents {
-                position: relative; // in firefox, setting td to relative doesnt work well
             }
         }
     }
