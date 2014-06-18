@@ -4,6 +4,13 @@
     Error 404
 {% endblock %}
 
+{% block scripts %}
+    {{ super() }}
+    {% assets "404_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+{% endblock %}
+
 {% block styles %}
     {{ super() }}
     {% assets "404_css" %}

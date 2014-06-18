@@ -130,6 +130,7 @@ assets.register('editor_css',
 
 assets.register('dashboard_css',
     Bundle(
+        "scss/widgets/lightbox.scss",
         "scss/users/dashboard.scss",
         filters="scss,cssmin",
         depends="scss/shared/*.scss",
@@ -197,6 +198,7 @@ assets.register('splash_js',
 
 assets.register('profile_js',
     Bundle(
+        "js/widgets/lightbox.js",
         "js/users/profile.js",
         filters="rjsmin",
         output="gen/profile.js"
@@ -244,6 +246,14 @@ assets.register('login_js',
 )
 
 assets.register('upload_js',
+    Bundle(
+        "js/footer.js",
+        filters="rjsmin",
+        output="gen/upload.js"
+    )
+)
+
+assets.register('404_js',
     Bundle(
         "js/footer.js",
         filters="rjsmin",

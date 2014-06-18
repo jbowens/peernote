@@ -19,6 +19,50 @@ Home
 {% endblock %}
 
 {% block content %}
+
+{# Popup lightbox for finding and adding a new course #}
+<div class="add-course-pane">
+    <form>
+    <h2>Find and Add a Course</h2>
+    <div class="slider-window">
+        <ul class="add-course-steps">
+            <li class="add-course-step add-course-step-1">
+                <h1>Step 1: Where do you go to school?</h1>
+                <input placeholder="School name"></input>
+            </li>
+            <li class="add-course-step add-course-step-2">
+                <h1>Step 2: Select your course.</h2>
+                <select placeholder="Course - Instructor">
+                    <option>English - Deboer-Langworthy</option>
+                    <option>French I - Tubiana</option>
+                    <option>French II - Seaberg
+                    <option>US History - Chester</option>
+                </select>
+            </li>
+            <li class="add-course-step add-course-step-3">
+                <div class="check-container">
+                    <i class="fa fa-check"></i>
+                </div>
+                <h1>Course Added!</h1>
+            </li>
+        </ul>
+    </div>
+    <div class="add-course-footer">
+        <div class="add-course-button add-course-next-button">
+            Next
+            <i class="fa fa-angle-right"></i>
+        </div>
+        <div class="add-course-button add-course-finish-button">
+            Finish
+        </div>
+        <div class="add-course-button add-course-back-button">
+            <i class="fa fa-angle-double-left"></i>
+            Back
+        </div>
+    </div>
+    </form>
+</div>
+
 <div class="dummy-nav"></div>
 <div class="dashboard">
     <div class="top-push"></div>
@@ -288,26 +332,6 @@ Home
                     </div>
                     Find and Add Course
                 </div>
-                {#<ul class="course-list">
-                    <li class="course">
-                        <div class="course-title"></div>
-                        <div class="course-description">
-                            This is a one sentence description of the course. It should be short!
-                        </div>
-                        <div class="course-announcements">
-                            <h2>Announcements</h2>
-                            <ul class="announcements-list">
-                                <li>Test coming up on Friday.</li>
-                                <li>Remember to get permission slips signed by parents.</li>
-                            </ul>
-                        </div>
-                        <div class="course-assignments">
-                            <h2>Current Assignments</h2>
-                            <ul class="assignments-list">
-                            </ul>
-                        </div>
-                    </li>
-                </ul>#}
             </div>
         </div>
         <div class="notifications-container">

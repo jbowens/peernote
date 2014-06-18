@@ -32,11 +32,17 @@ peernoteNS.widgets.lightbox = {
     _this.isOpen = true;
   },
 
-  close: function() {
+  close: function(callback) {
     var _this = this;
-    _this.container.fadeOut(100, "linear");
+
     $("html, body").css({"overflow": "visible"}); // enable scrolling
     _this.isOpen = false;
+
+    if (callback) {
+        _this.container.fadeOut({complete: callback},100,"linear");
+    }else {
+        _this.container.fadeOut(100, "linear");
+    }
   },
 
   /**
@@ -45,6 +51,7 @@ peernoteNS.widgets.lightbox = {
    *
    * options = {
    *   closeIcon: boolean for adding close icon in corner, default false)
+   *   onClose: function that is run when the lightbox is closed
    * }
    */
   init: function(innerHtml, options) {
@@ -62,7 +69,7 @@ peernoteNS.widgets.lightbox = {
       var targetClass = $(event.target).attr('class');
       // check for fa-times as well if the inner html has a close button
       if (targetClass === "lightbox-center-align" || targetClass === "fa fa-times") {
-        _this.close();
+          _this.close(options.onClose);
       }
     });
 
