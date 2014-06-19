@@ -6,4 +6,5 @@ from flask import Blueprint
 courses = Blueprint('courses', __name__)
 
 # Import the endpoints
-from course_dashboard import *
+from dashboard import *
+from create import *
