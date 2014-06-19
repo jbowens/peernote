@@ -63,15 +63,16 @@ peernoteNS.widgets.lightbox = {
 
     if (options.closeIcon) {
       _this.container.find('.lightbox-horiz-center').prepend('<i class="fa fa-times"/>');
-    }
 
-    _this.container.click(function(event) {
-      var targetClass = $(event.target).attr('class');
-      // check for fa-times as well if the inner html has a close button
-      if (targetClass === "lightbox-center-align" || targetClass === "fa fa-times") {
-          _this.close(options.onClose);
-      }
-    });
+      _this.container.click(function(event) {
+        var targetClass = $(event.target).attr('class');
+        // check for fa-times as well if the inner html has a close button
+        if (targetClass === "lightbox-center-align" || targetClass === "fa fa-times") {
+            _this.close(options.onClose);
+        }
+      });
+
+    }
 
     $(document).keyup(function(e) {
       if (e.keyCode == 27) {//esc

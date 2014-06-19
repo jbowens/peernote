@@ -31,10 +31,10 @@ def fetch_draft():
 
         draft = Draft.query.filter_by(did=did).first()
 
-        essay = Essay.query.filter_by(eid=draft.eid).first()
-
         if not draft or draft.uid != g.user.uid:
             return jsonify(error='Invalid params'), 400
+
+        essay = Essay.query.filter_by(eid=draft.eid).first()
 
         if 'timestamp' in request.args:
             timestamp = str(request.args['timestamp'])
