@@ -8,7 +8,7 @@ $border-radius: 2px;
 
 .footer-push {
     background: whitesmoke;
-    padding-bottom: $height-unit;
+    //padding-bottom: $height-unit;
 }
 
 nav {
@@ -207,7 +207,7 @@ nav {
             }
 
             .user-image-name {
-                background: #444;//#777;//gainsboro;
+                background: #666;//#777;//gainsboro;
                 overflow: auto;
                 min-height: 120px;
                 border-bottom: $default-border;
@@ -224,7 +224,7 @@ nav {
                 #user-info {
                     float: left;
                     margin-top: 10px;
-                    color: $white-color;
+                    color: whitesmoke;
 
                     h1 {
                         font-size:22px;
