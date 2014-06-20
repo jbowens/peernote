@@ -68,18 +68,30 @@ Home
     <div class="top-push"></div>
     <div id="user-profile">
         <div class="user-profile-container">
-            <img src="{{ user.email | gravatar }}" />
-            {#<div class="item-count item-count-first">
-                <a href="/essays">{{ user.essay_count() }}</a>
-                Documents
+            <div class="user-image-name">
+                <img src="{{ user.email | gravatar }}" />
+                {#<div class="item-count item-count-first">
+                    <a href="/essays">{{ user.essay_count() }}</a>
+                    Documents
+                </div>
+                <div class="item-count item-count-last">
+                    <a href="#">{{ user.draft_count() }}</a>
+                    Drafts
+                </div>#}
+                <div id="user-info">
+                    <h1>{{ user.first_name | shorten_string(12) }} {{ user.last_name | shorten_string(12) }}</h1>
+                    <div>Student</div>
+                </div>
+            <div class="button-panel">
+                <a class="button" title="Create new document"
+                    href="{{ url_for('essays.create_essay') }}">
+                    <i class="fa fa-plus"></i>New
+                </a>
+                <a class="button" title="Upload document"
+                    href="{{ url_for('essays.upload_essay') }}">
+                    <i class="fa fa-upload"></i>Upload
+                </a>
             </div>
-            <div class="item-count item-count-last">
-                <a href="#">{{ user.draft_count() }}</a>
-                Drafts
-            </div>#}
-            <div id="user-info">
-                <h1>{{ user.first_name | shorten_string(12) }} {{ user.last_name | shorten_string(12) }}</h1>
-                <div>Student</div>
             </div>
             <div class="course-shortlist">
                 <h2>My Courses</h2>
@@ -122,16 +134,6 @@ Home
                 </div>
                 {% endif %}
             </ul>
-            <div class="button-panel">
-                <a class="button" title="Create new document"
-                    href="{{ url_for('essays.create_essay') }}">
-                    <i class="fa fa-plus"></i>New
-                </a>
-                <a class="button" title="Upload document"
-                    href="{{ url_for('essays.upload_essay') }}">
-                    <i class="fa fa-upload"></i>Upload
-                </a>
-            </div>
         </div>
     </div>
     <div class="right-col">
