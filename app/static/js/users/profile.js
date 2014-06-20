@@ -53,52 +53,23 @@ $.extend(peernoteNS.profile, {
         $(".add-course-finish-button").click(function() {
             peernoteNS.profile.lightbox.close(peernoteNS.profile.lightboxReset);
         });
-
     },
 
     /* Make tabs work */
     tabFunctionality: function() {
-        $assignmentsPanel = $(".assignments-tab");
-        $notificationsPanel = $(".week-calendar");
-        $coursesPanel = $(".courses-tab");
-        $assignmentsTab = $("#assignments");
-        $notificationsTab = $("#notifications");
-        $coursesTab = $("#courses");
+        $(".tab").click(function() {
+            $(".tab").removeClass("tab-selected");
+            $(".tab").addClass("tab-unselected");
 
-        $assignmentsTab.click(function() {
-                $notificationsPanel.hide();
-                $coursesPanel.hide();
-                $assignmentsPanel.show();
-                $assignmentsTab.addClass("tab-selected");
-                $assignmentsTab.removeClass("tab-unselected");
-                $notificationsTab.addClass("tab-unselected");
-                $notificationsTab.removeClass("tab-selected");
-                $coursesTab.addClass("tab-unselected");
-                $coursesTab.removeClass("tab-selected");
-        });
+            var tabClassToShow = $(this).attr("for");
+            $(tabClassToShow).show();
+            $(this).removeClass("tab-unselected");
+            $(this).addClass("tab-selected");
 
-        $coursesTab.click(function() {
-            $notificationsPanel.hide();
-            $coursesPanel.show();
-            $assignmentsPanel.hide();
-            $assignmentsTab.addClass("tab-unselected");
-            $assignmentsTab.removeClass("tab-selected");
-            $notificationsTab.addClass("tab-unselected");
-            $notificationsTab.removeClass("tab-selected");
-            $coursesTab.removeClass("tab-unselected");
-            $coursesTab.addClass("tab-selected");
-        });
-
-        $notificationsTab.click(function() {
-                $notificationsPanel.show();
-                $coursesPanel.hide();
-                $assignmentsPanel.hide();
-                $notificationsTab.addClass("tab-selected");
-                $notificationsTab.removeClass("tab-unselected");
-                $assignmentsTab.addClass("tab-unselected");
-                $assignmentsTab.removeClass("tab-selected");
-                $coursesTab.addClass("tab-unselected");
-                $coursesTab.removeClass("tab-selected");
+            $(".tab-unselected").each(function () {
+               var tabClassToHide = $(this).attr("for");
+               $(tabClassToHide).hide();
+            });
         });
     },
 

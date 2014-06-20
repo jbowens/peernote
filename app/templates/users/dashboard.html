@@ -139,23 +139,24 @@ Home
     <div class="right-col">
         <div class="tabbed-panes">
             <div class="tabs">
-                <div class="tab">
-                    <h1 class="tab-selected" id="notifications">
+                <div class="tab tab-selected" for=".week-calendar">
+                    <h1 id="notifications">
                         <i class="fa fa-calendar"></i>
                         Calendar
                     </h1>
                 </div>
-                {#<div class="tab">
-                    <h1 class="tab-unselected" id="assignments">
-                        <i class="fa fa-pencil-square-o"></i>
-                        Assignments
-                    </h1>
-                </div>#}
                 <div class="small-tab-fill"></div>
-                <div class="tab">
-                    <h1 class="tab-unselected" id="courses">
+                <div class="tab tab-unselected" for=".courses-tab">
+                    <h1  id="courses">
                         <i class="fa fa-graduation-cap"></i>
                         Courses
+                    </h1>
+                </div>
+                <div class="small-tab-fill"></div>
+                <div class="tab tab-unselected" for=".grades-tab">
+                    <h1 id="assignments">
+                        <i class="fa fa-trophy"></i>
+                        Grades
                     </h1>
                 </div>
                 <div class="tab-fill"></div>
@@ -231,7 +232,7 @@ Home
             </div>
             {% set reviews = user.get_assigned_reviews(5) %}
             {% if reviews %}
-            <div class="assignments-tab">
+            <div class="grades-tab">
             </div>
             <div class="courses-tab">
                 <div class="no-courses-added">You have not added any courses yet.</div>

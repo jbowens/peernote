@@ -415,18 +415,23 @@ nav {
                 }
 
                 .tab-selected {
-                    border-bottom: 2px solid $main-color-2;
-                    color: $main-color-2;
+
+                    h1 {
+                        border-bottom: 2px solid $main-color-2;
+                        color: $main-color-2;
+                    }
                 }
 
                 .tab-unselected {
-                    border-bottom: 2px solid $generic-divider-color;
-                    color: #888;
+                    h1 {
+                        border-bottom: 2px solid $generic-divider-color;
+                        color: #888;
+                    }
                 }
 
                 $tab-fill-height: 31px;
                 .tab-fill {
-                   width: 406px;
+                   width: 315px;
                    height: $tab-fill-height;
                    float: left;
                    border-bottom: 2px solid $generic-divider-color;
