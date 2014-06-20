@@ -239,7 +239,8 @@ $.extend(peernoteNS.essays, {
    *
    * @param did the draft id of the draft to load
    * @param timestamp (optional) timestamp to use for fetch_draft
-   * @param cb (optional) a callback to call upon completion
+   * @param cb (optional) a callback to call upon completion.
+   *   Passes boolean to callback indicating success or failure.
    */
   loadDraft: function(did, timestamp, cb) {
     var params = {
@@ -303,14 +304,18 @@ $.extend(peernoteNS.essays, {
 
           $('.status-line').text('Saved');
         }
-
-        if (cb) {
-          cb();
-        }
       } else {
-        // TODO:
+        // TODO
       }
-    }));
+
+      if (cb) {
+        cb(true);
+      }
+    })).error(function() {
+      if (cb) {
+        cb(false);
+      }
+    });
   },
 
   // constant widths of left and right panels
@@ -792,10 +797,24 @@ $.extend(peernoteNS.essays, {
    * outside of this instance of the editor
    */
   initAutoloadTimer: function() {
+
+    // lightbox for if essay no longer exists on autoload check
+    var lb = peernoteNS.widgets.initLightbox($('.no-essay-warning'), {
+      closeIcon: false
+    });
+
+    $('#close-no-essay-warning').click(function() {
+      window.location ='/essays/';
+    });
+
     var _this = this;
     setInterval(function() {
       if (_this.lastModifiedDate && peernoteNS.essays.drafts[0].did == peernoteNS.essays.did) {
-        _this.loadDraft(peernoteNS.essays.did, peernoteNS.essays.lastModifiedDate);
+        _this.loadDraft(peernoteNS.essays.did, peernoteNS.essays.lastModifiedDate, function(success) {
+          if (!success) {
+            lb.open();
+          }
+        });
       }
     }, 3000);
   },
