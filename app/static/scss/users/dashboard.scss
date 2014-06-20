@@ -1,12 +1,16 @@
 @import "../shared/_variables.scss";
 
+$width-unit: 20px;
+$height-unit: 20px;
+$border-radius: 2px;
+
 .footer-push {
     background: whitesmoke;
     padding-bottom: 20px;
 }
 
 nav {
-    position:fixed;
+    //position:fixed;
     width: 100%;
 }
 
@@ -19,6 +23,7 @@ nav {
 .dummy-nav {
     width: 100%;
     height: 50px;
+    display: none;
 }
 
 // add new course lightbox
@@ -59,11 +64,10 @@ nav {
 
             input {
                 border: 1px solid #ccc;
-                border-radius: 2px;
+                border-radius: $border-radius;
                 padding: 8px;
                 font-size: 14px;
                 width: 250px;
-                //margin-left: 15px;
                 margin-top: 15px;
             }
 
@@ -122,7 +126,7 @@ nav {
             text-align: center;
             cursor: pointer;
             padding: 8px 8px 6px 8px;
-            border-radius: 2px;
+            border-radius: $border-radius;
             margin-top: 10px;
             font-weight: 500;
             border: 1px solid rgba(0,0,0,0);
@@ -168,7 +172,7 @@ $box-padding: 20px;
 
     .top-push {
         width: 100%;
-        height: 15px;
+        height: $height-unit;
     }
 
     $user-profile-container-width: 182px;
@@ -178,29 +182,29 @@ $box-padding: 20px;
         float: left;
         overflow-y: auto;
         overflow-x: hidden;
-        padding: 20px;
-        background: white;
-        margin-right: 15px;
-        border: 1px solid gainsboro;
-        border-radius: 2px;
-        width: $recent-essays-width;
-        position: fixed;
+        //padding: 20px;
+        //background: white;
+        //border: 1px solid gainsboro;
+        border-radius: $border-radius;
+        width: 300px;
+        //position: fixed;
 
         .user-profile-container {
-            margin-right: $box-padding;
-            width: 100%;
-            height: 222px;
+            width: 237px;
             overflow: auto;
-            padding-bottom: 20px;
             margin-bottom: 20px;
-            border-bottom: 1px dotted gainsboro;
+            border: gainsboro 1px solid;
+            padding: 20px;
+            background: white;
 
             img {
                 float: left;
-                height: 150px;
+                height: 168px;
                 display: inline-block;
-                padding: 6px;
+                padding: 5px;
                 border: 1px $generic-divider-color solid;
+                background: white;
+                margin-right: $width-unit/2;
             }
 
             #user-info {
@@ -208,22 +212,90 @@ $box-padding: 20px;
                 margin-top: 10px;
 
                 h1 {
-                    font-size:24px;
+                    font-size:22px;
                     margin-bottom: 5px;
                 }
             }
         }
 
+        .course-shortlist {
+            padding-top:20px;
+            clear:both;
+
+            h2 {
+                border-bottom: 1px solid gainsboro;
+                line-height: $height-unit;
+                margin-bottom: $height-unit/2;
+                padding-bottom: 5px;
+            }
+
+            ul {
+                padding-bottom: $height-unit/2;
+                margin-bottom: $height-unit/2;
+                border-bottom: 1px dotted gainsboro;
+                min-height: 100px;
+
+                li {
+                    font-size: 14px;
+                    margin-bottom: $height-unit/4;
+                    cursor: pointer;
+
+                    i {
+                        margin-right: $width-unit/2;
+                        color: #999;
+                    }
+                }
+
+                li:hover {
+                    text-decoration: underline;
+
+                    i {
+                        color: #777;
+                    }
+                }
+            }
+
+            .add-course-link {
+                cursor: pointer;
+                color: #777;
+
+                .icon-container {
+                    position: relative;
+                    bottom: 1px;
+                    width: 20px;
+                    height: 19px;
+                    border-radius: 10px;
+                    background: $white-color; //#39bd41;
+                    margin-right: 6px;
+                    float:left;
+
+                    i {
+                        position:relative;
+                        top:2px;
+                        left: 4px;
+                    }
+                }
+            }
+
+            .add-course-link:hover {
+                text-decoration: underline;
+                color: #373737;
+            }
+        }
+
         .recent-essays {
-            width: $recent-essays-width;
+            width: 237px;
             float: left;
             clear: both;
             background: white;
+            padding: $height-unit;
+            border: 1px solid gainsboro;
+            padding-top: $height-unit;
 
             .button-panel {
                 float: right;
                 overflow: auto;
-                margin-top: 10px;
+                margin-top: 20px;
 
                 i {
                     margin-right: 4px;
@@ -259,7 +331,7 @@ $box-padding: 20px;
                     float: right;
                     display: block;
                     color: #888;
-                    font-size: 11px;
+                    font-size: 12px;
                 }
             }
 
@@ -303,57 +375,56 @@ $box-padding: 20px;
 
     .right-col {
         float: right;
-        width: 642px;
-        border-radius: 2px;
-
-        .tabs {
-            overflow: auto;
-            margin-bottom: 20px;
-
-            h1 {
-                float: left;
-                padding: 0 8px 5px 0px;
-                font-size: 14px;
-                cursor: pointer;
-                margin-bottom: 0px;
-
-                i {
-                    margin-right: 3px;
-                }
-            }
-
-            .tab-selected {
-                border-bottom: 1px solid $main-color-2;
-                color: $main-color-2;
-            }
-
-            .tab-unselected {
-                border-bottom: 1px solid $generic-divider-color;
-                color: #888;
-            }
-
-            $tab-fill-height: 31px;
-            .tab-fill {
-               width: 277px;
-               height: $tab-fill-height;
-               float: left;
-               border-bottom: 1px solid $generic-divider-color;
-            }
-
-            .small-tab-fill {
-                width: 15px;
-                height: $tab-fill-height;
-                float: left;
-                border-bottom: 1px solid $generic-divider-color;
-            }
-        }
+        width: 640px;
 
         .tabbed-panes {
             background: white;
             padding: $box-padding;
             border: 1px solid gainsboro;
-            border-radius: 2px;
+            border-radius: $border-radius;
             overflow: auto;
+
+            .tabs {
+                overflow: auto;
+                margin-bottom: 20px;
+
+                h1 {
+                    float: left;
+                    padding: 0 8px 5px 0px;
+                    font-size: 14px;
+                    cursor: pointer;
+                    margin-bottom: 0px;
+
+                    i {
+                        margin-right: 3px;
+                    }
+                }
+
+                .tab-selected {
+                    border-bottom: 2px solid $main-color-2;
+                    color: $main-color-2;
+                }
+
+                .tab-unselected {
+                    border-bottom: 2px solid $generic-divider-color;
+                    color: #888;
+                }
+
+                $tab-fill-height: 31px;
+                .tab-fill {
+                   width: 406px;
+                   height: $tab-fill-height;
+                   float: left;
+                   border-bottom: 2px solid $generic-divider-color;
+                }
+
+                .small-tab-fill {
+                    width: 15px;
+                    height: $tab-fill-height;
+                    float: left;
+                    border-bottom: 2px solid $generic-divider-color;
+                }
+            }
 
             .week-calendar {
                 $dark-border-color: gainsboro;
@@ -361,7 +432,7 @@ $box-padding: 20px;
                 $calendar-height: 240px;
                 $calendar-header-height: 30px;
                 width: $calendar-width;
-                border-radius: 2px;
+                border-radius: $border-radius;
 
                 .calendar-header {
                     $calendar-header-border-width: 1px;
@@ -399,13 +470,12 @@ $box-padding: 20px;
                         .calendar-button:hover {
                             border: 1px solid gainsboro;
                             background: #ececec;
-                            border-radius: 2px;
+                            border-radius: $border-radius;
                         }
 
                         .calendar-button:active {
                             border: 1px solid #bbb;
                             background: #ccc;
-                            border-radius: 2px;
                         }
 
                         i {
@@ -456,7 +526,7 @@ $box-padding: 20px;
                         .assignment-block {
                             $assignment-block-width: $weekday-width - 10px;
                             width: $assignment-block-width;
-                            border-radius: 2px;
+                            border-radius: $border-radius;
                             margin:auto;
                             margin-top: 5px;
                             border: 1px solid $dark-border-color;
@@ -505,72 +575,6 @@ $box-padding: 20px;
                 }
             }
 
-            .assignments-tab {
-                width: 600px;
-                display: none;
-
-                .course-assignments-block {
-                    border-bottom: 2px solid gainsboro;
-                    margin-bottom: 20px;
-
-                    h2 {
-                        margin-bottom: 20px;
-                        cursor: pointer;
-                        float: left;
-                    }
-
-                    h2:hover {
-                        text-decoration: underline;
-                    }
-
-                    .course-assignment {
-                        padding-bottom: 15px;
-                        overflow: auto;
-                        margin-left: 10px;
-                        margin-bottom: 15px;
-                        border-bottom: 1px dotted gainsboro;
-                        clear: both;
-
-                        .course-assignment-date {
-                            font-weight: 500;
-                            width: 100px;
-                            float: left;
-                        }
-
-                        .course-assignment-content {
-                            float: left;
-
-                            .course-assignment-text {
-                                display: block;
-                                float: left;
-                                width: 350px;
-                                line-height: 18px;
-                            }
-
-                            a {
-                                display: block;
-                                margin: 0;
-                                margin-top: 5px;
-                                margin-left: 10px;
-                                float: left;
-
-                                i {
-                                    margin-left:4px;
-                                }
-                            }
-                        }
-                    }
-
-                    .course-assignment:last-child {
-                        border-bottom: none;
-                    }
-                }
-                .course-assignments-block:last-child {
-                    border-bottom: none;
-                    margin-bottom: 0;
-                }
-            }
-
             .courses-tab {
                 width: 600px;
                 min-height: 250px;
@@ -583,14 +587,13 @@ $box-padding: 20px;
                 }
 
                 .course-list {
-                    max-height: 400px;
                     overflow-y: auto;
 
                     .course-li {
                         border: 1px solid gainsboro;
-                        border-radius: 2px;
-                        padding-bottom: 15px;
+                        border-radius: $border-radius;
                         margin-bottom: 20px;
+                        background: white;
 
                         .course-li-header {
                             background: $white-color;
@@ -600,13 +603,16 @@ $box-padding: 20px;
 
                             h2 {
                                 float: left;
-                            }
 
-                            a {
-                                display: block;
-                                float: right;
-                                font-weight: 500;
-                                color: #777;
+                                a {
+                                    display: block;
+                                    color: #373737;
+                                }
+
+                                .teacher-name {
+                                    color: #777;
+                                    font-size: 14px;
+                                }
                             }
 
                             a:hover {
@@ -615,23 +621,29 @@ $box-padding: 20px;
                         }
 
                         .course-contents {
-                            padding: 10px 0;
+                            padding: 20px;
 
-                            .course-announcements {
-                                margin-top: 5px;
-                                padding: 0 15px;
+                            .course-section {
+                                padding: 0;
+                                margin-bottom: $height-unit;
 
-                                h2 {
+                                .course-section-header {
                                     font-size: 14px;
-                                    padding-bottom: 8px;
+                                    border-bottom: 1px solid gainsboro;
+                                    padding-bottom: 3px;
+                                    margin-bottom: 20px;
+                                    line-height: $height-unit;
 
                                     i {
-                                        margin-right: 3px;
+                                        margin-right: 5px;
+                                        float: left;
+                                        position:relative;
+                                        top: 3px;
                                     }
                                 }
 
                                 .course-announcement {
-                                    margin-left: 10px;
+                                    margin-left: $width-unit;
                                     margin-bottom: 5px;
                                     font-style: italic;
                                 }
@@ -639,37 +651,57 @@ $box-padding: 20px;
                                 .no-announcements {
                                     font-style: italic;
                                 }
+
+                                .course-assignment {
+                                    padding-bottom: 20px;
+                                    overflow: auto;
+                                    margin-left: 20px;
+                                    margin-bottom: 20px;
+                                    border-bottom: 1px dotted gainsboro;
+                                    clear: both;
+
+                                    .course-assignment-date {
+                                        font-weight: 500;
+                                        width: 100px;
+                                        float: left;
+                                    }
+
+                                    .course-assignment-content {
+                                        float: left;
+
+                                        .course-assignment-text {
+                                            display: block;
+                                            float: left;
+                                            width: 300px;
+                                            line-height: $height-unit;
+                                        }
+
+                                        a {
+                                            display: block;
+                                            margin: 0;
+                                            margin-top: 5px;
+                                            margin-left: 10px;
+                                            float: left;
+
+                                            i {
+                                                margin-left:4px;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .course-assignment:last-child {
+                                    border-bottom: none;
+                                    margin-bottom: 0;
+                                    padding-bottom: 0;
+                                }
                             }
                         }
                     }
-                }
 
-                .add-course-link {
-                    cursor: pointer;
-                    color: #777;
-                    float: left;
-
-                    .icon-container {
-                        position: relative;
-                        bottom: 1px;
-                        width: 20px;
-                        height: 19px;
-                        border-radius: 10px;
-                        background: $white-color; //#39bd41;
-                        margin-right: 6px;
-                        float:left;
-
-                        i {
-                            position:relative;
-                            top:2px;
-                            left: 4px;
-                        }
+                    .course-li:last-child {
+                        margin-bottom: 0;
                     }
-                }
-
-                .add-course-link:hover {
-                    text-decoration: underline;
-                    color: #373737;
                 }
             }
         }
@@ -677,12 +709,12 @@ $box-padding: 20px;
         .notifications-container {
             background: white;
             clear: both;
-            margin-top: 15px;
             padding: $box-padding;
             float: left;
-            width: 600px;
+            width: 599px;
             border: 1px gainsboro solid;
-            border-radius: 2px;
+            border-radius: $border-radius;
+            margin-top: $height-unit;
 
             .notifications {
                 overflow: auto;
@@ -690,8 +722,8 @@ $box-padding: 20px;
 
                 .notification {
                     overflow: auto;
-                    padding-bottom:25px;
-                    margin-bottom: 25px;
+                    padding-bottom:20px;
+                    margin-bottom: 20px;
                     border-bottom: 1px dotted $generic-divider-color;
 
                     .notification-thumbnail {
@@ -703,8 +735,8 @@ $box-padding: 20px;
 
                     .notification-content {
                         float: left;
-                        width: 530px;
-                        margin-left: 15px;
+                        width: 480px;
+                        margin-left: 20px;
 
                         .author-date {
                             margin-bottom: 25px;
@@ -725,6 +757,11 @@ $box-padding: 20px;
                             line-height: 18px;
                         }
                     }
+                }
+
+                .notification:last-child {
+                    margin-bottom: 0;
+                    border: none;
                 }
             }
 
@@ -757,7 +794,7 @@ $box-padding: 20px;
         -ms-user-select: none;
         user-select: none;
         box-shadow: 0 1px 0 0 rgba(0,0,0,0.05),inset 0 1px 0 0 #fff;
-        border-radius: 3px;
+        border-radius: $border-radius;
         background-color: #f5f5f5;
         background-image: -moz-linear-gradient(top, #fafafa, #ededed);
         background-image: -ms-linear-gradient(top, #fafafa, #ededed);

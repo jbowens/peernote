@@ -27,11 +27,11 @@ Home
     <div class="slider-window">
         <ul class="add-course-steps">
             <li class="add-course-step add-course-step-1">
-                <h1>Step 1: Where do you go to school?</h1>
+                <h1>Where do you go to school?</h1>
                 <input placeholder="School name"></input>
             </li>
             <li class="add-course-step add-course-step-2">
-                <h1>Step 2: Select your course</h2>
+                <h1>Select your course</h2>
                 <select placeholder="Course - Instructor">
                     <option>English - Deboer-Langworthy</option>
                     <option>French I - Tubiana</option>
@@ -81,6 +81,20 @@ Home
                 <h1>{{ user.first_name | shorten_string(12) }} {{ user.last_name | shorten_string(12) }}</h1>
                 <div>Student</div>
             </div>
+            <div class="course-shortlist">
+                <h2>My Courses</h2>
+                <ul class="my-courses-list">
+                    <li>
+                    <i class="fa fa-square"></i>English - Deboer-Langworthy</li>
+                    <li><i class="fa fa-square"></i>US History - Chester</li>
+                </ul>
+                <div class="add-course-link">
+                    <div class="icon-container">
+                        <i class="fa fa-plus"></i>
+                    </div>
+                    Find and Add Course
+                </div>
+            </div>
         </div>
         <div class="recent-essays">
             <div class="recent-essays-header">
@@ -97,7 +111,7 @@ Home
                 {% for essay in recent_essays %}
                 <li>
                 <a href="{{ url_for('essays.edit_essay', essayid=essay.eid) }}">
-                    <div class="recent-doc">{{ essay.get_current_draft().title | check_untitled | shorten_string(25) }}</div>
+                    <div class="recent-doc">{{ essay.get_current_draft().title | check_untitled | shorten_string(20) }}</div>
                     <div class="date">{{ essay.pretty_modified_date() }} </div>
                 </a>
                 </li>
@@ -129,13 +143,12 @@ Home
                         Calendar
                     </h1>
                 </div>
-                <div class="small-tab-fill"></div>
-                <div class="tab">
+                {#<div class="tab">
                     <h1 class="tab-unselected" id="assignments">
                         <i class="fa fa-pencil-square-o"></i>
                         Assignments
                     </h1>
-                </div>
+                </div>#}
                 <div class="small-tab-fill"></div>
                 <div class="tab">
                     <h1 class="tab-unselected" id="courses">
@@ -217,85 +230,19 @@ Home
             {% set reviews = user.get_assigned_reviews(5) %}
             {% if reviews %}
             <div class="assignments-tab">
-                <ul class="course-assignments-blocks">
-                    <li class="course-assignments-block">
-                        <h2 title="Go to course page">English - Deboer-Langworthy</h2>
-                        <ul class="course-assignments">
-                            <li class="course-assignment">
-                                <div class="course-assignment-date">
-                                    Tomorrow
-                                </div>
-                                <div class="course-assignment-content">
-                                    Read Chapter 5 from Simons et al.
-                                </div>
-                            </li>
-                            <li class="course-assignment">
-                                <div class="course-assignment-date">
-                                    June 21
-                                </div>
-                                <div class="course-assignment-content">
-                                    <div class="course-assignment-text">
-                                        Complete the first draft of your response paper on Atticus Finch. Remember to avoid passive voice.
-                                    </div>
-                                    <a class="button"
-                                        href="{{ url_for('essays.create_essay') }}">
-                                        Begin Assignment
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="course-assignments-block">
-                        <h2 title="Go to course page">US History - Chester</h2>
-                        <ul class="course-assignments">
-                            <li class="course-assignment">
-                                <span class="course-assignment-date">
-                                    Tomorrow
-                                </span>
-                                <span class="course-assignment-content">
-                                    Read Chapter 5 from Simons et al.
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="course-assignments-block">
-                        <h2 title="Go to course page">Miscellaneous</h2>
-                        <ul class="course-assignments">
-                            {% for review in reviews %}
-                            <li class="course-assignment">
-                            <span class="course-assignment-date">
-                                {{ review.pretty_request_date() }}
-                            </span>
-                            <span class="course-assignment-content">
-                                <div class="course-assignment-text">
-                                    {{ review.get_requesting_user().first_name }} {{ user.last_initial() }}. requested a review on his paper, "{{ review.get_draft().title }}."
-                                </div>
-                                <a class="button"  href="{{ url_for('essays.review_draft', reviewhash=review.urlhash) }}">
-                                    Begin Review
-                                </a>
-                            </span>
-                                {#<img src="{{ review.get_requesting_user().email | gravatar }}" class="notification-thumbnail">#}
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                </ul>
             </div>
             <div class="courses-tab">
                 <div class="no-courses-added">You have not added any courses yet.</div>
                 <ul class="course-list">
                     <div class="course-li">
                         <div class="course-li-header">
-                            <h2>English - Deboer-Langworthy</h2>
-                            <a>
-                                Go to course page
-                                <i class="fa fa-caret-right"></i>
-                            </a>
+                            <h2>
+                                <a>English <span class="teacher-name"> - Deboer-Langworthy</span></a>
+                            </h2>
                         </div>
                         <div class="course-contents">
-                            <div class="course-announcements">
-                                <h2>
+                            <div class="course-section">
+                                <h2 class="course-section-header">
                                     <i class="fa fa-bullhorn"></i>
                                     Announcements
                                 </h2>
@@ -305,19 +252,47 @@ Home
                                     </li>
                                 </ul>
                             </div>
+                            <div class="course-section">
+                                <h2 class="course-section-header">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                    Assignments
+                                </h2>
+                                <ul class="course-assignments">
+                                    <li class="course-assignment">
+                                        <div class="course-assignment-date">
+                                            Tomorrow
+                                        </div>
+                                        <div class="course-assignment-content">
+                                            Read Chapter 5 from Simons et al.
+                                        </div>
+                                    </li>
+                                    <li class="course-assignment">
+                                        <div class="course-assignment-date">
+                                            June 21
+                                        </div>
+                                        <div class="course-assignment-content">
+                                            <div class="course-assignment-text">
+                                                Complete the first draft of your response paper on Atticus Finch. Remember to avoid passive voice.
+                                            </div>
+                                            <a class="button"
+                                                href="{{ url_for('essays.create_essay') }}">
+                                                Begin
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div class="course-li">
                         <div class="course-li-header">
-                            <h2>US History - Chester</h2>
-                            <a>
-                                Go to course page
-                                <i class="fa fa-caret-right"></i>
-                            </a>
+                            <h2>
+                                <a>US History - <span class="teacher-name">Chester</span></a>
+                            </h2>
                         </div>
                         <div class="course-contents">
-                            <div class="course-announcements">
-                                <h2>
+                            <div class="course-section">
+                                <h2 class="course-section-header">
                                     <i class="fa fa-bullhorn"></i>
                                     Announcements
                                 </h2>
@@ -332,15 +307,25 @@ Home
                                     </li>
                                 </ul>
                             </div>
+                            <div class="course-section">
+                                <h2 class="course-section-header">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                    Assignments
+                                </h2>
+                                <ul class="course-assignments">
+                                    <li class="course-assignment">
+                                        <span class="course-assignment-date">
+                                            Tomorrow
+                                        </span>
+                                        <span class="course-assignment-content">
+                                            Read Chapter 5 from Simons et al.
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </ul>
-                <div class="add-course-link">
-                    <div class="icon-container">
-                        <i class="fa fa-plus"></i>
-                    </div>
-                    Find and Add Course
-                </div>
             </div>
         </div>
         <div class="notifications-container">
@@ -351,6 +336,8 @@ Home
             </ul>
         </div>
         {% endif %}
+    </div>
+    <div class="far-right-col">
     </div>
 </div>
 

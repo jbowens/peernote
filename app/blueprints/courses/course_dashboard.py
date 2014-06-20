@@ -12,10 +12,3 @@ so that Bryce can design it. This code will change upon implementation
 def show_course_dashboard():
     return render_template('courses/dashboard.html')
 
-"""
-This route creates a new course. TODO: Post request
-"""
-@courses.route('create', methods=['GET', 'POST'])
-@login_required
-def create_course():
-    return render_template('courses/create.html')

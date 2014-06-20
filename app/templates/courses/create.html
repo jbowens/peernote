@@ -1,7 +1,7 @@
 {% extends 'base/application_main.html' %}
 
 {% block title %}
-    Temp Course Dashboard
+    Create Course
 {% endblock %}
 
 {% block styles %}
@@ -19,5 +19,14 @@
 {% endblock %}
 
 {% block content %}
-test
+
+<div class="page-container top-margin bottom-margin">
+    <div class="forms-wrapper">
+        <input type="text" placeholder="Course Name" name="course_name">
+        <textarea placeholder="One sentence course description"></textarea>
+        <input type="radio" name="require-instructor-approval" value="require-approval" checked>
+        <input type="radio" name="require-instructor-approval" value="no-approval">
+        <input type="submit" value="Create Course">
+    </div>
+</div>
 {% endblock %}

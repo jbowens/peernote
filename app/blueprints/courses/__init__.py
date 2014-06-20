@@ -7,3 +7,4 @@ courses = Blueprint('courses', __name__)
 
 # Import the endpoints
 from course_dashboard import *
+from create import *
