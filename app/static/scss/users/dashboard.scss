@@ -472,6 +472,18 @@ nav {
                         top: 5px;
                     }
 
+                    .expand-calendar {
+                        float: left;
+                        margin-top:6px;
+                        margin-left: $width-unit/2;
+                        color: #777;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: #373737;
+                        }
+                    }
+
                     .calendar-controls {
                         width: 100px;
                         margin: auto;
@@ -722,6 +734,10 @@ nav {
                         }
                     }
                 }
+            }
+
+            .grades-tab {
+                display: none;
             }
         }
 
