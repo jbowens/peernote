@@ -27,8 +27,55 @@ nav {
     display: none;
 }
 
+// full-calendar lightbox
+.calendar-popup {
+    width: $page-width - 50px;
+    height: 600px;
+
+    .widget-calendar {
+        height: 100%;
+        width: 100%;
+
+        .cal-header {}
+
+        .cal-days {
+            .cal-row {
+                clear: both;
+                width: 100%;
+
+                &:first-child {
+                    border-top: 1px solid gainsboro;
+                }
+
+                .cal-day {
+                    float: left;
+                    width: 110px; // TEMP
+                    height: 90px;
+                    border-bottom: 1px solid gainsboro;
+                    border-right: 1px solid gainsboro;
+
+                    &:first-child {
+                        border-left: 1px solid gainsboro;
+                    }
+
+                    .cal-date {
+                        float: right;
+                        padding-top: 3px;
+                        padding-right: 5px;
+
+                    }
+
+                    .cal-not-current-month-date {
+                        color: #aaa;
+                    }
+                }
+            }
+        }
+    }
+}
+
 // add new course lightbox
-.lightbox-inner-wrapper {
+.add-course-pane {
     width: 450px;
     height: 300px;
     margin-right: 10px;
