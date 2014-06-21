@@ -234,7 +234,185 @@ Home
             {% set reviews = user.get_assigned_reviews(5) %}
             {% if reviews %}
             <div class="grades-tab">
-                TODO
+                <h2>Grade Summary</h2>
+                <ul class="gradebooks">
+                    <li class="gradebook-viewer">
+                        <div class="gradebook-summary">
+                            <h3>English - Deboer-Langworthy</h3>
+                            <div class="gradebook-details-button">
+                                <i class="fa fa-plus-square-o"></i>Details
+                            </div>
+                        </div>
+                        <div class="gradebook-details">
+                            <div class="gradebook-assignments-container">
+                                <div class="gradebook-assignments-container-top-push"></div>
+                                <ul class="gradebook-assignments">
+                                    <li class="gradebook-assignments-header">
+                                        <div class="gradebook-header-due gradebook-entry">
+                                            Date Due
+                                        </div>
+                                        <div class="gradebook-header-name gradebook-entry">
+                                            Assignment
+                                        </div>
+                                        <div class="gradebook-header-score gradebook-entry">
+                                            Score
+                                        </div>
+                                        <div class="gradebook-header-percent gradebook-entry">
+                                            %
+                                        </div>
+                                    </li>
+                                    <li class="gradebook-assignment">
+                                        <div class="gradebook-entry-due gradebook-entry">
+                                            02/01/2014
+                                        </div>
+                                        <div class="gradebook-entry-name gradebook-entry">
+                                            HW #1
+                                        </div>
+                                        <div class="gradebook-entry-score gradebook-entry">
+                                            4/5
+                                        </div>
+                                        <div class="gradebook-entry-percent gradebook-entry">
+                                            80
+                                        </div>
+                                    </li>
+                                    <li class="gradebook-assignment">
+                                        <div class="gradebook-entry-due gradebook-entry">
+                                            03/15/2014
+                                        </div>
+                                        <div class="gradebook-entry-name gradebook-entry">
+                                            HW #2
+                                        </div>
+                                        <div class="gradebook-entry-score gradebook-entry">
+                                            9/10
+                                        </div>
+                                        <div class="gradebook-entry-percent gradebook-entry">
+                                            90
+                                        </div>
+                                    </li>
+                                    <li class="gradebook-assignment">
+                                        <div class="gradebook-entry-due gradebook-entry">
+                                            04/12/2014
+                                        </div>
+                                        <div class="gradebook-entry-name gradebook-entry">
+                                            HW #3
+                                        </div>
+                                        <div class="gradebook-entry-score gradebook-entry">
+                                            10/10
+                                        </div>
+                                        <div class="gradebook-entry-percent gradebook-entry">
+                                            100
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="gradebook-totals">
+                                <div class="gradebook-score-total gradebook-total">
+                                    <span class="total-descriptor">Score:</span>
+                                    <span class="total-datum">23/25</span>
+                                </div>
+                                <div class="gradebook-percent-total gradebook-total">
+                                    <span class="total-descriptor">Grade:</span>
+                                    <span class="total-datum">92.0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="gradebook-viewer">
+                        <div class="gradebook-summary">
+                            <h3>US History - Chester</h3>
+                            <div class="gradebook-details-button">
+                                <i class="fa fa-plus-square-o"></i>Details
+                            </div>
+                        </div>
+                        <div class="gradebook-details">
+                            <div class="gradebook-assignments-container">
+                                <div class="gradebook-assignments-container-top-push"></div>
+                                <ul class="gradebook-assignments">
+                                    <li class="gradebook-assignments-header">
+                                        <div class="gradebook-header-due gradebook-entry">
+                                            Date Due
+                                        </div>
+                                        <div class="gradebook-header-name gradebook-entry">
+                                            Assignment
+                                        </div>
+                                        <div class="gradebook-header-score gradebook-entry">
+                                            Score
+                                        </div>
+                                        <div class="gradebook-header-percent gradebook-entry">
+                                            %
+                                        </div>
+                                    </li>
+                                    <li class="gradebook-assignment">
+                                        <div class="gradebook-entry-due gradebook-entry">
+                                            02/01/2014
+                                        </div>
+                                        <div class="gradebook-entry-name gradebook-entry">
+                                            HW #1
+                                        </div>
+                                        <div class="gradebook-entry-score gradebook-entry">
+                                            4/5
+                                        </div>
+                                        <div class="gradebook-entry-percent gradebook-entry">
+                                            80
+                                        </div>
+                                    </li>
+                                    <li class="gradebook-assignment">
+                                        <div class="gradebook-entry-due gradebook-entry">
+                                            03/15/2014
+                                        </div>
+                                        <div class="gradebook-entry-name gradebook-entry">
+                                            HW #2
+                                        </div>
+                                        <div class="gradebook-entry-score gradebook-entry">
+                                            9/10
+                                        </div>
+                                        <div class="gradebook-entry-percent gradebook-entry">
+                                            90
+                                        </div>
+                                    </li>
+                                    <li class="gradebook-assignment">
+                                        <div class="gradebook-entry-due gradebook-entry">
+                                            04/12/2014
+                                        </div>
+                                        <div class="gradebook-entry-name gradebook-entry">
+                                            HW #3
+                                        </div>
+                                        <div class="gradebook-entry-score gradebook-entry">
+                                            10/10
+                                        </div>
+                                        <div class="gradebook-entry-percent gradebook-entry">
+                                            100
+                                        </div>
+                                    </li>
+                                    <li class="gradebook-assignment">
+                                        <div class="gradebook-entry-due gradebook-entry">
+                                            04/12/2014
+                                        </div>
+                                        <div class="gradebook-entry-name gradebook-entry">
+                                            HW #4
+                                        </div>
+                                        <div class="gradebook-entry-score gradebook-entry">
+                                            10/10
+                                        </div>
+                                        <div class="gradebook-entry-percent gradebook-entry">
+                                            100
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="gradebook-totals">
+                                <div class="gradebook-score-total gradebook-total">
+                                    <span class="total-descriptor">Score:</span>
+                                    <span class="total-datum">33/35</span>
+                                </div>
+                                <div class="gradebook-percent-total gradebook-total">
+                                    <span class="total-descriptor">Grade:</span>
+                                    <span class="total-datum">94.2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div class="courses-tab">
                 <div class="no-courses-added">You have not added any courses yet.</div>

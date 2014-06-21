@@ -341,7 +341,7 @@ nav {
                 .see-all-recent {
                     float: right;
                     display: block;
-                    color: #888;
+                    color: #777;
                     font-size: 12px;
                 }
             }
@@ -738,6 +738,139 @@ nav {
 
             .grades-tab {
                 display: none;
+
+                h2 {
+                    border-bottom: $default-border;
+                    padding-bottom: 15px;
+                }
+
+                .gradebooks {
+                    $gradebooks-width: 599px;
+
+                    .gradebook-viewer {
+                        border-bottom: $default-border;
+                        position: relative;
+                        padding: $height-unit/2 0;
+
+                        &:last-child {
+                            border-bottom: none;
+                        }
+
+                        .gradebook-summary {
+                            overflow: auto;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            padding-top: $height-unit/2;
+                            margin-top: $height-unit/2;
+
+                            h3 {
+                                font-weight: 600;
+                                //line-height: $height-unit;
+                                float:left;
+                            }
+
+                            .gradebook-details-button {
+                                float: right;
+                                cursor: pointer;
+
+                                i {
+                                    margin-right: 5px;
+                                }
+
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+
+                        .gradebook-details .gradebook-assignments-container {
+                            overflow: auto;
+                            display:none;
+
+                            .gradebook-assignments-container-top-push {
+                                height: $height-unit * 2;
+                                width: 100%;
+                                display: none;
+                            }
+
+                            .gradebook-assignments {
+                                overflow: auto;
+                                border: $default-border;
+                                border-bottom: 2px solid #ccc;
+
+                                .gradebook-entry {
+                                    float: left;
+                                    line-height: $height-unit;
+                                    padding: $height-unit/2 0;
+                                    padding-left: $width-unit;
+                                    width: ($gradebooks-width - 2)/4 - $width-unit;
+                                    text-align: left;
+                                    overflow: hidden;
+                                }
+
+                                .gradebook-assignment, .gradebook-assignments-header {
+                                    clear: both;
+                                    overflow: auto;
+                                }
+
+                                .gradebook-assignments-header {
+                                    border-bottom: $default-border;
+                                    background: #888;
+
+                                    .gradebook-entry {
+                                        font-weight: 500;
+                                        color: whitesmoke;
+                                    }
+                                }
+
+                                .gradebook-assignment {
+                                    border-bottom: gainsboro 1px dotted;
+
+                                    &:nth-child(odd) {
+                                        background: #eee;
+                                    }
+
+                                    &:last-child {
+                                        border-bottom: none;
+                                    }
+                                }
+                            }
+                        }
+
+                        .gradebook-totals {
+                            overflow: auto;
+
+                            .gradebook-total {
+                                float: left;
+                                padding: $height-unit/2 0;
+
+                                $total-desc-width: 50px;
+                                .total-descriptor {
+                                    font-weight: 500;
+                                    width: $total-desc-width;
+                                    display: block;
+                                    float: left;
+                                }
+
+                                .total-datum {
+                                    display: block;
+                                    width: 80px;
+                                    float: left;
+                                }
+
+                                &.gradebook-score-total .total-descriptor {
+                                    margin-left: 270px;
+                                }
+
+                                &.gradebook-percent-total .total-descriptor {
+                                    margin-left: 20px;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 

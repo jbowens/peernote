@@ -6,15 +6,61 @@ $.extend(peernoteNS.profile, {
         this.tabFunctionality();
         this.subscribeNotifications();
         this.lightboxInit();
+        this.gradebooksInit();
+    },
+
+    // initializes the display code for each grade report
+    gradebooksInit: function() {
+        $(".gradebook-viewer").each(function() {
+            var $detailsButton = $(this).find(".gradebook-details-button");
+            var $container = $(this).find(".gradebook-assignments-container");
+            var $containerPush = $(this).find(".gradebook-assignments-container-top-push");
+
+            var closed = true;
+            var complete = true; // hacky synchronization
+            $detailsButton.click(function() {
+                if (complete) {
+                    complete = false;
+                    if (closed) {
+                        $containerPush.slideToggle(100,function() {
+                            $container.slideToggle(function() {
+                                closed = !closed;
+                                var icon = $detailsButton.find("i");
+                                icon.removeClass("fa-plus-square-o");
+                                icon.addClass("fa-minus-square-o");
+                                complete = true;
+                            });
+                        });
+                    } else {
+                        $container.slideToggle(500,function() {
+                            $containerPush.slideToggle(
+                                {
+                                    duration: 100,
+                                    easing: 'swing',
+                                    complete: function() {
+                                        closed = !closed;
+                                        var icon = $detailsButton.find("i");
+                                        icon.removeClass("fa-minus-square-o");
+                                        icon.addClass("fa-plus-square-o");
+                                        complete = true;
+                                        complete=true;
+                                    }
+                                }
+                            );
+                        });
+                    }
+                }
+            });
+        });
     },
 
     // resets lightbox for adding a course to step 1
     lightboxReset: function() {
-            peernoteNS.profile.lightboxStep = 1;
-            $(".add-course-steps").css({"right": "0"});
-            $(".add-course-back-button").hide();
-            $(".add-course-next-button").show();
-            $(".add-course-finish-button").hide();
+        peernoteNS.profile.lightboxStep = 1;
+        $(".add-course-steps").css({"right": "0"});
+        $(".add-course-back-button").hide();
+        $(".add-course-next-button").show();
+        $(".add-course-finish-button").hide();
     },
 
     // the lightbox for adding a course has three steps
