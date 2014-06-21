@@ -748,7 +748,7 @@ nav {
                     $gradebooks-width: 599px;
 
                     .gradebook-viewer {
-                        border-bottom: $default-border;
+                        border-bottom: 1px dotted gainsboro;
                         position: relative;
                         padding: $height-unit/2 0;
 
@@ -798,7 +798,7 @@ nav {
                             .gradebook-assignments {
                                 overflow: auto;
                                 border: $default-border;
-                                border-bottom: 2px solid #ccc;
+                                border-bottom: 2px solid gainsboro;
 
                                 .gradebook-entry {
                                     float: left;
