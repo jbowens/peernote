@@ -42,6 +42,7 @@ $.extend(peernoteNS.profile, {
 
         // set the dates of the week
         populateWeek(currentEpochTime);
+        $("."+currentDay+".weekday").addClass("current-weekday");
 
         // Given an epoch time. sets the correct dates for the other days of the week
         function populateWeek(anchorEpochTime) {
