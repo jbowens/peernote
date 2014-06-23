@@ -20,7 +20,114 @@
 
 {% block content %}
     <div class="navigator">
-        <div class="dark-square"></div>
+        <div class="dark-square">
+            <h1>US History</h2>
+            <div class="instructor-depiction">
+                <div class="instructor-image"></div>
+                <div class="instructor-name-container">
+                    <div class="instructor-word">Instructor:</div>
+                    <div class="instructor-name">John Chester</div>
+                </div>
+            </div>
+        </div>
+        <ul class="navigator-tab-links">
+            <li class="tab-selected">
+                <div class="tab-highlight"></div>
+                <div class="tab-name">
+                    <i class="fa fa-bookmark-o"></i>
+                    Dashboard {# week calendar, announcements, assignments #}
+                </div>
+            </li>
+            <li class="tab-unselected">
+                <div class="tab-highlight"></div>
+                <div class="tab-name">
+                    <i class="fa fa-calendar"></i>
+                    Calendar
+                </div>
+            </li>
+            <li class="tab-unselected">
+                <div class="tab-highlight"></div>
+                <div class="tab-name">
+                    <i class="fa fa-file-o"></i>
+                    Files
+                </div>
+            </li>
+            <li class="tab-unselected">
+                <div class="tab-highlight"></div>
+                <div class="tab-name">
+                    <i class="fa fa-info-circle"></i>
+                    Syllabus
+                </div>
+            </li>
+            <li class="tab-unselected">
+                <div class="tab-highlight"></div>
+                <div class="tab-name">
+                    <i class="fa fa-group"></i>
+                    Student Roster
+                </div>
+            </li>
+            {# <li class="tab-unselected">Gradebook</li> (for instructor only) #}
+        </ul>
     </div>
-    <div class="content-body"></div>
+    <div class="content-body">
+        <div class="gradebook-tab">
+            <div class="gradebook-table">
+                <div class="gradebook-table-header">
+                    <div class="gradebook-table-cell header-cell">
+                        Student
+                    </div>
+                    <div class="gradebook-table-cell header-cell">
+                        HW #1
+                    </div>
+                    <div class="gradebook-table-cell header-cell">
+                        HW #2
+                    </div>
+                    <div class="gradebook-table-cell header-cell">
+                        HW #3
+                    </div>
+                    <div class="gradebook-table-cell header-cell">
+                        HW #4
+                    </div>
+                    <div class="gradebook-table-cell header-cell">
+                        Total
+                    </div>
+                </div>
+                <div class="gradebook-table-row">
+                    <div class="gradebook-table-cell">Bryce Aebi</div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                </div>
+                <div class="gradebook-table-row">
+                    <div class="gradebook-table-cell">Jackson Owens</div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                </div>
+                <div class="gradebook-table-row">
+                    <div class="gradebook-table-cell">Alec Lee</div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                </div>
+                <div class="gradebook-table-row">
+                    <div class="gradebook-table-cell">Jefferson Chen</div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                    <div class="gradebook-table-cell"></div>
+                </div>
+                <div class="gradebook-table-row"></div>
+
+                <div class="gradebook-table-row"></div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

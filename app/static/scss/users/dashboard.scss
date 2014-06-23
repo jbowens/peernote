@@ -795,6 +795,7 @@ nav {
 
             .grades-tab {
                 display: none;
+                min-height: 160px;
 
                 h2 {
                     border-bottom: $default-border;
@@ -831,6 +832,8 @@ nav {
                             .gradebook-details-button {
                                 float: right;
                                 cursor: pointer;
+                                color: $main-color-2;
+                                font-weight: 500;
 
                                 i {
                                     margin-right: 5px;

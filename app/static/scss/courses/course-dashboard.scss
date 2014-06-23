@@ -35,21 +35,89 @@ nav {
             background: #eee;
 
             .dark-square {
-                width: 100%;
-                height: 150px;
+                width: $navigator-width - $padding;
+                overflow: auto;
                 background: #666;
+                padding-left: $padding;
+                padding-top: $padding;
+                padding-bottom: $padding;
 
+                h1 {
+                    color: whitesmoke;
+                    line-height: $height-unit;
+                    margin-bottom: $height-unit;
+                }
+
+                .instructor-image {
+                    background: #aaa;
+                    height: 1.5 * $height-unit;
+                    width: 1.5 * $height-unit;
+                    float: left;
+                }
+
+                .instructor-name-container {
+                    overflow: auto;
+                    float: left;
+                    margin-left: $width-unit/2;
+
+                    * {
+                        color: #ccc;
+                    }
+                }
+            }
+
+            .navigator-tab-links {
+                li {
+                    border-bottom: $default-border;
+                    cursor: pointer;
+                    height: 3 * $height-unit;
+
+                    &.tab-selected {
+                        background: white;
+
+                        .tab-highlight {
+                            height: 100%;
+                            width: 6px;
+                            background: $main-color-2;
+                            opacity: .8;
+                            float: right;
+                        }
+                    }
+
+                    &.tab-unselected:hover {
+                        background: #e5e5e5;
+                    }
+
+                    .tab-name {
+                        line-height: $height-unit;
+                        padding: $padding;
+
+                        i {
+                            margin-right: 4px;
+                            color: #777;
+                            display: none;
+                        }
+                    }
+                }
             }
         }
 
         .content-body {
-            width: 100%;
             height: 80%;
             border-right: $default-border;
             border-bottom: $default-border;
             padding: $padding;
             background: white;
             min-width: $page-width - $navigator-width;
+            width: 1000px;
+            float: left;
+
+
+
+
+
+
+
         }
     }
 }
