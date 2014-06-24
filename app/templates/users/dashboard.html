@@ -662,14 +662,12 @@ Home
                             </h2>
                         </div>
                         <div class="course-contents">
-                            <div class="course-section">
+                            <div class="announcements empty-announcements">
                                 <h2 class="course-section-header">
-                                    <i class="fa fa-bullhorn"></i>
                                     Announcements
                                 </h2>
                                 <ul class="course-announcements-list">
                                     <li class="no-announcements course-announcement">
-                                        No announcements
                                     </li>
                                 </ul>
                             </div>
@@ -712,19 +710,22 @@ Home
                             </h2>
                         </div>
                         <div class="course-contents">
-                            <div class="course-section">
+                            <div class="existing-announcements">
                                 <h2 class="course-section-header">
-                                    <i class="fa fa-bullhorn"></i>
-                                    Announcements
+                                    Announcement
                                 </h2>
                                 <ul class="course-announcements-list">
                                     <li class="course-announcement">
                                         <i class="fa fa-angle-double-right"></i>
-                                        You should complete the Adams reading by Monday.
+                                        <div class="course-announcement-text">
+                                            You should complete the Adams reading by Monday.
+                                        </div>
                                     </li>
                                     <li class="course-announcement">
                                         <i class="fa fa-angle-double-right"></i>
-                                        Don't forget, we'll be having a pop quiz next week covering material in the current unit.
+                                        <div class="course-announcement-text">
+                                            Don't forget, we'll be having a pop quiz next week covering material in the current unit.
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -741,6 +742,20 @@ Home
                                         <span class="course-assignment-content">
                                             Read Chapter 5 from Simons et al.
                                         </span>
+                                    </li>
+                                    <li class="course-assignment">
+                                        <div class="course-assignment-date">
+                                            June 21
+                                        </div>
+                                        <div class="course-assignment-content">
+                                            <div class="course-assignment-text">
+                                                Complete the first draft of your response paper on Atticus Finch. Remember to avoid passive voice.
+                                            </div>
+                                            <a class="button"
+                                                href="{{ url_for('essays.create_essay') }}">
+                                                Begin
+                                            </a>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>

@@ -16,7 +16,6 @@ $theme-b-txt: #373737;
 
 .footer-push {
     background: whitesmoke;
-    //padding-bottom: $height-unit;
 }
 
 nav {
@@ -710,6 +709,48 @@ nav {
 
                         .course-contents {
                             padding: $padding;
+
+                            .empty-announcements {
+                                display: none;
+                            }
+
+                            .existing-announcements {
+                                border: $main-color-2 1px solid;
+                                padding: $padding;
+                                margin-bottom: 20px;
+                                background: #F1EBF2;
+                                border-radius: $border-radius;
+                                overflow: auto;
+
+                                h2 {
+                                    font-size: 14px;
+                                    margin-bottom: $height-unit/2;
+
+                                    i {
+                                        display: none;
+                                    }
+                                }
+
+                                li {
+                                    margin-bottom: $height-unit/2;
+                                    overflow:auto;
+                                    padding-bottom: 1px;
+
+                                    &:last-child {
+                                        margin-bottom: 0;
+                                    }
+
+                                    i {
+                                        float: left;
+                                        margin-right: 5px;
+                                    }
+
+                                    .course-announcement-text {
+                                        float: left;
+                                        width: 500px;
+                                    }
+                                }
+                            }
 
                             .course-section {
                                 padding: 0;
