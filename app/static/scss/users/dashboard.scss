@@ -220,10 +220,12 @@ nav {
     background: #eee;
     position:relative;
     margin:auto;
+    //margin-top: $height-unit/2;
     border: $default-border;
+    border-top: none;
+    border-radius: $border-radius;
     height: auto;
     overflow: auto;
-    border-top: none;
 
     .top-push {
         display:none;
@@ -238,7 +240,7 @@ nav {
         float: left;
         overflow-y: auto;
         overflow-x: hidden;
-        border-radius: $border-radius;
+        border-top-left-radius: $border-radius;
         width: 300px;
         height: 100%;
 
@@ -441,14 +443,17 @@ nav {
         float: right;
         width: 639px;
         border: $default-border;
+        border-top-right-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
         border-bottom: none;
         border-right: none;
         background: white;
+        position: relative;
 
         .tabbed-panes {
             background: white;
             padding: $padding;
-            border-radius: $border-radius;
+            border-top-right-radius: $border-radius;
             overflow: auto;
 
             .tabs {
@@ -468,7 +473,6 @@ nav {
                 }
 
                 .tab-selected {
-
                     h1 {
                         border-bottom: 2px solid $main-color-2;
                         color: $main-color-2;
@@ -975,14 +979,20 @@ nav {
             }
         }
 
+        .notifications-fill {
+            width: 100%;
+            display: none;
+        }
+
         .notifications-container {
+            min-height: 260px;
             background: white;
             clear: both;
             padding: $padding;
             float: left;
             width: 599px;
             border-top: $default-border;
-            border-radius: $border-radius;
+            border-bottom-right-radius: $border-radius;
 
             .notifications {
                 overflow: auto;

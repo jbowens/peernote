@@ -3,12 +3,36 @@ peernoteNS.profile = peernoteNS.profile || {};
 
 $.extend(peernoteNS.profile, {
     init: function() {
-        this.tabFunctionality();
         this.subscribeNotifications();
         this.lightboxInit();
         this.gradebooksInit();
         this.initLightboxes();
         this.initWeekCalendar();
+        this.initHeight();
+    },
+
+    // makes sure that the page is never too short
+    initHeight: function() {
+        $(window).resize(setMinHeight);
+        $(".tab").click(setMinHeight);
+        setMinHeight();
+
+        function setMinHeight() {
+            var windowHeight = $(window).height();
+            var footerPushHeight = $(".footer-push").height();
+            var footerHeight = $(".footer").height();
+            var navHeight = $("nav").height();
+            if (windowHeight > footerPushHeight) {
+                var newHeight = windowHeight - footerHeight - navHeight;
+                $(".footer-push").css("min-height",newHeight);
+                $(".wrapper").css("min-height",newHeight);
+                $(".dashboard").css("min-height",newHeight);
+                console.log($(".tabbed-panes").height());
+                var tabbedPanesHeight = $(".tabbed-panes").height()
+                    + (4 * parseInt($(".tabbed-panes").css("padding")) + 4);
+                $(".notifications-container").height(newHeight - tabbedPanesHeight);
+            }
+        }
     },
 
     initWeekCalendar: function() {
@@ -196,24 +220,6 @@ $.extend(peernoteNS.profile, {
 
         $(".add-course-finish-button").click(function() {
             peernoteNS.profile.lightbox.close(peernoteNS.profile.lightboxReset);
-        });
-    },
-
-    /* Make tabs work */
-    tabFunctionality: function() {
-        $(".tab").click(function() {
-            $(".tab").removeClass("tab-selected");
-            $(".tab").addClass("tab-unselected");
-
-            var tabClassToShow = $(this).attr("for");
-            $(tabClassToShow).show();
-            $(this).removeClass("tab-unselected");
-            $(this).addClass("tab-selected");
-
-            $(".tab-unselected").each(function () {
-               var tabClassToHide = $(this).attr("for");
-               $(tabClassToHide).hide();
-            });
         });
     },
 

@@ -12,13 +12,13 @@ $theme-b-bg: #eee;
 $theme-b-txt: #373737;
 
 nav {
-    padding-left: $width-unit;
-    padding-right: $width-unit;
+    //padding-left: $width-unit;
+    //padding-right: $width-unit;
     position: fixed;
     width: 100%;
 
     .header-container {
-        width: 100%;
+        //width: 100%;
     }
 }
 
@@ -117,33 +117,84 @@ nav {
             }
         }
 
+        .course-header {
+            position: fixed;
+            width: 100%;
+            height: 40px;
+            background: #444;
+
+            * {
+                line-height: $height-unit;
+            }
+
+            .centered-course-header {
+                width: $page-width;
+                margin: auto;
+
+                h1 {
+                    float: left;
+                    margin-right: $width-unit * 2;
+                    padding: 10px 0;
+                    margin-bottom: 0;
+                   // display: none;
+                   color: whitesmoke;
+                }
+
+                ul li {
+                    float: left;
+                    padding: 10px 15px;
+                    cursor: pointer;
+                    color: whitesmoke;
+
+                    &.tab-selected {
+                        background: #666;
+                        //background: white;
+                        //color: #373737;
+                    }
+
+                    &.tab-unselected:hover {
+                        background: #373737;
+                    }
+
+                    i {
+                        display: none;
+                    }
+                }
+            }
+        }
+
         .content-wrapper {
             height: 100%;
             overflow: hidden;
             width: auto;
 
             .content-body {
-                width: $page-width - (4 * $padding) - 100px;
+                width: $page-width - (4 * $padding);
                 min-height: 80%;
                 background: white;
                 border: $default-border;
                 margin: auto;
-                margin-top: $height-unit;
-                margin-left: $width-unit;
+                margin-top: 2 * $height-unit;
+                //margin-left: $width-unit;
                 padding: 2 * $padding;
 
                 .gradebook-tab {
                     display: none;
                 }
 
-                .dashboard-tab {
-                    h1 {
-                        border-bottom: $default-border;
-                        line-height: 2 * $height-unit;
-                        font-size:30px;
-                        margin-bottom: $height-unit;
-                    }
+                .syllabus-tab {
+                    display: none;
+                }
 
+                .student-roster-tab {
+                    display: none;
+                }
+
+                .files-tab {
+                    display: none;
+                }
+
+                .dashboard-tab {
                     .announcements {
                         border: $main-color-2 1px solid;
                         background: #F1EBF2;

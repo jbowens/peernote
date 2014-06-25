@@ -338,12 +338,15 @@ Home
                     <i class="fa fa-square"></i>English - Deboer-Langworthy</li>
                     <li><i class="fa fa-square"></i>US History - Chester</li>
                 </ul>
+                {% if is_teacher %}
+                {% else %}
                 <div class="add-course-link">
                     <div class="icon-container">
                         <i class="fa fa-plus"></i>
                     </div>
                     Find and Add Course
                 </div>
+                {% endif %}
             </div>
         </div>
         <div class="recent-essays">

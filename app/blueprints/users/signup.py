@@ -4,6 +4,7 @@ from wtforms import TextField, PasswordField
 from wtforms.validators import *
 from wtforms.validators import ValidationError
 from app.models.user import User
+from app.models.teacher import Teacher
 from app.blueprints.users import users
 from app.mailer.templates.welcome import Welcome
 from app.mailer import Mailer
@@ -67,6 +68,14 @@ def signup():
         newuser.url_keyword = User.generate_url_keyword(newuser.first_name, newuser.last_name)
         newuser.set_password(request.form['pw'])
         db.session.add(newuser)
+
+        # is this user a teacher? if so make a teacher
+        if request.form['is-student'] == "false":
+            db.session.flush()
+            newteacher = Teacher()
+            newteacher.uid = newuser.uid
+            db.session.add(newteacher)
+
         db.session.commit()
 
         # Send the welcome email.

@@ -216,6 +216,8 @@ assets.register('splash_js',
 assets.register('courses-dashboard_js',
     Bundle(
         "js/footer.js",
+        "js/widgets/tabs.js",
+        "js/courses/dashboard.js",
         filters="rjsmin",
         output="gen/courses/dashboard.js"
     )
@@ -224,6 +226,7 @@ assets.register('courses-dashboard_js',
 assets.register('profile_js',
     Bundle(
         "js/widgets/lightbox.js",
+        "js/widgets/tabs.js",
         "js/users/profile.js",
         filters="rjsmin",
         output="gen/profile.js"
