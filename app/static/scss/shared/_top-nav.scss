@@ -1,7 +1,7 @@
 @import "../shared/_variables.scss";
 
 nav {
-    background-color: $main-dark;
+    background-color: $black;
     height: 50px;
     line-height: 50px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.4);
@@ -104,7 +104,7 @@ nav {
         }
 
         .dropdown {
-            border-radius: 2px;
+            border-radius: $border-radius;
             box-shadow: 0 3px 12px rgba(0,0,0,0.15);
             background-color: $background;
             border: 1px solid rgba(197,197,197,1);
@@ -151,12 +151,12 @@ nav {
 
            a.notifications-dropdown-see-all-link {
                font-weight: bold;
-               color: $main-color-2;
+               color: $theme-color;
            }
 
            a.notifications-dropdown-see-all-link:hover {
                text-decoration: underline;
-               color: $main-color-2;
+               color: $theme-color;
            }
         }
 
@@ -198,7 +198,7 @@ nav {
             }
 
             a:hover {
-                background: $main-color-2;
+                background: $theme-color;
                 background-color: rgba(169, 115, 180, 0.87);
                 color: white;
 
@@ -332,7 +332,7 @@ nav {
     .new-doc-button {
         float: left;
         padding: 7px;
-        background: $main-color-2;
+        background: $theme-color;
         border-radius: 3px;
         color: white;
         margin-top: 8px;

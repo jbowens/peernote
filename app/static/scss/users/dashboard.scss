@@ -1,21 +1,18 @@
 @import "../shared/_variables.scss";
 
-$height-unit: 20px;
-$width-unit: $height-unit;
-$padding: $height-unit;
 $default-border: gainsboro 1px solid;
-$border-radius: 2px;
-
 
 // Following variables are for testing. remove later Bryce
-$theme-a-bg: #777;
-$theme-a-txt: whitesmoke;
+$theme-a-bg: $p777;
 $theme-a-txt-2: gainsboro;
-$theme-b-bg: #eee;
-$theme-b-txt: #373737;
 
 .footer-push {
-    background: whitesmoke;
+    background: $off-white;
+}
+
+.footer {
+    border-top: none;
+    background: $off-white;
 }
 
 nav {
@@ -89,7 +86,7 @@ nav {
     position: relative;
 
     h2 {
-        color: #777;
+        color: $p777;
         margin-bottom: 50px;
         float: left;
     }
@@ -187,14 +184,14 @@ nav {
         }
 
         .add-course-next-button {
-            background: $main-color-2;
+            background: $theme-color;
             color: white;
             float: right;
         }
 
         .add-course-finish-button {
             display: none;
-            background: $main-color-2;
+            background: $theme-color;
             color: white;
             float: right;
         }
@@ -203,7 +200,7 @@ nav {
             display: none;
             float: left;
             background: $white-color;
-            color: #777;
+            color: $p777;
             border: 1px solid #ccc;
             padding-right: 15px;
         }
@@ -217,11 +214,10 @@ nav {
 .dashboard {
     width: $page-width;
     height:100%;
-    background: #eee;
+    background: #dfdfdf;
     position:relative;
     margin:auto;
-    //margin-top: $height-unit/2;
-    border: $default-border;
+    border: 1px solid #ccc;
     border-top: none;
     border-radius: $border-radius;
     height: auto;
@@ -263,7 +259,7 @@ nav {
             }
 
             .user-image-name {
-                background: #666;//#777;//gainsboro;
+                background: $p666;
                 overflow: auto;
                 min-height: 108px;
                 border-bottom: $default-border;
@@ -279,10 +275,10 @@ nav {
                 #user-info {
                     float: left;
                     margin-top: 10px;
-                    color: whitesmoke;
+                    color: $white;
 
                     h1 {
-                        font-size:22px;
+                        font-size:20px;
                         margin-bottom: 5px;
                     }
                 }
@@ -312,24 +308,30 @@ nav {
                     margin-bottom: $height-unit/4;
                     cursor: pointer;
 
-                    i {
-                        margin-right: $width-unit/2;
-                        color: #999;
-                    }
-
-                    &:hover {
-                        text-decoration: underline;
+                    a {
+                        color: $p777;
+                        font-weight: 500;
 
                         i {
-                            color: #777;
+                            margin-right: $width-unit/2;
+                            color: #999;
+                        }
+
+                        &:hover {
+                            text-decoration: underline;
+
+                            i {
+                                color: $p777;
+                            }
                         }
                     }
                 }
             }
 
-            .add-course-link {
+            .new-course {
                 cursor: pointer;
-                color: #777;
+                color: $p777;
+                font-weight: 400;
 
                 .icon-container {
                     position: relative;
@@ -338,7 +340,7 @@ nav {
                     height: 19px;
                     border-radius: 10px;
                     background: #aaa; //#39bd41;
-                    color: whitesmoke;
+                    color: $white;
                     opacity:1;
                     margin-right: 6px;
                     float:left;
@@ -396,7 +398,7 @@ nav {
                 .see-all-recent {
                     float: right;
                     display: block;
-                    color: #777;
+                    color: $p777;
                     font-size: 12px;
                 }
             }
@@ -408,10 +410,11 @@ nav {
                 li {
                     padding: 0 0px 0px 0px;
                     border-bottom: 1px solid $generic-divider-color;
+                    border-bottom: 1px solid #ccc;
 
                     a {
                         color: #888;
-                        color: $main-color-2;
+                        //color: $theme-color;
                         font-weight: 500;
                         font-size: 14px;
                         display:block;
@@ -431,7 +434,7 @@ nav {
                         }
 
                         &:hover {
-                            background: #f6f6f6;
+                            background: #e5e5e5;
                         }
                     }
                 }
@@ -442,7 +445,7 @@ nav {
     .right-col {
         float: right;
         width: 639px;
-        border: $default-border;
+        border: 1px solid #ccc;
         border-top-right-radius: $border-radius;
         border-bottom-right-radius: $border-radius;
         border-bottom: none;
@@ -474,8 +477,8 @@ nav {
 
                 .tab-selected {
                     h1 {
-                        border-bottom: 2px solid $main-color-2;
-                        color: $main-color-2;
+                        border-bottom: 2px solid $theme-color;
+                        color: $theme-color;
                     }
                 }
 
@@ -512,7 +515,7 @@ nav {
 
                 .calendar-header {
                     $calendar-header-border-width: 1px;
-                    background-color: #eee;
+                    background-color: $p777;//#eee;
                     width: $calendar-width - 2px;
                     clear:both;
                     border: #ccc 1px solid;
@@ -527,19 +530,18 @@ nav {
                         margin: auto;
                         position: relative;
                         top: 5px;
-                        //color: $theme-a-txt;
+                        color: $off-white;
                     }
 
                     .expand-calendar {
                         float: left;
                         margin-top:6px;
                         margin-left: $width-unit/2;
-                        color: #777;
+                        color: $off-white;
                         cursor: pointer;
 
-
                         &:hover {
-                            color: $theme-a-txt;//#373737;
+                            color: $white;
                         }
                     }
 
@@ -554,8 +556,7 @@ nav {
                             cursor: pointer;
                             border: 1px solid rgba(0,0,0,0);
                             padding: 4px;
-                            //color: $theme-a-txt-2;
-
+                            color: $off-white;
                         }
 
                         .calendar-button:hover {
@@ -609,7 +610,7 @@ nav {
                             padding-left: 6px;
 
                            .wd-date {
-                               color: #777;
+                               color: $p777;
                                font-weight: 500;
                            }
                         }
@@ -687,7 +688,7 @@ nav {
                         background: white;
 
                         .course-li-header {
-                            background: $theme-a-bg;//#eee;
+                            background: $p777;
                             padding: 5px 15px;
                             border-bottom: 1px solid #ccc;
                             overflow: auto;
@@ -697,7 +698,7 @@ nav {
 
                                 a {
                                     display: block;
-                                    color: $theme-a-txt;//#373737;
+                                    color: $white;
 
                                     &:hover {
                                         text-decoration: underline;
@@ -705,7 +706,7 @@ nav {
                                 }
 
                                 .teacher-name {
-                                    color: $theme-a-txt-2;//#777;
+                                    color: $theme-a-txt-2;
                                     font-size: 14px;
                                 }
                             }
@@ -719,7 +720,7 @@ nav {
                             }
 
                             .existing-announcements {
-                                border: $main-color-2 1px solid;
+                                border: $theme-color 1px solid;
                                 padding: $padding;
                                 margin-bottom: 20px;
                                 background: #F1EBF2;
@@ -864,6 +865,7 @@ nav {
                             position: absolute;
                             top: 0;
                             left: 0;
+                            height: $height-unit;
                             width: 100%;
                             padding-top: $height-unit/2;
                             margin-top: $height-unit/2;
@@ -877,7 +879,7 @@ nav {
                             .gradebook-details-button {
                                 float: right;
                                 cursor: pointer;
-                                color: $main-color-2;
+                                color: $theme-color;
                                 font-weight: 500;
 
                                 i {
@@ -926,7 +928,7 @@ nav {
 
                                     .gradebook-entry {
                                         font-weight: 500;
-                                        color: whitesmoke;
+                                        color: $white;
                                     }
                                 }
 

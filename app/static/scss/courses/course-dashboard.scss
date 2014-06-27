@@ -1,25 +1,13 @@
 @import "../shared/_variables.scss";
 
 $default-border: gainsboro 1px solid;
-$height-unit: 20px;
-$width-unit: 20px;
-$padding: 20px;
-$border-radius: 2px;
 $theme-a-bg: #777;
 $theme-a-txt: whitesmoke;
 $theme-a-txt-2: gainsboro;
-$theme-b-bg: #eee;
-$theme-b-txt: #373737;
 
 nav {
-    //padding-left: $width-unit;
-    //padding-right: $width-unit;
     position: fixed;
     width: 100%;
-
-    .header-container {
-        //width: 100%;
-    }
 }
 
 .nav-section {
@@ -28,7 +16,7 @@ nav {
 }
 
 .footer-push {
-    background: whitesmoke;
+    background: $off-white;
     padding-top: 50px;
 
     .wrapper {
@@ -121,7 +109,7 @@ nav {
             position: fixed;
             width: 100%;
             height: 40px;
-            background: #444;
+            background: $p444;
 
             * {
                 line-height: $height-unit;
@@ -172,7 +160,7 @@ nav {
                 width: $page-width - (4 * $padding);
                 min-height: 80%;
                 background: white;
-                border: $default-border;
+                border: 1px solid #ccc;
                 margin: auto;
                 margin-top: 2 * $height-unit;
                 //margin-left: $width-unit;

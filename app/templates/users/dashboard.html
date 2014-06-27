@@ -258,6 +258,8 @@ Home
     </div>
 </div>
 
+{% if is_teacher %}
+{% else %}
 {# Popup lightbox for finding and adding a new course #}
 <div class="add-course-pane">
     <form>
@@ -300,6 +302,7 @@ Home
     </div>
     </form>
 </div>
+{% endif %}
 
 <div class="dummy-nav"></div>
 <div class="dashboard">
@@ -335,12 +338,25 @@ Home
                 <h2>My Courses</h2>
                 <ul class="my-courses-list">
                     <li>
-                    <i class="fa fa-square"></i>English - Deboer-Langworthy</li>
-                    <li><i class="fa fa-square"></i>US History - Chester</li>
+                        <a href="/courses/dashboard">
+                            <i class="fa fa-square"></i>English - Deboer-Langworthy
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/courses/dashboard">
+                            <i class="fa fa-square"></i>US History - Chester
+                        </a>
+                    </li>
                 </ul>
                 {% if is_teacher %}
+                <div class="create-course-link new-course">
+                    <div class="icon-container">
+                        <i class="fa fa-plus"></i>
+                    </div>
+                    Create a New Course
+                </div>
                 {% else %}
-                <div class="add-course-link">
+                <div class="add-course-link new-course">
                     <div class="icon-container">
                         <i class="fa fa-plus"></i>
                     </div>
