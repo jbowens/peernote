@@ -30,6 +30,10 @@ body {
     min-width: 1250px;
 }
 
+.wrapper {
+    overflow: visible;
+}
+
 /* invisible panel that pushes the toolkit panel open */
 .main-panel-push {
     width: 250px;

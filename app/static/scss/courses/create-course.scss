@@ -1,0 +1,14 @@
+@import "../shared/_variables.scss";
+
+.footer-push {
+    background: $off-white;
+}
+
+.page-container {
+    width: $page-width - (4 * $padding);
+    margin: auto;
+    border: 1px solid gainsboro;
+    padding: 2 * $padding;
+    background: white;
+    margin-top: $height-unit;
+}

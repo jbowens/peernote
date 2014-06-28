@@ -4,7 +4,7 @@ peernoteNS.profile = peernoteNS.profile || {};
 $.extend(peernoteNS.profile, {
     init: function() {
         this.subscribeNotifications();
-        this.lightboxInit();
+        this.addCourseInit();
         this.gradebooksInit();
         this.initLightboxes();
         this.initWeekCalendar();
@@ -121,12 +121,22 @@ $.extend(peernoteNS.profile, {
         });
 
         // Initialize lightbox for finding and adding courses
-        peernoteNS.profile.lightbox = peernoteNS.widgets.initLightbox($(".add-course-pane"), {
+        peernoteNS.profile.addCoursePopup =
+            peernoteNS.widgets.initLightbox($(".add-course-pane"), {
             closeIcon: true,
             onClose: peernoteNS.profile.lightboxReset
         });
         $(".add-course-link").click(function() {
-            peernoteNS.profile.lightbox.open();
+            peernoteNS.profile.addCoursePopup.open();
+        });
+
+        // Initialize lightbox for createing a new course
+        peernoteNS.profile.createCoursePopup =
+            peernoteNS.widgets.initLightbox($(".create-course-pane"), {
+                closeIcon: true,
+            });
+        $(".create-course-link").click(function() {
+            peernoteNS.profile.createCoursePopup.open();
         });
     },
 
@@ -189,7 +199,7 @@ $.extend(peernoteNS.profile, {
     lightboxStep: 1,
 
     // initializes lightbox for adding a course
-    lightboxInit: function() {
+    addCourseInit: function() {
         var shift;
         $(".add-course-next-button").click(function() {
             if (peernoteNS.profile.lightboxStep === 1) {
@@ -218,7 +228,7 @@ $.extend(peernoteNS.profile, {
         });
 
         $(".add-course-finish-button").click(function() {
-            peernoteNS.profile.lightbox.close(peernoteNS.profile.lightboxReset);
+            peernoteNS.profile.addCoursePopup.close(peernoteNS.profile.lightboxReset);
         });
     },
 

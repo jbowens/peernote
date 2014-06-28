@@ -30,6 +30,24 @@ peernoteNS.widgets.lightbox = {
     _this.container.css("display", "table");
     $("html, body").css({"overflow": "hidden"}); // stop scrolling
     _this.isOpen = true;
+
+    // set height
+    $(window).resize(setHeight);
+    setHeight();
+
+    function setHeight() {
+        var bodyHeight = $("body").height();
+        var windowHeight = $(window).height();
+
+        if (bodyHeight > windowHeight) {
+            _this.container.height(bodyHeight);
+        } else {
+            _this.container.height(windowHeight);
+        }
+
+        //var negHeight = 0 - $("nav").height();
+        _this.container.css("top", 0);
+    }
   },
 
   close: function(callback) {

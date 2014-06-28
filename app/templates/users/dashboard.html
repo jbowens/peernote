@@ -259,9 +259,31 @@ Home
 </div>
 
 {% if is_teacher %}
+<div class="create-course-pane add-course">
+    <form>
+    <h2>Create a Course</h2>
+    <div class="slider-window">
+        <ul class="add-course-steps">
+        </ul>
+    </div>
+    <div class="add-course-footer">
+        <div class="add-course-button add-course-next-button">
+            Next
+            <i class="fa fa-angle-right"></i>
+        </div>
+        <div class="add-course-button add-course-finish-button">
+            Finish
+        </div>
+        <div class="add-course-button add-course-back-button">
+            <i class="fa fa-angle-double-left"></i>
+            Back
+        </div>
+    </div>
+    </form>
+</div>
 {% else %}
 {# Popup lightbox for finding and adding a new course #}
-<div class="add-course-pane">
+<div class="add-course-pane add-course">
     <form>
     <h2>Find and Add a Course</h2>
     <div class="slider-window">

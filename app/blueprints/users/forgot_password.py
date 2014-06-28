@@ -35,7 +35,6 @@ def reset_password(token_hash):
 
 @users.route('/forgot-password', methods=['GET', 'POST'])
 def forgot_password():
-    
     if g.user:
         # Shouldn't be logged in.
         abort(404)
@@ -43,12 +42,11 @@ def forgot_password():
     email_sent = False
     user_to_recover = None
 
-    if request.method == 'POST' and request.form.get('user_to_recover'): 
-        
+    if request.method == 'POST' and request.form.get('user_to_recover'):
         uinput = request.form.get('user_to_recover')
 
         # They entered an email. Get the user obj by the email.
-        user_to_recover = User.query.filter_by(email=uinput.lower()).first() 
+        user_to_recover = User.query.filter_by(email=uinput.lower()).first()
 
         if user_to_recover:
             # Generate a password recovery token for the user.
