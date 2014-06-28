@@ -178,8 +178,60 @@ nav {
                     display: none;
                 }
 
-                .files-tab {
+                .file-tab {
                     display: none;
+                    $preview-width: 550px;
+                    $preview-height: 650px;
+
+                    .file-tab-left {
+                        float: left;
+                        overflow: auto;
+
+                        .file-list {
+                            border: 1px solid #ccc;
+                            padding: $padding;
+                            background: #dfdfdf;
+                            height: $preview-height - (2 * $padding);
+                            width: $page-width - ($padding * 7) - $preview-width - 4px;
+                            margin-right: $width-unit;
+                            border-radius: $border-radius;
+                        }
+
+                        .file-usage {
+                            font-size: 12px;
+                            line-height: 20px;
+                        }
+                    }
+
+                    .file-preview {
+                        border: 1px solid gainsboro;
+                        border-radius: $border-radius;
+                        width: $preview-width;
+                        height: $preview-height;
+                        float: right;
+
+                        .file-preview-header {
+                            padding: $height-unit/2 $width-unit;
+                            border-bottom: $default-border;
+                            line-height: 20px;
+                            background-color:#454248;
+                            color: whitesmoke;
+
+                            i {
+                                float: right;
+                            }
+                        }
+
+                        .file-preview-viewport {
+                            .no-pdf-display {
+                                text-align: center;
+                                color: #ccc;
+                                font-weight: 800;
+                                font-size: 20px;
+                                margin-top: 250px;
+                            }
+                        }
+                    }
                 }
 
                 .dashboard-tab {

@@ -259,7 +259,7 @@ nav {
             }
 
             .user-image-name {
-                background: $p666;
+                background: #454347; //#444 at 3%;//$p666;
                 overflow: auto;
                 min-height: 108px;
                 border-bottom: $default-border;
@@ -292,16 +292,16 @@ nav {
             border-bottom: 1px solid #ccc;
 
             h2 {
-                border-bottom: $default-border;
+                border-bottom: 1px solid #ccc;
                 line-height: $height-unit;
                 margin-bottom: $height-unit/2;
-                padding-bottom: 5px;
+                padding-bottom: $height-unit/2;
             }
 
             ul {
                 padding-bottom: $height-unit/2;
                 margin-bottom: $height-unit/2;
-                border-bottom: 1px dotted gainsboro;
+                border-bottom: 1px dotted #ccc;
 
                 li {
                     font-size: 14px;
@@ -405,7 +405,7 @@ nav {
 
             ul {
                 clear: both;
-                border-top: 1px solid $generic-divider-color;
+                border-top: 1px solid #ccc;
 
                 li {
                     padding: 0 0px 0px 0px;
@@ -515,7 +515,7 @@ nav {
 
                 .calendar-header {
                     $calendar-header-border-width: 1px;
-                    background-color: $p777;//#eee;
+                    background-color: #545257; //$p777;//#eee;
                     width: $calendar-width - 2px;
                     clear:both;
                     border: #ccc 1px solid;
@@ -530,14 +530,14 @@ nav {
                         margin: auto;
                         position: relative;
                         top: 5px;
-                        color: $off-white;
+                        color: #eee;//gainsboro; //$off-white;
                     }
 
                     .expand-calendar {
                         float: left;
                         margin-top:6px;
                         margin-left: $width-unit/2;
-                        color: $off-white;
+                        color: #eee; //$off-white;
                         cursor: pointer;
 
                         &:hover {
@@ -556,7 +556,7 @@ nav {
                             cursor: pointer;
                             border: 1px solid rgba(0,0,0,0);
                             padding: 4px;
-                            color: $off-white;
+                            color: #eee;//$off-white;
                         }
 
                         .calendar-button:hover {
@@ -682,16 +682,18 @@ nav {
                     overflow-y: auto;
 
                     .course-li {
-                        border: $default-border;
+                        border: 1px solid #ccc;
                         border-radius: $border-radius;
                         margin-bottom: $height-unit;
                         background: white;
 
                         .course-li-header {
-                            background: $p777;
+                            background: #545257; // $p777;
                             padding: 5px 15px;
                             border-bottom: 1px solid #ccc;
                             overflow: auto;
+                            border-top-right-radius: $border-radius;
+                            border-top-left-radius: $border-radius;
 
                             h2 {
                                 float: left;

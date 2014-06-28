@@ -47,7 +47,7 @@ body {
     position: relative;
 
     .toolkit { // this is the left column of tools
-        background: #373737;
+        background: #454347;//#373737;
         width: 250px;
         float: left;
         height: 100%;
@@ -173,14 +173,14 @@ body {
 
         .toolkit-region-accordion {
             border-top: #555 1px solid;
-            border-bottom: #000 1px solid;
+            border-bottom: #222 1px solid;
 
             h2 {
                 padding-bottom: 18px;
                 padding-top: 20px;
                 margin-left: 0;
                 padding-left: 20px;
-                background: #373737;
+                background: #454347;//#373737;
                 cursor: pointer;
 
                 .fa-caret-down {
@@ -191,7 +191,7 @@ body {
             }
 
             h2:hover {
-                background: #3b3b3b;
+                background: #403E42;// 3% 404040 #3b3b3b;
             }
         }
 
@@ -476,9 +476,9 @@ body {
         .page-wrapper {
             width: 100%;
             height: 100%;
-            //margin-top: 42px;
             overflow: auto;
             position: relative;
+            background: $off-white;
 
 
             .page {
