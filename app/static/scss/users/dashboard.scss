@@ -78,6 +78,46 @@ nav {
     }
 }
 
+.create-course-pane {
+    width: 450px;
+    height: 300px;
+    margin-right: 10px;
+    position: relative;
+
+    h2 {
+        color: $p777;
+        margin-bottom: 50px;
+        float: left;
+    }
+
+    .create-course-slider-window {
+        width: 438px;
+        height: 200px;
+        overflow-x: hidden;
+
+        ul {
+            li {
+                width: 438px;
+                height: 200px;
+                //border: red 1px solid;
+                margin-right: 100px;
+            }
+        }
+    }
+
+    .create-course-back-button {
+        display: none;
+    }
+
+    .create-course-finish-button {
+        display: none;
+    }
+
+    .create-course-submit {
+        display: none;
+    }
+}
+
 // add new course lightbox
 .add-course-pane {
     width: 450px;
@@ -91,8 +131,9 @@ nav {
         float: left;
     }
 
-    .slider-window {
+    .add-course-slider-window {
         width: 438px;
+        height: 200px;
         overflow-y:auto;
         overflow-x: hidden;
         clear: both;
@@ -106,12 +147,11 @@ nav {
 
         .add-course-step {
             float: left;
-            margin-right: 200px;
             overflow:auto;
+            height: 200px;
 
             h1 {
                 font-size: 24px;
-                //margin-left: 15px;
             }
 
             input {

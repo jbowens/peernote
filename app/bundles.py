@@ -225,6 +225,7 @@ assets.register('courses-dashboard_js',
 
 assets.register('profile_js',
     Bundle(
+        "js/widgets/carousel.js",
         "js/widgets/lightbox.js",
         "js/widgets/tabs.js",
         "js/users/profile.js",

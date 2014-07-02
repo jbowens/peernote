@@ -262,19 +262,60 @@ Home
 <div class="create-course-pane add-course">
     <form>
     <h2>Create a Course</h2>
-    <div class="slider-window">
-        <ul class="add-course-steps">
+    <div class="create-course-slider-window">
+        <ul class="create-course-steps">
+            <li class="create-course-step create-course-step-1" next=".create-course-step-2"
+                 next-button=".create-course-next-button">
+                <input type="text" placeholder="School" name="school-name">
+            </li>
+            <li class="create-course-step create-course-step-2" next=".create-course-step-3"
+                prev=".create-course-step-1",
+                next-button=".create-course-next-button"
+                prev-button=".create-course-back-button">
+                <input type="text" placeholder="Course Name" name="course_name">
+            </li>
+            <li class="create-course-step create-course-step-3" next=".create-course-step-4"
+                prev=".create-course-step-2",
+                next-button=".create-course-next-button"
+                prev-button=".create-course-back-button">
+                <textarea placeholder="One sentence course description"></textarea>
+            </li>
+            <li class="create-course-step create-course-step-4" next=".create-course-step-4b"
+                prev=".create-course-step-3",
+                next-button=".create-course-next-button"
+                prev-button=".create-course-back-button">
+                Require students to enter a passcode to join the course?
+                <input id="require-passcode" class="create-course-radio" type="radio"
+                    name="require-passcode" value="require-passcode" checked>
+                <label for="require-passcode">Yes</label>
+                <input id="no-passcode" class="create-course-radio" type="radio"
+                    name="require-passcode" value="no-passcode">
+                <label for="no-passcode">No</label>
+            </li>
+            <li class="create-course-step create-course-step-4b" next=".create-course-step-5"
+                prev=".create-course-step-4",
+                next-button=".create-course-next-button"
+                prev-button=".create-course-back-button">
+                <input type="text" placeholder="Passcode">
+            </li>
+            <li class="create-course-step create-course-step-5">
+                <div class="check-container">
+                    <i class="fa fa-check"></i>
+                </div>
+                <h1>Course created!</h1>
+            </li>
         </ul>
     </div>
+    <input class="create-course-submit" type="submit" value="Create Course">
     <div class="add-course-footer">
-        <div class="add-course-button add-course-next-button">
+        <div class="create-course-button create-course-next-button">
             Next
             <i class="fa fa-angle-right"></i>
         </div>
-        <div class="add-course-button add-course-finish-button">
+        <div class="create-course-button create-course-finish-button">
             Finish
         </div>
-        <div class="add-course-button add-course-back-button">
+        <div class="create-course-button create-course-back-button">
             <i class="fa fa-angle-double-left"></i>
             Back
         </div>
@@ -286,13 +327,17 @@ Home
 <div class="add-course-pane add-course">
     <form>
     <h2>Find and Add a Course</h2>
-    <div class="slider-window">
+    <div class="add-course-slider-window">
         <ul class="add-course-steps">
-            <li class="add-course-step add-course-step-1">
+            <li class="add-course-step add-course-step-1" next=".add-course-step-2"
+                next-button=".add-course-next-button">
                 <h1>Where do you go to school?</h1>
                 <input placeholder="School name"></input>
             </li>
-            <li class="add-course-step add-course-step-2">
+            <li class="add-course-step add-course-step-2" next=".add-course-step-3"
+                prev=".add-course-step-1"
+                next-button=".add-course-next-button"
+                prev-button=".add-course-back-button">
                 <h1>Select your course</h2>
                 <select placeholder="Course - Instructor">
                     <option>English - Deboer-Langworthy</option>

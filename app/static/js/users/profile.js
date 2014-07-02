@@ -9,6 +9,7 @@ $.extend(peernoteNS.profile, {
         this.initLightboxes();
         this.initWeekCalendar();
         this.initHeight();
+        this.createCourseInit();
     },
 
     // makes sure that the page is never too short
@@ -200,7 +201,29 @@ $.extend(peernoteNS.profile, {
 
     // initializes lightbox for adding a course
     addCourseInit: function() {
-        var shift;
+        peernoteNS.widgets.initCarousel($(".add-course-slider-window"),
+                $(".add-course-steps"),
+                {
+                    stepFunction: {
+                                    ".add-course-step-1": function () {
+                                        $(".add-course-back-button").fadeOut();
+                                    },
+                                    ".add-course-step-2": function() {
+                                        $(".add-course-back-button").fadeIn();
+                                    },
+                                    ".add-course-step-3": function() {
+                                        $(".add-course-back-button").fadeOut();
+                                        $(".add-course-next-button").fadeOut({
+                                            complete: function() {
+                                                $(".add-course-finish-button").fadeIn();
+                                            }
+                                        });
+                                    }
+                                  }
+                });
+
+
+        /*var shift;
         $(".add-course-next-button").click(function() {
             if (peernoteNS.profile.lightboxStep === 1) {
                 shift = $(".add-course-step-1").width()
@@ -229,6 +252,46 @@ $.extend(peernoteNS.profile, {
 
         $(".add-course-finish-button").click(function() {
             peernoteNS.profile.addCoursePopup.close(peernoteNS.profile.lightboxReset);
+        });*/
+    },
+
+    createCourseInit: function() {
+        peernoteNS.widgets.initCarousel($(".create-course-slider-window"),
+                $(".create-course-steps"),
+                { stepFunction: {
+                              ".create-course-step-1": function () {
+                                  $(".create-course-back-button").fadeOut();
+                              },
+                              ".create-course-step-2": function() {
+                                  $(".create-course-back-button").fadeIn();
+                              },
+                              ".create-course-step-4b": function() {
+                                  $(".create-course-back-button").fadeIn();
+                                  $(".create-course-finish-button").fadeOut({
+                                      complete: function() {
+                                                    $(".create-course-next-button").fadeIn();
+                                                }
+                                  });
+                              },
+                              ".create-course-step-5": function() {
+                                  $(".create-course-back-button").fadeOut();
+                                  $(".create-course-next-button").fadeOut({
+                                      complete: function() {
+                                                    $(".create-course-finish-button").fadeIn();
+                                                }
+                                  });
+                              }
+                          }
+                }
+        );
+
+        // only prompt for a passcode if the teacher wants one
+        $(".create-course-radio").click(function() {
+            if ($("#require-passcode").is(':checked')){
+                $(".create-course-step-4").attr("next",".create-course-step-4b");
+            } else {
+                $(".create-course-step-4").attr("next",".create-course-step-5");
+            }
         });
     },
 
