@@ -202,57 +202,26 @@ $.extend(peernoteNS.profile, {
     // initializes lightbox for adding a course
     addCourseInit: function() {
         peernoteNS.widgets.initCarousel($(".add-course-slider-window"),
-                $(".add-course-steps"),
-                {
-                    stepFunction: {
-                                    ".add-course-step-1": function () {
-                                        $(".add-course-back-button").fadeOut();
-                                    },
-                                    ".add-course-step-2": function() {
-                                        $(".add-course-back-button").fadeIn();
-                                    },
-                                    ".add-course-step-3": function() {
-                                        $(".add-course-back-button").fadeOut();
-                                        $(".add-course-next-button").fadeOut({
-                                            complete: function() {
-                                                $(".add-course-finish-button").fadeIn();
-                                            }
-                                        });
-                                    }
-                                  }
-                });
-
-
-        /*var shift;
-        $(".add-course-next-button").click(function() {
-            if (peernoteNS.profile.lightboxStep === 1) {
-                shift = $(".add-course-step-1").width()
-                + parseInt($(".add-course-step-1").css("margin-right"));
-                peernoteNS.profile.lightboxStep = 2;
-                $(".add-course-back-button").fadeIn(200);
-            } else {
-                shift = $(".add-course-step-2").width()
-                + parseInt($(".add-course-step-2").css("margin-right"));
-                peernoteNS.profile.lightboxStep = 3;
-                $(".add-course-back-button").fadeOut(200);
-                $(".add-course-next-button").fadeOut({
-                    complete: function() {
-                                  $(".add-course-finish-button").fadeIn(100);
-                              }
-                }, 100);
+            $(".add-course-steps"),
+            {
+                stepFunction: {
+                    ".add-course-step-1": function () {
+                        $(".add-course-back-button").fadeOut();
+                    },
+                    ".add-course-step-2": function() {
+                        $(".add-course-back-button").fadeIn();
+                    },
+                    ".add-course-step-3": function() {
+                        $(".add-course-back-button").fadeOut();
+                        $(".add-course-next-button").fadeOut({
+                            complete: function() {
+                                $(".add-course-finish-button").fadeIn();
+                            }
+                        });
+                    }
+                }
             }
-            $(".add-course-steps").animate({"right":"+="+shift+"px" }, 200);
-        });
-
-        $(".add-course-back-button").click(function() {
-            $(".add-course-steps").animate({"right":"-="+shift+"px" }, 200);
-            peernoteNS.profile.lightboxStep = 1;
-            $(".add-course-back-button").fadeOut(200);
-        });
-
-        $(".add-course-finish-button").click(function() {
-            peernoteNS.profile.addCoursePopup.close(peernoteNS.profile.lightboxReset);
-        });*/
+        );
     },
 
     createCourseInit: function() {
