@@ -6,10 +6,10 @@ $.extend(peernoteNS.profile, {
         this.subscribeNotifications();
         this.addCourseInit();
         this.gradebooksInit();
+        this.createCourseInit();
         this.initLightboxes();
         this.initWeekCalendar();
         this.initHeight();
-        this.createCourseInit();
     },
 
     // makes sure that the page is never too short
@@ -124,8 +124,8 @@ $.extend(peernoteNS.profile, {
         // Initialize lightbox for finding and adding courses
         peernoteNS.profile.addCoursePopup =
             peernoteNS.widgets.initLightbox($(".add-course-pane"), {
-            closeIcon: true,
-            onClose: peernoteNS.profile.lightboxReset
+                closeIcon: true,
+                onClose: function() { peernoteNS.profile.addCourseCarousel.reset(); }
         });
         $(".add-course-link").click(function() {
             peernoteNS.profile.addCoursePopup.open();
@@ -133,11 +133,95 @@ $.extend(peernoteNS.profile, {
 
         // Initialize lightbox for createing a new course
         peernoteNS.profile.createCoursePopup =
-            peernoteNS.widgets.initLightbox($(".create-course-pane"), {
+             peernoteNS.widgets.initLightbox($(".create-course-pane"), {
                 closeIcon: true,
+                onClose: function() { peernoteNS.profile.createCourseCarousel.reset(); }
             });
         $(".create-course-link").click(function() {
             peernoteNS.profile.createCoursePopup.open();
+        });
+    },
+
+    // initializes lightbox for adding a course
+    addCourseInit: function() {
+        peernoteNS.profile.addCourseCarousel =
+            peernoteNS.widgets.initCarousel($(".add-course-slider-window"),
+            $(".add-course-steps"),
+            {
+                stepFunction: {
+                    ".add-course-step-1": function () {
+                        $(".add-course-back-button").fadeOut();
+                        $(".add-course-finish-button").fadeOut();
+                        $(".add-course-next-button").fadeIn();
+                    },
+                    ".add-course-step-2": function() {
+                        $(".add-course-back-button").fadeIn();
+                    },
+                    ".add-course-step-3": function() {
+                        $(".add-course-back-button").fadeOut();
+                        $(".add-course-next-button").fadeOut({
+                            complete: function() {
+                                $(".add-course-finish-button").fadeIn();
+                            }
+                        });
+                    }
+                }
+            }
+        );
+
+        $(".add-course-finish-button").click(function() {
+            peernoteNS.profile.addCoursePopup.close(function () {
+             peernoteNS.profile.addCourseCarousel.reset();
+            });
+        });
+    },
+
+    createCourseInit: function() {
+        peernoteNS.profile.createCourseCarousel =
+            peernoteNS.widgets.initCarousel($(".create-course-slider-window"),
+                $(".create-course-steps"),
+                { stepFunction: {
+                              ".create-course-step-1": function () {
+                                  $(".create-course-back-button").fadeOut();
+                                  $(".create-course-next-button").fadeIn();
+                                  $(".create-course-finish-button").fadeOut();
+                              },
+                              ".create-course-step-2": function() {
+                                  $(".create-course-back-button").fadeIn();
+                              },
+                              ".create-course-step-4b": function() {
+                                  $(".create-course-back-button").fadeIn();
+                                  $(".create-course-finish-button").fadeOut({
+                                      complete: function() {
+                                                    $(".create-course-next-button").fadeIn();
+                                                }
+                                  });
+                              },
+                              ".create-course-step-5": function() {
+                                  $(".create-course-back-button").fadeOut();
+                                  $(".create-course-next-button").fadeOut({
+                                      complete: function() {
+                                                    $(".create-course-finish-button").fadeIn();
+                                                }
+                                  });
+                              }
+                          }
+                }
+        );
+
+        $(".create-course-finish-button").click(function() {
+            peernoteNS.profile.createCoursePopup.close(function () {
+                peernoteNS.profile.createCourseCarousel.reset();
+            });
+        });
+
+        // only prompt for a passcode if the teacher wants one
+        $(".create-course-radio").click(function() {
+            if ($("#require-passcode").is(':checked')){
+                $(".create-course-step-4").attr("next",".create-course-step-4b");
+            } else {
+                $(".create-course-step-4").attr("next",".create-course-step-5");
+            }
         });
     },
 
@@ -175,7 +259,6 @@ $.extend(peernoteNS.profile, {
                                         icon.removeClass("fa-minus-square-o");
                                         icon.addClass("fa-plus-square-o");
                                         complete = true;
-                                        complete=true;
                                     }
                                 }
                             );
@@ -183,84 +266,6 @@ $.extend(peernoteNS.profile, {
                     }
                 }
             });
-        });
-    },
-
-    // resets lightbox for adding a course to step 1
-    lightboxReset: function() {
-        peernoteNS.profile.lightboxStep = 1;
-        $(".add-course-steps").css({"right": "0"});
-        $(".add-course-back-button").hide();
-        $(".add-course-next-button").show();
-        $(".add-course-finish-button").hide();
-    },
-
-    // the lightbox for adding a course has three steps
-    // this denotes which step is currently taking place
-    lightboxStep: 1,
-
-    // initializes lightbox for adding a course
-    addCourseInit: function() {
-        peernoteNS.widgets.initCarousel($(".add-course-slider-window"),
-            $(".add-course-steps"),
-            {
-                stepFunction: {
-                    ".add-course-step-1": function () {
-                        $(".add-course-back-button").fadeOut();
-                    },
-                    ".add-course-step-2": function() {
-                        $(".add-course-back-button").fadeIn();
-                    },
-                    ".add-course-step-3": function() {
-                        $(".add-course-back-button").fadeOut();
-                        $(".add-course-next-button").fadeOut({
-                            complete: function() {
-                                $(".add-course-finish-button").fadeIn();
-                            }
-                        });
-                    }
-                }
-            }
-        );
-    },
-
-    createCourseInit: function() {
-        peernoteNS.widgets.initCarousel($(".create-course-slider-window"),
-                $(".create-course-steps"),
-                { stepFunction: {
-                              ".create-course-step-1": function () {
-                                  $(".create-course-back-button").fadeOut();
-                              },
-                              ".create-course-step-2": function() {
-                                  $(".create-course-back-button").fadeIn();
-                              },
-                              ".create-course-step-4b": function() {
-                                  $(".create-course-back-button").fadeIn();
-                                  $(".create-course-finish-button").fadeOut({
-                                      complete: function() {
-                                                    $(".create-course-next-button").fadeIn();
-                                                }
-                                  });
-                              },
-                              ".create-course-step-5": function() {
-                                  $(".create-course-back-button").fadeOut();
-                                  $(".create-course-next-button").fadeOut({
-                                      complete: function() {
-                                                    $(".create-course-finish-button").fadeIn();
-                                                }
-                                  });
-                              }
-                          }
-                }
-        );
-
-        // only prompt for a passcode if the teacher wants one
-        $(".create-course-radio").click(function() {
-            if ($("#require-passcode").is(':checked')){
-                $(".create-course-step-4").attr("next",".create-course-step-4b");
-            } else {
-                $(".create-course-step-4").attr("next",".create-course-step-5");
-            }
         });
     },
 

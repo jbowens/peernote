@@ -66,7 +66,6 @@ nav {
                         float: right;
                         padding-top: 3px;
                         padding-right: 5px;
-
                     }
 
                     .cal-not-current-month-date {
@@ -78,11 +77,122 @@ nav {
     }
 }
 
+// shared scss between create course and add course popups
+.course-step {
+    overflow:auto;
+    height: 200px;
+
+    h1 {
+        font-size: 24px;
+    }
+
+    input, textarea {
+        border: 1px solid #ccc;
+        border-radius: $border-radius;
+        padding: 8px;
+        font-size: 14px;
+        width: 250px;
+        margin-top: 15px;
+    }
+
+    textarea {
+        resize: none;
+        width: 344px;
+        height:50px;
+    }
+
+    select {
+        font-size: 14px;
+        margin-top: 15px;
+        background: white;
+    }
+
+    .check-container {
+        background: #39bd41;
+        height: 50px;
+        width: 50px;
+        border-radius: 25px;
+        float: left;
+        margin-right: 15px;
+
+        i {
+            color: white;
+            font-size: 26px;
+            position: relative;
+            top: 12px;
+            left: 12px;
+
+            &:hover {
+                color: white;
+            }
+        }
+    }
+}
+
+.course-footer {
+    overflow: auto;
+    border-top: $default-border;
+    width: 100%;
+    position:absolute;
+    bottom: 10px;
+    width: 450px;
+
+    .course-button {
+        height: $height-unit;
+        width: 50px;
+        text-align: center;
+        cursor: pointer;
+        padding: 8px 8px 6px 8px;
+        border-radius: $border-radius;
+        margin-top: 10px;
+        font-weight: 500;
+        border: 1px solid rgba(0,0,0,0);
+    }
+
+    .next-button {
+        background: $theme-color;
+        color: white;
+        float: right;
+    }
+
+    .finish-button {
+        display: none;
+        background: $theme-color;
+        color: white;
+        float: right;
+    }
+
+    .back-button {
+        display: none;
+        float: left;
+        background: $white-color;
+        color: $p777;
+        border: 1px solid #ccc;
+        padding-right: 15px;
+
+        &:hover {
+            background: #e0e0e0;
+        }
+    }
+}
+
+// create new course lightbox
 .create-course-pane {
     width: 450px;
     height: 300px;
     margin-right: 10px;
     position: relative;
+
+    .create-course-step-5 {
+        height: 200px;
+        padding-left: 90px;
+
+        h1 {
+            width: 255px;
+            position:relative;
+            top: 12px;
+        }
+    }
 
     h2 {
         color: $p777;
@@ -99,8 +209,6 @@ nav {
             li {
                 width: 438px;
                 height: 200px;
-                //border: red 1px solid;
-                margin-right: 100px;
             }
         }
     }
@@ -137,42 +245,21 @@ nav {
         overflow-y:auto;
         overflow-x: hidden;
         clear: both;
+
+        ul {
+            li {
+                width: 438px;
+                height: 200px;
+            }
+        }
     }
 
     .add-course-steps {
         overflow:auto;
-        width: 1850px;
-        clear: both;
-        position: relative;
-
-        .add-course-step {
-            float: left;
-            overflow:auto;
-            height: 200px;
-
-            h1 {
-                font-size: 24px;
-            }
-
-            input {
-                border: 1px solid #ccc;
-                border-radius: $border-radius;
-                padding: 8px;
-                font-size: 14px;
-                width: 250px;
-                margin-top: 15px;
-            }
-
-            select {
-                font-size: 14px;
-                margin-top: 15px;
-                background: white;
-            }
-        }
 
         .add-course-step-3 {
             height: 200px;
-            margin-left: 90px;
+            padding-left: 90px;
 
             h1 {
                 width: 255px;
@@ -181,73 +268,6 @@ nav {
             }
         }
 
-        .check-container {
-            background: #39bd41;
-            height: 50px;
-            width: 50px;
-            border-radius: 25px;
-            float: left;
-            margin-right: 15px;
-
-            i {
-                color: white;
-                font-size: 26px;
-                position: relative;
-                top: 12px;
-                left: 12px;
-
-                &:hover {
-                    color: white;
-                }
-            }
-        }
-    }
-
-    .add-course-footer {
-        overflow: auto;
-        border-top: $default-border;
-        width: 100%;
-        position:absolute;
-        bottom: 10px;
-        width: 450px;
-
-        .add-course-button {
-            height: $height-unit;
-            width: 50px;
-            text-align: center;
-            cursor: pointer;
-            padding: 8px 8px 6px 8px;
-            border-radius: $border-radius;
-            margin-top: 10px;
-            font-weight: 500;
-            border: 1px solid rgba(0,0,0,0);
-        }
-
-        .add-course-next-button {
-            background: $theme-color;
-            color: white;
-            float: right;
-        }
-
-        .add-course-finish-button {
-            display: none;
-            background: $theme-color;
-            color: white;
-            float: right;
-        }
-
-        .add-course-back-button {
-            display: none;
-            float: left;
-            background: $white-color;
-            color: $p777;
-            border: 1px solid #ccc;
-            padding-right: 15px;
-        }
-
-        .add-course-back-button:hover {
-            background: #e0e0e0;
-        }
     }
 }
 

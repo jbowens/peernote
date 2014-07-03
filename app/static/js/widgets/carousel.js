@@ -30,7 +30,9 @@ peernoteNS.widgets = peernoteNS.widgets || {};
 
 peernoteNS.widgets.initCarousel = function($container,$panesList, options) {
   // Clone lightbox object and return new one
-  return $.extend({}, peernoteNS.widgets.carousel).init($container, $panesList, options);
+  var newCarousel = $.extend({}, peernoteNS.widgets.carousel);
+  return newCarousel.init($container, $panesList, options);
+  //return newCarousel;
 };
 
 peernoteNS.widgets.carousel = {
@@ -39,9 +41,13 @@ peernoteNS.widgets.carousel = {
   currentLi: null,
   paneWidth: null,
   stepFunction: {},
+  firstPane: null,
+  panesList: null,
 
   init: function($container, $panesList, options) {
       var _this = this;
+      _this.panesList = $panesList;
+
       if (options) {
           if (options.margin) {
               _this.margin = options.margin;
@@ -56,6 +62,7 @@ peernoteNS.widgets.carousel = {
 
       var paneWidth = $container.width();
       _this.paneWidth = paneWidth;
+
       var paneHeight = $container.height();
 
       // ul needs to contain room for the visible li (in the middle), the next li (on the
@@ -81,9 +88,39 @@ peernoteNS.widgets.carousel = {
           .hide();
 
       var $firstli = $panesList.find(">:first-child");
+      _this.firstPane = $firstli;
       $firstli.css({"display": "block",
           "margin-left": ((3 * parseInt(_margin)) + paneWidth) + "px"});
       _this.currentLi = $firstli;
+      _this.initCurrentPanel();
+
+      return _this;
+  },
+
+  // reset to first step
+  reset: function() {
+      var _this = this;
+      var _margin = _this.margin;
+      var _paneWidth = _this.paneWidth;
+      var _firstPane = _this.firstPane;
+
+      _this.panesList.find("li")
+          .css({"float":"left","margin-right":parseInt(_margin) + "px",
+              "margin-left":parseInt(_margin) + "px"
+          })
+          .hide();
+
+      _firstPane.css({"display": "block",
+          "margin-left": ((3 * parseInt(_margin)) + _paneWidth) + "px"});
+
+      var stepFunctions = _this.stepFunction;
+      $(_firstPane.attr('class').split(' ')).each(function() {
+        if (stepFunctions["." + this]) {
+            stepFunctions["." + this]();
+        }
+      });
+
+      _this.currentLi = _firstPane;
       _this.initCurrentPanel();
   },
 
@@ -92,10 +129,7 @@ peernoteNS.widgets.carousel = {
     var _this = this;
     var $current = _this.currentLi;
 
-    console.log("here");
     if ($current.attr("next-button")) {
-        console.log("also");
-
         $($current.attr("next-button"))
             .click(function() {
                 $($current.attr("next-button")).off();
@@ -127,7 +161,6 @@ peernoteNS.widgets.carousel = {
     var _margin = _this.margin;
     var _paneWidth = _this.paneWidth;
     var $current = _this.currentLi;
-    console.log("fuck");
 
     // make sure current pane is set up to go in correct direction
     $current.css({"margin-left": ((3 * parseInt(_margin)) + _paneWidth) + "px",
@@ -136,12 +169,9 @@ peernoteNS.widgets.carousel = {
 
     // place next pane to the right of the visible pane
     $next = $($current.attr("next"));
-    console.log($current);
-    console.log($current.attr("next"));
     $current.insertBefore($next);
     $next.css("float","left");
     $next.show();
-    console.log($next);
 
     var stepFunctions = _this.stepFunction;
     if (stepFunctions[$current.attr("next")]) {
@@ -179,6 +209,11 @@ peernoteNS.widgets.carousel = {
     $current.insertBefore($current.attr("prev"));
     $prev.css("float","right");
     $prev.show();
+
+    var stepFunctions = _this.stepFunction;
+    if (stepFunctions[$current.attr("prev")]) {
+        stepFunctions[$current.attr("prev")]();
+    }
 
     // perform the animation between panes
     $current.animate({"margin-right": parseInt(_margin) + "px"},

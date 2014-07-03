@@ -19,7 +19,6 @@ Home
 {% endblock %}
 
 {% block content %}
-
 {# TODO: MOVE INTO WIDGET THAT AUTOGENERATES ALL DAYS #}
 <div class="calendar-popup">
     <div class="widget-calendar">
@@ -259,32 +258,35 @@ Home
 </div>
 
 {% if is_teacher %}
-<div class="create-course-pane add-course">
+<div class="create-course-pane my-course-section">
     <form>
     <h2>Create a Course</h2>
     <div class="create-course-slider-window">
         <ul class="create-course-steps">
-            <li class="create-course-step create-course-step-1" next=".create-course-step-2"
+            <li class="course-step create-course-step-1" next=".create-course-step-2"
                  next-button=".create-course-next-button">
+                 <h1>Select your school</h1>
                 <input type="text" placeholder="School" name="school-name">
             </li>
-            <li class="create-course-step create-course-step-2" next=".create-course-step-3"
+            <li class="course-step create-course-step-2" next=".create-course-step-3"
                 prev=".create-course-step-1",
                 next-button=".create-course-next-button"
                 prev-button=".create-course-back-button">
+                <h1>Name your course</h1>
                 <input type="text" placeholder="Course Name" name="course_name">
             </li>
-            <li class="create-course-step create-course-step-3" next=".create-course-step-4"
+            <li class="course-step create-course-step-3" next=".create-course-step-4"
                 prev=".create-course-step-2",
                 next-button=".create-course-next-button"
                 prev-button=".create-course-back-button">
+                <h1>Add a short description of your course</h1>
                 <textarea placeholder="One sentence course description"></textarea>
             </li>
-            <li class="create-course-step create-course-step-4" next=".create-course-step-4b"
+            <li class="course-step create-course-step-4" next=".create-course-step-4b"
                 prev=".create-course-step-3",
                 next-button=".create-course-next-button"
                 prev-button=".create-course-back-button">
-                Require students to enter a passcode to join the course?
+                <h1>Require passcode to join the course?</h1>
                 <input id="require-passcode" class="create-course-radio" type="radio"
                     name="require-passcode" value="require-passcode" checked>
                 <label for="require-passcode">Yes</label>
@@ -292,13 +294,14 @@ Home
                     name="require-passcode" value="no-passcode">
                 <label for="no-passcode">No</label>
             </li>
-            <li class="create-course-step create-course-step-4b" next=".create-course-step-5"
+            <li class="course-step create-course-step-4b" next=".create-course-step-5"
                 prev=".create-course-step-4",
                 next-button=".create-course-next-button"
                 prev-button=".create-course-back-button">
+                <h1>Enter passcode</h1>
                 <input type="text" placeholder="Passcode">
             </li>
-            <li class="create-course-step create-course-step-5">
+            <li class="course-step create-course-step-5">
                 <div class="check-container">
                     <i class="fa fa-check"></i>
                 </div>
@@ -307,15 +310,15 @@ Home
         </ul>
     </div>
     <input class="create-course-submit" type="submit" value="Create Course">
-    <div class="add-course-footer">
-        <div class="create-course-button create-course-next-button">
+    <div class="course-footer">
+        <div class="course-button create-course-next-button next-button">
             Next
             <i class="fa fa-angle-right"></i>
         </div>
-        <div class="create-course-button create-course-finish-button">
+        <div class="course-button create-course-finish-button finish-button">
             Finish
         </div>
-        <div class="create-course-button create-course-back-button">
+        <div class="course-button create-course-back-button back-button">
             <i class="fa fa-angle-double-left"></i>
             Back
         </div>
@@ -324,17 +327,17 @@ Home
 </div>
 {% else %}
 {# Popup lightbox for finding and adding a new course #}
-<div class="add-course-pane add-course">
+<div class="add-course-pane my-course-section">
     <form>
     <h2>Find and Add a Course</h2>
     <div class="add-course-slider-window">
         <ul class="add-course-steps">
-            <li class="add-course-step add-course-step-1" next=".add-course-step-2"
+            <li class="course-step add-course-step-1" next=".add-course-step-2"
                 next-button=".add-course-next-button">
                 <h1>Where do you go to school?</h1>
                 <input placeholder="School name"></input>
             </li>
-            <li class="add-course-step add-course-step-2" next=".add-course-step-3"
+            <li class="course-step add-course-step-2" next=".add-course-step-3"
                 prev=".add-course-step-1"
                 next-button=".add-course-next-button"
                 prev-button=".add-course-back-button">
@@ -346,7 +349,7 @@ Home
                     <option>US History - Chester</option>
                 </select>
             </li>
-            <li class="add-course-step add-course-step-3">
+            <li class="course-step add-course-step-3">
                 <div class="check-container">
                     <i class="fa fa-check"></i>
                 </div>
@@ -354,15 +357,15 @@ Home
             </li>
         </ul>
     </div>
-    <div class="add-course-footer">
-        <div class="add-course-button add-course-next-button">
+    <div class="course-footer">
+        <div class="course-button add-course-next-button next-button">
             Next
             <i class="fa fa-angle-right"></i>
         </div>
-        <div class="add-course-button add-course-finish-button">
+        <div class="course-button add-course-finish-button finish-button">
             Finish
         </div>
-        <div class="add-course-button add-course-back-button">
+        <div class="course-button add-course-back-button back-button">
             <i class="fa fa-angle-double-left"></i>
             Back
         </div>

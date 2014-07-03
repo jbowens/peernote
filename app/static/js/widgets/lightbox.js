@@ -45,7 +45,6 @@ peernoteNS.widgets.lightbox = {
             _this.container.height(windowHeight);
         }
 
-        //var negHeight = 0 - $("nav").height();
         _this.container.css("top", 0);
     }
   },
@@ -89,7 +88,6 @@ peernoteNS.widgets.lightbox = {
             _this.close(options.onClose);
         }
       });
-
     }
 
     $(document).keyup(function(e) {
