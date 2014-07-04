@@ -200,6 +200,16 @@ nav {
         float: left;
     }
 
+    .create-course-radio {
+        width: 20px;
+        margin-top: 30px;
+    }
+
+    label {
+        margin-right: 20px;
+        margin-top: 20px;
+    }
+
     .create-course-slider-window {
         width: 438px;
         height: 200px;
@@ -399,7 +409,7 @@ nav {
                     width: 19px;
                     height: 19px;
                     border-radius: 10px;
-                    background: #aaa; //#39bd41;
+                    background: #39bd41; //#aaa;
                     color: $white;
                     opacity:1;
                     margin-right: 6px;
@@ -551,7 +561,7 @@ nav {
 
                 $tab-fill-height: 31px;
                 .tab-fill {
-                   width: 315px;
+                   width: 312px;
                    height: $tab-fill-height;
                    float: left;
                    border-bottom: 2px solid $generic-divider-color;
@@ -1049,71 +1059,73 @@ nav {
         }
 
         .notifications-container {
-            min-height: 260px;
             background: white;
             clear: both;
-            padding: $padding;
             float: left;
-            width: 599px;
-            border-top: $default-border;
             border-bottom-right-radius: $border-radius;
 
-            .notifications {
-                overflow: auto;
-                clear: both;
-                padding-bottom: $height-unit;
+            .summary-tab {
+                padding: $padding;
+                border-top: $default-border;
+                width: 599px;
 
-                .notification {
+                .notifications {
                     overflow: auto;
+                    clear: both;
                     padding-bottom: $height-unit;
-                    margin-bottom: $height-unit;
-                    border-bottom: 1px dotted $generic-divider-color;
 
-                    .notification-thumbnail {
-                        height: 40px;
-                        width: 40px;
-                        background: #ccc;
-                        float: left;
-                    }
+                    .notification {
+                        overflow: auto;
+                        padding-bottom: $height-unit;
+                        margin-bottom: $height-unit;
+                        border-bottom: 1px dotted $generic-divider-color;
 
-                    .notification-content {
-                        float: left;
-                        width: 500px;
-                        margin-left: $width-unit;
+                        .notification-thumbnail {
+                            height: 40px;
+                            width: 40px;
+                            background: #ccc;
+                            float: left;
+                        }
 
-                        .author-date {
-                            margin-bottom: $height-unit;
+                        .notification-content {
+                            float: left;
+                            width: 500px;
+                            margin-left: $width-unit;
 
-                            .notification-author {
-                                float: left;
-                                font-weight: 600;
+                            .author-date {
+                                margin-bottom: $height-unit;
+
+                                .notification-author {
+                                    float: left;
+                                    font-weight: 600;
+                                }
+
+                                .notification-date {
+                                    float: right;
+                                    font-weight: 500;
+                                    color: #888;
+                                    font-size: 11px;
+                                }
                             }
 
-                            .notification-date {
-                                float: right;
-                                font-weight: 500;
-                                color: #888;
-                                font-size: 11px;
+                            .notification-text {
+                                line-height: $height-unit;
                             }
                         }
 
-                        .notification-text {
-                            line-height: $height-unit;
+                        &:last-child {
+                            margin-bottom: 0;
+                            border: none;
                         }
-                    }
-
-                    &:last-child {
-                        margin-bottom: 0;
-                        border: none;
                     }
                 }
-            }
 
-            h2 {
-                margin-bottom: $height-unit;
-                padding-bottom: 15px;
-                border-bottom: $default-border;
-            }
+                h2 {
+                    margin-bottom: $height-unit;
+                    padding-bottom: 15px;
+                    border-bottom: $default-border;
+                }
+         }
         }
     }
 

@@ -28,9 +28,10 @@ $.extend(peernoteNS.profile, {
                 $(".footer-push").css("min-height",newHeight);
                 $(".wrapper").css("min-height",newHeight);
                 $(".dashboard").css("min-height",newHeight);
+                $(".right-col").css("min-height",newHeight);
                 var tabbedPanesHeight = $(".tabbed-panes").height()
                     + (4 * parseInt($(".tabbed-panes").css("padding")) + 4);
-                $(".notifications-container").css("min-height",newHeight - tabbedPanesHeight);
+                $(".notifications-container").css("min-height",newHeight - tabbedPanesHeight - 100);
             }
         }
     },

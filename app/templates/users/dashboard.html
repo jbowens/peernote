@@ -391,7 +391,11 @@ Home
                 </div>#}
                 <div id="user-info">
                     <h1>{{ user.first_name | shorten_string(12) }} {{ user.last_name | shorten_string(12) }}</h1>
+                    {% if is_teacher %}
+                    <div>Instructor</div>
+                    {% else %}
                     <div>Student</div>
+                    {% endif %}
                 </div>
             <div class="button-panel">
                 <a class="button" title="Create new document"
@@ -466,10 +470,10 @@ Home
     <div class="right-col">
         <div class="tabbed-panes">
             <div class="tabs">
-                <div class="tab tab-selected" for=".week-calendar">
+                <div class="tab tab-selected" for=".summary-tab">
                     <h1 id="notifications">
                         <i class="fa fa-calendar"></i>
-                        Calendar
+                        Summary
                     </h1>
                 </div>
                 <div class="small-tab-fill"></div>
@@ -488,7 +492,7 @@ Home
                 </div>
                 <div class="tab-fill"></div>
             </div>
-            <div class="week-calendar">
+            <div class="week-calendar summary-tab">
                 <div class="calendar-header">
                     <i class="fa fa-arrows-alt expand-calendar"></i>
                     <div class="calendar-controls">
@@ -559,7 +563,6 @@ Home
                 </ul>
             </div>
             {% set reviews = user.get_assigned_reviews(5) %}
-            {% if reviews %}
             <div class="grades-tab">
                 <h2>Summary</h2>
                 <ul class="gradebooks">
@@ -854,15 +857,14 @@ Home
             </div>
         </div>
         <div class="notifications-container">
-            <h2>
-                Notifications
-            </h2>
-            <ul class="notifications">
-            </ul>
+            <div class="summary-tab">
+                <h2>
+                    Notifications
+                </h2>
+                <ul class="notifications">
+                </ul>
+            </div>
         </div>
-        {% endif %}
-    </div>
-    <div class="far-right-col">
     </div>
 </div>
 
