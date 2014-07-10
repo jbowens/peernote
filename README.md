@@ -1,4 +1,4 @@
-peernote
+Peernote
 ========
 
 Peernote in Python using Flask.
